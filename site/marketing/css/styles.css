@@ -121,6 +121,13 @@ a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible,
 .btn-edit:hover{transform:translateY(-1px);box-shadow:0 8px 20px rgba(29,98,219,.5);}
 .btn-edit:active{transform:translateY(0);}
 .btn-edit svg{flex-shrink:0;}
+.btn-pdf{background:rgba(255,255,255,.1);box-shadow:none;font-family:inherit;}
+.btn-pdf:hover{background:rgba(255,255,255,.18);box-shadow:none;}
+.btn-pdf:disabled{opacity:.7;cursor:progress;transform:none;}
+/* Aviso mientras se genera el PDF */
+.pdf-overlay{position:fixed;inset:0;z-index:100;display:grid;place-items:center;background:rgba(11,27,52,.55);backdrop-filter:blur(2px);}
+.pdf-overlay div{background:#fff;color:var(--ink);border-radius:14px;padding:18px 22px;font:600 14px Inter,system-ui,sans-serif;box-shadow:var(--shadow-md);}
+@media print{.btn-pdf,.btn-edit,.pdf-overlay{display:none!important}*{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
 
 /* ===== Layout ===== */
 .wrap{max-width:1400px;margin:0 auto;padding:26px 40px 60px;}

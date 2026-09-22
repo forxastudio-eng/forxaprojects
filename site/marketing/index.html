@@ -34,7 +34,11 @@
         <div class="label" id="m-period-label">Periodo de análisis</div>
         <div class="value" id="m-period-value">—</div>
       </div>
-      <a class="btn-edit" href="admin.html">
+      <button class="btn-edit btn-pdf" id="btn-pdf" type="button" data-pdf-ignore>
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v11"/><path d="m7 10 5 5 5-5"/><path d="M4 20h16"/></svg>
+        <span>Exportar PDF</span>
+      </button>
+      <a class="btn-edit" href="admin.html" data-pdf-ignore>
         <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>
         Editar contenido
       </a>
@@ -260,5 +264,6 @@ document.documentElement.style.visibility = "hidden";
 <script src="js/supabase-client.js"></script>
 <script src="js/data.js"></script>
 <script src="js/dashboard.js"></script>
+<script src="js/exportar-pdf.js"></script>
 </body>
 </html>

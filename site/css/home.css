@@ -31,11 +31,19 @@ button,input,select,textarea{font:inherit;color:inherit}
 .top-row{display:flex;align-items:center;justify-content:space-between;height:76px}
 .brand img{height:40px;width:auto}
 .top-nav{display:flex;align-items:center;gap:6px}
-.top-nav a{text-decoration:none;font-weight:500;font-size:15px;padding:10px 14px;border-radius:999px;color:var(--fx-ink-600)}
+.top-nav a{text-decoration:none;font-weight:500;font-size:15px;padding:10px 14px;border-radius:999px;color:var(--fx-ink-600);white-space:nowrap}
 .top-nav a:hover{color:var(--color-primary)}
-.top-nav .top-nav-team{border:1.5px solid var(--color-border);color:var(--color-text)}
-.top-nav .top-nav-team:hover{border-color:var(--color-primary)}
-@media (max-width:620px){.top-nav a:not(.top-nav-team){display:none}.brand img{height:34px}}
+.top-nav .top-nav-btn{min-height:42px;display:inline-flex;align-items:center;border:1.5px solid var(--color-border);color:var(--color-text);font-weight:600;padding:0 18px}
+.top-nav .top-nav-btn:hover{border-color:var(--color-primary);color:var(--color-primary)}
+.top-nav .top-nav-cotizador{background:var(--color-primary);border-color:var(--color-primary);color:#fff}
+.top-nav .top-nav-cotizador:hover{background:var(--color-primary-hover);border-color:var(--color-primary-hover);color:#fff}
+@media (max-width:620px){
+  .top-nav a:not(.top-nav-btn){display:none}
+  .top-nav{gap:8px}
+  .top-nav .top-nav-btn{min-height:40px;padding:0 14px;font-size:14.5px}
+  .brand img{height:32px}
+}
+@media (max-width:359px){.brand img{height:26px}.top-nav .top-nav-btn{padding:0 11px}}
 
 /* ---------- hero ---------- */
 .hero{position:relative;overflow:hidden;padding:clamp(48px,8vw,104px) 0 clamp(56px,8vw,96px)}
@@ -45,25 +53,17 @@ button,input,select,textarea{font:inherit;color:inherit}
 .hero-lead{margin-top:24px;font-size:clamp(1.02rem,1.5vw,1.18rem);color:var(--fx-ink-600);max-width:48ch}
 .hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:32px}
 
-/* El símbolo en grande: tres barras y la flecha, con el degradado de marca */
-.hero-mark{position:relative;aspect-ratio:3/4;width:100%;max-width:400px;justify-self:end}
-.hero-mark .bar,.hero-mark .arrow{position:absolute;display:block;background:var(--gradient-brand)}
-.hero-mark .bar{left:0;clip-path:polygon(0 42%,100% 0,100% 58%,0 100%)}
-.hero-mark .bar-1{top:6%;width:84%;height:28%}
-.hero-mark .bar-2{top:38%;width:62%;height:26%;opacity:.92}
-.hero-mark .bar-3{top:69%;width:26%;height:25%;clip-path:polygon(0 30%,100% 0,55% 70%,0 100%);opacity:.85}
-.hero-mark .arrow{right:0;top:0;width:32%;height:32%;clip-path:polygon(0 0,100% 0,42% 100%,38% 18%)}
+/* Isotipo oficial de FORXA (imagen original, proporción 554×858, sin deformar) */
+.hero-mark{justify-self:end;width:min(100%,320px)}
+.hero-mark img{display:block;width:100%;height:auto}
 @media (prefers-reduced-motion:no-preference){
-  .hero-mark .bar,.hero-mark .arrow{animation:rise .9s cubic-bezier(.2,.7,.2,1) both}
-  .hero-mark .bar-3{animation-delay:.05s}
-  .hero-mark .bar-2{animation-delay:.16s}
-  .hero-mark .bar-1{animation-delay:.27s}
-  .hero-mark .arrow{animation-delay:.42s}
+  .hero-mark img{animation:rise .9s cubic-bezier(.2,.7,.2,1) .15s both}
 }
-@keyframes rise{from{opacity:0;transform:translate(-24px,28px)}to{transform:none}}
+@keyframes rise{from{opacity:0;transform:translate(-18px,22px)}to{opacity:1;transform:none}}
 @media (max-width:820px){
-  .hero-grid{grid-template-columns:1fr}
-  .hero-mark{position:absolute;right:-60px;top:24px;width:220px;opacity:.14;pointer-events:none}
+  .hero-grid{grid-template-columns:1fr;gap:24px}
+  /* En móvil el isotipo va completo, arriba del título, sin salirse de la pantalla */
+  .hero-mark{order:-1;justify-self:start;width:72px}
 }
 
 /* ---------- proyectos ---------- */

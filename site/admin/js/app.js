@@ -153,11 +153,6 @@
       return;
     }
 
-    // Enlace de "olvidé mi contraseña": Supabase abre esta página en modo recuperación.
-    sb.auth.onAuthStateChange(function (event) {
-      if (event === "PASSWORD_RECOVERY") nuevaContrasena();
-    });
-
     $("login-form").addEventListener("submit", async function (e) {
       e.preventDefault();
       var email = $("login-email").value.trim(), pass = $("login-password").value;
@@ -169,31 +164,11 @@
       entrar(res.data.user);
     });
 
-    $("forgot-btn").onclick = async function () {
-      var email = $("login-email").value.trim();
-      if (!email) { loginMsg("Escribe tu correo arriba y vuelve a pulsar “Olvidé mi contraseña”.", true); return; }
-      var res = await sb.auth.resetPasswordForEmail(email, { redirectTo: location.origin + "/admin/" });
-      loginMsg(res.error ? FX.errMsg(res.error) : "Si el correo está registrado, te llegará un enlace para crear una nueva contraseña.", !!res.error);
-    };
-
     $("logout-btn").onclick = async function () { await sb.auth.signOut(); location.hash = ""; location.reload(); };
 
     var s = await sb.auth.getSession();
     if (s.data && s.data.session) entrar(s.data.session.user);
     else show("auth");
-  }
-
-  function nuevaContrasena() {
-    FX.modal({
-      title: "Crea tu nueva contraseña",
-      body: '<label class="fld"><span>Nueva contraseña</span><input type="password" id="np1" minlength="8" autocomplete="new-password" required><small>Mínimo 8 caracteres.</small></label>',
-      actions: [{ label: "Guardar", value: "ok", cls: "btn-primary" }],
-      onSubmit: async function (body) {
-        var res = await sb.auth.updateUser({ password: body.querySelector("#np1").value });
-        if (res.error) { FX.toast(FX.errMsg(res.error), true); return false; }
-        FX.toast("Contraseña actualizada");
-      }
-    });
   }
 
   boot();

@@ -549,12 +549,28 @@ window.VIEWS = (function () {
   }
 
   /* ============================================================== Usuarios */
+  // Contraseña legible (sin 0/O ni 1/l), 12 caracteres.
+  function generarClave() {
+    var abc = "ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnpqrstuvwxyz23456789";
+    var r = new Uint8Array(12); crypto.getRandomValues(r);
+    return Array.prototype.map.call(r, function (x) { return abc[x % abc.length]; }).join("");
+  }
+  async function llamarAdminUsuarios(body) {
+    var res = await sb.functions.invoke("admin-usuarios", { body: body });
+    if (res.error) {
+      var msg = res.error.message;
+      try { var j = await res.error.context.json(); if (j && j.error) msg = j.error; } catch (e) { /* sin detalle */ }
+      throw new Error(msg);
+    }
+    return res.data;
+  }
+
   async function usuarios(el) {
     if (!FX.can("usuarios")) { el.innerHTML = '<div class="panel empty">Solo el editor administra usuarios.</div>'; return; }
-    var list = [];
+    var list = [], estado = {};
     var opts = Object.keys(FX.ROLES).map(function (r) { return '<option value="' + r + '">' + FX.ROLES[r].label + "</option>"; }).join("");
     el.innerHTML =
-      '<div class="notice notice-warn">Asignar un rol <strong>no crea la cuenta</strong>. La cuenta (correo y contraseña) se crea en Supabase → Authentication → Users → Add user, o con <code>scripts/crear_usuarios.mjs</code>. El correo debe ser exactamente el mismo.</div>' +
+      '<div class="notice">Para dar acceso a alguien: agrégalo con su rol y luego pulsa <strong>Contraseña</strong> en su fila. Si todavía no tiene cuenta, se crea en ese momento. Usa el mismo botón si alguien olvida su contraseña.</div>' +
       '<section class="panel"><div class="panel-head"><h2>Agregar persona</h2></div>' +
         '<form class="form-grid u-form" id="u-form">' +
           '<label class="fld"><span>Correo</span><input type="email" id="u-email" required></label>' +
@@ -563,23 +579,69 @@ window.VIEWS = (function () {
           '<button class="btn btn-primary" type="submit">' + icon("plus") + "Agregar</button>" +
         "</form></section>" +
       '<section class="panel"><div class="panel-head"><h2>Equipo</h2><p>' + Object.keys(FX.ROLES).map(function (r) { return "<strong>" + FX.ROLES[r].label + ":</strong> " + esc(FX.ROLES[r].desc); }).join("<br>") + "</p></div>" +
-      '<div class="table-wrap"><table class="data"><thead><tr><th>Correo</th><th>Nombre</th><th>Rol</th><th class="actions"></th></tr></thead><tbody id="u-body"></tbody></table></div></section>';
+      '<div class="table-wrap"><table class="data"><thead><tr><th>Correo</th><th>Nombre</th><th>Rol</th><th>Cuenta</th><th class="actions"></th></tr></thead><tbody id="u-body"><tr><td class="empty" colspan="5">Cargando…</td></tr></tbody></table></div></section>';
     var body = el.querySelector("#u-body");
     var orden = { editor: 0, administrador: 1, marketing: 2, asesor: 3 };
 
+    function cuentaCelda(u) {
+      var e = estado[u.email];
+      if (!e) return '<span class="pill s-no_disponible">Sin cuenta</span>';
+      return '<span class="pill s-disponible">Activa</span><br><small class="muted">' +
+        (e.ultimo_ingreso ? "Último ingreso: " + esc(FX.fecha(e.ultimo_ingreso, true)) : "Aún no ha entrado") + "</small>";
+    }
     function render() {
       body.innerHTML = list.map(function (u, i) {
         var yo = u.email === FX.state.user.email.toLowerCase();
         return "<tr><td>" + esc(u.email) + (yo ? ' <span class="pill s-disponible">Tú</span>' : "") + "</td><td>" + esc(u.nombre || "—") + "</td>" +
           '<td><select class="input" data-r="' + i + '" style="width:auto"' + (yo ? " disabled" : "") + ">" +
           Object.keys(FX.ROLES).map(function (r) { return '<option value="' + r + '"' + (r === u.role ? " selected" : "") + ">" + FX.ROLES[r].label + "</option>"; }).join("") +
-          '</select></td><td class="actions">' + (yo ? "" : '<button class="icon-btn danger" data-x="' + i + '" aria-label="Quitar acceso">' + icon("trash") + "</button>") + "</td></tr>";
+          "</select></td><td>" + cuentaCelda(u) + "</td>" +
+          '<td class="actions"><button class="btn btn-ghost btn-sm" data-p="' + i + '">' + icon("key") + (estado[u.email] ? "Contraseña" : "Crear cuenta") + "</button> " +
+          (yo ? "" : '<button class="icon-btn danger" data-x="' + i + '" aria-label="Quitar acceso">' + icon("trash") + "</button>") + "</td></tr>";
       }).join("");
     }
     async function cargar() {
       list = (await FX.fetchAll("user_roles")).sort(function (a, b) { return (orden[a.role] - orden[b.role]) || a.email.localeCompare(b.email); });
+      try { estado = (await llamarAdminUsuarios({ accion: "listar" })).estado || {}; }
+      catch (e) { estado = {}; FX.toast("No se pudo leer el estado de las cuentas: " + e.message, true); }
       render();
     }
+
+    function asignarClave(u) {
+      var nueva = !estado[u.email];
+      FX.modal({
+        title: (nueva ? "Crear cuenta de " : "Nueva contraseña para ") + u.email,
+        body:
+          '<p class="muted" style="margin-bottom:14px">' + (nueva
+            ? "Se crea la cuenta con esta contraseña. Entrégala por un canal privado y pide que la cambie en Mi cuenta."
+            : "La contraseña anterior deja de funcionar de inmediato. Entrégala por un canal privado y pide que la cambie en Mi cuenta.") + "</p>" +
+          '<label class="fld"><span>Contraseña</span>' +
+          '<div style="display:flex;gap:8px"><input class="input" id="np" minlength="8" autocomplete="off" spellcheck="false" style="font-family:ui-monospace,Menlo,monospace;letter-spacing:.04em" value="' + generarClave() + '">' +
+          '<button type="button" class="btn btn-ghost btn-sm" id="np-gen">Generar otra</button></div>' +
+          "<small>Mínimo 8 caracteres. Puedes escribir una propia.</small></label>",
+        actions: [{ label: "Cancelar", value: "cancel" }, { label: nueva ? "Crear cuenta" : "Asignar contraseña", value: "ok", cls: "btn-primary" }],
+        onOpen: function (f) { f.querySelector("#np-gen").onclick = function () { f.querySelector("#np").value = generarClave(); }; },
+        onSubmit: async function (f) {
+          var pass = f.querySelector("#np").value.trim();
+          if (pass.length < 8) { FX.toast("La contraseña debe tener al menos 8 caracteres.", true); return false; }
+          try {
+            await llamarAdminUsuarios({ accion: "asignar_password", email: u.email, password: pass });
+          } catch (e) { FX.toast(e.message, true); return false; }
+          await cargar();
+          setTimeout(function () {
+            FX.modal({
+              title: "Listo",
+              body: "<p>Contraseña " + (nueva ? "creada" : "asignada") + " para <strong>" + esc(u.email) + "</strong>:</p>" +
+                '<p style="font:600 20px ui-monospace,Menlo,monospace;letter-spacing:.05em;background:var(--color-surface);padding:12px 14px;border-radius:10px;margin:12px 0;user-select:all">' + esc(pass) + "</p>" +
+                '<p class="muted">Cópiala ahora: no se vuelve a mostrar. Entra en ' + (u.role === "asesor" ? "/cotizador/" : "/admin/") + ".</p>",
+              actions: [{ label: "Copiar y cerrar", value: "ok", cls: "btn-primary" }],
+              onSubmit: function () { try { navigator.clipboard.writeText(pass); FX.toast("Contraseña copiada"); } catch (e) { /* sin portapapeles */ } }
+            });
+          }, 50);
+        }
+      });
+    }
+
     body.addEventListener("change", async function (e) {
       var s = e.target.closest("[data-r]"); if (!s) return;
       var u = list[+s.dataset.r];
@@ -589,6 +651,8 @@ window.VIEWS = (function () {
       FX.toast("Rol actualizado"); await cargar();
     });
     body.addEventListener("click", async function (e) {
+      var p = e.target.closest("[data-p]");
+      if (p) { asignarClave(list[+p.dataset.p]); return; }
       var b = e.target.closest("[data-x]"); if (!b) return;
       var u = list[+b.dataset.x];
       if (!(await FX.confirmar("Quitar acceso", "¿Quitar el rol de " + u.email + "? Podrá iniciar sesión, pero no verá nada hasta que le asignes un rol.", "Quitar"))) return;
@@ -604,7 +668,9 @@ window.VIEWS = (function () {
       var res = await sb.from("user_roles").upsert({ email: email, role: el.querySelector("#u-rol").value, nombre: el.querySelector("#u-nombre").value.trim() || null });
       if (res.error) { FX.toast(FX.errMsg(res.error), true); return; }
       FX.log("rol", email + " → " + el.querySelector("#u-rol").value);
-      e.target.reset(); FX.toast("Persona agregada"); await cargar();
+      e.target.reset(); await cargar();
+      var nuevo = list.find(function (x) { return x.email === email; });
+      if (nuevo && !estado[email]) asignarClave(nuevo); else FX.toast("Persona agregada");
     });
     await cargar();
   }
@@ -674,7 +740,8 @@ window.VIEWS = (function () {
       '<section class="panel"><div class="panel-head"><h2>Cambiar contraseña</h2></div><form id="pw-form" style="display:flex;flex-direction:column;gap:12px">' +
       '<label class="fld"><span>Nueva contraseña</span><input type="password" id="pw1" minlength="8" autocomplete="new-password" required><small>Mínimo 8 caracteres.</small></label>' +
       '<label class="fld"><span>Repite la contraseña</span><input type="password" id="pw2" minlength="8" autocomplete="new-password" required></label>' +
-      '<button class="btn btn-primary" type="submit" style="align-self:flex-start">Guardar contraseña</button></form></section></div>';
+      '<button class="btn btn-primary" type="submit" style="align-self:flex-start">Guardar contraseña</button></form>' +
+      '<p class="muted" style="margin-top:14px;font-size:14px">Si olvidas tu contraseña, pide al editor que te asigne una nueva.</p></section></div>';
     el.querySelector("#pw-form").addEventListener("submit", async function (e) {
       e.preventDefault();
       var a = el.querySelector("#pw1").value, b = el.querySelector("#pw2").value;

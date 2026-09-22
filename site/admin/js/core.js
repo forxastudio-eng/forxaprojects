@@ -57,7 +57,8 @@ window.FX = (function () {
     down: '<path d="M12 5v14M6 13l6 6 6-6"/>',
     search: '<circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/>',
     eye: '<path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/>',
-    upload: '<path d="M12 20V9M7 14l5-5 5 5M4 4h16"/>'
+    upload: '<path d="M12 20V9M7 14l5-5 5 5M4 4h16"/>',
+    key: '<circle cx="8" cy="15" r="4"/><path d="m10.8 12.2 8.7-8.7M16 6l3 3M14 8l2 2"/>'
   };
   function icon(name, cls) {
     return '<svg class="icon ' + (cls || "") + '" viewBox="0 0 24 24" aria-hidden="true">' + (P[name] || "") + "</svg>";
