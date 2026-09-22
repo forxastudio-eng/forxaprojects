@@ -54,7 +54,7 @@ button,input,select,textarea{font:inherit;color:inherit}
 .hero-actions{display:flex;flex-wrap:wrap;gap:12px;margin-top:32px}
 
 /* Isotipo oficial de FORXA (imagen original, proporción 554×858, sin deformar) */
-.hero-mark{justify-self:end;width:min(100%,320px)}
+.hero-mark{justify-self:end;width:min(50%,320px)}
 .hero-mark img{display:block;width:85%;height:auto}
 @media (prefers-reduced-motion:no-preference){
   .hero-mark img{animation:rise .9s cubic-bezier(.2,.7,.2,1) .15s both}
