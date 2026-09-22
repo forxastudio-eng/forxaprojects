@@ -50,7 +50,7 @@ function showToast(message, type = 'error') {
     document.body.appendChild(el);
   }
   el.textContent = message;
-  el.style.background = type === 'error' ? '#a3402f' : (type === 'ok' ? '#565a41' : '#26251f');
+  el.style.background = type === 'error' ? '#C23A32' : (type === 'ok' ? '#17845A' : '#0E1624');
   el.style.color = '#fff';
   el.style.opacity = '1';
   el.style.transform = 'translateX(-50%) translateY(0)';

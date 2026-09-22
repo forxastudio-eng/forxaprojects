@@ -146,32 +146,105 @@ async function cargarHistorial() {
   document.getElementById('historial-contador').textContent =
     filas.length === 1 ? '1 proforma encontrada' : `${filas.length} proformas encontradas`;
 
+  const puedeBorrar = CotizadorAuth.getIsAdmin();   // solo rol editor (la BD también lo exige)
   if (!filas.length) {
     list.innerHTML = '<div class="empty-state">No hay proformas con estos filtros.</div>';
   } else {
-    list.innerHTML = `<table class="admin-table"><thead><tr>
+    list.innerHTML = (puedeBorrar ? `<div class="borrar-bar" id="borrar-bar" hidden>
+        <span id="borrar-cuenta"></span>
+        <button type="button" class="btn btn-danger-soft btn-sm" id="borrar-seleccion">Eliminar seleccionadas</button>
+        <button type="button" class="btn btn-ghost btn-sm" id="borrar-cancelar">Quitar selección</button>
+      </div>` : '') +
+      `<table class="admin-table"><thead><tr>
+      ${puedeBorrar ? '<th class="col-check"><input type="checkbox" id="sel-todas" aria-label="Seleccionar todas"></th>' : ''}
       <th>Cliente</th><th>Proyecto</th><th>Unidad(es)</th><th>N.º proforma</th><th>Fecha</th>
       <th>Asesor</th><th>Precio final</th><th>Abono</th><th>Financiado</th><th>Cuota/mes</th>
-    </tr></thead><tbody>${filas.map(filaHTML).join('')}</tbody></table>`;
+      ${puedeBorrar ? '<th class="col-accion"><span class="sr-only">Eliminar</span></th>' : ''}
+    </tr></thead><tbody>${filas.map(f => filaHTML(f, puedeBorrar)).join('')}</tbody></table>`;
+    if (puedeBorrar) wireBorrado(list);
   }
 
   renderDashboard(filas);
 }
 
-function filaHTML(f) {
+// ---------------------------------------------------------------------------
+// Borrado de proformas (solo editor). Pensado para limpiar cotizaciones de
+// prueba. La numeración NO se reutiliza: si se borra ARCUS-0012, la siguiente
+// sigue siendo ARCUS-0013 (evita números duplicados con PDFs ya entregados).
+// ---------------------------------------------------------------------------
+function wireBorrado(list) {
+  const checks = () => Array.from(list.querySelectorAll('input.sel-fila'));
+  const seleccion = () => checks().filter(c => c.checked).map(c => c.value);
+  const bar = document.getElementById('borrar-bar');
+
+  function refrescar() {
+    const n = seleccion().length;
+    bar.hidden = n === 0;
+    document.getElementById('borrar-cuenta').textContent = n === 1 ? '1 proforma seleccionada' : `${n} proformas seleccionadas`;
+    const todas = document.getElementById('sel-todas');
+    todas.checked = n > 0 && n === checks().length;
+    todas.indeterminate = n > 0 && n < checks().length;
+  }
+
+  list.addEventListener('change', e => {
+    if (e.target.id === 'sel-todas') checks().forEach(c => { c.checked = e.target.checked; });
+    refrescar();
+  });
+  list.addEventListener('click', e => {
+    const b = e.target.closest('[data-borrar]');
+    if (b) borrarProformas([b.dataset.borrar]);
+  });
+  document.getElementById('borrar-seleccion').onclick = () => borrarProformas(seleccion());
+  document.getElementById('borrar-cancelar').onclick = () => { checks().forEach(c => { c.checked = false; }); refrescar(); };
+}
+
+async function borrarProformas(ids) {
+  if (!ids.length) return;
+  const filas = HISTORIAL.filter(f => ids.includes(f.id));
+  const lista = filas.slice(0, 12).map(f => `• ${f.numero_proforma || 'sin número'} — ${f.cliente_nombre || 'sin cliente'}`).join('\n');
+  const mas = filas.length > 12 ? `\n… y ${filas.length - 12} más` : '';
+  const ok = confirm(
+    `¿Eliminar ${filas.length === 1 ? 'esta proforma' : `estas ${filas.length} proformas`} del historial?\n\n${lista}${mas}\n\n` +
+    'No se puede deshacer. Los números eliminados no se vuelven a usar.');
+  if (!ok) return;
+
+  const { data, error } = await supabaseClient.from('cotizador_historial').delete().in('id', ids).select('id');
+  if (error) { showToast('No se pudo eliminar: ' + error.message); return; }
+  if (!data || data.length === 0) { showToast('No se eliminó nada. Solo el rol editor puede borrar proformas.'); return; }
+
+  try {
+    const user = CotizadorAuth.getUser();
+    await supabaseClient.from('actividad').insert({
+      email: user.email, accion: 'eliminar',
+      detalle: 'Proformas eliminadas: ' + filas.filter(f => data.some(d => d.id === f.id)).map(f => f.numero_proforma || f.id).join(', ')
+    });
+  } catch (e) { /* el registro no bloquea el borrado */ }
+
+  showToast(data.length === 1 ? 'Proforma eliminada' : `${data.length} proformas eliminadas`, 'ok');
+  await cargarHistorial();
+}
+
+// Evita que un nombre con "<" o comillas rompa la tabla.
+function escHTML(v) {
+  return String(v == null ? '' : v).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+}
+
+function filaHTML(f, puedeBorrar) {
   const fecha = f.created_at ? new Date(f.created_at).toLocaleDateString('es-EC', { day: '2-digit', month: '2-digit', year: 'numeric' }) : '—';
   const unidades = Array.isArray(f.unidades) ? f.unidades.map(u => u.nombre || u.codigo).join(', ') : '';
   return `<tr>
-    <td>${f.cliente_nombre || '—'}${f.cliente_telefono ? `<br><span class="hint">${f.cliente_telefono}</span>` : ''}</td>
-    <td>${f.cotizador_proyectos?.nombre || f.proyecto_id || '—'}</td>
-    <td>${unidades || '—'}</td>
-    <td><strong>${f.numero_proforma || '—'}</strong></td>
+    ${puedeBorrar ? `<td class="col-check"><input type="checkbox" class="sel-fila" value="${escHTML(f.id)}" aria-label="Seleccionar ${escHTML(f.numero_proforma)}"></td>` : ''}
+    <td>${escHTML(f.cliente_nombre) || '—'}${f.cliente_telefono ? `<br><span class="hint">${escHTML(f.cliente_telefono)}</span>` : ''}</td>
+    <td>${escHTML(f.cotizador_proyectos?.nombre || f.proyecto_id) || '—'}</td>
+    <td>${escHTML(unidades) || '—'}</td>
+    <td><strong>${escHTML(f.numero_proforma) || '—'}</strong></td>
     <td>${fecha}</td>
-    <td>${f.asesor_nombre || '—'}${f.asesor_telefono ? `<br><span class="hint">${f.asesor_telefono}</span>` : ''}</td>
+    <td>${escHTML(f.asesor_nombre) || '—'}${f.asesor_telefono ? `<br><span class="hint">${escHTML(f.asesor_telefono)}</span>` : ''}</td>
     <td>${fmtMoney(f.precio_final)}</td>
     <td>${fmtMoney(f.abono_total)}</td>
     <td>${fmtMoney(f.monto_financiado)}</td>
     <td>${f.cuota_mensual ? fmtMoney(f.cuota_mensual) : '—'}</td>
+    ${puedeBorrar ? `<td class="col-accion"><button type="button" class="btn-borrar" data-borrar="${escHTML(f.id)}" title="Eliminar proforma" aria-label="Eliminar ${escHTML(f.numero_proforma)}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3"/></svg></button></td>` : ''}
   </tr>`;
 }
 

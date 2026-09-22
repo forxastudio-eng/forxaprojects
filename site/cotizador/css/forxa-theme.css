@@ -88,6 +88,19 @@
 .donut-center .l { text-transform: none; letter-spacing: 0; font-size: 11px; }
 .dash-bar-track { background: #EDF1F6; }
 
+/* ------------------------------------------ borrar proformas (editor) --- */
+.borrar-bar { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; padding: 10px 12px; margin-bottom: 12px; border-radius: 10px; background: #FBEBEA; color: #8E2A24; font-weight: 600; font-size: 13.5px; }
+.borrar-bar[hidden] { display: none; }
+.borrar-bar span { flex: 1; }
+.btn-danger-soft { background: #C23A32; color: #fff; border: 0; }
+.btn-danger-soft:hover { background: #A52F28; }
+.admin-table .col-check { width: 36px; text-align: center; }
+.admin-table .col-check input { width: 17px; height: 17px; min-height: 0; padding: 0; cursor: pointer; accent-color: var(--olive); }
+.admin-table .col-accion { width: 44px; text-align: right; }
+.btn-borrar { display: inline-grid; place-items: center; width: 32px; height: 32px; border-radius: 8px; border: 1.5px solid var(--border); background: #fff; color: var(--muted); cursor: pointer; }
+.btn-borrar:hover { border-color: #C23A32; color: #C23A32; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; }
+
 /* ------------------------------------------------------- impresión --- */
 @media print {
   body:has(#dashboard-print-area) { background: #fff !important; font-size: 11px; }
