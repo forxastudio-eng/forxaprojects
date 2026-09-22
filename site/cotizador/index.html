@@ -79,6 +79,7 @@ async function showPicker() {
   const isAdmin = CotizadorAuth.getIsAdmin();
   document.getElementById('header-actions').innerHTML = `
     <span class="user-pill">${user.email}</span>
+    <a href="/admin/#/cuenta">Mi cuenta</a>
     ${CotizadorAuth.getPuedeEntrarPanel() ? '<a href="/admin/">Panel</a>' : ''}
     ${isAdmin ? '<a href="admin.html">Configurar</a>' : ''}
     ${CotizadorAuth.getPuedeVerHistorial() ? '<a href="historial.html">Historial</a>' : ''}

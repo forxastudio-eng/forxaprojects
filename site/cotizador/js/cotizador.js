@@ -18,6 +18,7 @@ async function boot() {
 
   document.getElementById('header-actions').innerHTML = `
     <span class="user-pill">${user.email}</span>
+    <a href="/admin/#/cuenta">Mi cuenta</a>
     ${CotizadorAuth.getIsAdmin() ? '<a href="admin.html">Administrar</a>' : ''}
     ${CotizadorAuth.getPuedeVerHistorial() ? '<a href="historial.html">Historial</a>' : ''}
     <button id="logout-btn">Cerrar sesión</button>`;

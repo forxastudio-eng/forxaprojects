@@ -49,7 +49,10 @@
   /* ------------------------------------------------------------- menú */
   function buildNav() {
     $("side-nav").innerHTML = NAV.map(function (grp) {
-      var items = grp.items.filter(function (it) { return !it.perm || FX.can(it.perm); });
+      var items = grp.items.filter(function (it) {
+        if (FX.state.soloCuenta) return it.r === "cuenta" || it.href === "/cotizador/";
+        return !it.perm || FX.can(it.perm);
+      });
       if (!items.length) return "";
       return '<div class="nav-group">' + (grp.g ? '<p class="nav-group-label">' + esc(grp.g) + "</p>" : "") +
         items.map(function (it) {
@@ -77,6 +80,7 @@
     view.appendChild(page);
     closeSide();
 
+    if (FX.state.soloCuenta && parts[0] !== "cuenta") { location.replace("/cotizador/"); return; }
     var title, group, run;
     if (parts[0] === "inventario" && VIEWS.INV[parts[1]]) {
       title = VIEWS.INV[parts[1]].label; group = "Inventario";
@@ -116,8 +120,12 @@
     var r = await sb.rpc("mi_rol");
     FX.state.rol = r.error ? null : r.data;
 
-    if (FX.state.rol === "asesor") { location.replace("/cotizador/"); return; }
-    if (!FX.can("panel")) {
+    // Los asesores solo usan el cotizador; del panel solo pueden abrir "Mi cuenta"
+    // para cambiar su contraseña.
+    if (FX.state.rol === "asesor") {
+      if (!/^#\/cuenta/.test(location.hash)) { location.replace("/cotizador/"); return; }
+      FX.state.soloCuenta = true;
+    } else if (!FX.can("panel")) {
       show("auth");
       loginMsg("Tu cuenta (" + user.email + ") no tiene un rol con acceso al panel. Pide al editor que te asigne uno.", true);
       await sb.auth.signOut();

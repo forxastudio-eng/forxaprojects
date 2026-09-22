@@ -14,6 +14,7 @@ async function boot() {
 
   document.getElementById('header-actions').innerHTML = `
     <span class="user-pill">${user.email}</span>
+    <a href="/admin/#/cuenta">Mi cuenta</a>
     <a href="/admin/">Panel</a>
     <a href="index.html">Ver cotizador</a>
     ${CotizadorAuth.getIsAdmin() ? '<a href="admin.html">Configurar</a>' : ''}
