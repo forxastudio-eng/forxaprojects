@@ -1,0 +1,19 @@
+{
+  "name": "forxa-scripts",
+  "private": true,
+  "type": "module",
+  "description": "Scripts de mantenimiento de la plataforma FORXA (se ejecutan en tu computadora, nunca en Netlify).",
+  "scripts": {
+    "respaldar": "node migrar_datos.mjs respaldar",
+    "inspeccionar": "node migrar_datos.mjs inspeccionar",
+    "simular": "node migrar_datos.mjs",
+    "migrar": "node migrar_datos.mjs --ejecutar",
+    "usuarios": "node crear_usuarios.mjs",
+    "usuarios:crear": "node crear_usuarios.mjs --ejecutar",
+    "imagenes:simular": "node migrar_datos.mjs --solo-imagenes",
+    "imagenes": "node migrar_datos.mjs --ejecutar --solo-imagenes"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.45.0"
+  }
+}

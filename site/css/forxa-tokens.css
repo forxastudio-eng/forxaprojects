@@ -1,0 +1,45 @@
+/* ==========================================================================
+   FORXA · Tokens de marca (fuente única para landing, panel y cotizador)
+   Primitivos → semánticos. Tomados del logotipo: degradado azul del símbolo
+   (#1D62DB → #3C9FF4) y wordmark geométrico negro.
+   ========================================================================== */
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&family=Hanken+Grotesk:wght@400;500;600;700&display=swap');
+
+:root{
+  /* primitivos */
+  --fx-blue-700:#154BB0;
+  --fx-blue-600:#1D62DB;
+  --fx-blue-400:#3C9FF4;
+  --fx-blue-100:#E6F0FD;
+  --fx-blue-50:#F2F7FE;
+  --fx-ink-900:#0E1624;
+  --fx-ink-800:#16223A;
+  --fx-ink-600:#3D4A60;
+  --fx-slate-500:#5A6475;
+  --fx-slate-300:#A9B2C0;
+  --fx-line:#E3E8EF;
+  --fx-mist:#F4F6F9;
+  --fx-white:#FFFFFF;
+  --fx-green-600:#17845A; --fx-green-50:#E8F5EE;
+  --fx-amber-600:#B7791F; --fx-amber-50:#FDF4E3;
+  --fx-red-600:#C23A32;   --fx-red-50:#FBEBEA;
+
+  /* semánticos */
+  --color-primary:var(--fx-blue-600);
+  --color-primary-hover:var(--fx-blue-700);
+  --color-accent:var(--fx-blue-400);
+  --color-text:var(--fx-ink-900);
+  --color-text-muted:var(--fx-slate-500);
+  --color-bg:var(--fx-white);
+  --color-surface:var(--fx-mist);
+  --color-border:var(--fx-line);
+  --gradient-brand:linear-gradient(135deg, var(--fx-blue-400) 0%, var(--fx-blue-600) 100%);
+
+  --font-display:'Lexend', system-ui, sans-serif;
+  --font-body:'Hanken Grotesk', system-ui, -apple-system, sans-serif;
+
+  --radius-sm:8px; --radius-md:12px; --radius-lg:18px;
+  --shadow-sm:0 1px 2px rgba(14,22,36,.05);
+  --shadow-md:0 8px 24px rgba(14,22,36,.08);
+  --shadow-lg:0 24px 48px -16px rgba(14,22,36,.22);
+}

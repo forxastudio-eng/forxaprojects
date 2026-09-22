@@ -1,0 +1,44 @@
+[
+ {
+  "id": 1,
+  "alt": "Mapa satelital: Portón del Valle ubicado a 800m del parque extremo",
+  "src": "img/mapa-ubicacion.jpg",
+  "sort_order": 0,
+  "updated_at": "2026-08-31T18:11:30.061195+00:00"
+ },
+ {
+  "id": 2,
+  "alt": "Vista aérea de los lotes y vías internas del proyecto",
+  "src": "img/aerial-lotes.jpg",
+  "sort_order": 1,
+  "updated_at": "2026-08-31T18:11:30.061195+00:00"
+ },
+ {
+  "id": 3,
+  "alt": "Vista aérea de las vías y lotes de Portón del Valle",
+  "src": "img/aerial-hillside.jpg",
+  "sort_order": 2,
+  "updated_at": "2026-08-31T18:11:30.061195+00:00"
+ },
+ {
+  "id": 4,
+  "alt": "Vista aérea del Valle de Yunguilla",
+  "src": "img/aerial-valle1.jpg",
+  "sort_order": 3,
+  "updated_at": "2026-08-31T18:11:30.061195+00:00"
+ },
+ {
+  "id": 5,
+  "alt": "Vista aérea del proyecto y sus alrededores",
+  "src": "img/aerial-valle2.jpg",
+  "sort_order": 4,
+  "updated_at": "2026-08-31T18:11:30.061195+00:00"
+ },
+ {
+  "id": 6,
+  "alt": "Vista panorámica del valle",
+  "src": "img/aerial-valle3.jpg",
+  "sort_order": 5,
+  "updated_at": "2026-08-31T18:11:30.061195+00:00"
+ }
+]
