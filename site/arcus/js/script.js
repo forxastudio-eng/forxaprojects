@@ -261,8 +261,21 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   galleryImgs.forEach(function (img, i) {
-    img.addEventListener("click", function () { openGalleryAt(i); });
+    var target = img.closest("figure") || img;
+    target.addEventListener("click", function () { openGalleryAt(i); });
   });
+
+  /* Deslizar con el dedo en el lightbox (móvil) */
+  var touchX = null;
+  lightbox.addEventListener("touchstart", function (e) {
+    touchX = e.touches.length === 1 ? e.touches[0].clientX : null;
+  }, { passive: true });
+  lightbox.addEventListener("touchend", function (e) {
+    if (touchX === null) return;
+    var dx = e.changedTouches[0].clientX - touchX;
+    touchX = null;
+    if (Math.abs(dx) > 50) showRelative(dx < 0 ? 1 : -1);
+  }, { passive: true });
 
   document.addEventListener("click", function (e) {
     var card = e.target.closest("[data-ficha]");
