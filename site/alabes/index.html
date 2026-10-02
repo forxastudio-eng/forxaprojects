@@ -1,16 +1,17 @@
 <!DOCTYPE html>
-<html lang="es">
-<head>
+<html lang="es" data-cms-page="alabes">
+<head data-cms-group="Pestaña del navegador y buscadores">
 <meta charset="UTF-8" />
 <base href="/alabes/">
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Álabes | Proyecto residencial y comercial en Cuenca — Calle del Batán</title>
-<meta name="description" content="Álabes: 34 unidades entre suites, departamentos y locales comerciales en Calle del Batán, Cuenca, junto al Río Tomebamba. Roof Top, Fire Zone y áreas comunales. Entrega 2028." />
+<title data-cms="seo.titulo" data-cms-label="Título de la página (pestaña y Google)">Álabes | Proyecto residencial y comercial en Cuenca — Calle del Batán</title>
+<meta name="description" content="Álabes: 34 unidades entre suites, departamentos y locales comerciales en Calle del Batán, Cuenca, junto al Río Tomebamba. Roof Top, Fire Zone y áreas comunales. Entrega 2028."  data-cms-attr="content:seo.descripcion" data-cms-label="Descripción para Google" data-cms-type="textarea"/>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="icon" href="img/logo-mark.png" type="image/png">
+<link rel="icon" href="img/logo-mark.png" type="image/png" data-cms-attr="href:seo.icono" data-cms-label="Icono de la pestaña (favicon)" data-cms-type="image">
 <link rel="stylesheet" href="css/styles.css" />
+<link rel="stylesheet" href="/css/consent.css" />
 </head>
 <body>
 
@@ -61,18 +62,18 @@
 </svg>
 
 <!-- ============ HEADER ============ -->
-<header class="header" id="header">
+<header class="header" id="header" data-cms-group="Menú superior">
   <div class="container header__inner">
-    <a href="#inicio" class="brand"><img src="img/logo-horizontal.png" alt="Álabes" /></a>
+    <a href="#inicio" class="brand"><img src="img/logo-horizontal.png" alt="Álabes"  data-cms-img="header.imagen" data-cms-label="Logotipo"/></a>
     <nav class="nav" id="nav">
-      <a href="#proyecto">Proyecto</a>
-      <a href="#ubicacion">Ubicación</a>
-      <a href="#amenidades">Amenidades</a>
-      <a href="#tipologias">Tipologías</a>
-      <a href="#locales">Locales</a>
-      <a href="#galeria">Galería</a>
-      <a href="/" class="nav-more">Más proyectos</a>
-      <a href="#contacto" class="btn btn--primary btn--sm">Contáctanos</a>
+      <a href="#proyecto" data-cms="header.enlace" data-cms-label="Enlace">Proyecto</a>
+      <a href="#ubicacion" data-cms="header.enlace-2" data-cms-label="Enlace 2">Ubicación</a>
+      <a href="#amenidades" data-cms="header.enlace-3" data-cms-label="Enlace 3">Amenidades</a>
+      <a href="#tipologias" data-cms="header.enlace-4" data-cms-label="Enlace 4">Tipologías</a>
+      <a href="#locales" data-cms="header.enlace-5" data-cms-label="Enlace 5">Locales</a>
+      <a href="#galeria" data-cms="header.enlace-6" data-cms-label="Enlace 6">Galería</a>
+      <a href="/" class="nav-more" data-cms="header.enlace-7" data-cms-label="Enlace 7" data-cms-href="header.enlace-url">Más proyectos</a>
+      <a href="#contacto" class="btn btn--primary btn--sm" data-cms="header.boton" data-cms-label="Botón">Contáctanos</a>
     </nav>
     <button class="nav-toggle" id="navToggle" aria-label="Abrir menú">
       <span></span><span></span><span></span>
@@ -81,46 +82,46 @@
 </header>
 
 <!-- ============ HERO ============ -->
-<section class="hero" id="inicio">
-  <div class="hero__bg"><img src="img/vista-frontal.jpg" alt="Fachada frontal del proyecto Álabes" /></div>
+<section class="hero" id="inicio" data-cms-group="Portada">
+  <div class="hero__bg"><img src="img/vista-frontal.jpg" alt="Fachada frontal del proyecto Álabes"  data-cms-img="inicio.imagen" data-cms-label="Imagen"/></div>
   <div class="hero__overlay"></div>
   <div class="container hero__content">
-    <h1 class="hero__title">Álabes</h1>
-    <p class="hero__tagline">Solidez que genera movimiento</p>
-    <p class="hero__desc">Un proyecto residencial y comercial en el corazón de Cuenca, a pasos del Río Tomebamba. Suites, departamentos y locales comerciales pensados para vivir con equilibrio, comodidad y seguridad.</p>
+    <h1 class="hero__title" data-cms="inicio.titulo-principal" data-cms-label="Título principal">Álabes</h1>
+    <p class="hero__tagline" data-cms="inicio.lema" data-cms-label="Lema">Solidez que genera movimiento</p>
+    <p class="hero__desc" data-cms="inicio.descripcion" data-cms-label="Descripción" data-cms-type="textarea">Un proyecto residencial y comercial en el corazón de Cuenca, a pasos del Río Tomebamba. Suites, departamentos y locales comerciales pensados para vivir con equilibrio, comodidad y seguridad.</p>
     <div class="hero__cta">
-      <a href="https://wa.me/593939087030?text=Hola%2C%20quiero%20m%C3%A1s%20informaci%C3%B3n%20del%20proyecto%20ALABES." class="btn btn--primary btn--whatsapp" target="_blank" rel="noopener">
-        <svg class="icon"><use href="#i-whatsapp"></use></svg> Escribir por WhatsApp
+      <a href="https://wa.me/593939087030?text=Hola%2C%20quiero%20m%C3%A1s%20informaci%C3%B3n%20del%20proyecto%20ALABES." class="btn btn--primary btn--whatsapp" target="_blank" rel="noopener" data-cms-wa>
+        <svg class="icon"><use href="#i-whatsapp"></use></svg> <span data-cms="inicio.texto" data-cms-label="Texto del botón">Escribir por WhatsApp</span>
       </a>
     </div>
-    <div class="hero__stats">
-      <div><strong>34</strong><span>Unidades</span></div>
-      <div><strong>2028</strong><span>Fecha de entrega</span></div>
-      <div><strong>4</strong><span>Locales comerciales</span></div>
-      <div><strong>3</strong><span>Plantas + Roof Top</span></div>
+    <div class="hero__stats" data-cms-list="inicio.lista-hero-stats" data-cms-label="Cifras de la portada" data-cms-noun="Cifra">
+      <div><strong data-cms="dato" data-cms-label="Dato destacado">34</strong><span data-cms="detalle" data-cms-label="Texto">Unidades</span></div>
+      <div><strong data-cms="dato" data-cms-label="Dato destacado">2028</strong><span data-cms="detalle" data-cms-label="Texto">Fecha de entrega</span></div>
+      <div><strong data-cms="dato" data-cms-label="Dato destacado">4</strong><span data-cms="detalle" data-cms-label="Texto">Locales comerciales</span></div>
+      <div><strong data-cms="dato" data-cms-label="Dato destacado">3</strong><span data-cms="detalle" data-cms-label="Texto">Plantas + Roof Top</span></div>
     </div>
   </div>
   <a href="#proyecto" class="scroll-cue" aria-label="Bajar"><svg class="icon"><use href="#i-arrow-down"></use></svg></a>
 </section>
 
 <!-- ============ SOBRE EL PROYECTO ============ -->
-<section class="section" id="proyecto">
+<section class="section" id="proyecto" data-cms-group="Sobre el proyecto" data-cms-show="mostrar.proyecto">
   <div class="container">
     <div class="about">
       <div class="about__media reveal">
-        <img src="img/vista-lateral.jpg" alt="Vista lateral del edificio Álabes" />
+        <img src="img/vista-lateral.jpg" alt="Vista lateral del edificio Álabes"  data-cms-img="proyecto.imagen" data-cms-label="Imagen"/>
       </div>
       <div class="about__text reveal">
-        <p class="eyebrow">Sobre Álabes</p>
-        <h2>Solidez que genera movimiento</h2>
-        <p>Ubicado en una zona estratégica, Álabes ofrece un entorno que combina tranquilidad, conectividad y calidad de vida, en pleno Calle del Batán, junto al Río Tomebamba.</p>
-        <p>Desarrollado bajo una visión sostenible y con experiencia en el sector, el proyecto prioriza la seguridad y el bienestar de sus residentes, garantizando una experiencia integral. Cuenta con Roof Top en el último piso, Fire Zone y áreas comunales pensadas para la convivencia.</p>
-        <p>Una propuesta residencial planificada para brindar equilibrio, comodidad y espacios de encuentro en un entorno seguro. Entrega: 2028.</p>
-        <div class="about__badges">
-          <div class="badge"><strong>34</strong><span>Unidades totales</span></div>
-          <div class="badge"><strong>2028</strong><span>Fecha de entrega</span></div>
-          <div class="badge"><strong>4</strong><span>Locales comerciales</span></div>
-          <div class="badge"><strong>1</strong><span>Roof Top + Fire Zone</span></div>
+        <p class="eyebrow" data-cms="proyecto.etiqueta" data-cms-label="Sobretítulo">Sobre Álabes</p>
+        <h2 data-cms="proyecto.titulo" data-cms-label="Título">Solidez que genera movimiento</h2>
+        <p data-cms="proyecto.texto" data-cms-label="Párrafo" data-cms-type="textarea">Ubicado en una zona estratégica, Álabes ofrece un entorno que combina tranquilidad, conectividad y calidad de vida, en pleno Calle del Batán, junto al Río Tomebamba.</p>
+        <p data-cms="proyecto.texto-2" data-cms-label="Párrafo 2" data-cms-type="textarea">Desarrollado bajo una visión sostenible y con experiencia en el sector, el proyecto prioriza la seguridad y el bienestar de sus residentes, garantizando una experiencia integral. Cuenta con Roof Top en el último piso, Fire Zone y áreas comunales pensadas para la convivencia.</p>
+        <p data-cms="proyecto.texto-3" data-cms-label="Párrafo 3" data-cms-type="textarea">Una propuesta residencial planificada para brindar equilibrio, comodidad y espacios de encuentro en un entorno seguro. Entrega: 2028.</p>
+        <div class="about__badges" data-cms-list="proyecto.lista-about-badges" data-cms-label="Cifras destacadas" data-cms-noun="Cifra">
+          <div class="badge"><strong data-cms="dato" data-cms-label="Dato destacado">34</strong><span data-cms="detalle" data-cms-label="Texto">Unidades totales</span></div>
+          <div class="badge"><strong data-cms="dato" data-cms-label="Dato destacado">2028</strong><span data-cms="detalle" data-cms-label="Texto">Fecha de entrega</span></div>
+          <div class="badge"><strong data-cms="dato" data-cms-label="Dato destacado">4</strong><span data-cms="detalle" data-cms-label="Texto">Locales comerciales</span></div>
+          <div class="badge"><strong data-cms="dato" data-cms-label="Dato destacado">1</strong><span data-cms="detalle" data-cms-label="Texto">Roof Top + Fire Zone</span></div>
         </div>
       </div>
     </div>
@@ -128,163 +129,163 @@
 </section>
 
 <!-- ============ UBICACIÓN ============ -->
-<section class="section section--alt" id="ubicacion">
+<section class="section section--alt" id="ubicacion" data-cms-group="Ubicación" data-cms-show="mostrar.ubicacion">
   <div class="container">
     <div class="section-head reveal">
-      <p class="eyebrow">Ubicación privilegiada</p>
-      <h2>A pasos del Río Tomebamba</h2>
-      <p>En Calle del Batán, uno de los sectores más conectados y tranquilos de Cuenca, con acceso directo a la Av. 12 de Abril.</p>
+      <p class="eyebrow" data-cms="ubicacion.etiqueta" data-cms-label="Sobretítulo">Ubicación privilegiada</p>
+      <h2 data-cms="ubicacion.titulo" data-cms-label="Título">A pasos del Río Tomebamba</h2>
+      <p data-cms="ubicacion.texto" data-cms-label="Párrafo" data-cms-type="textarea">En Calle del Batán, uno de los sectores más conectados y tranquilos de Cuenca, con acceso directo a la Av. 12 de Abril.</p>
     </div>
     <div class="location">
-      <div class="location__maps reveal">
-        <img src="img/map-close.jpg" alt="Ubicación exacta del proyecto Álabes en Calle del Batán" />
-        <img src="img/map-wide.jpg" alt="Vista panorámica de Cuenca con la ubicación de Álabes" />
+      <div class="location__maps reveal" data-cms-list="ubicacion.lista-location-maps" data-cms-label="Mapas de ubicación" data-cms-noun="Mapa">
+        <img src="img/map-close.jpg" alt="Ubicación exacta del proyecto Álabes en Calle del Batán"  data-cms-img="imagen" data-cms-label="Imagen"/>
+        <img src="img/map-wide.jpg" alt="Vista panorámica de Cuenca con la ubicación de Álabes"  data-cms-img="imagen" data-cms-label="Imagen"/>
       </div>
-      <div class="poi-list reveal">
-        <div class="poi"><span class="poi__icon"><svg class="icon"><use href="#i-water"></use></svg></span><div><strong>Río Tomebamba</strong><span>A pasos del proyecto</span></div></div>
-        <div class="poi"><span class="poi__icon"><svg class="icon"><use href="#i-road"></use></svg></span><div><strong>Av. 12 de Abril</strong><span>Conexión directa a toda la ciudad</span></div></div>
-        <div class="poi"><span class="poi__icon"><svg class="icon"><use href="#i-landmark"></use></svg></span><div><strong>Centro Histórico (Catedral)</strong><span>Pocos minutos en auto</span></div></div>
-        <div class="poi"><span class="poi__icon"><svg class="icon"><use href="#i-grad"></use></svg></span><div><strong>Universidad de Cuenca</strong><span>A corta distancia</span></div></div>
-        <div class="poi"><span class="poi__icon"><svg class="icon"><use href="#i-medical"></use></svg></span><div><strong>Hospital Santa Inés</strong><span>Atención médica cercana</span></div></div>
-        <div class="poi"><span class="poi__icon"><svg class="icon"><use href="#i-bank"></use></svg></span><div><strong>SRI</strong><span>Servicios públicos a la mano</span></div></div>
+      <div class="poi-list reveal" data-cms-list="ubicacion.lista-poi-list" data-cms-label="Puntos de interés cercanos" data-cms-noun="Punto">
+        <div class="poi"><span class="poi__icon"><svg class="icon"><use href="#i-water" data-cms-icon="icono" data-cms-label="Ícono"></use></svg></span><div><strong data-cms="dato" data-cms-label="Dato destacado">Río Tomebamba</strong><span data-cms="detalle" data-cms-label="Texto">A pasos del proyecto</span></div></div>
+        <div class="poi"><span class="poi__icon"><svg class="icon"><use href="#i-road" data-cms-icon="icono" data-cms-label="Ícono"></use></svg></span><div><strong data-cms="dato" data-cms-label="Dato destacado">Av. 12 de Abril</strong><span data-cms="detalle" data-cms-label="Texto">Conexión directa a toda la ciudad</span></div></div>
+        <div class="poi"><span class="poi__icon"><svg class="icon"><use href="#i-landmark" data-cms-icon="icono" data-cms-label="Ícono"></use></svg></span><div><strong data-cms="dato" data-cms-label="Dato destacado">Centro Histórico (Catedral)</strong><span data-cms="detalle" data-cms-label="Texto">Pocos minutos en auto</span></div></div>
+        <div class="poi"><span class="poi__icon"><svg class="icon"><use href="#i-grad" data-cms-icon="icono" data-cms-label="Ícono"></use></svg></span><div><strong data-cms="dato" data-cms-label="Dato destacado">Universidad de Cuenca</strong><span data-cms="detalle" data-cms-label="Texto">A corta distancia</span></div></div>
+        <div class="poi"><span class="poi__icon"><svg class="icon"><use href="#i-medical" data-cms-icon="icono" data-cms-label="Ícono"></use></svg></span><div><strong data-cms="dato" data-cms-label="Dato destacado">Hospital Santa Inés</strong><span data-cms="detalle" data-cms-label="Texto">Atención médica cercana</span></div></div>
+        <div class="poi"><span class="poi__icon"><svg class="icon"><use href="#i-bank" data-cms-icon="icono" data-cms-label="Ícono"></use></svg></span><div><strong data-cms="dato" data-cms-label="Dato destacado">SRI</strong><span data-cms="detalle" data-cms-label="Texto">Servicios públicos a la mano</span></div></div>
       </div>
     </div>
   </div>
 </section>
 
 <!-- ============ AMENIDADES ============ -->
-<section class="section" id="amenidades">
+<section class="section" id="amenidades" data-cms-group="Amenidades" data-cms-show="mostrar.amenidades">
   <div class="container">
     <div class="section-head reveal">
-      <p class="eyebrow">Amenidades</p>
-      <h2>Espacios pensados para convivir</h2>
-      <p>Áreas comunales, seguridad y comodidad en cada rincón de Álabes.</p>
+      <p class="eyebrow" data-cms="amenidades.etiqueta" data-cms-label="Sobretítulo">Amenidades</p>
+      <h2 data-cms="amenidades.titulo" data-cms-label="Título">Espacios pensados para convivir</h2>
+      <p data-cms="amenidades.texto" data-cms-label="Párrafo" data-cms-type="textarea">Áreas comunales, seguridad y comodidad en cada rincón de Álabes.</p>
     </div>
-    <div class="amenities-grid">
-      <div class="amenity-card reveal"><div class="amenity-card__icon"><svg class="icon"><use href="#i-coworking"></use></svg></div><h3>Coworking</h3><p>Espacio equipado para trabajar o reunirte sin salir del edificio, ideal para home office y reuniones.</p></div>
-      <div class="amenity-card reveal"><div class="amenity-card__icon"><svg class="icon"><use href="#i-firepit"></use></svg></div><h3>Fire Zone & BBQ</h3><p>Zona comunal con parrilla y fogata para compartir en familia o con amigos.</p></div>
-      <div class="amenity-card reveal"><div class="amenity-card__icon"><svg class="icon"><use href="#i-lobby"></use></svg></div><h3>Lobby con recepción</h3><p>Ingreso controlado con lobby que recibe a residentes y visitas con calidez y elegancia.</p></div>
-      <div class="amenity-card reveal"><div class="amenity-card__icon"><svg class="icon"><use href="#i-garden"></use></svg></div><h3>Áreas comunales y jardines</h3><p>Patios internos, jardines y salas de estar compartidas que integran naturaleza y arquitectura.</p></div>
-      <div class="amenity-card reveal"><div class="amenity-card__icon"><svg class="icon"><use href="#i-store"></use></svg></div><h3>Locales comerciales</h3><p>4 locales disponibles en planta baja, ideales para cafetería, retail o servicios de proximidad.</p></div>
-      <div class="amenity-card reveal"><div class="amenity-card__icon"><svg class="icon"><use href="#i-parking"></use></svg></div><h3>Parqueaderos y bodegas</h3><p>Subsuelo con parqueaderos para autos y motos, más bodegas privadas de almacenamiento.</p></div>
-      <div class="amenity-card reveal"><div class="amenity-card__icon"><svg class="icon"><use href="#i-shield"></use></svg></div><h3>Diseño seguro y sostenible</h3><p>Proyecto desarrollado bajo criterios de sostenibilidad, priorizando la seguridad de sus residentes.</p></div>
-      <div class="amenity-card reveal"><div class="amenity-card__icon"><svg class="icon"><use href="#i-people"></use></svg></div><h3>Espacios de convivencia</h3><p>Áreas diseñadas para el encuentro entre vecinos, dentro de un entorno tranquilo y planificado.</p></div>
+    <div class="amenities-grid" data-cms-list="amenidades.lista-amenities-grid" data-cms-label="Amenidades" data-cms-noun="Amenidad">
+      <div class="amenity-card reveal"><div class="amenity-card__icon"><svg class="icon"><use href="#i-coworking" data-cms-icon="icono" data-cms-label="Ícono"></use></svg></div><h3 data-cms="subtitulo" data-cms-label="Subtítulo">Coworking</h3><p data-cms="texto" data-cms-label="Párrafo" data-cms-type="textarea">Espacio equipado para trabajar o reunirte sin salir del edificio, ideal para home office y reuniones.</p></div>
+      <div class="amenity-card reveal"><div class="amenity-card__icon"><svg class="icon"><use href="#i-firepit" data-cms-icon="icono" data-cms-label="Ícono"></use></svg></div><h3 data-cms="subtitulo" data-cms-label="Subtítulo">Fire Zone & BBQ</h3><p data-cms="texto" data-cms-label="Párrafo" data-cms-type="textarea">Zona comunal con parrilla y fogata para compartir en familia o con amigos.</p></div>
+      <div class="amenity-card reveal"><div class="amenity-card__icon"><svg class="icon"><use href="#i-lobby" data-cms-icon="icono" data-cms-label="Ícono"></use></svg></div><h3 data-cms="subtitulo" data-cms-label="Subtítulo">Lobby con recepción</h3><p data-cms="texto" data-cms-label="Párrafo" data-cms-type="textarea">Ingreso controlado con lobby que recibe a residentes y visitas con calidez y elegancia.</p></div>
+      <div class="amenity-card reveal"><div class="amenity-card__icon"><svg class="icon"><use href="#i-garden" data-cms-icon="icono" data-cms-label="Ícono"></use></svg></div><h3 data-cms="subtitulo" data-cms-label="Subtítulo">Áreas comunales y jardines</h3><p data-cms="texto" data-cms-label="Párrafo" data-cms-type="textarea">Patios internos, jardines y salas de estar compartidas que integran naturaleza y arquitectura.</p></div>
+      <div class="amenity-card reveal"><div class="amenity-card__icon"><svg class="icon"><use href="#i-store" data-cms-icon="icono" data-cms-label="Ícono"></use></svg></div><h3 data-cms="subtitulo" data-cms-label="Subtítulo">Locales comerciales</h3><p data-cms="texto" data-cms-label="Párrafo" data-cms-type="textarea">4 locales disponibles en planta baja, ideales para cafetería, retail o servicios de proximidad.</p></div>
+      <div class="amenity-card reveal"><div class="amenity-card__icon"><svg class="icon"><use href="#i-parking" data-cms-icon="icono" data-cms-label="Ícono"></use></svg></div><h3 data-cms="subtitulo" data-cms-label="Subtítulo">Parqueaderos y bodegas</h3><p data-cms="texto" data-cms-label="Párrafo" data-cms-type="textarea">Subsuelo con parqueaderos para autos y motos, más bodegas privadas de almacenamiento.</p></div>
+      <div class="amenity-card reveal"><div class="amenity-card__icon"><svg class="icon"><use href="#i-shield" data-cms-icon="icono" data-cms-label="Ícono"></use></svg></div><h3 data-cms="subtitulo" data-cms-label="Subtítulo">Diseño seguro y sostenible</h3><p data-cms="texto" data-cms-label="Párrafo" data-cms-type="textarea">Proyecto desarrollado bajo criterios de sostenibilidad, priorizando la seguridad de sus residentes.</p></div>
+      <div class="amenity-card reveal"><div class="amenity-card__icon"><svg class="icon"><use href="#i-people" data-cms-icon="icono" data-cms-label="Ícono"></use></svg></div><h3 data-cms="subtitulo" data-cms-label="Subtítulo">Espacios de convivencia</h3><p data-cms="texto" data-cms-label="Párrafo" data-cms-type="textarea">Áreas diseñadas para el encuentro entre vecinos, dentro de un entorno tranquilo y planificado.</p></div>
     </div>
   </div>
 </section>
 
 <!-- ============ TIPOLOGÍAS ============ -->
-<section class="section section--alt" id="tipologias">
+<section class="section section--alt" id="tipologias" data-cms-group="Suites y tipologías" data-cms-show="mostrar.tipologias">
   <div class="container">
     <div class="section-head reveal">
-      <p class="eyebrow">Tipologías</p>
-      <h2>Encuentra tu espacio ideal</h2>
-      <p>Suites, monoambientes y departamentos dúplex distribuidos en planta baja y dos plantas altas. Haz clic en cualquier unidad para ver su ficha técnica completa.</p>
+      <p class="eyebrow" data-cms="tipologias.etiqueta" data-cms-label="Sobretítulo">Tipologías</p>
+      <h2 data-cms="tipologias.titulo" data-cms-label="Título">Encuentra tu espacio ideal</h2>
+      <p data-cms="tipologias.texto" data-cms-label="Párrafo" data-cms-type="textarea">Suites, monoambientes y departamentos dúplex distribuidos en planta baja y dos plantas altas. Haz clic en cualquier unidad para ver su ficha técnica completa.</p>
     </div>
 
     <div class="tabs reveal">
-      <button class="tab-btn is-active" data-tab="tab-a">Planta Baja · Suites A</button>
-      <button class="tab-btn" data-tab="tab-b">1ra Planta Alta · Suites B</button>
-      <button class="tab-btn" data-tab="tab-c">2da Planta Alta · Suites y Deptos C</button>
+      <button class="tab-btn is-active" data-tab="tab-a" data-cms="tipologias.boton" data-cms-label="Botón">Planta Baja · Suites A</button>
+      <button class="tab-btn" data-tab="tab-b" data-cms="tipologias.boton-2" data-cms-label="Botón 2">1ra Planta Alta · Suites B</button>
+      <button class="tab-btn" data-tab="tab-c" data-cms="tipologias.boton-3" data-cms-label="Botón 3">2da Planta Alta · Suites y Deptos C</button>
     </div>
 
     <div class="tab-panel is-active" id="tab-a"><div class="unit-grid" id="grid-a"></div></div>
     <div class="tab-panel" id="tab-b"><div class="unit-grid" id="grid-b"></div></div>
     <div class="tab-panel" id="tab-c"><div class="unit-grid" id="grid-c"></div></div>
 
-    <p class="tipologias-note">Áreas referenciales según planos arquitectónicos. Haz clic en una unidad para ver su ficha técnica del brochure. Escríbenos para conocer disponibilidad actualizada.</p>
+    <p class="tipologias-note" data-cms="tipologias.texto-2" data-cms-label="Párrafo 2" data-cms-type="textarea">Áreas referenciales según planos arquitectónicos. Haz clic en una unidad para ver su ficha técnica del brochure. Escríbenos para conocer disponibilidad actualizada.</p>
   </div>
 </section>
 
 <!-- ============ LOCALES COMERCIALES ============ -->
-<section class="section" id="locales">
+<section class="section" id="locales" data-cms-group="Locales comerciales" data-cms-show="mostrar.locales">
   <div class="container">
     <div class="section-head reveal">
-      <p class="eyebrow">Locales comerciales</p>
-      <h2>Emprende en planta baja</h2>
-      <p>4 locales disponibles con acceso directo desde Calle del Batán. Haz clic para ver la ficha de cada uno.</p>
+      <p class="eyebrow" data-cms="locales.etiqueta" data-cms-label="Sobretítulo">Locales comerciales</p>
+      <h2 data-cms="locales.titulo" data-cms-label="Título">Emprende en planta baja</h2>
+      <p data-cms="locales.texto" data-cms-label="Párrafo" data-cms-type="textarea">4 locales disponibles con acceso directo desde Calle del Batán. Haz clic para ver la ficha de cada uno.</p>
     </div>
     <div class="locales-grid" id="localesGrid"></div>
   </div>
 </section>
 
 <!-- ============ PLANTAS ============ -->
-<section class="section section--alt" id="planos">
+<section class="section section--alt" id="planos" data-cms-group="Plantas y distribución" data-cms-show="mostrar.planos">
   <div class="container">
     <div class="section-head reveal">
-      <p class="eyebrow">Distribución del proyecto</p>
-      <h2>Un edificio pensado en cada nivel</h2>
-      <p>Desde el subsuelo con parqueaderos y bodegas, hasta el Roof Top con terrazas privadas.</p>
+      <p class="eyebrow" data-cms="planos.etiqueta" data-cms-label="Sobretítulo">Distribución del proyecto</p>
+      <h2 data-cms="planos.titulo" data-cms-label="Título">Un edificio pensado en cada nivel</h2>
+      <p data-cms="planos.texto" data-cms-label="Párrafo" data-cms-type="textarea">Desde el subsuelo con parqueaderos y bodegas, hasta el Roof Top con terrazas privadas.</p>
     </div>
-    <div class="plans-grid">
-      <div class="plan-card reveal" data-ficha="img/planta-baja.jpg" data-title="Planta Baja">
-        <img src="img/planta-baja.jpg" alt="Planta baja: suites A, locales comerciales y sala comunal" />
-        <div class="plan-card__label">01 · Planta Baja — Suites A, locales comerciales y sala comunal</div>
+    <div class="plans-grid" data-cms-list="planos.lista-plans-grid" data-cms-label="Planos / plantas" data-cms-noun="Plano">
+      <div class="plan-card reveal" data-ficha="img/planta-baja.jpg" data-title="Planta Baja" data-cms-attr="data-title:titulo-ampliado">
+        <img src="img/planta-baja.jpg" alt="Planta baja: suites A, locales comerciales y sala comunal"  data-cms-img="imagen" data-cms-label="Imagen"/>
+        <div class="plan-card__label" data-cms="texto" data-cms-label="Texto" data-cms-type="textarea">01 · Planta Baja — Suites A, locales comerciales y sala comunal</div>
       </div>
-      <div class="plan-card reveal" data-ficha="img/primera-planta-alta.jpg" data-title="Primera Planta Alta">
-        <img src="img/primera-planta-alta.jpg" alt="Primera planta alta: suites B" />
-        <div class="plan-card__label">02 · Primera Planta Alta — Suites B0 a B12</div>
+      <div class="plan-card reveal" data-ficha="img/primera-planta-alta.jpg" data-title="Primera Planta Alta" data-cms-attr="data-title:titulo-ampliado">
+        <img src="img/primera-planta-alta.jpg" alt="Primera planta alta: suites B"  data-cms-img="imagen" data-cms-label="Imagen"/>
+        <div class="plan-card__label" data-cms="texto" data-cms-label="Texto" data-cms-type="textarea">02 · Primera Planta Alta — Suites B0 a B12</div>
       </div>
-      <div class="plan-card reveal" data-ficha="img/segunda-planta-alta.jpg" data-title="Segunda Planta Alta">
-        <img src="img/segunda-planta-alta.jpg" alt="Segunda planta alta: suites y departamentos C" />
-        <div class="plan-card__label">03 · Segunda Planta Alta — Suites y departamentos C</div>
+      <div class="plan-card reveal" data-ficha="img/segunda-planta-alta.jpg" data-title="Segunda Planta Alta" data-cms-attr="data-title:titulo-ampliado">
+        <img src="img/segunda-planta-alta.jpg" alt="Segunda planta alta: suites y departamentos C"  data-cms-img="imagen" data-cms-label="Imagen"/>
+        <div class="plan-card__label" data-cms="texto" data-cms-label="Texto" data-cms-type="textarea">03 · Segunda Planta Alta — Suites y departamentos C</div>
       </div>
     </div>
   </div>
 </section>
 
 <!-- ============ GALERÍA ============ -->
-<section class="section" id="galeria">
+<section class="section" id="galeria" data-cms-group="Galería" data-cms-show="mostrar.galeria">
   <div class="container">
     <div class="section-head reveal">
-      <p class="eyebrow">Galería</p>
-      <h2>Un vistazo a Álabes</h2>
-      <p>Renders del proyecto: fachadas, áreas comunales e interiores.</p>
+      <p class="eyebrow" data-cms="galeria.etiqueta" data-cms-label="Sobretítulo">Galería</p>
+      <h2 data-cms="galeria.titulo" data-cms-label="Título">Un vistazo a Álabes</h2>
+      <p data-cms="galeria.texto" data-cms-label="Párrafo" data-cms-type="textarea">Renders del proyecto: fachadas, áreas comunales e interiores.</p>
     </div>
-    <div class="gallery-grid reveal">
-      <figure class="wide tall"><img src="img/vista-frontal.jpg" data-full="img/vista-frontal.jpg" data-lightbox alt="Vista frontal del edificio" /></figure>
-      <figure><img src="img/terraza.jpg" data-full="img/terraza.jpg" data-lightbox alt="Terraza Roof Top" /></figure>
-      <figure><img src="img/zona-comunal-bbq.jpg" data-full="img/zona-comunal-bbq.jpg" data-lightbox alt="Zona comunal con BBQ" /></figure>
-      <figure><img src="img/lobby.jpg" data-full="img/lobby.jpg" data-lightbox alt="Lobby de ingreso" /></figure>
-      <figure><img src="img/area-comunal-jardin.jpg" data-full="img/area-comunal-jardin.jpg" data-lightbox alt="Jardín interior" /></figure>
-      <figure class="wide"><img src="img/area-comunal-lounge.jpg" data-full="img/area-comunal-lounge.jpg" data-lightbox alt="Sala comunal lounge" /></figure>
-      <figure><img src="img/area-comunal-kitchen.jpg" data-full="img/area-comunal-kitchen.jpg" data-lightbox alt="Cocina comunal" /></figure>
-      <figure><img src="img/interior-01.jpg" data-full="img/interior-01.jpg" data-lightbox alt="Interior suite" /></figure>
-      <figure><img src="img/interior-02.jpg" data-full="img/interior-02.jpg" data-lightbox alt="Dormitorio" /></figure>
-      <figure class="tall"><img src="img/interior-04.jpg" data-full="img/interior-04.jpg" data-lightbox alt="Cocina departamento dúplex" /></figure>
-      <figure><img src="img/interior-06.jpg" data-full="img/interior-06.jpg" data-lightbox alt="Sala de estar" /></figure>
-      <figure><img src="img/interior-07.jpg" data-full="img/interior-07.jpg" data-lightbox alt="Sala moderna" /></figure>
+    <div class="gallery-grid reveal" data-cms-list="galeria.lista-gallery-grid" data-cms-label="Fotos de la galería" data-cms-noun="Foto" data-cms-cls="wide:Doble ancho,tall:Doble alto,arch:Forma de arco">
+      <figure class="wide tall"><img src="img/vista-frontal.jpg" data-full="img/vista-frontal.jpg" data-lightbox alt="Vista frontal del edificio"  data-cms-img="imagen" data-cms-label="Imagen"/></figure>
+      <figure><img src="img/terraza.jpg" data-full="img/terraza.jpg" data-lightbox alt="Terraza Roof Top"  data-cms-img="imagen" data-cms-label="Imagen"/></figure>
+      <figure><img src="img/zona-comunal-bbq.jpg" data-full="img/zona-comunal-bbq.jpg" data-lightbox alt="Zona comunal con BBQ"  data-cms-img="imagen" data-cms-label="Imagen"/></figure>
+      <figure><img src="img/lobby.jpg" data-full="img/lobby.jpg" data-lightbox alt="Lobby de ingreso"  data-cms-img="imagen" data-cms-label="Imagen"/></figure>
+      <figure><img src="img/area-comunal-jardin.jpg" data-full="img/area-comunal-jardin.jpg" data-lightbox alt="Jardín interior"  data-cms-img="imagen" data-cms-label="Imagen"/></figure>
+      <figure class="wide"><img src="img/area-comunal-lounge.jpg" data-full="img/area-comunal-lounge.jpg" data-lightbox alt="Sala comunal lounge"  data-cms-img="imagen" data-cms-label="Imagen"/></figure>
+      <figure><img src="img/area-comunal-kitchen.jpg" data-full="img/area-comunal-kitchen.jpg" data-lightbox alt="Cocina comunal"  data-cms-img="imagen" data-cms-label="Imagen"/></figure>
+      <figure><img src="img/interior-01.jpg" data-full="img/interior-01.jpg" data-lightbox alt="Interior suite"  data-cms-img="imagen" data-cms-label="Imagen"/></figure>
+      <figure><img src="img/interior-02.jpg" data-full="img/interior-02.jpg" data-lightbox alt="Dormitorio"  data-cms-img="imagen" data-cms-label="Imagen"/></figure>
+      <figure class="tall"><img src="img/interior-04.jpg" data-full="img/interior-04.jpg" data-lightbox alt="Cocina departamento dúplex"  data-cms-img="imagen" data-cms-label="Imagen"/></figure>
+      <figure><img src="img/interior-06.jpg" data-full="img/interior-06.jpg" data-lightbox alt="Sala de estar"  data-cms-img="imagen" data-cms-label="Imagen"/></figure>
+      <figure><img src="img/interior-07.jpg" data-full="img/interior-07.jpg" data-lightbox alt="Sala moderna"  data-cms-img="imagen" data-cms-label="Imagen"/></figure>
     </div>
   </div>
 </section>
 
 <!-- ============ CONTACTO ============ -->
-<section class="section contact" id="contacto">
+<section class="section contact" id="contacto" data-cms-group="Contacto" data-cms-show="mostrar.contacto">
   <div class="container">
     <div class="contact-grid">
       <div class="contact-info reveal">
-        <p class="eyebrow">Contacto</p>
-        <h2>Agenda tu visita a Álabes</h2>
-        <p>Cuéntanos qué tipología te interesa y te contactamos con toda la información: disponibilidad, planos y formas de pago.</p>
+        <p class="eyebrow" data-cms="contacto.etiqueta" data-cms-label="Sobretítulo">Contacto</p>
+        <h2 data-cms="contacto.titulo" data-cms-label="Título">Agenda tu visita a Álabes</h2>
+        <p data-cms="contacto.texto" data-cms-label="Párrafo" data-cms-type="textarea">Cuéntanos qué tipología te interesa y te contactamos con toda la información: disponibilidad, planos y formas de pago.</p>
 
         <div class="contact-details">
-          <div class="item"><span class="ic"><svg class="icon"><use href="#i-phone"></use></svg></span><div><strong>Teléfono / WhatsApp</strong><a href="https://wa.me/593939087030?text=Hola%2C%20quiero%20m%C3%A1s%20informaci%C3%B3n%20del%20proyecto%20ALABES." target="_blank" rel="noopener">093 908 7030</a></div></div>
-          <div class="item"><span class="ic"><svg class="icon"><use href="#i-mail"></use></svg></span><div><strong>Correo</strong><a href="mailto:info@forxainmobiliaria.com">info@forxainmobiliaria.com</a></div></div>
-          <div class="item"><span class="ic"><svg class="icon"><use href="#i-pin"></use></svg></span><div><strong>Ubicación</strong><span>Calle del Batán, Cuenca, Ecuador</span></div></div>
+          <div class="item"><span class="ic"><svg class="icon"><use href="#i-phone"></use></svg></span><div><strong data-cms="contacto.dato" data-cms-label="Dato destacado">Teléfono / WhatsApp</strong><a href="https://wa.me/593939087030?text=Hola%2C%20quiero%20m%C3%A1s%20informaci%C3%B3n%20del%20proyecto%20ALABES." target="_blank" rel="noopener" data-cms="contacto.enlace" data-cms-label="Enlace" data-cms-wa>093 908 7030</a></div></div>
+          <div class="item"><span class="ic"><svg class="icon"><use href="#i-mail"></use></svg></span><div><strong data-cms="contacto.dato-2" data-cms-label="Dato destacado 2">Correo</strong><a href="mailto:info@forxainmobiliaria.com" data-cms="contacto.enlace-2" data-cms-label="Enlace 2">info@forxainmobiliaria.com</a></div></div>
+          <div class="item"><span class="ic"><svg class="icon"><use href="#i-pin"></use></svg></span><div><strong data-cms="contacto.dato-3" data-cms-label="Dato destacado 3">Ubicación</strong><span data-cms="contacto.detalle" data-cms-label="Texto">Calle del Batán, Cuenca, Ecuador</span></div></div>
         </div>
 
       </div>
 
       <form class="contact-form reveal" id="contactForm">
-        <h3>Solicita información</h3>
-        <p>Completa el formulario y te escribimos por WhatsApp al instante.</p>
+        <h3 data-cms="contacto.subtitulo" data-cms-label="Subtítulo">Solicita información</h3>
+        <p data-cms="contacto.texto-2" data-cms-label="Párrafo 2" data-cms-type="textarea">Completa el formulario y te escribimos por WhatsApp al instante.</p>
         <div class="form-row">
-          <div class="field"><label for="name">Nombre completo *</label><input type="text" id="name" name="name" placeholder="Tu nombre" required /></div>
-          <div class="field"><label for="phone">Teléfono *</label><input type="tel" id="phone" name="phone" placeholder="09XXXXXXXX" required /></div>
+          <div class="field"><label for="name" data-cms="contacto.campo" data-cms-label="Etiqueta del campo">Nombre completo *</label><input type="text" id="name" name="name" placeholder="Tu nombre" required  data-cms-attr="placeholder:contacto.ejemplo" data-cms-label="Texto de ejemplo del campo"/></div>
+          <div class="field"><label for="phone" data-cms="contacto.campo-2" data-cms-label="Etiqueta del campo 2">Teléfono *</label><input type="tel" id="phone" name="phone" placeholder="09XXXXXXXX" required  data-cms-attr="placeholder:contacto.ejemplo-2" data-cms-label="Texto de ejemplo del campo"/></div>
         </div>
-        <div class="field"><label for="email">Correo electrónico</label><input type="email" id="email" name="email" placeholder="tucorreo@email.com" /></div>
+        <div class="field"><label for="email" data-cms="contacto.campo-3" data-cms-label="Etiqueta del campo 3">Correo electrónico</label><input type="email" id="email" name="email" placeholder="tucorreo@email.com"  data-cms-attr="placeholder:contacto.ejemplo-3" data-cms-label="Texto de ejemplo del campo"/></div>
         <div class="field">
-          <label for="unit">Tipología de interés</label>
+          <label for="unit" data-cms="contacto.campo-4" data-cms-label="Etiqueta del campo 4">Tipología de interés</label>
           <select id="unit" name="unit">
             <option value="">Selecciona una opción</option>
             <option value="Suite Planta Baja (A)">Suite Planta Baja (A)</option>
@@ -294,25 +295,30 @@
             <option value="Aún no lo sé">Aún no lo sé</option>
           </select>
         </div>
-        <div class="field"><label for="message">Mensaje</label><textarea id="message" name="message" placeholder="Cuéntanos qué te gustaría saber..."></textarea></div>
-        <button type="submit" class="btn btn--primary btn--block">Enviar por WhatsApp</button>
+        <div class="field"><label for="message" data-cms="contacto.campo-5" data-cms-label="Etiqueta del campo 5">Mensaje</label><textarea id="message" name="message" placeholder="Cuéntanos qué te gustaría saber..." data-cms-attr="placeholder:contacto.ejemplo-4" data-cms-label="Texto de ejemplo del campo"></textarea></div>
+        <button type="submit" class="btn btn--primary btn--block" data-cms="contacto.boton" data-cms-label="Botón">Enviar por WhatsApp</button>
         <p class="form-status" id="formStatus"></p>
-        <p class="form-note">Al enviar aceptas ser contactado por nuestro equipo comercial.</p>
+        <p class="form-note" data-cms-html="contacto.texto-3" data-cms-label="Párrafo 3" data-cms-type="textarea">Al enviar aceptas ser contactado por nuestro equipo comercial y el tratamiento de tus datos según nuestra <a href="/privacidad/">Política de privacidad</a>.</p>
       </form>
     </div>
   </div>
 </section>
 
 <!-- ============ FOOTER ============ -->
-<footer class="footer">
+<footer class="footer" data-cms-group="Pie de página">
   <div class="container">
-    <div class="footer__brand"><img src="img/logo-mark.png" alt="Álabes" /><img class="footer__forxa" src="img/logo-forxa-white.png" alt="FORXA Inmobiliaria" /><img class="footer__adrian" src="img/logo-adrian-white.png" alt="Adrián Rodríguez Inmobiliario" /><span>© 2026 Álabes — FORXA Inmobiliaria. Todos los derechos reservados.</span></div>
-    <span>Calle del Batán, Cuenca, Ecuador</span>
+    <div class="footer__brand"><img src="img/logo-mark.png" alt="Álabes"  data-cms-img="footer.imagen" data-cms-label="Logotipo"/><img class="footer__forxa" src="img/logo-forxa-white.png" alt="FORXA Inmobiliaria"  data-cms-img="footer.imagen-2" data-cms-label="Logotipo 2"/><img class="footer__adrian" src="img/logo-adrian-white.png" alt="Adrián Rodríguez Inmobiliario"  data-cms-img="footer.imagen-3" data-cms-label="Logotipo 3"/><span data-cms="footer.detalle" data-cms-label="Texto">© 2026 Álabes — FORXA Inmobiliaria. Todos los derechos reservados.</span></div>
+    <span data-cms="footer.detalle-2" data-cms-label="Texto 2">Calle del Batán, Cuenca, Ecuador</span>
+    <nav class="legal-links" aria-label="Información legal">
+      <a href="/privacidad/">Política de privacidad</a>
+      <a href="/cookies/">Política de cookies</a>
+      <button type="button" data-consent-open>Preferencias de cookies</button>
+    </nav>
   </div>
 </footer>
 
 <!-- WhatsApp floating button -->
-<a href="https://wa.me/593939087030?text=Hola%2C%20quiero%20m%C3%A1s%20informaci%C3%B3n%20del%20proyecto%20ALABES." class="whatsapp-float" target="_blank" rel="noopener" aria-label="Escríbenos por WhatsApp">
+<a href="https://wa.me/593939087030?text=Hola%2C%20quiero%20m%C3%A1s%20informaci%C3%B3n%20del%20proyecto%20ALABES." class="whatsapp-float" target="_blank" rel="noopener" aria-label="Escríbenos por WhatsApp" data-cms-wa>
   <svg class="icon"><use href="#i-whatsapp"></use></svg>
 </a>
 
@@ -329,6 +335,8 @@
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
 <script src="/js/forxa-config.js"></script>
+<script src="/js/cms.js"></script>
 <script src="js/script.js"></script>
+<script src="/js/consent.js" defer></script>
 </body>
 </html>

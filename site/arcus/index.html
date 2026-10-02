@@ -1,16 +1,17 @@
 <!DOCTYPE html>
-<html lang="es">
-<head>
+<html lang="es" data-cms-page="arcus">
+<head data-cms-group="Pestaña del navegador y buscadores">
 <meta charset="UTF-8" />
 <base href="/arcus/">
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Arcus | Suites &amp; Lofts en Cuenca — Remigio Tamariz Crespo</title>
-<meta name="description" content="Arcus Suites & Lofts: 64 unidades residenciales, 7 locales comerciales y 6 islas en la calle Remigio Tamariz Crespo, Cuenca. A pasos del Centro Histórico y la Universidad de Cuenca." />
+<title data-cms="seo.titulo" data-cms-label="Título de la página (pestaña y Google)">Arcus | Suites &amp; Lofts en Cuenca — Remigio Tamariz Crespo</title>
+<meta name="description" content="Arcus Suites & Lofts: 64 unidades residenciales, 7 locales comerciales y 6 islas en la calle Remigio Tamariz Crespo, Cuenca. A pasos del Centro Histórico y la Universidad de Cuenca."  data-cms-attr="content:seo.descripcion" data-cms-label="Descripción para Google" data-cms-type="textarea"/>
 <meta name="theme-color" content="#3a2c23" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="icon" href="img/brand/arcus-mark-black.png" type="image/png">
+<link rel="icon" href="img/brand/arcus-mark-black.png" type="image/png" data-cms-attr="href:seo.icono" data-cms-label="Icono de la pestaña (favicon)" data-cms-type="image">
 <link rel="stylesheet" href="css/styles.css" />
+<link rel="stylesheet" href="/css/consent.css" />
 </head>
 <body>
 
@@ -53,22 +54,22 @@
 </svg>
 
 <!-- ============ HEADER ============ -->
-<header class="header" id="header">
+<header class="header" id="header" data-cms-group="Menú superior">
   <div class="container header__inner">
     <a href="#inicio" class="brand">
-      <img class="brand__mark" src="img/brand/arcus-mark-white.png" alt="" />
-      <span class="brand__word">ARCUS<small>Suites &amp; Lofts</small></span>
+      <img class="brand__mark" src="img/brand/arcus-mark-white.png" alt=""  data-cms-img="header.imagen" data-cms-label="Logotipo"/>
+      <span class="brand__word"><span data-cms="header.texto" data-cms-label="Texto">ARCUS</span><small data-cms="header.texto-2" data-cms-label="Texto 2" data-cms-type="textarea">Suites &amp; Lofts</small></span>
     </a>
     <nav class="nav" id="nav">
-      <a href="#proyecto">Proyecto</a>
-      <a href="#ubicacion">Ubicación</a>
-      <a href="#amenidades">Amenidades</a>
-      <a href="#tipologias">Suites &amp; Lofts</a>
-      <a href="#locales">Locales</a>
-      <a href="#planos">Plantas</a>
-      <a href="#galeria">Galería</a>
-      <a href="/" class="nav-more">Más proyectos</a>
-      <a href="#contacto" class="btn btn--cream btn--sm">Contáctanos</a>
+      <a href="#proyecto" data-cms="header.enlace" data-cms-label="Enlace">Proyecto</a>
+      <a href="#ubicacion" data-cms="header.enlace-2" data-cms-label="Enlace 2">Ubicación</a>
+      <a href="#amenidades" data-cms="header.enlace-3" data-cms-label="Enlace 3">Amenidades</a>
+      <a href="#tipologias" data-cms="header.enlace-4" data-cms-label="Enlace 4">Suites &amp; Lofts</a>
+      <a href="#locales" data-cms="header.enlace-5" data-cms-label="Enlace 5">Locales</a>
+      <a href="#planos" data-cms="header.enlace-6" data-cms-label="Enlace 6">Plantas</a>
+      <a href="#galeria" data-cms="header.enlace-7" data-cms-label="Enlace 7">Galería</a>
+      <a href="/" class="nav-more" data-cms="header.enlace-8" data-cms-label="Enlace 8" data-cms-href="header.enlace-url">Más proyectos</a>
+      <a href="#contacto" class="btn btn--cream btn--sm" data-cms="header.boton" data-cms-label="Botón">Contáctanos</a>
     </nav>
     <button class="nav-toggle" id="navToggle" aria-label="Abrir menú" aria-expanded="false">
       <span></span><span></span><span></span>
@@ -77,10 +78,10 @@
 </header>
 
 <!-- ============ HERO ============ -->
-<section class="hero" id="inicio">
+<section class="hero" id="inicio" data-cms-group="Portada">
   <div class="hero__media">
-    <video autoplay muted loop playsinline poster="img/hero-poster.jpg">
-      <source src="video/hero-arcus.mp4" type="video/mp4" />
+    <video autoplay muted loop playsinline poster="img/hero-poster.jpg" data-cms-attr="poster:inicio.video-portada" data-cms-label="Imagen de carga del video" data-cms-type="image">
+      <source src="video/hero-arcus.mp4" type="video/mp4"  data-cms-attr="src:inicio.video-mp4" data-cms-label="Video de fondo (MP4)" data-cms-type="video"/>
       <img src="img/hero-poster.jpg" alt="Edificio Arcus al atardecer" />
     </video>
   </div>
@@ -88,26 +89,26 @@
 
   <div class="hero__inner">
     <div class="hero__panel">
-      <span class="hero__kicker"><span class="dot"></span> Cuenca · Remigio Tamariz Crespo</span>
-      <img class="hero__logo" src="img/brand/arcus-lockup-white.png" alt="Arcus Suites &amp; Lofts" />
+      <span class="hero__kicker"><span class="dot"></span> <span data-cms="inicio.etiqueta" data-cms-label="Sobretítulo">Cuenca · Remigio Tamariz Crespo</span></span>
+      <img class="hero__logo" src="img/brand/arcus-lockup-white.png" alt="Arcus Suites &amp; Lofts"  data-cms-img="inicio.imagen" data-cms-label="Logotipo"/>
       <h1 class="hero__title">
-        <span class="line"><span>Arquitectura</span></span>
-        <span class="line"><span><em>que se eleva</em></span></span>
+        <span class="line"><span data-cms="inicio.titulo-principal" data-cms-label="Título principal">Arquitectura</span></span>
+        <span class="line"><span><em data-cms="inicio.titulo-principal-2" data-cms-label="Título principal 2">que se eleva</em></span></span>
       </h1>
-      <p class="hero__desc">Suites y lofts en el corazón de Cuenca, con locales comerciales en planta baja y áreas verdes en altura. Elegancia, funcionalidad y vida urbana en una zona de alta revalorización.</p>
+      <p class="hero__desc" data-cms="inicio.descripcion" data-cms-label="Descripción" data-cms-type="textarea">Suites y lofts en el corazón de Cuenca, con locales comerciales en planta baja y áreas verdes en altura. Elegancia, funcionalidad y vida urbana en una zona de alta revalorización.</p>
       <div class="hero__cta">
-        <a href="https://wa.me/593939087030?text=Hola%2C%20quiero%20m%C3%A1s%20informaci%C3%B3n%20del%20proyecto%20ARCUS." class="btn btn--cream" target="_blank" rel="noopener">
-          <svg class="icon"><use href="#i-whatsapp"></use></svg> Escribir por WhatsApp
+        <a href="https://wa.me/593939087030?text=Hola%2C%20quiero%20m%C3%A1s%20informaci%C3%B3n%20del%20proyecto%20ARCUS." class="btn btn--cream" target="_blank" rel="noopener" data-cms-wa>
+          <svg class="icon"><use href="#i-whatsapp"></use></svg> <span data-cms="inicio.texto" data-cms-label="Texto del botón">Escribir por WhatsApp</span>
         </a>
-        <a href="#tipologias" class="btn btn--glass">Ver disponibilidad <svg class="icon"><use href="#i-arrow-right"></use></svg></a>
+        <a href="#tipologias" class="btn btn--glass"><span data-cms="inicio.texto-2" data-cms-label="Texto del botón">Ver disponibilidad</span> <svg class="icon"><use href="#i-arrow-right"></use></svg></a>
       </div>
     </div>
 
-    <div class="hero__stats">
-      <div><strong data-count="64">0</strong><span>Suites y lofts</span></div>
-      <div><strong data-count="13">0</strong><span>Locales e islas</span></div>
-      <div><strong data-count="6">0</strong><span>Plantas altas</span></div>
-      <div><strong data-count="2">0</strong><span>Subsuelos</span></div>
+    <div class="hero__stats" data-cms-list="inicio.lista-hero-stats" data-cms-label="Cifras de la portada" data-cms-noun="Cifra">
+      <div><strong data-count="64" data-cms-attr="data-count:cifra" data-cms-label="Cifra (número)" data-cms-type="number">0</strong><span data-cms="detalle" data-cms-label="Texto">Suites y lofts</span></div>
+      <div><strong data-count="13" data-cms-attr="data-count:cifra" data-cms-label="Cifra (número)" data-cms-type="number">0</strong><span data-cms="detalle" data-cms-label="Texto">Locales e islas</span></div>
+      <div><strong data-count="6" data-cms-attr="data-count:cifra" data-cms-label="Cifra (número)" data-cms-type="number">0</strong><span data-cms="detalle" data-cms-label="Texto">Plantas altas</span></div>
+      <div><strong data-count="2" data-cms-attr="data-count:cifra" data-cms-label="Cifra (número)" data-cms-type="number">0</strong><span data-cms="detalle" data-cms-label="Texto">Subsuelos</span></div>
     </div>
   </div>
 
@@ -115,14 +116,14 @@
 </section>
 
 <!-- ============ CINTA ============ -->
-<div class="marquee" aria-hidden="true">
-  <div class="marquee__track">
-    <span>Suites &amp; Lofts<span></span></span>
-    <span>Locales comerciales</span>
-    <span>Áreas verdes en altura</span>
-    <span>Dos subsuelos de parqueadero</span>
-    <span>Centro Histórico a minutos</span>
-    <span>Zona de alta plusvalía</span>
+<div class="marquee" aria-hidden="true" data-cms-group="Cinta de frases">
+  <div class="marquee__track" data-cms-list="marquee.lista-marquee-track" data-cms-label="Cinta de frases (se repite en bucle)" data-cms-noun="Frase" data-cms-repeat="2">
+    <span data-cms="detalle" data-cms-label="Texto">Suites &amp; Lofts</span>
+    <span data-cms="detalle" data-cms-label="Texto">Locales comerciales</span>
+    <span data-cms="detalle" data-cms-label="Texto">Áreas verdes en altura</span>
+    <span data-cms="detalle" data-cms-label="Texto">Dos subsuelos de parqueadero</span>
+    <span data-cms="detalle" data-cms-label="Texto">Centro Histórico a minutos</span>
+    <span data-cms="detalle" data-cms-label="Texto">Zona de alta plusvalía</span>
     <span>Suites &amp; Lofts</span>
     <span>Locales comerciales</span>
     <span>Áreas verdes en altura</span>
@@ -133,27 +134,27 @@
 </div>
 
 <!-- ============ SOBRE EL PROYECTO ============ -->
-<section class="section" id="proyecto">
+<section class="section" id="proyecto" data-cms-group="Sobre el proyecto" data-cms-show="mostrar.proyecto">
   <div class="container">
     <div class="about">
       <div class="about__media reveal">
-        <img src="img/exterior/lateral.jpg" alt="Vista lateral del edificio Arcus" data-parallax />
+        <img src="img/exterior/lateral.jpg" alt="Vista lateral del edificio Arcus" data-parallax  data-cms-img="proyecto.imagen" data-cms-label="Imagen"/>
         <div class="about__float">
-          <strong>77</strong>
-          <span>Unidades en total</span>
+          <strong data-cms="proyecto.dato" data-cms-label="Dato destacado">77</strong>
+          <span data-cms="proyecto.detalle" data-cms-label="Texto">Unidades en total</span>
         </div>
       </div>
       <div class="about__text reveal">
-        <p class="eyebrow">Sobre Arcus</p>
-        <h2>Elegancia, funcionalidad y vida urbana</h2>
-        <p>Ubicado en la calle Remigio Tamariz Crespo, este moderno proyecto residencial y comercial fusiona elegancia, funcionalidad y estilo de vida urbano.</p>
-        <p>Su arquitectura, pensada para adaptarse a las necesidades actuales, integra locales comerciales en la planta baja y exclusivas unidades de vivienda distribuidas en seis plantas altas. Dos niveles de subsuelo alojan parqueaderos, bodegas y zonas de servicios técnicos, garantizando máxima comodidad e independencia.</p>
-        <p>Incorpora además áreas verdes en la primera planta alta y en la terraza, diseñadas para el esparcimiento y el bienestar de los residentes.</p>
-        <div class="about__badges stagger">
-          <div class="badge"><strong>64</strong><span>Suites y lofts</span></div>
-          <div class="badge"><strong>13</strong><span>Locales e islas</span></div>
-          <div class="badge"><strong>6</strong><span>Plantas altas</span></div>
-          <div class="badge"><strong>2</strong><span>Subsuelos</span></div>
+        <p class="eyebrow" data-cms="proyecto.etiqueta" data-cms-label="Sobretítulo">Sobre Arcus</p>
+        <h2 data-cms="proyecto.titulo" data-cms-label="Título">Elegancia, funcionalidad y vida urbana</h2>
+        <p data-cms="proyecto.texto" data-cms-label="Párrafo" data-cms-type="textarea">Ubicado en la calle Remigio Tamariz Crespo, este moderno proyecto residencial y comercial fusiona elegancia, funcionalidad y estilo de vida urbano.</p>
+        <p data-cms="proyecto.texto-2" data-cms-label="Párrafo 2" data-cms-type="textarea">Su arquitectura, pensada para adaptarse a las necesidades actuales, integra locales comerciales en la planta baja y exclusivas unidades de vivienda distribuidas en seis plantas altas. Dos niveles de subsuelo alojan parqueaderos, bodegas y zonas de servicios técnicos, garantizando máxima comodidad e independencia.</p>
+        <p data-cms="proyecto.texto-3" data-cms-label="Párrafo 3" data-cms-type="textarea">Incorpora además áreas verdes en la primera planta alta y en la terraza, diseñadas para el esparcimiento y el bienestar de los residentes.</p>
+        <div class="about__badges stagger" data-cms-list="proyecto.lista-about-badges" data-cms-label="Cifras destacadas" data-cms-noun="Cifra">
+          <div class="badge"><strong data-cms="dato" data-cms-label="Dato destacado">64</strong><span data-cms="detalle" data-cms-label="Texto">Suites y lofts</span></div>
+          <div class="badge"><strong data-cms="dato" data-cms-label="Dato destacado">13</strong><span data-cms="detalle" data-cms-label="Texto">Locales e islas</span></div>
+          <div class="badge"><strong data-cms="dato" data-cms-label="Dato destacado">6</strong><span data-cms="detalle" data-cms-label="Texto">Plantas altas</span></div>
+          <div class="badge"><strong data-cms="dato" data-cms-label="Dato destacado">2</strong><span data-cms="detalle" data-cms-label="Texto">Subsuelos</span></div>
         </div>
       </div>
     </div>
@@ -161,193 +162,193 @@
 </section>
 
 <!-- ============ UBICACIÓN ============ -->
-<section class="section section--cream-2" id="ubicacion">
+<section class="section section--cream-2" id="ubicacion" data-cms-group="Ubicación" data-cms-show="mostrar.ubicacion">
   <div class="container">
     <div class="section-head reveal">
-      <p class="eyebrow">Ubicación privilegiada</p>
-      <h2>En el corazón de Cuenca</h2>
-      <p>Una zona de alta revalorización con acceso directo a las principales avenidas de la ciudad.</p>
+      <p class="eyebrow" data-cms="ubicacion.etiqueta" data-cms-label="Sobretítulo">Ubicación privilegiada</p>
+      <h2 data-cms="ubicacion.titulo" data-cms-label="Título">En el corazón de Cuenca</h2>
+      <p data-cms="ubicacion.texto" data-cms-label="Párrafo" data-cms-type="textarea">Una zona de alta revalorización con acceso directo a las principales avenidas de la ciudad.</p>
     </div>
     <div class="location">
-      <div class="location__maps reveal">
+      <div class="location__maps reveal" data-cms-list="ubicacion.lista-location-maps" data-cms-label="Mapas de ubicación" data-cms-noun="Mapa">
         <figure class="location__map" style="margin:0">
-          <img src="img/ubicacion/mapa-1.jpg" alt="Ubicación de Arcus respecto al Centro Histórico y la Universidad de Cuenca" />
-          <figcaption>Entorno inmediato</figcaption>
+          <img src="img/ubicacion/mapa-1.jpg" alt="Ubicación de Arcus respecto al Centro Histórico y la Universidad de Cuenca"  data-cms-img="imagen" data-cms-label="Imagen"/>
+          <figcaption data-cms="pie" data-cms-label="Pie de foto">Entorno inmediato</figcaption>
         </figure>
         <figure class="location__map" style="margin:0">
-          <img src="img/ubicacion/mapa-2.jpg" alt="Ubicación de Arcus respecto al Estadio Alejandro Serrano Aguilar" />
-          <figcaption>Conectividad urbana</figcaption>
+          <img src="img/ubicacion/mapa-2.jpg" alt="Ubicación de Arcus respecto al Estadio Alejandro Serrano Aguilar"  data-cms-img="imagen" data-cms-label="Imagen"/>
+          <figcaption data-cms="pie" data-cms-label="Pie de foto">Conectividad urbana</figcaption>
         </figure>
       </div>
-      <div class="poi-list stagger">
-        <div class="poi"><span class="poi__icon"><svg class="icon"><use href="#i-road"></use></svg></span><div><strong>Remigio Tamariz Crespo</strong><span>Acceso directo a Av. Solano y Av. Remigio Crespo</span></div></div>
-        <div class="poi"><span class="poi__icon"><svg class="icon"><use href="#i-landmark"></use></svg></span><div><strong>Centro Histórico</strong><span>Pocos minutos en auto</span></div></div>
-        <div class="poi"><span class="poi__icon"><svg class="icon"><use href="#i-grad"></use></svg></span><div><strong>Universidad de Cuenca</strong><span>A corta distancia</span></div></div>
-        <div class="poi"><span class="poi__icon"><svg class="icon"><use href="#i-garden"></use></svg></span><div><strong>Parque de la Madre</strong><span>Área verde cercana</span></div></div>
-        <div class="poi"><span class="poi__icon"><svg class="icon"><use href="#i-stadium"></use></svg></span><div><strong>Estadio Alejandro Serrano Aguilar</strong><span>A corta distancia</span></div></div>
-        <div class="poi"><span class="poi__icon"><svg class="icon"><use href="#i-pin-area"></use></svg></span><div><strong>Zona de alta plusvalía</strong><span>Entorno residencial y comercial consolidado</span></div></div>
+      <div class="poi-list stagger" data-cms-list="ubicacion.lista-poi-list" data-cms-label="Puntos de interés cercanos" data-cms-noun="Punto">
+        <div class="poi"><span class="poi__icon"><svg class="icon"><use href="#i-road" data-cms-icon="icono" data-cms-label="Ícono"></use></svg></span><div><strong data-cms="dato" data-cms-label="Dato destacado">Remigio Tamariz Crespo</strong><span data-cms="detalle" data-cms-label="Texto">Acceso directo a Av. Solano y Av. Remigio Crespo</span></div></div>
+        <div class="poi"><span class="poi__icon"><svg class="icon"><use href="#i-landmark" data-cms-icon="icono" data-cms-label="Ícono"></use></svg></span><div><strong data-cms="dato" data-cms-label="Dato destacado">Centro Histórico</strong><span data-cms="detalle" data-cms-label="Texto">Pocos minutos en auto</span></div></div>
+        <div class="poi"><span class="poi__icon"><svg class="icon"><use href="#i-grad" data-cms-icon="icono" data-cms-label="Ícono"></use></svg></span><div><strong data-cms="dato" data-cms-label="Dato destacado">Universidad de Cuenca</strong><span data-cms="detalle" data-cms-label="Texto">A corta distancia</span></div></div>
+        <div class="poi"><span class="poi__icon"><svg class="icon"><use href="#i-garden" data-cms-icon="icono" data-cms-label="Ícono"></use></svg></span><div><strong data-cms="dato" data-cms-label="Dato destacado">Parque de la Madre</strong><span data-cms="detalle" data-cms-label="Texto">Área verde cercana</span></div></div>
+        <div class="poi"><span class="poi__icon"><svg class="icon"><use href="#i-stadium" data-cms-icon="icono" data-cms-label="Ícono"></use></svg></span><div><strong data-cms="dato" data-cms-label="Dato destacado">Estadio Alejandro Serrano Aguilar</strong><span data-cms="detalle" data-cms-label="Texto">A corta distancia</span></div></div>
+        <div class="poi"><span class="poi__icon"><svg class="icon"><use href="#i-pin-area" data-cms-icon="icono" data-cms-label="Ícono"></use></svg></span><div><strong data-cms="dato" data-cms-label="Dato destacado">Zona de alta plusvalía</strong><span data-cms="detalle" data-cms-label="Texto">Entorno residencial y comercial consolidado</span></div></div>
       </div>
     </div>
   </div>
 </section>
 
 <!-- ============ AMENIDADES ============ -->
-<section class="section section--cafe" id="amenidades">
+<section class="section section--cafe" id="amenidades" data-cms-group="Amenidades" data-cms-show="mostrar.amenidades">
   <div class="container">
     <div class="section-head reveal">
-      <p class="eyebrow">Amenidades</p>
-      <h2>Comodidad en cada nivel</h2>
-      <p>Del subsuelo a la terraza, Arcus está pensado para la independencia y el bienestar de sus residentes.</p>
+      <p class="eyebrow" data-cms="amenidades.etiqueta" data-cms-label="Sobretítulo">Amenidades</p>
+      <h2 data-cms="amenidades.titulo" data-cms-label="Título">Comodidad en cada nivel</h2>
+      <p data-cms="amenidades.texto" data-cms-label="Párrafo" data-cms-type="textarea">Del subsuelo a la terraza, Arcus está pensado para la independencia y el bienestar de sus residentes.</p>
     </div>
-    <div class="amenities-grid stagger">
-      <div class="amenity-card"><div class="amenity-card__icon"><svg class="icon"><use href="#i-parking"></use></svg></div><h3>Parqueaderos</h3><p>Dos niveles de subsuelo con amplios parqueaderos para residentes y visitas.</p></div>
-      <div class="amenity-card"><div class="amenity-card__icon"><svg class="icon"><use href="#i-box"></use></svg></div><h3>Bodegas privadas</h3><p>Zonas de bodegas y servicios técnicos en el subsuelo, para máxima independencia.</p></div>
-      <div class="amenity-card"><div class="amenity-card__icon"><svg class="icon"><use href="#i-garden"></use></svg></div><h3>Áreas verdes</h3><p>Espacios verdes en la primera planta alta, pensados para el esparcimiento.</p></div>
-      <div class="amenity-card"><div class="amenity-card__icon"><svg class="icon"><use href="#i-rooftop"></use></svg></div><h3>Terraza</h3><p>Planta de terraza con áreas verdes diseñadas para el bienestar de los residentes.</p></div>
-      <div class="amenity-card"><div class="amenity-card__icon"><svg class="icon"><use href="#i-store"></use></svg></div><h3>Locales comerciales</h3><p>7 locales y 6 islas en planta baja, ideales para retail, servicios o cafetería.</p></div>
-      <div class="amenity-card"><div class="amenity-card__icon"><svg class="icon"><use href="#i-pin-area"></use></svg></div><h3>Ubicación estratégica</h3><p>A pasos del Centro Histórico y la Universidad de Cuenca.</p></div>
+    <div class="amenities-grid stagger" data-cms-list="amenidades.lista-amenities-grid" data-cms-label="Amenidades" data-cms-noun="Amenidad">
+      <div class="amenity-card"><div class="amenity-card__icon"><svg class="icon"><use href="#i-parking" data-cms-icon="icono" data-cms-label="Ícono"></use></svg></div><h3 data-cms="subtitulo" data-cms-label="Subtítulo">Parqueaderos</h3><p data-cms="texto" data-cms-label="Párrafo" data-cms-type="textarea">Dos niveles de subsuelo con amplios parqueaderos para residentes y visitas.</p></div>
+      <div class="amenity-card"><div class="amenity-card__icon"><svg class="icon"><use href="#i-box" data-cms-icon="icono" data-cms-label="Ícono"></use></svg></div><h3 data-cms="subtitulo" data-cms-label="Subtítulo">Bodegas privadas</h3><p data-cms="texto" data-cms-label="Párrafo" data-cms-type="textarea">Zonas de bodegas y servicios técnicos en el subsuelo, para máxima independencia.</p></div>
+      <div class="amenity-card"><div class="amenity-card__icon"><svg class="icon"><use href="#i-garden" data-cms-icon="icono" data-cms-label="Ícono"></use></svg></div><h3 data-cms="subtitulo" data-cms-label="Subtítulo">Áreas verdes</h3><p data-cms="texto" data-cms-label="Párrafo" data-cms-type="textarea">Espacios verdes en la primera planta alta, pensados para el esparcimiento.</p></div>
+      <div class="amenity-card"><div class="amenity-card__icon"><svg class="icon"><use href="#i-rooftop" data-cms-icon="icono" data-cms-label="Ícono"></use></svg></div><h3 data-cms="subtitulo" data-cms-label="Subtítulo">Terraza</h3><p data-cms="texto" data-cms-label="Párrafo" data-cms-type="textarea">Planta de terraza con áreas verdes diseñadas para el bienestar de los residentes.</p></div>
+      <div class="amenity-card"><div class="amenity-card__icon"><svg class="icon"><use href="#i-store" data-cms-icon="icono" data-cms-label="Ícono"></use></svg></div><h3 data-cms="subtitulo" data-cms-label="Subtítulo">Locales comerciales</h3><p data-cms="texto" data-cms-label="Párrafo" data-cms-type="textarea">7 locales y 6 islas en planta baja, ideales para retail, servicios o cafetería.</p></div>
+      <div class="amenity-card"><div class="amenity-card__icon"><svg class="icon"><use href="#i-pin-area" data-cms-icon="icono" data-cms-label="Ícono"></use></svg></div><h3 data-cms="subtitulo" data-cms-label="Subtítulo">Ubicación estratégica</h3><p data-cms="texto" data-cms-label="Párrafo" data-cms-type="textarea">A pasos del Centro Histórico y la Universidad de Cuenca.</p></div>
     </div>
   </div>
 </section>
 
 <!-- ============ BANDA DESTACADA ============ -->
-<section class="section--tight">
+<section class="section--tight" data-cms-group="Terraza &amp; áreas verdes" data-cms-show="mostrar.terraza-areas-verdes">
   <div class="container">
     <div class="feature-band reveal">
       <div class="feature-band__body">
-        <p class="eyebrow">Terraza &amp; áreas verdes</p>
-        <h3>Espacios diseñados para el bienestar</h3>
-        <p>Desde la primera planta alta hasta la terraza, Arcus integra áreas verdes pensadas para el esparcimiento, con vista al entorno urbano de Cuenca.</p>
-        <a href="https://wa.me/593939087030?text=Hola%2C%20quiero%20m%C3%A1s%20informaci%C3%B3n%20del%20proyecto%20ARCUS." class="btn btn--cream" target="_blank" rel="noopener">Consultar disponibilidad <svg class="icon"><use href="#i-arrow-right"></use></svg></a>
+        <p class="eyebrow" data-cms="terraza-areas-verdes.etiqueta" data-cms-label="Sobretítulo">Terraza &amp; áreas verdes</p>
+        <h3 data-cms="terraza-areas-verdes.subtitulo" data-cms-label="Subtítulo">Espacios diseñados para el bienestar</h3>
+        <p data-cms="terraza-areas-verdes.texto" data-cms-label="Párrafo" data-cms-type="textarea">Desde la primera planta alta hasta la terraza, Arcus integra áreas verdes pensadas para el esparcimiento, con vista al entorno urbano de Cuenca.</p>
+        <a href="https://wa.me/593939087030?text=Hola%2C%20quiero%20m%C3%A1s%20informaci%C3%B3n%20del%20proyecto%20ARCUS." class="btn btn--cream" target="_blank" rel="noopener" data-cms-wa><span data-cms="terraza-areas-verdes.texto-2" data-cms-label="Texto del botón">Consultar disponibilidad</span> <svg class="icon"><use href="#i-arrow-right"></use></svg></a>
       </div>
       <div class="feature-band__media">
-        <img src="img/interior/sala.jpg" alt="Sala con vista, proyecto Arcus" />
+        <img src="img/interior/sala.jpg" alt="Sala con vista, proyecto Arcus"  data-cms-img="terraza-areas-verdes.imagen" data-cms-label="Imagen"/>
       </div>
     </div>
   </div>
 </section>
 
 <!-- ============ TIPOLOGÍAS ============ -->
-<section class="section section--cream-2" id="tipologias">
+<section class="section section--cream-2" id="tipologias" data-cms-group="Suites y tipologías" data-cms-show="mostrar.tipologias">
   <div class="container">
     <div class="section-head reveal">
-      <p class="eyebrow">Suites &amp; Lofts</p>
-      <h2>Encuentra tu espacio ideal</h2>
-      <p>64 unidades distribuidas en seis plantas altas. Haz clic en cualquier unidad para ver su ficha técnica completa.</p>
+      <p class="eyebrow" data-cms="tipologias.etiqueta" data-cms-label="Sobretítulo">Suites &amp; Lofts</p>
+      <h2 data-cms="tipologias.titulo" data-cms-label="Título">Encuentra tu espacio ideal</h2>
+      <p data-cms="tipologias.texto" data-cms-label="Párrafo" data-cms-type="textarea">64 unidades distribuidas en seis plantas altas. Haz clic en cualquier unidad para ver su ficha técnica completa.</p>
     </div>
 
     <div class="tabs-wrap reveal">
       <div class="tabs">
-        <button class="tab-btn is-active" data-tab="tab-suites">Suites · <span id="countSuites">23</span></button>
-        <button class="tab-btn" data-tab="tab-lofts">Lofts · <span id="countLofts">41</span></button>
+        <button class="tab-btn is-active" data-tab="tab-suites"><span data-cms="tipologias.texto-2" data-cms-label="Texto del botón">Suites ·</span> <span id="countSuites">23</span></button>
+        <button class="tab-btn" data-tab="tab-lofts"><span data-cms="tipologias.texto-3" data-cms-label="Texto del botón">Lofts ·</span> <span id="countLofts">41</span></button>
       </div>
     </div>
 
     <div class="tab-panel is-active" id="tab-suites"><div class="unit-grid" id="grid-suites"></div></div>
     <div class="tab-panel" id="tab-lofts"><div class="unit-grid" id="grid-lofts"></div></div>
 
-    <p class="tipologias-note">Áreas referenciales según planos arquitectónicos. Escríbenos para conocer disponibilidad actualizada.</p>
+    <p class="tipologias-note" data-cms="tipologias.texto-4" data-cms-label="Párrafo 4" data-cms-type="textarea">Áreas referenciales según planos arquitectónicos. Escríbenos para conocer disponibilidad actualizada.</p>
   </div>
 </section>
 
 <!-- ============ LOCALES ============ -->
-<section class="section section--cafe" id="locales">
+<section class="section section--cafe" id="locales" data-cms-group="Locales comerciales" data-cms-show="mostrar.locales">
   <div class="container">
     <div class="head-split reveal">
       <div>
-        <p class="eyebrow">Locales &amp; islas</p>
-        <h2>Emprende en planta baja</h2>
-        <p>7 locales comerciales y 6 islas —<span id="countLocales">13</span> espacios— con acceso directo desde la calle.</p>
+        <p class="eyebrow" data-cms="locales.etiqueta" data-cms-label="Sobretítulo">Locales &amp; islas</p>
+        <h2 data-cms="locales.titulo" data-cms-label="Título">Emprende en planta baja</h2>
+        <p><span data-cms="locales.texto" data-cms-label="Texto">7 locales comerciales y 6 islas —</span><span id="countLocales">13</span> <span data-cms="locales.texto-2" data-cms-label="Texto 2">espacios— con acceso directo desde la calle.</span></p>
       </div>
-      <a href="#contacto" class="btn btn--glass btn--sm">Consultar <svg class="icon"><use href="#i-arrow-right"></use></svg></a>
+      <a href="#contacto" class="btn btn--glass btn--sm"><span data-cms="locales.texto-3" data-cms-label="Texto del botón">Consultar</span> <svg class="icon"><use href="#i-arrow-right"></use></svg></a>
     </div>
     <div class="locales-grid" id="localesGrid"></div>
   </div>
 </section>
 
 <!-- ============ PLANTAS ============ -->
-<section class="section" id="planos">
+<section class="section" id="planos" data-cms-group="Plantas y distribución" data-cms-show="mostrar.planos">
   <div class="container">
     <div class="section-head reveal">
-      <p class="eyebrow">Distribución</p>
-      <h2>Un edificio pensado en cada nivel</h2>
-      <p>Desde el subsuelo con parqueaderos y bodegas, hasta la terraza con áreas verdes.</p>
+      <p class="eyebrow" data-cms="planos.etiqueta" data-cms-label="Sobretítulo">Distribución</p>
+      <h2 data-cms="planos.titulo" data-cms-label="Título">Un edificio pensado en cada nivel</h2>
+      <p data-cms="planos.texto" data-cms-label="Párrafo" data-cms-type="textarea">Desde el subsuelo con parqueaderos y bodegas, hasta la terraza con áreas verdes.</p>
     </div>
-    <div class="plans-grid stagger">
-      <div class="plan-card" data-ficha="img/plantas/subsuelo-2.jpg" data-title="Subsuelo -2"><div class="plan-card__img"><img src="img/plantas/subsuelo-2.jpg" alt="Subsuelo -2: parqueaderos y bodegas" loading="lazy" /></div><div class="plan-card__label"><i>N-2</i> Parqueaderos y bodegas</div></div>
-      <div class="plan-card" data-ficha="img/plantas/subsuelo-1.jpg" data-title="Subsuelo -1"><div class="plan-card__img"><img src="img/plantas/subsuelo-1.jpg" alt="Subsuelo -1: parqueaderos y bodegas" loading="lazy" /></div><div class="plan-card__label"><i>N-1</i> Parqueaderos y bodegas</div></div>
-      <div class="plan-card" data-ficha="img/plantas/planta-baja.jpg" data-title="Planta Baja"><div class="plan-card__img"><img src="img/plantas/planta-baja.jpg" alt="Planta baja: locales comerciales e islas" loading="lazy" /></div><div class="plan-card__label"><i>PB</i> Locales e islas comerciales</div></div>
-      <div class="plan-card" data-ficha="img/plantas/planta-1.jpg" data-title="1° Planta Alta"><div class="plan-card__img"><img src="img/plantas/planta-1.jpg" alt="Primera planta alta" loading="lazy" /></div><div class="plan-card__label"><i>N1</i> Suites, lofts y área verde</div></div>
-      <div class="plan-card" data-ficha="img/plantas/planta-2.jpg" data-title="2° Planta Alta"><div class="plan-card__img"><img src="img/plantas/planta-2.jpg" alt="Segunda planta alta" loading="lazy" /></div><div class="plan-card__label"><i>N2</i> Suites y lofts</div></div>
-      <div class="plan-card" data-ficha="img/plantas/planta-3.jpg" data-title="3° Planta Alta"><div class="plan-card__img"><img src="img/plantas/planta-3.jpg" alt="Tercera planta alta" loading="lazy" /></div><div class="plan-card__label"><i>N3</i> Suites y lofts</div></div>
-      <div class="plan-card" data-ficha="img/plantas/planta-4.jpg" data-title="4° Planta Alta"><div class="plan-card__img"><img src="img/plantas/planta-4.jpg" alt="Cuarta planta alta" loading="lazy" /></div><div class="plan-card__label"><i>N4</i> Suites y lofts</div></div>
-      <div class="plan-card" data-ficha="img/plantas/planta-5.jpg" data-title="5° Planta Alta"><div class="plan-card__img"><img src="img/plantas/planta-5.jpg" alt="Quinta planta alta" loading="lazy" /></div><div class="plan-card__label"><i>N5</i> Suites y lofts</div></div>
-      <div class="plan-card" data-ficha="img/plantas/planta-6.jpg" data-title="6° Planta Alta"><div class="plan-card__img"><img src="img/plantas/planta-6.jpg" alt="Sexta planta alta" loading="lazy" /></div><div class="plan-card__label"><i>N6</i> Suites y lofts</div></div>
-      <div class="plan-card" data-ficha="img/plantas/terraza.jpg" data-title="Planta de Terraza"><div class="plan-card__img"><img src="img/plantas/terraza.jpg" alt="Planta de terraza con áreas verdes" loading="lazy" /></div><div class="plan-card__label"><i>TER</i> Terraza y áreas verdes</div></div>
+    <div class="plans-grid stagger" data-cms-list="planos.lista-plans-grid" data-cms-label="Planos / plantas" data-cms-noun="Plano">
+      <div class="plan-card" data-ficha="img/plantas/subsuelo-2.jpg" data-title="Subsuelo -2" data-cms-attr="data-title:titulo-ampliado"><div class="plan-card__img"><img src="img/plantas/subsuelo-2.jpg" alt="Subsuelo -2: parqueaderos y bodegas" loading="lazy"  data-cms-img="imagen" data-cms-label="Imagen"/></div><div class="plan-card__label"><i data-cms="numero" data-cms-label="Número / viñeta">N-2</i> <span data-cms="texto" data-cms-label="Texto">Parqueaderos y bodegas</span></div></div>
+      <div class="plan-card" data-ficha="img/plantas/subsuelo-1.jpg" data-title="Subsuelo -1" data-cms-attr="data-title:titulo-ampliado"><div class="plan-card__img"><img src="img/plantas/subsuelo-1.jpg" alt="Subsuelo -1: parqueaderos y bodegas" loading="lazy"  data-cms-img="imagen" data-cms-label="Imagen"/></div><div class="plan-card__label"><i data-cms="numero" data-cms-label="Número / viñeta">N-1</i> <span data-cms="texto" data-cms-label="Texto">Parqueaderos y bodegas</span></div></div>
+      <div class="plan-card" data-ficha="img/plantas/planta-baja.jpg" data-title="Planta Baja" data-cms-attr="data-title:titulo-ampliado"><div class="plan-card__img"><img src="img/plantas/planta-baja.jpg" alt="Planta baja: locales comerciales e islas" loading="lazy"  data-cms-img="imagen" data-cms-label="Imagen"/></div><div class="plan-card__label"><i data-cms="numero" data-cms-label="Número / viñeta">PB</i> <span data-cms="texto" data-cms-label="Texto">Locales e islas comerciales</span></div></div>
+      <div class="plan-card" data-ficha="img/plantas/planta-1.jpg" data-title="1° Planta Alta" data-cms-attr="data-title:titulo-ampliado"><div class="plan-card__img"><img src="img/plantas/planta-1.jpg" alt="Primera planta alta" loading="lazy"  data-cms-img="imagen" data-cms-label="Imagen"/></div><div class="plan-card__label"><i data-cms="numero" data-cms-label="Número / viñeta">N1</i> <span data-cms="texto" data-cms-label="Texto">Suites, lofts y área verde</span></div></div>
+      <div class="plan-card" data-ficha="img/plantas/planta-2.jpg" data-title="2° Planta Alta" data-cms-attr="data-title:titulo-ampliado"><div class="plan-card__img"><img src="img/plantas/planta-2.jpg" alt="Segunda planta alta" loading="lazy"  data-cms-img="imagen" data-cms-label="Imagen"/></div><div class="plan-card__label"><i data-cms="numero" data-cms-label="Número / viñeta">N2</i> <span data-cms="texto" data-cms-label="Texto">Suites y lofts</span></div></div>
+      <div class="plan-card" data-ficha="img/plantas/planta-3.jpg" data-title="3° Planta Alta" data-cms-attr="data-title:titulo-ampliado"><div class="plan-card__img"><img src="img/plantas/planta-3.jpg" alt="Tercera planta alta" loading="lazy"  data-cms-img="imagen" data-cms-label="Imagen"/></div><div class="plan-card__label"><i data-cms="numero" data-cms-label="Número / viñeta">N3</i> <span data-cms="texto" data-cms-label="Texto">Suites y lofts</span></div></div>
+      <div class="plan-card" data-ficha="img/plantas/planta-4.jpg" data-title="4° Planta Alta" data-cms-attr="data-title:titulo-ampliado"><div class="plan-card__img"><img src="img/plantas/planta-4.jpg" alt="Cuarta planta alta" loading="lazy"  data-cms-img="imagen" data-cms-label="Imagen"/></div><div class="plan-card__label"><i data-cms="numero" data-cms-label="Número / viñeta">N4</i> <span data-cms="texto" data-cms-label="Texto">Suites y lofts</span></div></div>
+      <div class="plan-card" data-ficha="img/plantas/planta-5.jpg" data-title="5° Planta Alta" data-cms-attr="data-title:titulo-ampliado"><div class="plan-card__img"><img src="img/plantas/planta-5.jpg" alt="Quinta planta alta" loading="lazy"  data-cms-img="imagen" data-cms-label="Imagen"/></div><div class="plan-card__label"><i data-cms="numero" data-cms-label="Número / viñeta">N5</i> <span data-cms="texto" data-cms-label="Texto">Suites y lofts</span></div></div>
+      <div class="plan-card" data-ficha="img/plantas/planta-6.jpg" data-title="6° Planta Alta" data-cms-attr="data-title:titulo-ampliado"><div class="plan-card__img"><img src="img/plantas/planta-6.jpg" alt="Sexta planta alta" loading="lazy"  data-cms-img="imagen" data-cms-label="Imagen"/></div><div class="plan-card__label"><i data-cms="numero" data-cms-label="Número / viñeta">N6</i> <span data-cms="texto" data-cms-label="Texto">Suites y lofts</span></div></div>
+      <div class="plan-card" data-ficha="img/plantas/terraza.jpg" data-title="Planta de Terraza" data-cms-attr="data-title:titulo-ampliado"><div class="plan-card__img"><img src="img/plantas/terraza.jpg" alt="Planta de terraza con áreas verdes" loading="lazy"  data-cms-img="imagen" data-cms-label="Imagen"/></div><div class="plan-card__label"><i data-cms="numero" data-cms-label="Número / viñeta">TER</i> <span data-cms="texto" data-cms-label="Texto">Terraza y áreas verdes</span></div></div>
     </div>
   </div>
 </section>
 
 <!-- ============ GALERÍA ============ -->
-<section class="section section--cafe" id="galeria">
+<section class="section section--cafe" id="galeria" data-cms-group="Galería" data-cms-show="mostrar.galeria">
   <div class="container">
     <div class="section-head reveal">
-      <p class="eyebrow">Galería</p>
-      <h2>Un vistazo a Arcus</h2>
-      <p>Renders del proyecto: fachada, áreas comunes, terraza y departamentos ambientados.</p>
+      <p class="eyebrow" data-cms="galeria.etiqueta" data-cms-label="Sobretítulo">Galería</p>
+      <h2 data-cms="galeria.titulo" data-cms-label="Título">Un vistazo a Arcus</h2>
+      <p data-cms="galeria.texto" data-cms-label="Párrafo" data-cms-type="textarea">Renders del proyecto: fachada, áreas comunes, terraza y departamentos ambientados.</p>
     </div>
-    <div class="gallery-grid stagger">
-      <figure class="wide tall arch"><img src="img/galeria/fachada-atardecer.jpg" data-full="img/galeria/fachada-atardecer.jpg" data-lightbox alt="Fachada del edificio Arcus al atardecer" loading="lazy" /></figure>
-      <figure><img src="img/galeria/fachada-noche.jpg" data-full="img/galeria/fachada-noche.jpg" data-lightbox alt="Fachada de Arcus iluminada de noche" loading="lazy" /></figure>
-      <figure><img src="img/galeria/recepcion.jpg" data-full="img/galeria/recepcion.jpg" data-lightbox alt="Recepción de Arcus Suites &amp; Lofts" loading="lazy" /></figure>
-      <figure><img src="img/galeria/lobby-ascensor.jpg" data-full="img/galeria/lobby-ascensor.jpg" data-lightbox alt="Lobby y hall de ascensores" loading="lazy" /></figure>
-      <figure><img src="img/galeria/acceso-exterior.jpg" data-full="img/galeria/acceso-exterior.jpg" data-lightbox alt="Acceso exterior y áreas verdes" loading="lazy" /></figure>
-      <figure><img src="img/galeria/lobby-estar.jpg" data-full="img/galeria/lobby-estar.jpg" data-lightbox alt="Área de estar del lobby" loading="lazy" /></figure>
-      <figure><img src="img/galeria/pasaje-comercial.jpg" data-full="img/galeria/pasaje-comercial.jpg" data-lightbox alt="Pasaje comercial en planta baja" loading="lazy" /></figure>
-      <figure><img src="img/galeria/terraza-lounge.jpg" data-full="img/galeria/terraza-lounge.jpg" data-lightbox alt="Terraza lounge con vista a la ciudad" loading="lazy" /></figure>
-      <figure><img src="img/galeria/terraza-comedor.jpg" data-full="img/galeria/terraza-comedor.jpg" data-lightbox alt="Terraza comedor al aire libre" loading="lazy" /></figure>
-      <figure><img src="img/galeria/terraza-gimnasio.jpg" data-full="img/galeria/terraza-gimnasio.jpg" data-lightbox alt="Gimnasio en la terraza" loading="lazy" /></figure>
-      <figure><img src="img/galeria/monoambiente-101.jpg" data-full="img/galeria/monoambiente-101.jpg" data-lightbox alt="Monoambiente 101, vista general" loading="lazy" /></figure>
-      <figure><img src="img/galeria/monoambiente-101-dormitorio.jpg" data-full="img/galeria/monoambiente-101-dormitorio.jpg" data-lightbox alt="Monoambiente 101, dormitorio" loading="lazy" /></figure>
-      <figure><img src="img/galeria/monoambiente-105.jpg" data-full="img/galeria/monoambiente-105.jpg" data-lightbox alt="Monoambiente 105" loading="lazy" /></figure>
-      <figure class="wide tall"><img src="img/galeria/suite-202-sala.jpg" data-full="img/galeria/suite-202-sala.jpg" data-lightbox alt="Suite 202, sala y área social" loading="lazy" /></figure>
-      <figure class="wide tall"><img src="img/galeria/sala-terciopelo.jpg" data-full="img/galeria/sala-terciopelo.jpg" data-lightbox alt="Sala ambientada con vista a la ciudad" loading="lazy" /></figure>
-      <figure class="wide tall"><img src="img/galeria/sala-vista-ciudad.jpg" data-full="img/galeria/sala-vista-ciudad.jpg" data-lightbox alt="Sala y barra con vista panorámica" loading="lazy" /></figure>
-      <figure class="wide tall"><img src="img/galeria/cocina-vista.jpg" data-full="img/galeria/cocina-vista.jpg" data-lightbox alt="Cocina con isla y vista a la ciudad" loading="lazy" /></figure>
-      <figure><img src="img/galeria/cocina-sala.jpg" data-full="img/galeria/cocina-sala.jpg" data-lightbox alt="Cocina y sala integradas" loading="lazy" /></figure>
-      <figure><img src="img/galeria/cocina-estar.jpg" data-full="img/galeria/cocina-estar.jpg" data-lightbox alt="Cocina y área de estar" loading="lazy" /></figure>
-      <figure><img src="img/galeria/suite-202-dormitorio.jpg" data-full="img/galeria/suite-202-dormitorio.jpg" data-lightbox alt="Suite 202, dormitorio" loading="lazy" /></figure>
-      <figure><img src="img/galeria/terraza-mascotas.jpg" data-full="img/galeria/terraza-mascotas.jpg" data-lightbox alt="Terraza con área para mascotas" loading="lazy" /></figure>
+    <div class="gallery-grid stagger" data-cms-list="galeria.lista-gallery-grid" data-cms-label="Fotos de la galería" data-cms-noun="Foto" data-cms-cls="wide:Doble ancho,tall:Doble alto,arch:Forma de arco">
+      <figure class="wide tall arch"><img src="img/galeria/fachada-atardecer.jpg" data-full="img/galeria/fachada-atardecer.jpg" data-lightbox alt="Fachada del edificio Arcus al atardecer" loading="lazy"  data-cms-img="imagen" data-cms-label="Imagen"/></figure>
+      <figure><img src="img/galeria/fachada-noche.jpg" data-full="img/galeria/fachada-noche.jpg" data-lightbox alt="Fachada de Arcus iluminada de noche" loading="lazy"  data-cms-img="imagen" data-cms-label="Imagen"/></figure>
+      <figure><img src="img/galeria/recepcion.jpg" data-full="img/galeria/recepcion.jpg" data-lightbox alt="Recepción de Arcus Suites &amp; Lofts" loading="lazy"  data-cms-img="imagen" data-cms-label="Imagen"/></figure>
+      <figure><img src="img/galeria/lobby-ascensor.jpg" data-full="img/galeria/lobby-ascensor.jpg" data-lightbox alt="Lobby y hall de ascensores" loading="lazy"  data-cms-img="imagen" data-cms-label="Imagen"/></figure>
+      <figure><img src="img/galeria/acceso-exterior.jpg" data-full="img/galeria/acceso-exterior.jpg" data-lightbox alt="Acceso exterior y áreas verdes" loading="lazy"  data-cms-img="imagen" data-cms-label="Imagen"/></figure>
+      <figure><img src="img/galeria/lobby-estar.jpg" data-full="img/galeria/lobby-estar.jpg" data-lightbox alt="Área de estar del lobby" loading="lazy"  data-cms-img="imagen" data-cms-label="Imagen"/></figure>
+      <figure><img src="img/galeria/pasaje-comercial.jpg" data-full="img/galeria/pasaje-comercial.jpg" data-lightbox alt="Pasaje comercial en planta baja" loading="lazy"  data-cms-img="imagen" data-cms-label="Imagen"/></figure>
+      <figure><img src="img/galeria/terraza-lounge.jpg" data-full="img/galeria/terraza-lounge.jpg" data-lightbox alt="Terraza lounge con vista a la ciudad" loading="lazy"  data-cms-img="imagen" data-cms-label="Imagen"/></figure>
+      <figure><img src="img/galeria/terraza-comedor.jpg" data-full="img/galeria/terraza-comedor.jpg" data-lightbox alt="Terraza comedor al aire libre" loading="lazy"  data-cms-img="imagen" data-cms-label="Imagen"/></figure>
+      <figure><img src="img/galeria/terraza-gimnasio.jpg" data-full="img/galeria/terraza-gimnasio.jpg" data-lightbox alt="Gimnasio en la terraza" loading="lazy"  data-cms-img="imagen" data-cms-label="Imagen"/></figure>
+      <figure><img src="img/galeria/monoambiente-101.jpg" data-full="img/galeria/monoambiente-101.jpg" data-lightbox alt="Monoambiente 101, vista general" loading="lazy"  data-cms-img="imagen" data-cms-label="Imagen"/></figure>
+      <figure><img src="img/galeria/monoambiente-101-dormitorio.jpg" data-full="img/galeria/monoambiente-101-dormitorio.jpg" data-lightbox alt="Monoambiente 101, dormitorio" loading="lazy"  data-cms-img="imagen" data-cms-label="Imagen"/></figure>
+      <figure><img src="img/galeria/monoambiente-105.jpg" data-full="img/galeria/monoambiente-105.jpg" data-lightbox alt="Monoambiente 105" loading="lazy"  data-cms-img="imagen" data-cms-label="Imagen"/></figure>
+      <figure class="wide tall"><img src="img/galeria/suite-202-sala.jpg" data-full="img/galeria/suite-202-sala.jpg" data-lightbox alt="Suite 202, sala y área social" loading="lazy"  data-cms-img="imagen" data-cms-label="Imagen"/></figure>
+      <figure class="wide tall"><img src="img/galeria/sala-terciopelo.jpg" data-full="img/galeria/sala-terciopelo.jpg" data-lightbox alt="Sala ambientada con vista a la ciudad" loading="lazy"  data-cms-img="imagen" data-cms-label="Imagen"/></figure>
+      <figure class="wide tall"><img src="img/galeria/sala-vista-ciudad.jpg" data-full="img/galeria/sala-vista-ciudad.jpg" data-lightbox alt="Sala y barra con vista panorámica" loading="lazy"  data-cms-img="imagen" data-cms-label="Imagen"/></figure>
+      <figure class="wide tall"><img src="img/galeria/cocina-vista.jpg" data-full="img/galeria/cocina-vista.jpg" data-lightbox alt="Cocina con isla y vista a la ciudad" loading="lazy"  data-cms-img="imagen" data-cms-label="Imagen"/></figure>
+      <figure><img src="img/galeria/cocina-sala.jpg" data-full="img/galeria/cocina-sala.jpg" data-lightbox alt="Cocina y sala integradas" loading="lazy"  data-cms-img="imagen" data-cms-label="Imagen"/></figure>
+      <figure><img src="img/galeria/cocina-estar.jpg" data-full="img/galeria/cocina-estar.jpg" data-lightbox alt="Cocina y área de estar" loading="lazy"  data-cms-img="imagen" data-cms-label="Imagen"/></figure>
+      <figure><img src="img/galeria/suite-202-dormitorio.jpg" data-full="img/galeria/suite-202-dormitorio.jpg" data-lightbox alt="Suite 202, dormitorio" loading="lazy"  data-cms-img="imagen" data-cms-label="Imagen"/></figure>
+      <figure><img src="img/galeria/terraza-mascotas.jpg" data-full="img/galeria/terraza-mascotas.jpg" data-lightbox alt="Terraza con área para mascotas" loading="lazy"  data-cms-img="imagen" data-cms-label="Imagen"/></figure>
     </div>
   </div>
 </section>
 
 <!-- ============ CONTACTO ============ -->
-<section class="section section--choc contact" id="contacto">
-  <div class="contact__bg"><img src="img/exterior/frontal.jpg" alt="" aria-hidden="true" /></div>
+<section class="section section--choc contact" id="contacto" data-cms-group="Contacto" data-cms-show="mostrar.contacto">
+  <div class="contact__bg"><img src="img/exterior/frontal.jpg" alt="" aria-hidden="true"  data-cms-img="contacto.imagen" data-cms-label="Imagen"/></div>
   <div class="container">
     <div class="contact-grid">
       <div class="contact-info reveal">
-        <p class="eyebrow">Contacto</p>
-        <h2>Agenda tu visita a Arcus</h2>
-        <p>Cuéntanos qué suite o loft te interesa y te contactamos con toda la información: disponibilidad, planos y formas de pago.</p>
+        <p class="eyebrow" data-cms="contacto.etiqueta" data-cms-label="Sobretítulo">Contacto</p>
+        <h2 data-cms="contacto.titulo" data-cms-label="Título">Agenda tu visita a Arcus</h2>
+        <p data-cms="contacto.texto" data-cms-label="Párrafo" data-cms-type="textarea">Cuéntanos qué suite o loft te interesa y te contactamos con toda la información: disponibilidad, planos y formas de pago.</p>
         <div class="contact-details stagger">
-          <div class="item"><span class="ic"><svg class="icon"><use href="#i-whatsapp"></use></svg></span><div><strong>WhatsApp</strong><a href="https://wa.me/593939087030?text=Hola%2C%20quiero%20m%C3%A1s%20informaci%C3%B3n%20del%20proyecto%20ARCUS." target="_blank" rel="noopener">093 908 7030</a></div></div>
-          <div class="item"><span class="ic"><svg class="icon"><use href="#i-pin"></use></svg></span><div><strong>Ubicación</strong><span>Calle Remigio Tamariz Crespo, Cuenca, Ecuador</span></div></div>
-          <div class="item"><span class="ic"><svg class="icon"><use href="#i-clock"></use></svg></span><div><strong>Atención</strong><span>Lunes a sábado · Visitas con cita previa</span></div></div>
+          <div class="item"><span class="ic"><svg class="icon"><use href="#i-whatsapp"></use></svg></span><div><strong data-cms="contacto.dato" data-cms-label="Dato destacado">WhatsApp</strong><a href="https://wa.me/593939087030?text=Hola%2C%20quiero%20m%C3%A1s%20informaci%C3%B3n%20del%20proyecto%20ARCUS." target="_blank" rel="noopener" data-cms="contacto.enlace" data-cms-label="Enlace" data-cms-wa>093 908 7030</a></div></div>
+          <div class="item"><span class="ic"><svg class="icon"><use href="#i-pin"></use></svg></span><div><strong data-cms="contacto.dato-2" data-cms-label="Dato destacado 2">Ubicación</strong><span data-cms="contacto.detalle" data-cms-label="Texto">Calle Remigio Tamariz Crespo, Cuenca, Ecuador</span></div></div>
+          <div class="item"><span class="ic"><svg class="icon"><use href="#i-clock"></use></svg></span><div><strong data-cms="contacto.dato-3" data-cms-label="Dato destacado 3">Atención</strong><span data-cms="contacto.detalle-2" data-cms-label="Texto 2">Lunes a sábado · Visitas con cita previa</span></div></div>
         </div>
       </div>
 
       <form class="contact-form reveal" id="contactForm">
-        <h3>Solicita información</h3>
-        <p>Completa el formulario y te escribimos por WhatsApp al instante.</p>
+        <h3 data-cms="contacto.subtitulo" data-cms-label="Subtítulo">Solicita información</h3>
+        <p data-cms="contacto.texto-2" data-cms-label="Párrafo 2" data-cms-type="textarea">Completa el formulario y te escribimos por WhatsApp al instante.</p>
         <div class="form-row">
-          <div class="field"><label for="name">Nombre completo *</label><input type="text" id="name" name="name" placeholder="Tu nombre" required /></div>
-          <div class="field"><label for="phone">Teléfono *</label><input type="tel" id="phone" name="phone" placeholder="09XXXXXXXX" required /></div>
+          <div class="field"><label for="name" data-cms="contacto.campo" data-cms-label="Etiqueta del campo">Nombre completo *</label><input type="text" id="name" name="name" placeholder="Tu nombre" required  data-cms-attr="placeholder:contacto.ejemplo" data-cms-label="Texto de ejemplo del campo"/></div>
+          <div class="field"><label for="phone" data-cms="contacto.campo-2" data-cms-label="Etiqueta del campo 2">Teléfono *</label><input type="tel" id="phone" name="phone" placeholder="09XXXXXXXX" required  data-cms-attr="placeholder:contacto.ejemplo-2" data-cms-label="Texto de ejemplo del campo"/></div>
         </div>
-        <div class="field"><label for="email">Correo electrónico</label><input type="email" id="email" name="email" placeholder="tucorreo@email.com" /></div>
+        <div class="field"><label for="email" data-cms="contacto.campo-3" data-cms-label="Etiqueta del campo 3">Correo electrónico</label><input type="email" id="email" name="email" placeholder="tucorreo@email.com"  data-cms-attr="placeholder:contacto.ejemplo-3" data-cms-label="Texto de ejemplo del campo"/></div>
         <div class="field">
-          <label for="unit">Tipología de interés</label>
+          <label for="unit" data-cms="contacto.campo-4" data-cms-label="Etiqueta del campo 4">Tipología de interés</label>
           <select id="unit" name="unit">
             <option value="">Selecciona una opción</option>
             <option value="Suite">Suite</option>
@@ -357,28 +358,33 @@
             <option value="Aún no lo sé">Aún no lo sé</option>
           </select>
         </div>
-        <div class="field"><label for="message">Mensaje</label><textarea id="message" name="message" placeholder="Cuéntanos qué te gustaría saber..."></textarea></div>
-        <button type="submit" class="btn btn--primary btn--block">Enviar por WhatsApp</button>
+        <div class="field"><label for="message" data-cms="contacto.campo-5" data-cms-label="Etiqueta del campo 5">Mensaje</label><textarea id="message" name="message" placeholder="Cuéntanos qué te gustaría saber..." data-cms-attr="placeholder:contacto.ejemplo-4" data-cms-label="Texto de ejemplo del campo"></textarea></div>
+        <button type="submit" class="btn btn--primary btn--block" data-cms="contacto.boton" data-cms-label="Botón">Enviar por WhatsApp</button>
         <p class="form-status" id="formStatus"></p>
-        <p class="form-note">Al enviar aceptas ser contactado por nuestro equipo comercial.</p>
+        <p class="form-note" data-cms-html="contacto.texto-3" data-cms-label="Párrafo 3" data-cms-type="textarea">Al enviar aceptas ser contactado por nuestro equipo comercial y el tratamiento de tus datos según nuestra <a href="/privacidad/">Política de privacidad</a>.</p>
       </form>
     </div>
   </div>
 </section>
 
 <!-- ============ FOOTER ============ -->
-<footer class="footer">
+<footer class="footer" data-cms-group="Pie de página">
   <div class="container">
     <div class="footer__brand">
-      <img src="img/brand/arcus-mark-white.png" alt="Arcus" />
-      <span>© 2026 Arcus Suites &amp; Lofts. Todos los derechos reservados.</span>
+      <img src="img/brand/arcus-mark-white.png" alt="Arcus"  data-cms-img="footer.imagen" data-cms-label="Logotipo"/>
+      <span data-cms="footer.detalle" data-cms-label="Texto">© 2026 Arcus Suites &amp; Lofts. Todos los derechos reservados.</span>
     </div>
-    <span>Calle Remigio Tamariz Crespo, Cuenca, Ecuador</span>
+    <span data-cms="footer.detalle-2" data-cms-label="Texto 2">Calle Remigio Tamariz Crespo, Cuenca, Ecuador</span>
+    <nav class="legal-links" aria-label="Información legal">
+      <a href="/privacidad/">Política de privacidad</a>
+      <a href="/cookies/">Política de cookies</a>
+      <button type="button" data-consent-open>Preferencias de cookies</button>
+    </nav>
   </div>
 </footer>
 
 <!-- WhatsApp flotante (esquina inferior izquierda) -->
-<a href="https://wa.me/593939087030?text=Hola%2C%20quiero%20m%C3%A1s%20informaci%C3%B3n%20del%20proyecto%20ARCUS." class="whatsapp-float" target="_blank" rel="noopener" aria-label="Escríbenos por WhatsApp">
+<a href="https://wa.me/593939087030?text=Hola%2C%20quiero%20m%C3%A1s%20informaci%C3%B3n%20del%20proyecto%20ARCUS." class="whatsapp-float" target="_blank" rel="noopener" aria-label="Escríbenos por WhatsApp" data-cms-wa>
   <svg class="icon"><use href="#i-whatsapp"></use></svg>
 </a>
 
@@ -395,6 +401,8 @@
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
 <script src="/js/forxa-config.js"></script>
+<script src="/js/cms.js"></script>
 <script src="js/script.js"></script>
+<script src="/js/consent.js" defer></script>
 </body>
 </html>

@@ -183,7 +183,8 @@ document.addEventListener("DOMContentLoaded", function () {
   var lbNext = document.getElementById("lightboxNext");
   var lbClose = document.getElementById("lightboxClose");
 
-  var galleryImgs = Array.prototype.slice.call(document.querySelectorAll("[data-lightbox]"));
+  function getGallery() { return Array.prototype.slice.call(document.querySelectorAll("[data-lightbox]")); }
+  var galleryImgs = getGallery();
   var currentIndex = 0;
   var navMode = "gallery"; // "gallery" | "single"
 
@@ -248,13 +249,20 @@ document.addEventListener("DOMContentLoaded", function () {
 
   function showRelative(delta) {
     if (navMode !== "gallery") return;
+    galleryImgs = getGallery();
     currentIndex = (currentIndex + delta + galleryImgs.length) % galleryImgs.length;
     lightboxImg.src = galleryImgs[currentIndex].getAttribute("data-full") || galleryImgs[currentIndex].src;
     lightboxCaption.textContent = galleryImgs[currentIndex].getAttribute("alt") || "";
   }
 
-  galleryImgs.forEach(function (img, index) {
-    img.addEventListener("click", function () { openGalleryAt(index); });
+  // Clic en cualquier foto de la galería (delegado: la lista puede cambiarse desde el panel)
+  document.addEventListener("click", function (e) {
+    var fig = e.target.closest("figure");
+    var img = e.target.closest("[data-lightbox]") || (fig && fig.querySelector("[data-lightbox]"));
+    if (!img) return;
+    galleryImgs = getGallery();
+    var i = galleryImgs.indexOf(img);
+    if (i !== -1) openGalleryAt(i);
   });
 
   // Delegated click for unit cards + local cards + plan cards (rendered dynamically)
@@ -269,6 +277,18 @@ document.addEventListener("DOMContentLoaded", function () {
   if (lbPrev) lbPrev.addEventListener("click", function () { showRelative(-1); });
   if (lbNext) lbNext.addEventListener("click", function () { showRelative(1); });
   lightbox.addEventListener("click", function (e) { if (e.target === lightbox) closeLightbox(); });
+
+  /* Deslizar con el dedo en el visor (móvil) */
+  var touchX = null;
+  lightbox.addEventListener("touchstart", function (e) {
+    touchX = e.touches.length === 1 ? e.touches[0].clientX : null;
+  }, { passive: true });
+  lightbox.addEventListener("touchend", function (e) {
+    if (touchX === null) return;
+    var dx = e.changedTouches[0].clientX - touchX;
+    touchX = null;
+    if (Math.abs(dx) > 50) showRelative(dx < 0 ? 1 : -1);
+  }, { passive: true });
   document.addEventListener("keydown", function (e) {
     if (!lightbox.classList.contains("is-open")) return;
     if (e.key === "Escape") closeLightbox();
@@ -301,7 +321,7 @@ document.addEventListener("DOMContentLoaded", function () {
       if (email) text += ". Correo: " + email;
       if (message) text += ". Mensaje: " + message;
 
-      var url = "https://wa.me/" + WHATSAPP_NUMBER + "?text=" + encodeURIComponent(text);
+      var url = "https://wa.me/" + ((window.CMS && CMS.whatsapp()) || WHATSAPP_NUMBER) + "?text=" + encodeURIComponent(text);
       openWhatsApp(url);
 
       formStatus.textContent = "¡Listo! Te llevamos a WhatsApp para enviar tu consulta.";

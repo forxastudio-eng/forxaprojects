@@ -196,11 +196,37 @@ archiva esos repos y pausa (no borres) los Supabase viejos.
 
 ## Uso diario
 
-- **Cambiar disponibilidad:** Panel → Inventario → el proyecto → selector de estado de la unidad. Se publica al instante.
+- **Cambiar disponibilidad:** Panel → Inventario → el proyecto → selector de estado de la unidad. Se publica al instante y **también cambia en el cotizador** (`10_sincronizar_estado_cotizador.sql`; un solo sentido: landing → cotizador).
+- **Editar textos, fotos, botones y galerías de una landing (editor):** Panel → Landings → el proyecto. Cada sección tiene sus campos; lo que no cambies queda como está en la página. Tiene vista previa en vivo y guarda solo con «Guardar cambios». También se editan allí la política de privacidad y la de cookies.
 - **Editar unidades, fotos y fichas (editor):** mismo lugar, botón del lápiz.
 - **Precios, planos y configuración del cotizador (editor):** Panel → Cotizador → Configurar cotizador.
 - **Dashboard del historial:** Panel → Historial y dashboard → pestaña Dashboard → título, período → Exportar a PDF. En el diálogo de impresión elige **Guardar como PDF** y deja activado **Gráficos de fondo**.
 - **Agregar una persona:** Panel → Usuarios y roles (asigna el rol) + crea su cuenta con `npm run usuarios:crear` o en Supabase → Authentication → Add user.
+
+## Cómo funciona el contenido editable
+
+- Cada landing marca en su HTML lo que se puede editar con atributos `data-cms*`
+  (`scripts/etiquetar-landing.mjs` los agrega solos). El panel lee la propia página, arma
+  el formulario y guarda **solo lo que cambia** en la tabla `site_content`
+  (`09_contenido_landings.sql`); sin fila, la página muestra lo que dice su HTML.
+- `site/js/cms.js` aplica esos valores en la página pública (con caché local para que no parpadee).
+- Al agregar un elemento nuevo a una landing, ponle `data-cms="seccion.nombre"` (texto),
+  `data-cms-img`, `data-cms-href` o márcalo como lista con `data-cms-list`; aparece solo en el panel.
+- Para etiquetar una landing nueva completa: agrega su configuración en `scripts/etiquetar-landing.mjs`
+  y ejecuta `cd scripts && npm install && node etiquetar-landing.mjs <pagina>`.
+
+## Cookies, privacidad y textos legales
+
+- **Aviso de cookies:** `site/js/consent.js` + `site/css/consent.css`. Aparece la primera vez (y cada 12 meses),
+  con tema propio en cada marca (FORXA, Arcus, Álabes, Portón). Hoy el sitio solo usa almacenamiento necesario;
+  las categorías de analítica y marketing existen para el futuro.
+- **Si agregas analítica o publicidad** (Google Analytics, Meta Pixel…), no pongas el script normal: decláralo así y no se
+  ejecuta hasta que la persona acepte: `<script type="text/plain" data-consent="analytics" src="…"></script>`
+  (usa `marketing` para publicidad). Y actualiza `/cookies/` y `/privacidad/`.
+- **Páginas:** `/privacidad/` y `/cookies/` (editables en Panel → Textos legales). Cada pie de página enlaza a ambas y a
+  «Preferencias de cookies» (cualquier elemento con `data-consent-open` reabre el aviso).
+- Los textos legales son una base redactada para FORXA conforme a la LOPDP de Ecuador; **conviene que tu asesor legal los revise**
+  (en especial plazos de conservación y datos del responsable).
 
 ## Agregar un proyecto nuevo
 
@@ -211,7 +237,9 @@ archiva esos repos y pausa (no borres) los Supabase viejos.
    - agrega `<a href="/" class="nav-more">Más proyectos</a>` en el menú.
 2. **Tabla de unidades (si la landing muestra disponibilidad):** crea la tabla en el SQL Editor
    y agrega su nombre a la lista de `06_politicas.sql` (bloque "landings") y a `cambiar_estado`
-   en `05_cambiar_estado.sql`; vuelve a ejecutar ambos.
+   en `05_cambiar_estado.sql`; vuelve a ejecutar ambos. Para que su disponibilidad también cambie
+   en el cotizador, agrega su caso en `10_sincronizar_estado_cotizador.sql`.
+   Agrega `consent.js`/`consent.css` y los enlaces legales del pie (copia el pie de Arcus) y `data-cms-page="<nombre>"` en `<html>`.
 3. **Panel:** agrega una entrada en `INV` (`site/admin/js/views.js`) y una línea en el menú
    (`NAV` en `site/admin/js/app.js`). Álabes o Portón sirven de modelo.
 4. **Portafolio:** Panel → Portafolio de proyectos → Agregar proyecto, con enlace `/misicata/`.

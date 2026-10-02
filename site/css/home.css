@@ -119,3 +119,10 @@ button,input,select,textarea{font:inherit;color:inherit}
 .foot-nav{display:flex;gap:18px}
 .foot-nav a{text-decoration:none}
 .foot-nav a:hover{color:#fff}
+
+/* ---------- aviso de privacidad en el formulario y enlaces del pie ---------- */
+.form-note{grid-column:1/-1;font-size:13.5px;color:#9AA6B8}
+.form-note a{color:#fff;text-underline-offset:3px}
+.foot-nav{flex-wrap:wrap}
+.foot-nav button{background:none;border:0;padding:0;font:inherit;color:inherit;cursor:pointer}
+.foot-nav button:hover,.foot-nav a:hover{color:#fff}

@@ -211,7 +211,8 @@ document.addEventListener("DOMContentLoaded", function () {
   var lbNext = document.getElementById("lightboxNext");
   var lbClose = document.getElementById("lightboxClose");
 
-  var galleryImgs = Array.prototype.slice.call(document.querySelectorAll("[data-lightbox]"));
+  function getGallery() { return Array.prototype.slice.call(document.querySelectorAll("[data-lightbox]")); }
+  var galleryImgs = getGallery();
   var currentIndex = 0;
   var navMode = "gallery";
   var scrollLockY = 0;
@@ -255,14 +256,20 @@ document.addEventListener("DOMContentLoaded", function () {
   }
   function showRelative(d) {
     if (navMode !== "gallery") return;
+    galleryImgs = getGallery();
     currentIndex = (currentIndex + d + galleryImgs.length) % galleryImgs.length;
     lightboxImg.src = galleryImgs[currentIndex].getAttribute("data-full") || galleryImgs[currentIndex].src;
     lightboxCaption.textContent = galleryImgs[currentIndex].getAttribute("alt") || "";
   }
 
-  galleryImgs.forEach(function (img, i) {
-    var target = img.closest("figure") || img;
-    target.addEventListener("click", function () { openGalleryAt(i); });
+  // Clic en cualquier foto de la galería (delegado: la lista puede cambiarse desde el panel)
+  document.addEventListener("click", function (e) {
+    var fig = e.target.closest("figure");
+    var img = e.target.closest("[data-lightbox]") || (fig && fig.querySelector("[data-lightbox]"));
+    if (!img) return;
+    galleryImgs = getGallery();
+    var i = galleryImgs.indexOf(img);
+    if (i !== -1) openGalleryAt(i);
   });
 
   /* Deslizar con el dedo en el lightbox (móvil) */
@@ -318,7 +325,7 @@ document.addEventListener("DOMContentLoaded", function () {
       if (email) text += ". Correo: " + email;
       if (message) text += ". Mensaje: " + message;
 
-      openWhatsApp("https://wa.me/" + WHATSAPP_NUMBER + "?text=" + encodeURIComponent(text));
+      openWhatsApp("https://wa.me/" + ((window.CMS && CMS.whatsapp()) || WHATSAPP_NUMBER) + "?text=" + encodeURIComponent(text));
       formStatus.textContent = "¡Listo! Te llevamos a WhatsApp para enviar tu consulta.";
       formStatus.classList.add("is-visible");
     });
