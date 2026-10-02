@@ -11,6 +11,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="icon" href="img/brand/arcus-mark-black.png" type="image/png" data-cms-attr="href:seo.icono" data-cms-label="Icono de la pestaña (favicon)" data-cms-type="image">
 <link rel="stylesheet" href="css/styles.css" />
+<link rel="stylesheet" href="/css/consent.css" />
 </head>
 <body>
 
@@ -360,7 +361,7 @@
         <div class="field"><label for="message" data-cms="contacto.campo-5" data-cms-label="Etiqueta del campo 5">Mensaje</label><textarea id="message" name="message" placeholder="Cuéntanos qué te gustaría saber..." data-cms-attr="placeholder:contacto.ejemplo-4" data-cms-label="Texto de ejemplo del campo"></textarea></div>
         <button type="submit" class="btn btn--primary btn--block" data-cms="contacto.boton" data-cms-label="Botón">Enviar por WhatsApp</button>
         <p class="form-status" id="formStatus"></p>
-        <p class="form-note" data-cms="contacto.texto-3" data-cms-label="Párrafo 3" data-cms-type="textarea">Al enviar aceptas ser contactado por nuestro equipo comercial.</p>
+        <p class="form-note" data-cms-html="contacto.texto-3" data-cms-label="Párrafo 3" data-cms-type="textarea">Al enviar aceptas ser contactado por nuestro equipo comercial y el tratamiento de tus datos según nuestra <a href="/privacidad/">Política de privacidad</a>.</p>
       </form>
     </div>
   </div>
@@ -374,6 +375,11 @@
       <span data-cms="footer.detalle" data-cms-label="Texto">© 2026 Arcus Suites &amp; Lofts. Todos los derechos reservados.</span>
     </div>
     <span data-cms="footer.detalle-2" data-cms-label="Texto 2">Calle Remigio Tamariz Crespo, Cuenca, Ecuador</span>
+    <nav class="legal-links" aria-label="Información legal">
+      <a href="/privacidad/">Política de privacidad</a>
+      <a href="/cookies/">Política de cookies</a>
+      <button type="button" data-consent-open>Preferencias de cookies</button>
+    </nav>
   </div>
 </footer>
 
@@ -397,5 +403,6 @@
 <script src="/js/forxa-config.js"></script>
 <script src="/js/cms.js"></script>
 <script src="js/script.js"></script>
+<script src="/js/consent.js" defer></script>
 </body>
 </html>

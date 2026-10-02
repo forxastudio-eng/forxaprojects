@@ -10,6 +10,7 @@
 <link rel="apple-touch-icon" href="/assets/brand/favicon-180.png">
 <link rel="stylesheet" href="/css/forxa-tokens.css">
 <link rel="stylesheet" href="/css/home.css">
+<link rel="stylesheet" href="/css/consent.css">
 </head>
 <body>
 <a class="skip" href="#proyectos" data-cms="pagina.enlace" data-cms-label="Enlace">Saltar a los proyectos</a>
@@ -81,6 +82,7 @@
         </div>
         <p class="form-error" id="c-error" role="alert"></p>
         <button class="btn btn-primary" type="submit" data-cms="contacto.boton" data-cms-label="Botón">Continuar en WhatsApp</button>
+        <p class="form-note">Al continuar aceptas el tratamiento de tus datos según nuestra <a href="/privacidad/">Política de privacidad</a>.</p>
       </form>
     </div>
   </section>
@@ -90,7 +92,10 @@
   <div class="wrap foot-row">
     <img src="/assets/brand/forxa-logo-horizontal-white.png" alt="FORXA Inmobiliaria" class="foot-logo" width="601" height="200" data-cms-img="footer.imagen" data-cms-label="Logotipo">
     <p><span data-cms="footer.texto" data-cms-label="Texto">©</span> <span id="year"></span> <span data-cms="footer.texto-2" data-cms-label="Texto 2">FORXA Inmobiliaria. Cuenca, Ecuador.</span></p>
-    <nav class="foot-nav" aria-label="Equipo">
+    <nav class="foot-nav" aria-label="Enlaces del pie">
+      <a href="/privacidad/">Privacidad</a>
+      <a href="/cookies/">Cookies</a>
+      <button type="button" data-consent-open>Preferencias de cookies</button>
       <a href="/cotizador/" data-cms="footer.enlace" data-cms-label="Enlace">Cotizador</a>
       <a href="/admin/" data-cms="footer.enlace-2" data-cms-label="Enlace 2">Panel de administración</a>
     </nav>
@@ -101,5 +106,6 @@
 <script src="/js/forxa-config.js"></script>
 <script src="/js/cms.js"></script>
 <script src="/js/home.js"></script>
+<script src="/js/consent.js" defer></script>
 </body>
 </html>

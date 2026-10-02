@@ -373,16 +373,21 @@
       } else if (f.type === "html") {
         body = h("textarea", { rows: 4, disabled: ro ? "" : false }); body.value = String(ctx.get(key) == null ? "" : ctx.get(key));
         body.addEventListener("input", function () { onSet(body.value); });
-        var tools = h("div", { class: "ef-tools" }, ["b|<strong>|</strong>|Negrita", "i|<em>|</em>|Cursiva"].map(function (s) {
+        var tools = h("div", { class: "ef-tools" }, ["b|<strong>|</strong>|Negrita", "i|<em>|</em>|Cursiva", "a||</a>|Enlace"].map(function (s) {
           var p = s.split("|");
-          return h("button", { type: "button", title: p[3], html: p[0] === "b" ? "<b>N</b>" : "<i>C</i>", disabled: ro ? "" : false, onclick: function () {
+          return h("button", { type: "button", title: p[3], html: p[0] === "b" ? "<b>N</b>" : p[0] === "i" ? "<i>C</i>" : "Enlace", disabled: ro ? "" : false, onclick: function () {
+            var open = p[1];
+            if (p[0] === "a") {
+              var url = window.prompt("Dirección del enlace (https://…, mailto:… o /ruta/)", "https://");
+              if (!url) return; open = '<a href="' + url.replace(/"/g, "") + '">';
+            }
             var a = body.selectionStart, b = body.selectionEnd, v = body.value;
-            body.value = v.slice(0, a) + p[1] + v.slice(a, b) + p[2] + v.slice(b);
-            body.focus(); body.setSelectionRange(a + p[1].length, b + p[1].length); onSet(body.value);
+            body.value = v.slice(0, a) + open + v.slice(a, b) + p[2] + v.slice(b);
+            body.focus(); body.setSelectionRange(a + open.length, b + open.length); onSet(body.value);
           } });
         }));
         wrap.appendChild(tools); wrap.appendChild(body);
-        wrap.appendChild(h("span", { class: "ef-hint", text: "Puedes usar negrita y cursiva. Se muestra tal cual en la página." }));
+        wrap.appendChild(h("span", { class: "ef-hint", text: "Puedes usar negrita, cursiva y enlaces. Se muestra tal cual en la página." }));
       } else if (f.type === "link") {
         body = h("input", { type: "text", placeholder: "https://… o /ruta/", value: String(ctx.get(key) == null ? "" : ctx.get(key)), disabled: ro ? "" : false });
         body.addEventListener("input", function () { onSet(body.value.trim()); });

@@ -215,6 +215,19 @@ archiva esos repos y pausa (no borres) los Supabase viejos.
 - Para etiquetar una landing nueva completa: agrega su configuración en `scripts/etiquetar-landing.mjs`
   y ejecuta `cd scripts && npm install && node etiquetar-landing.mjs <pagina>`.
 
+## Cookies, privacidad y textos legales
+
+- **Aviso de cookies:** `site/js/consent.js` + `site/css/consent.css`. Aparece la primera vez (y cada 12 meses),
+  con tema propio en cada marca (FORXA, Arcus, Álabes, Portón). Hoy el sitio solo usa almacenamiento necesario;
+  las categorías de analítica y marketing existen para el futuro.
+- **Si agregas analítica o publicidad** (Google Analytics, Meta Pixel…), no pongas el script normal: decláralo así y no se
+  ejecuta hasta que la persona acepte: `<script type="text/plain" data-consent="analytics" src="…"></script>`
+  (usa `marketing` para publicidad). Y actualiza `/cookies/` y `/privacidad/`.
+- **Páginas:** `/privacidad/` y `/cookies/` (editables en Panel → Textos legales). Cada pie de página enlaza a ambas y a
+  «Preferencias de cookies» (cualquier elemento con `data-consent-open` reabre el aviso).
+- Los textos legales son una base redactada para FORXA conforme a la LOPDP de Ecuador; **conviene que tu asesor legal los revise**
+  (en especial plazos de conservación y datos del responsable).
+
 ## Agregar un proyecto nuevo
 
 1. **Landing:** copia la carpeta del proyecto en `site/<nombre>/` (ej. `site/misicata/`).
@@ -226,6 +239,7 @@ archiva esos repos y pausa (no borres) los Supabase viejos.
    y agrega su nombre a la lista de `06_politicas.sql` (bloque "landings") y a `cambiar_estado`
    en `05_cambiar_estado.sql`; vuelve a ejecutar ambos. Para que su disponibilidad también cambie
    en el cotizador, agrega su caso en `10_sincronizar_estado_cotizador.sql`.
+   Agrega `consent.js`/`consent.css` y los enlaces legales del pie (copia el pie de Arcus) y `data-cms-page="<nombre>"` en `<html>`.
 3. **Panel:** agrega una entrada en `INV` (`site/admin/js/views.js`) y una línea en el menú
    (`NAV` en `site/admin/js/app.js`). Álabes o Portón sirven de modelo.
 4. **Portafolio:** Panel → Portafolio de proyectos → Agregar proyecto, con enlace `/misicata/`.

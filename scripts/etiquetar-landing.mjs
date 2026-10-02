@@ -42,6 +42,8 @@ const CONFIG = {
       { clase: 'lotes-perks', etiqueta: 'Ventajas de compra', item: 'Ventaja' }],
   },
   home: { archivo: 'index.html', base: '/', listas: [] },
+  privacidad: { archivo: 'privacidad/index.html', base: '/privacidad/', listas: [] },
+  cookies: { archivo: 'cookies/index.html', base: '/cookies/', listas: [] },
 };
 
 // Contenido que el propio sitio rellena por código (no se etiqueta).
@@ -56,7 +58,7 @@ const ETIQ_GRUPO = {
   header: 'Menú superior', inicio: 'Portada', proyecto: 'Sobre el proyecto', ubicacion: 'Ubicación',
   amenidades: 'Amenidades', tipologias: 'Suites y tipologías', locales: 'Locales comerciales', planos: 'Plantas y distribución',
   galeria: 'Galería', contacto: 'Contacto', mapa: 'Mapa interactivo', lotes: 'Lotes', exclusivo: 'Zonas exclusivas',
-  proyectos: 'Proyectos', footer: 'Pie de página', marquee: 'Cinta de frases', hero: 'Portada',
+  proyectos: 'Proyectos', footer: 'Pie de página', marquee: 'Cinta de frases', hero: 'Portada', 'lg-hero': 'Encabezado de la página',
 };
 
 /* ------------------------------------------------------------- utilidades */
@@ -90,6 +92,7 @@ function rol(n) {
   if (t === 'strong' || t === 'b') return ['dato', 'Dato destacado'];
   if (t === 'em') return ['destacado', 'Texto destacado'];
   if (t === 'i') return ['numero', 'Número / viñeta'];
+  if (t === 'li') return ['punto', 'Punto de la lista'];
   if (t === 'p') return /hero__tagline/.test(c) ? ['lema', 'Lema'] : /hero__desc/.test(c) ? ['descripcion', 'Descripción'] : ['texto', 'Párrafo'];
   if (t === 'span') return ['detalle', 'Texto'];
   if (t === 'div') return ['texto', 'Texto'];
@@ -141,7 +144,10 @@ export function etiquetar(nombre, soloVerificar) {
     if (n.tagName === 'main') candidatos.push(...kids(n)); else candidatos.push(n);
   }
   const SECCIONALES = new Set(['header', 'section', 'footer', 'div']);
-  for (const n of candidatos) {
+  // En las páginas legales cada .lg-sec (a cualquier profundidad) es una sección editable.
+  const top = new Set(candidatos), ordenados = [];
+  (function rec(n) { for (const k of kids(n)) { if (top.has(k) || clases(k).includes('lg-sec')) ordenados.push(k); rec(k); } })(body);
+  for (const n of ordenados) {
     if (!SECCIONALES.has(n.tagName)) continue;
     if (n.tagName === 'div' && !clases(n).includes('marquee')) continue;
     grupos.push(n);
@@ -153,12 +159,13 @@ export function etiquetar(nombre, soloVerificar) {
     let etiqueta = ETIQ_GRUPO[id] || ETIQ_GRUPO[clases(g)[0]] || ETIQ_GRUPO[g.tagName];
     if (!etiqueta) {
       const k = findFirst(g, x => /eyebrow|kicker/.test(clases(x).join(' ')));
-      etiqueta = k ? limpio(txt(k)) : (clases(g)[0] || g.tagName);
-      if (!id) gslug = slug(etiqueta) || gslug;
+      const h2 = k ? null : findFirst(g, x => x.tagName === 'h2');
+      etiqueta = k ? limpio(txt(k)) : h2 ? limpio(txt(h2)) : (clases(g)[0] || g.tagName);
     }
     if (g.tagName === 'section' && !id && clases(g).includes('statement')) { etiqueta = 'Frase destacada'; gslug = 'frase'; }
     conteoGrupo[gslug] = (conteoGrupo[gslug] || 0) + 1;
     if (conteoGrupo[gslug] > 1) gslug += '-' + conteoGrupo[gslug];
+    if (!id && etiqueta) gslug = slug(etiqueta) || gslug;
     g._grupo = gslug;
     addAttr(g, ` data-cms-group="${escAttr(etiqueta)}"`);
     if (g.tagName === 'section' && gslug !== 'inicio' && gslug !== 'hero') addAttr(g, ` data-cms-show="mostrar.${gslug}"`);
@@ -290,7 +297,7 @@ export function etiquetar(nombre, soloVerificar) {
     if (t === 'a') {
       const href = attr(n, 'href') || '';
       if (/wa\.me/.test(href)) extra = ' data-cms-wa';
-      else if (!href.startsWith('#') && !/^\/(admin|cotizador)\//.test(href) && !href.startsWith('mailto:') && !href.startsWith('tel:')) {
+      else if (!href.startsWith('#') && !href.startsWith('/#') && !/^\/(admin|cotizador)\//.test(href) && !href.startsWith('mailto:') && !href.startsWith('tel:')) {
         const key = nombreCampo(n, c, 'enlace-url');
         extra = ` data-cms-href="${key}"`;
         reg(key);
@@ -311,7 +318,7 @@ export function etiquetar(nombre, soloVerificar) {
     if (!textos.length) { if (extra) addAttr(n, extra); return; }
     if (t === 'a' && attr(n, 'data-cms-wa') === undefined && extra === '' && (attr(n, 'href') || '').startsWith('#') && cl.includes('nav-more')) { /* texto normal */ }
 
-    const soloFormato = hijos.every(h => FORMATO.has(h.tagName));
+    const soloFormato = hijos.every(h => FORMATO.has(h.tagName) || (h.tagName === 'a' && ['p', 'li', 'blockquote'].includes(t) && !/\bbtn\b/.test(clases(h).join(' '))));
     if (soloFormato) {
       const key = nombreCampo(n, c);
       const lab = etiquetaCampo(n, key);

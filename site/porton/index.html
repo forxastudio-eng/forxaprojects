@@ -11,6 +11,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="icon" href="img/logo-mark.png" type="image/png" data-cms-attr="href:seo.icono" data-cms-label="Icono de la pestaña (favicon)" data-cms-type="image">
 <link rel="stylesheet" href="css/styles.css" />
+<link rel="stylesheet" href="/css/consent.css" />
 </head>
 <body>
 
@@ -337,7 +338,7 @@
         <div class="field"><label for="message" data-cms="contacto.campo-5" data-cms-label="Etiqueta del campo 5">Mensaje</label><textarea id="message" name="message" placeholder="Cuéntanos qué te gustaría saber..." data-cms-attr="placeholder:contacto.ejemplo-4" data-cms-label="Texto de ejemplo del campo"></textarea></div>
         <button type="submit" class="btn btn--primary btn--block" data-cms="contacto.boton" data-cms-label="Botón">Enviar por WhatsApp</button>
         <p class="form-status" id="formStatus"></p>
-        <p class="form-note" data-cms="contacto.texto-3" data-cms-label="Párrafo 3" data-cms-type="textarea">Al enviar aceptas ser contactado por nuestro equipo comercial.</p>
+        <p class="form-note" data-cms-html="contacto.texto-3" data-cms-label="Párrafo 3" data-cms-type="textarea">Al enviar aceptas ser contactado por nuestro equipo comercial y el tratamiento de tus datos según nuestra <a href="/privacidad/">Política de privacidad</a>.</p>
       </form>
     </div>
   </div>
@@ -353,6 +354,11 @@
       <span data-cms="footer.detalle" data-cms-label="Texto" data-cms-type="textarea">© 2026 Portón del Valle — Fideicomiso administrado por ENLACE Negocios Fiduciarios.</span>
     </div>
     <span data-cms="footer.detalle-2" data-cms-label="Texto 2">Valle de Yunguilla, Cuenca, Ecuador</span>
+    <nav class="legal-links" aria-label="Información legal">
+      <a href="/privacidad/">Política de privacidad</a>
+      <a href="/cookies/">Política de cookies</a>
+      <button type="button" data-consent-open>Preferencias de cookies</button>
+    </nav>
   </div>
 </footer>
 
@@ -376,5 +382,6 @@
 <script src="/js/forxa-config.js"></script>
 <script src="/js/cms.js"></script>
 <script src="js/script.js"></script>
+<script src="/js/consent.js" defer></script>
 </body>
 </html>

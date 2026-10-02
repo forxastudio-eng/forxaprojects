@@ -36,7 +36,7 @@
     if (!u) return "";
     return /^(https?:|mailto:|tel:|#|\/|\.\/|\.\.\/|data:image\/|[a-z0-9_\-]+(\/|\.))/i.test(u) && !/^javascript:/i.test(u) ? u : "";
   }
-  var OK_TAGS = { STRONG: 1, B: 1, EM: 1, I: 1, U: 1, BR: 1, MARK: 1, SUP: 1, SUB: 1 };
+  var OK_TAGS = { STRONG: 1, B: 1, EM: 1, I: 1, U: 1, BR: 1, MARK: 1, SUP: 1, SUB: 1, A: 1 };
   function sanitize(html) {
     var t = document.createElement("template");
     t.innerHTML = String(html == null ? "" : html);
@@ -46,7 +46,12 @@
         if (c.nodeType !== 1) { node.removeChild(c); return; }
         walk(c);
         if (OK_TAGS[c.tagName]) {
+          var href = c.tagName === "A" ? safeUrl(c.getAttribute("href")) : "";
           while (c.attributes.length) c.removeAttribute(c.attributes[0].name);
+          if (c.tagName === "A") {
+            if (href) { c.setAttribute("href", href); if (/^https?:/i.test(href)) { c.setAttribute("target", "_blank"); c.setAttribute("rel", "noopener"); } }
+            else { while (c.firstChild) node.insertBefore(c.firstChild, c); node.removeChild(c); }
+          }
         } else {
           while (c.firstChild) node.insertBefore(c.firstChild, c);
           node.removeChild(c);

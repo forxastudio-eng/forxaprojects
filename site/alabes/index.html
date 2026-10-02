@@ -11,6 +11,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="icon" href="img/logo-mark.png" type="image/png" data-cms-attr="href:seo.icono" data-cms-label="Icono de la pestaña (favicon)" data-cms-type="image">
 <link rel="stylesheet" href="css/styles.css" />
+<link rel="stylesheet" href="/css/consent.css" />
 </head>
 <body>
 
@@ -297,7 +298,7 @@
         <div class="field"><label for="message" data-cms="contacto.campo-5" data-cms-label="Etiqueta del campo 5">Mensaje</label><textarea id="message" name="message" placeholder="Cuéntanos qué te gustaría saber..." data-cms-attr="placeholder:contacto.ejemplo-4" data-cms-label="Texto de ejemplo del campo"></textarea></div>
         <button type="submit" class="btn btn--primary btn--block" data-cms="contacto.boton" data-cms-label="Botón">Enviar por WhatsApp</button>
         <p class="form-status" id="formStatus"></p>
-        <p class="form-note" data-cms="contacto.texto-3" data-cms-label="Párrafo 3" data-cms-type="textarea">Al enviar aceptas ser contactado por nuestro equipo comercial.</p>
+        <p class="form-note" data-cms-html="contacto.texto-3" data-cms-label="Párrafo 3" data-cms-type="textarea">Al enviar aceptas ser contactado por nuestro equipo comercial y el tratamiento de tus datos según nuestra <a href="/privacidad/">Política de privacidad</a>.</p>
       </form>
     </div>
   </div>
@@ -308,6 +309,11 @@
   <div class="container">
     <div class="footer__brand"><img src="img/logo-mark.png" alt="Álabes"  data-cms-img="footer.imagen" data-cms-label="Logotipo"/><img class="footer__forxa" src="img/logo-forxa-white.png" alt="FORXA Inmobiliaria"  data-cms-img="footer.imagen-2" data-cms-label="Logotipo 2"/><img class="footer__adrian" src="img/logo-adrian-white.png" alt="Adrián Rodríguez Inmobiliario"  data-cms-img="footer.imagen-3" data-cms-label="Logotipo 3"/><span data-cms="footer.detalle" data-cms-label="Texto">© 2026 Álabes — FORXA Inmobiliaria. Todos los derechos reservados.</span></div>
     <span data-cms="footer.detalle-2" data-cms-label="Texto 2">Calle del Batán, Cuenca, Ecuador</span>
+    <nav class="legal-links" aria-label="Información legal">
+      <a href="/privacidad/">Política de privacidad</a>
+      <a href="/cookies/">Política de cookies</a>
+      <button type="button" data-consent-open>Preferencias de cookies</button>
+    </nav>
   </div>
 </footer>
 
@@ -331,5 +337,6 @@
 <script src="/js/forxa-config.js"></script>
 <script src="/js/cms.js"></script>
 <script src="js/script.js"></script>
+<script src="/js/consent.js" defer></script>
 </body>
 </html>
