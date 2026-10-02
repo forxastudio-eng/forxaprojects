@@ -1,10 +1,10 @@
 <!doctype html>
-<html lang="es">
-<head>
+<html lang="es" data-cms-page="home">
+<head data-cms-group="Pestaña del navegador y buscadores">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>FORXA Inmobiliaria · Descubre tu nueva Inversión</title>
-<meta name="description" content="Proyectos inmobiliarios de FORXA: suites, departamentos, locales comerciales y lotes en Cuenca y Yunguilla, Ecuador.">
+<title data-cms="seo.titulo" data-cms-label="Título de la página (pestaña y Google)">FORXA Inmobiliaria · Descubre tu nueva Inversión</title>
+<meta name="description" content="Proyectos inmobiliarios de FORXA: suites, departamentos, locales comerciales y lotes en Cuenca y Yunguilla, Ecuador." data-cms-attr="content:seo.descripcion" data-cms-label="Descripción para Google" data-cms-type="textarea">
 <meta name="theme-color" content="#0E1624">
 <link rel="icon" type="image/png" sizes="32x32" href="/assets/brand/favicon-32.png">
 <link rel="apple-touch-icon" href="/assets/brand/favicon-180.png">
@@ -12,44 +12,44 @@
 <link rel="stylesheet" href="/css/home.css">
 </head>
 <body>
-<a class="skip" href="#proyectos">Saltar a los proyectos</a>
+<a class="skip" href="#proyectos" data-cms="pagina.enlace" data-cms-label="Enlace">Saltar a los proyectos</a>
 
-<header class="top" id="top">
+<header class="top" id="top" data-cms-group="Menú superior">
   <div class="wrap top-row">
-    <a class="brand" href="/" aria-label="FORXA Inmobiliaria, inicio">
-      <img src="/assets/brand/forxa-logo-horizontal.png" alt="FORXA Inmobiliaria" width="601" height="200">
+    <a class="brand" href="/" aria-label="FORXA Inmobiliaria, inicio" data-cms-href="top.enlace-url">
+      <img src="/assets/brand/forxa-logo-horizontal.png" alt="FORXA Inmobiliaria" width="601" height="200" data-cms-img="top.imagen" data-cms-label="Logotipo">
     </a>
     <nav class="top-nav" aria-label="Principal">
-      <a href="#proyectos">Proyectos</a>
-      <a href="#contacto">Contacto</a>
-      <a href="/cotizador/" class="top-nav-btn top-nav-cotizador">Cotizador</a>
-      <a href="/admin/" class="top-nav-btn">Acceso</a>
+      <a href="#proyectos" data-cms="top.enlace" data-cms-label="Enlace">Proyectos</a>
+      <a href="#contacto" data-cms="top.enlace-2" data-cms-label="Enlace 2">Contacto</a>
+      <a href="/cotizador/" class="top-nav-btn top-nav-cotizador" data-cms="top.boton" data-cms-label="Botón">Cotizador</a>
+      <a href="/admin/" class="top-nav-btn" data-cms="top.boton-2" data-cms-label="Botón 2">Acceso</a>
     </nav>
   </div>
 </header>
 
 <main>
-  <section class="hero" aria-labelledby="hero-title">
+  <section class="hero" aria-labelledby="hero-title" data-cms-group="Portada" data-cms-show="mostrar.section">
     <div class="wrap hero-grid">
       <div class="hero-copy">
-        <p class="hero-place">Descubre tu nueva Inversión</p>
-        <h1 id="hero-title">Espacios para vivir, trabajar e invertir.</h1>
-        <p class="hero-lead">Suites, lofts, locales comerciales y lotes. Todos los proyectos de FORXA Inmobiliaria reunidos en un solo lugar, con disponibilidad actualizada.</p>
+        <p class="hero-place" data-cms="section.etiqueta" data-cms-label="Sobretítulo">Descubre tu nueva Inversión</p>
+        <h1 id="hero-title" data-cms="section.titulo-principal" data-cms-label="Título principal">Espacios para vivir, trabajar e invertir.</h1>
+        <p class="hero-lead" data-cms="section.descripcion" data-cms-label="Descripción" data-cms-type="textarea">Suites, lofts, locales comerciales y lotes. Todos los proyectos de FORXA Inmobiliaria reunidos en un solo lugar, con disponibilidad actualizada.</p>
         <div class="hero-actions">
-          <a class="btn btn-primary" href="#proyectos">Ver proyectos</a>
-          <a class="btn btn-quiet" id="hero-whatsapp" href="https://wa.me/593939087030" target="_blank" rel="noopener">Hablar con un asesor</a>
+          <a class="btn btn-primary" href="#proyectos" data-cms="section.boton" data-cms-label="Botón">Ver proyectos</a>
+          <a class="btn btn-quiet" id="hero-whatsapp" href="https://wa.me/593939087030" target="_blank" rel="noopener" data-cms="section.boton-2" data-cms-label="Botón 2" data-cms-wa>Hablar con un asesor</a>
         </div>
       </div>
       <div class="hero-mark" aria-hidden="true">
-        <img src="/assets/brand/isotipo-forxa.png" alt="" width="554" height="858">
+        <img src="/assets/brand/isotipo-forxa.png" alt="" width="554" height="858" data-cms-img="section.imagen" data-cms-label="Imagen">
       </div>
     </div>
   </section>
 
-  <section class="projects" id="proyectos" aria-labelledby="proyectos-title">
+  <section class="projects" id="proyectos" aria-labelledby="proyectos-title" data-cms-group="Proyectos" data-cms-show="mostrar.proyectos">
     <div class="wrap">
       <div class="projects-head">
-        <h2 id="proyectos-title">Proyectos</h2>
+        <h2 id="proyectos-title" data-cms="proyectos.titulo" data-cms-label="Título">Proyectos</h2>
         <div class="filters" id="filters" role="group" aria-label="Filtrar por ubicación"></div>
       </div>
       <div class="grid" id="grid" aria-live="polite">
@@ -58,47 +58,48 @@
     </div>
   </section>
 
-  <section class="contact" id="contacto" aria-labelledby="contacto-title">
+  <section class="contact" id="contacto" aria-labelledby="contacto-title" data-cms-group="Contacto" data-cms-show="mostrar.contacto">
     <div class="wrap contact-grid">
       <div>
-        <h2 id="contacto-title">¿Buscas algo en particular?</h2>
-        <p>Cuéntanos qué necesitas y un asesor de FORXA te responde por WhatsApp con opciones y precios actualizados.</p>
+        <h2 id="contacto-title" data-cms="contacto.titulo" data-cms-label="Título">¿Buscas algo en particular?</h2>
+        <p data-cms="contacto.texto" data-cms-label="Párrafo" data-cms-type="textarea">Cuéntanos qué necesitas y un asesor de FORXA te responde por WhatsApp con opciones y precios actualizados.</p>
       </div>
       <form class="contact-form" id="contact-form" novalidate>
         <div class="field">
-          <label for="c-nombre">Nombre</label>
+          <label for="c-nombre" data-cms="contacto.campo" data-cms-label="Etiqueta del campo">Nombre</label>
           <input id="c-nombre" name="nombre" autocomplete="name" required>
         </div>
         <div class="field">
-          <label for="c-proyecto">Proyecto de interés</label>
+          <label for="c-proyecto" data-cms="contacto.campo-2" data-cms-label="Etiqueta del campo 2">Proyecto de interés</label>
           <select id="c-proyecto" name="proyecto">
             <option value="">Todavía no lo sé</option>
           </select>
         </div>
         <div class="field field-wide">
-          <label for="c-mensaje">Mensaje</label>
-          <textarea id="c-mensaje" name="mensaje" rows="3" placeholder="Ej. Busco una suite para inversión, presupuesto aproximado…"></textarea>
+          <label for="c-mensaje" data-cms="contacto.campo-3" data-cms-label="Etiqueta del campo 3">Mensaje</label>
+          <textarea id="c-mensaje" name="mensaje" rows="3" placeholder="Ej. Busco una suite para inversión, presupuesto aproximado…" data-cms-attr="placeholder:contacto.ejemplo" data-cms-label="Texto de ejemplo del campo"></textarea>
         </div>
         <p class="form-error" id="c-error" role="alert"></p>
-        <button class="btn btn-primary" type="submit">Continuar en WhatsApp</button>
+        <button class="btn btn-primary" type="submit" data-cms="contacto.boton" data-cms-label="Botón">Continuar en WhatsApp</button>
       </form>
     </div>
   </section>
 </main>
 
-<footer class="foot">
+<footer class="foot" data-cms-group="Pie de página">
   <div class="wrap foot-row">
-    <img src="/assets/brand/forxa-logo-horizontal-white.png" alt="FORXA Inmobiliaria" class="foot-logo" width="601" height="200">
-    <p>© <span id="year"></span> FORXA Inmobiliaria. Cuenca, Ecuador.</p>
+    <img src="/assets/brand/forxa-logo-horizontal-white.png" alt="FORXA Inmobiliaria" class="foot-logo" width="601" height="200" data-cms-img="footer.imagen" data-cms-label="Logotipo">
+    <p><span data-cms="footer.texto" data-cms-label="Texto">©</span> <span id="year"></span> <span data-cms="footer.texto-2" data-cms-label="Texto 2">FORXA Inmobiliaria. Cuenca, Ecuador.</span></p>
     <nav class="foot-nav" aria-label="Equipo">
-      <a href="/cotizador/">Cotizador</a>
-      <a href="/admin/">Panel de administración</a>
+      <a href="/cotizador/" data-cms="footer.enlace" data-cms-label="Enlace">Cotizador</a>
+      <a href="/admin/" data-cms="footer.enlace-2" data-cms-label="Enlace 2">Panel de administración</a>
     </nav>
   </div>
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
 <script src="/js/forxa-config.js"></script>
+<script src="/js/cms.js"></script>
 <script src="/js/home.js"></script>
 </body>
 </html>

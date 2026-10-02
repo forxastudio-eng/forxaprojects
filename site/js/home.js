@@ -119,7 +119,7 @@
     var text = "Hola FORXA, soy " + nombre + "." +
       (proyecto ? " Me interesa " + proyecto + "." : "") +
       (mensaje ? " " + mensaje : "");
-    window.open("https://wa.me/" + WA + "?text=" + encodeURIComponent(text), "_blank", "noopener");
+    window.open("https://wa.me/" + ((window.CMS && CMS.whatsapp()) || WA) + "?text=" + encodeURIComponent(text), "_blank", "noopener");
   });
 
   /* Header con borde al hacer scroll */

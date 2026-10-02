@@ -6,6 +6,16 @@
 
   var NAV = [
     { items: [{ r: "escritorio", t: "Escritorio", i: "home" }] },
+    { g: "Landings", items: [
+      { r: "sitio/home", t: "Landing principal", i: "layout" },
+      { r: "sitio/alabes", t: "Álabes", i: "layout" },
+      { r: "sitio/arcus", t: "Arcus", i: "layout" },
+      { r: "sitio/porton", t: "Portón del Valle", i: "layout" }
+    ] },
+    { g: "Textos legales", items: [
+      { r: "sitio/privacidad", t: "Política de privacidad", i: "shield" },
+      { r: "sitio/cookies", t: "Política de cookies", i: "cookie" }
+    ] },
     { g: "Sitio web", items: [
       { r: "portafolio", t: "Portafolio de proyectos", i: "globe" },
       { r: "slider", t: "Slider de Portón", i: "image" }
@@ -71,6 +81,14 @@
 
   /* ------------------------------------------------------------ rutas */
   async function route() {
+    // Si se acaba de restaurar el hash por un cambio cancelado, no vuelve a procesar.
+    if (FX.state.restoring) { FX.state.restoring = false; return; }
+    if (FX.state.guard) {
+      var aviso = FX.state.guard();
+      if (aviso && !window.confirm(aviso)) { FX.state.restoring = true; location.hash = FX.state.lastHash || "#/escritorio"; return; }
+      FX.state.guard = null; window.onbeforeunload = null;
+    }
+    FX.state.lastHash = location.hash;
     var path = (location.hash || "#/escritorio").replace(/^#\//, "") || "escritorio";
     var parts = path.split("/");
     var view = $("view");
@@ -82,7 +100,11 @@
 
     if (FX.state.soloCuenta && parts[0] !== "cuenta") { location.replace("/cotizador/"); return; }
     var title, group, run;
-    if (parts[0] === "inventario" && VIEWS.INV[parts[1]]) {
+    if (parts[0] === "sitio" && VIEWS.SITIOS && VIEWS.SITIOS[parts[1]]) {
+      if (!FX.can("panel")) { location.hash = "#/escritorio"; return; }
+      title = VIEWS.SITIOS[parts[1]].label; group = /^(privacidad|cookies)$/.test(parts[1]) ? "Textos legales" : "Landings";
+      run = function () { return VIEWS.contenido(page, parts[1]); };
+    } else if (parts[0] === "inventario" && VIEWS.INV[parts[1]]) {
       title = VIEWS.INV[parts[1]].label; group = "Inventario";
       run = function () { return VIEWS.inventario(page, parts[1]); };
     } else {

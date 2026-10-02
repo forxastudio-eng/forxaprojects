@@ -1,15 +1,15 @@
 <!DOCTYPE html>
-<html lang="es">
-<head>
+<html lang="es" data-cms-page="porton">
+<head data-cms-group="Pestaña del navegador y buscadores">
 <meta charset="UTF-8" />
 <base href="/porton/">
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Portón del Valle | Proyecto de lotización en Yunguilla, Cuenca</title>
-<meta name="description" content="Portón del Valle: 79 lotes desde 2.500 m² en el Valle de Yunguilla, Cuenca. Laguna, mirador, senderos, agua potable con planta propia y portón de ingreso. Fideicomiso administrado por ENLACE Negocios Fiduciarios." />
+<title data-cms="seo.titulo" data-cms-label="Título de la página (pestaña y Google)">Portón del Valle | Proyecto de lotización en Yunguilla, Cuenca</title>
+<meta name="description" content="Portón del Valle: 79 lotes desde 2.500 m² en el Valle de Yunguilla, Cuenca. Laguna, mirador, senderos, agua potable con planta propia y portón de ingreso. Fideicomiso administrado por ENLACE Negocios Fiduciarios."  data-cms-attr="content:seo.descripcion" data-cms-label="Descripción para Google" data-cms-type="textarea"/>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="icon" href="img/logo-mark.png" type="image/png">
+<link rel="icon" href="img/logo-mark.png" type="image/png" data-cms-attr="href:seo.icono" data-cms-label="Icono de la pestaña (favicon)" data-cms-type="image">
 <link rel="stylesheet" href="css/styles.css" />
 </head>
 <body>
@@ -33,17 +33,17 @@
 </svg>
 
 <!-- ============ HEADER ============ -->
-<header class="header" id="header">
+<header class="header" id="header" data-cms-group="Menú superior">
   <div class="container header__inner">
-    <a href="#inicio" class="brand"><img src="img/logo-porton-white.png" alt="Portón del Valle" /></a>
+    <a href="#inicio" class="brand"><img src="img/logo-porton-white.png" alt="Portón del Valle"  data-cms-img="header.imagen" data-cms-label="Logotipo"/></a>
     <nav class="nav" id="nav">
-      <a href="#proyecto">Proyecto</a>
-      <a href="#exclusivo">Zonas exclusivas</a>
-      <a href="#mapa">Mapa</a>
-      <a href="#lotes">Lotes</a>
-      <a href="#galeria">Galería</a>
-      <a href="/" class="nav-more">Más proyectos</a>
-      <a href="#contacto" class="btn btn--primary btn--sm">Contáctanos</a>
+      <a href="#proyecto" data-cms="header.enlace" data-cms-label="Enlace">Proyecto</a>
+      <a href="#exclusivo" data-cms="header.enlace-2" data-cms-label="Enlace 2">Zonas exclusivas</a>
+      <a href="#mapa" data-cms="header.enlace-3" data-cms-label="Enlace 3">Mapa</a>
+      <a href="#lotes" data-cms="header.enlace-4" data-cms-label="Enlace 4">Lotes</a>
+      <a href="#galeria" data-cms="header.enlace-5" data-cms-label="Enlace 5">Galería</a>
+      <a href="/" class="nav-more" data-cms="header.enlace-6" data-cms-label="Enlace 6" data-cms-href="header.enlace-url">Más proyectos</a>
+      <a href="#contacto" class="btn btn--primary btn--sm" data-cms="header.boton" data-cms-label="Botón">Contáctanos</a>
     </nav>
     <button class="nav-toggle" id="navToggle" aria-label="Abrir menú">
       <span></span><span></span><span></span>
@@ -52,61 +52,61 @@
 </header>
 
 <!-- ============ HERO (VIDEO) ============ -->
-<section class="hero" id="inicio">
+<section class="hero" id="inicio" data-cms-group="Portada">
   <div class="hero__bg">
-    <video autoplay muted loop playsinline poster="img/hero-poster.jpg">
-      <source src="img/hero-video.webm" type="video/webm" />
-      <source src="img/hero-video.mp4" type="video/mp4" />
+    <video autoplay muted loop playsinline poster="img/hero-poster.jpg" data-cms-attr="poster:inicio.video-portada" data-cms-label="Imagen de carga del video" data-cms-type="image">
+      <source src="img/hero-video.webm" type="video/webm"  data-cms-attr="src:inicio.video-webm" data-cms-label="Video de fondo (WEBM)" data-cms-type="video"/>
+      <source src="img/hero-video.mp4" type="video/mp4"  data-cms-attr="src:inicio.video-mp4" data-cms-label="Video de fondo (MP4)" data-cms-type="video"/>
     </video>
   </div>
   <div class="hero__overlay"></div>
   <div class="container hero__content">
-    <p class="hero__eyebrow">Valle de Yunguilla · Cuenca, Ecuador</p>
-    <h1 class="hero__title">Portón del Valle</h1>
-    <p class="hero__tagline">Vive la naturaleza</p>
-    <p class="hero__desc">79 lotes en una zona privilegiada del valle, donde podrás convivir con la naturaleza en un entorno pacífico, con vistas espectaculares y un clima perfecto.</p>
+    <p class="hero__eyebrow" data-cms="inicio.etiqueta" data-cms-label="Sobretítulo">Valle de Yunguilla · Cuenca, Ecuador</p>
+    <h1 class="hero__title" data-cms="inicio.titulo-principal" data-cms-label="Título principal">Portón del Valle</h1>
+    <p class="hero__tagline" data-cms="inicio.lema" data-cms-label="Lema">Vive la naturaleza</p>
+    <p class="hero__desc" data-cms="inicio.descripcion" data-cms-label="Descripción" data-cms-type="textarea">79 lotes en una zona privilegiada del valle, donde podrás convivir con la naturaleza en un entorno pacífico, con vistas espectaculares y un clima perfecto.</p>
     <div class="hero__cta">
-      <a href="https://wa.me/593939087030?text=Hola%2C%20quiero%20m%C3%A1s%20informaci%C3%B3n%20del%20proyecto%20PORT%C3%93N%20DEL%20VALLE." class="btn btn--primary btn--whatsapp" target="_blank" rel="noopener">
-        <svg class="icon"><use href="#i-whatsapp"></use></svg> Escribir por WhatsApp
+      <a href="https://wa.me/593939087030?text=Hola%2C%20quiero%20m%C3%A1s%20informaci%C3%B3n%20del%20proyecto%20PORT%C3%93N%20DEL%20VALLE." class="btn btn--primary btn--whatsapp" target="_blank" rel="noopener" data-cms-wa>
+        <svg class="icon"><use href="#i-whatsapp"></use></svg> <span data-cms="inicio.texto" data-cms-label="Texto del botón">Escribir por WhatsApp</span>
       </a>
-      <a href="https://tour.panoee.net/6a7b4f89123af53a67235346/dji_0009" class="btn btn--outline" target="_blank" rel="noopener">Recorrido virtual 360°</a>
+      <a href="https://tour.panoee.net/6a7b4f89123af53a67235346/dji_0009" class="btn btn--outline" target="_blank" rel="noopener" data-cms="inicio.boton" data-cms-label="Botón" data-cms-href="inicio.enlace-url">Recorrido virtual 360°</a>
     </div>
-    <div class="hero__stats">
-      <div><strong>79</strong><span>Lotes</span></div>
-      <div><strong>2.500 m²</strong><span>Área desde</span></div>
-      <div><strong>Yunguilla</strong><span>Valle de Cuenca</span></div>
-      <div><strong>ENLACE</strong><span>Fideicomiso administrador</span></div>
+    <div class="hero__stats" data-cms-list="inicio.lista-hero-stats" data-cms-label="Cifras de la portada" data-cms-noun="Cifra">
+      <div><strong data-cms="dato" data-cms-label="Dato destacado">79</strong><span data-cms="detalle" data-cms-label="Texto">Lotes</span></div>
+      <div><strong data-cms="dato" data-cms-label="Dato destacado">2.500 m²</strong><span data-cms="detalle" data-cms-label="Texto">Área desde</span></div>
+      <div><strong data-cms="dato" data-cms-label="Dato destacado">Yunguilla</strong><span data-cms="detalle" data-cms-label="Texto">Valle de Cuenca</span></div>
+      <div><strong data-cms="dato" data-cms-label="Dato destacado">ENLACE</strong><span data-cms="detalle" data-cms-label="Texto">Fideicomiso administrador</span></div>
     </div>
   </div>
   <a href="#proyecto" class="scroll-cue" aria-label="Bajar"><svg class="icon"><use href="#i-arrow-down"></use></svg></a>
 </section>
 
 <!-- ============ STATEMENT ============ -->
-<section class="statement">
+<section class="statement" data-cms-group="Frase destacada" data-cms-show="mostrar.frase">
   <div class="container">
-    <blockquote class="reveal">Un proyecto pensado para quienes buscan <em>seguridad, exclusividad y conexión real con la naturaleza</em> — en el corazón del Valle de Yunguilla.</blockquote>
-    <cite>Fideicomiso administrado por ENLACE Negocios Fiduciarios</cite>
+    <blockquote class="reveal" data-cms-html="frase.cita" data-cms-label="Frase destacada" data-cms-type="textarea">Un proyecto pensado para quienes buscan <em>seguridad, exclusividad y conexión real con la naturaleza</em> — en el corazón del Valle de Yunguilla.</blockquote>
+    <cite data-cms="frase.cita-autor" data-cms-label="Autor de la frase">Fideicomiso administrado por ENLACE Negocios Fiduciarios</cite>
   </div>
 </section>
 
 <!-- ============ SOBRE EL PROYECTO ============ -->
-<section class="section" id="proyecto">
+<section class="section" id="proyecto" data-cms-group="Sobre el proyecto" data-cms-show="mostrar.proyecto">
   <div class="container">
     <div class="about">
       <div class="about__media reveal">
-        <img src="img/aerial-hillside.jpg" alt="Vista aérea de las vías y lotes de Portón del Valle" />
+        <img src="img/aerial-hillside.jpg" alt="Vista aérea de las vías y lotes de Portón del Valle"  data-cms-img="proyecto.imagen" data-cms-label="Imagen"/>
       </div>
       <div class="about__text reveal">
-        <p class="kicker">Sobre Portón del Valle</p>
-        <h2 class="section-head" style="margin-bottom:0;">79 lotes para vivir la naturaleza</h2>
-        <p style="margin-top:26px;">Portón del Valle es un proyecto de 79 lotes ubicado en una zona privilegiada del Valle de Yunguilla, en donde podrás convivir con la naturaleza en un entorno pacífico, con vistas espectaculares, disfrutando de un clima perfecto.</p>
-        <p>Constituye la opción ideal para invertir, gracias a su proyección de crecimiento en plusvalía, respaldada por su ubicación estratégica, exclusividad y el desarrollo sostenible de la zona.</p>
-        <p>Cuenta con un estudio hidrológico–hidráulico que define la canalización óptima del agua: cunetas, canales, cruces de vía con tubería, subdrenes, atarjeas, encauzamiento de quebradas e impermeabilización de reservorios.</p>
-        <div class="about__badges">
-          <div class="badge"><strong>79</strong><span>Lotes totales</span></div>
-          <div class="badge"><strong>2.500 m²</strong><span>Área mínima por lote</span></div>
-          <div class="badge"><strong>800 m</strong><span>Del parque extremo</span></div>
-          <div class="badge"><strong>70%</strong><span>Escrituras al finalizar obras</span></div>
+        <p class="kicker" data-cms="proyecto.etiqueta" data-cms-label="Sobretítulo">Sobre Portón del Valle</p>
+        <h2 class="section-head" style="margin-bottom:0;" data-cms="proyecto.titulo" data-cms-label="Título">79 lotes para vivir la naturaleza</h2>
+        <p style="margin-top:26px;" data-cms="proyecto.texto" data-cms-label="Párrafo" data-cms-type="textarea">Portón del Valle es un proyecto de 79 lotes ubicado en una zona privilegiada del Valle de Yunguilla, en donde podrás convivir con la naturaleza en un entorno pacífico, con vistas espectaculares, disfrutando de un clima perfecto.</p>
+        <p data-cms="proyecto.texto-2" data-cms-label="Párrafo 2" data-cms-type="textarea">Constituye la opción ideal para invertir, gracias a su proyección de crecimiento en plusvalía, respaldada por su ubicación estratégica, exclusividad y el desarrollo sostenible de la zona.</p>
+        <p data-cms="proyecto.texto-3" data-cms-label="Párrafo 3" data-cms-type="textarea">Cuenta con un estudio hidrológico–hidráulico que define la canalización óptima del agua: cunetas, canales, cruces de vía con tubería, subdrenes, atarjeas, encauzamiento de quebradas e impermeabilización de reservorios.</p>
+        <div class="about__badges" data-cms-list="proyecto.lista-about-badges" data-cms-label="Cifras destacadas" data-cms-noun="Cifra">
+          <div class="badge"><strong data-cms="dato" data-cms-label="Dato destacado">79</strong><span data-cms="detalle" data-cms-label="Texto">Lotes totales</span></div>
+          <div class="badge"><strong data-cms="dato" data-cms-label="Dato destacado">2.500 m²</strong><span data-cms="detalle" data-cms-label="Texto">Área mínima por lote</span></div>
+          <div class="badge"><strong data-cms="dato" data-cms-label="Dato destacado">800 m</strong><span data-cms="detalle" data-cms-label="Texto">Del parque extremo</span></div>
+          <div class="badge"><strong data-cms="dato" data-cms-label="Dato destacado">70%</strong><span data-cms="detalle" data-cms-label="Texto">Escrituras al finalizar obras</span></div>
         </div>
       </div>
     </div>
@@ -114,78 +114,78 @@
 </section>
 
 <!-- ============ BENEFICIOS ============ -->
-<section class="section section--alt">
+<section class="section section--alt" data-cms-group="Beneficios" data-cms-show="mostrar.beneficios">
   <div class="container">
     <div class="section-head reveal">
-      <p class="kicker">Beneficios</p>
-      <h2>Todo listo para construir tu hogar</h2>
-      <p>Infraestructura completa y espacios exclusivos pensados para conectar con la naturaleza.</p>
+      <p class="kicker" data-cms="beneficios.etiqueta" data-cms-label="Sobretítulo">Beneficios</p>
+      <h2 data-cms="beneficios.titulo" data-cms-label="Título">Todo listo para construir tu hogar</h2>
+      <p data-cms="beneficios.texto" data-cms-label="Párrafo" data-cms-type="textarea">Infraestructura completa y espacios exclusivos pensados para conectar con la naturaleza.</p>
     </div>
-    <div class="benefits-list">
-      <div class="benefit-item reveal"><span class="benefit-item__num">01</span><div><h3>Agua potable</h3><p>Con planta propia de tratamiento para el proyecto.</p></div></div>
-      <div class="benefit-item reveal"><span class="benefit-item__num">02</span><div><h3>Energía eléctrica</h3><p>Red eléctrica disponible en todos los lotes.</p></div></div>
-      <div class="benefit-item reveal"><span class="benefit-item__num">03</span><div><h3>Vías amplias</h3><p>Con 8 metros de ancho para un acceso cómodo y seguro.</p></div></div>
-      <div class="benefit-item reveal"><span class="benefit-item__num">04</span><div><h3>Alumbrado público</h3><p>Iluminación en las vías internas del proyecto.</p></div></div>
-      <div class="benefit-item reveal"><span class="benefit-item__num">05</span><div><h3>Portón de ingreso</h3><p>La seguridad es nuestra prioridad: acceso a través de un elegante portón.</p></div></div>
-      <div class="benefit-item reveal"><span class="benefit-item__num">06</span><div><h3>Vistas privilegiadas</h3><p>Paisajes espectaculares del Valle de Yunguilla desde cada lote.</p></div></div>
-      <div class="benefit-item reveal"><span class="benefit-item__num">07</span><div><h3>Zonas exclusivas</h3><p>Laguna y mirador que te conectan con la naturaleza.</p></div></div>
-      <div class="benefit-item reveal"><span class="benefit-item__num">08</span><div><h3>Senderos</h3><p>Extensos caminos para recorrer, hacer ejercicio y disfrutar del entorno.</p></div></div>
+    <div class="benefits-list" data-cms-list="beneficios.lista-benefits-list" data-cms-label="Beneficios" data-cms-noun="Beneficio">
+      <div class="benefit-item reveal"><span class="benefit-item__num" data-cms="detalle" data-cms-label="Texto">01</span><div><h3 data-cms="subtitulo" data-cms-label="Subtítulo">Agua potable</h3><p data-cms="texto" data-cms-label="Párrafo" data-cms-type="textarea">Con planta propia de tratamiento para el proyecto.</p></div></div>
+      <div class="benefit-item reveal"><span class="benefit-item__num" data-cms="detalle" data-cms-label="Texto">02</span><div><h3 data-cms="subtitulo" data-cms-label="Subtítulo">Energía eléctrica</h3><p data-cms="texto" data-cms-label="Párrafo" data-cms-type="textarea">Red eléctrica disponible en todos los lotes.</p></div></div>
+      <div class="benefit-item reveal"><span class="benefit-item__num" data-cms="detalle" data-cms-label="Texto">03</span><div><h3 data-cms="subtitulo" data-cms-label="Subtítulo">Vías amplias</h3><p data-cms="texto" data-cms-label="Párrafo" data-cms-type="textarea">Con 8 metros de ancho para un acceso cómodo y seguro.</p></div></div>
+      <div class="benefit-item reveal"><span class="benefit-item__num" data-cms="detalle" data-cms-label="Texto">04</span><div><h3 data-cms="subtitulo" data-cms-label="Subtítulo">Alumbrado público</h3><p data-cms="texto" data-cms-label="Párrafo" data-cms-type="textarea">Iluminación en las vías internas del proyecto.</p></div></div>
+      <div class="benefit-item reveal"><span class="benefit-item__num" data-cms="detalle" data-cms-label="Texto">05</span><div><h3 data-cms="subtitulo" data-cms-label="Subtítulo">Portón de ingreso</h3><p data-cms="texto" data-cms-label="Párrafo" data-cms-type="textarea">La seguridad es nuestra prioridad: acceso a través de un elegante portón.</p></div></div>
+      <div class="benefit-item reveal"><span class="benefit-item__num" data-cms="detalle" data-cms-label="Texto">06</span><div><h3 data-cms="subtitulo" data-cms-label="Subtítulo">Vistas privilegiadas</h3><p data-cms="texto" data-cms-label="Párrafo" data-cms-type="textarea">Paisajes espectaculares del Valle de Yunguilla desde cada lote.</p></div></div>
+      <div class="benefit-item reveal"><span class="benefit-item__num" data-cms="detalle" data-cms-label="Texto">07</span><div><h3 data-cms="subtitulo" data-cms-label="Subtítulo">Zonas exclusivas</h3><p data-cms="texto" data-cms-label="Párrafo" data-cms-type="textarea">Laguna y mirador que te conectan con la naturaleza.</p></div></div>
+      <div class="benefit-item reveal"><span class="benefit-item__num" data-cms="detalle" data-cms-label="Texto">08</span><div><h3 data-cms="subtitulo" data-cms-label="Subtítulo">Senderos</h3><p data-cms="texto" data-cms-label="Párrafo" data-cms-type="textarea">Extensos caminos para recorrer, hacer ejercicio y disfrutar del entorno.</p></div></div>
     </div>
   </div>
 </section>
 
 <!-- ============ ZONAS EXCLUSIVAS (showcase) ============ -->
-<section class="section" id="exclusivo">
+<section class="section" id="exclusivo" data-cms-group="Zonas exclusivas" data-cms-show="mostrar.exclusivo">
   <div class="container">
     <div class="section-head reveal">
-      <p class="kicker">Zonas exclusivas</p>
-      <h2>Espacios que te conectan con la naturaleza</h2>
-      <p>Cada rincón del proyecto fue pensado para ofrecerte tranquilidad, seguridad y paisajes inigualables.</p>
+      <p class="kicker" data-cms="exclusivo.etiqueta" data-cms-label="Sobretítulo">Zonas exclusivas</p>
+      <h2 data-cms="exclusivo.titulo" data-cms-label="Título">Espacios que te conectan con la naturaleza</h2>
+      <p data-cms="exclusivo.texto" data-cms-label="Párrafo" data-cms-type="textarea">Cada rincón del proyecto fue pensado para ofrecerte tranquilidad, seguridad y paisajes inigualables.</p>
     </div>
   </div>
-  <div class="showcase">
+  <div class="showcase" data-cms-list="exclusivo.lista-showcase" data-cms-label="Zonas exclusivas" data-cms-noun="Zona">
     <div class="showcase-item reveal">
-      <div class="showcase-media"><img src="img/render-porton1.jpg" alt="Portón de ingreso al proyecto" /></div>
+      <div class="showcase-media"><img src="img/render-porton1.jpg" alt="Portón de ingreso al proyecto"  data-cms-img="imagen" data-cms-label="Imagen"/></div>
       <div class="showcase-text">
-        <span class="num">01 · Portón de ingreso</span>
-        <h3>La seguridad es nuestra prioridad</h3>
-        <p>Accede a tu hogar a través de un elegante portón de ingreso, diseñado para brindarte control y tranquilidad desde el primer momento.</p>
+        <span class="num" data-cms="detalle" data-cms-label="Texto">01 · Portón de ingreso</span>
+        <h3 data-cms="subtitulo" data-cms-label="Subtítulo">La seguridad es nuestra prioridad</h3>
+        <p data-cms="texto" data-cms-label="Párrafo" data-cms-type="textarea">Accede a tu hogar a través de un elegante portón de ingreso, diseñado para brindarte control y tranquilidad desde el primer momento.</p>
       </div>
     </div>
     <div class="showcase-item reveal">
-      <div class="showcase-media"><img src="img/render-laguna.jpg" alt="Laguna, zona exclusiva del proyecto" /></div>
+      <div class="showcase-media"><img src="img/render-laguna.jpg" alt="Laguna, zona exclusiva del proyecto"  data-cms-img="imagen" data-cms-label="Imagen"/></div>
       <div class="showcase-text">
-        <span class="num">02 · Laguna</span>
-        <h3>Un entorno sereno y natural</h3>
-        <p>Vive rodeado de espacios exclusivos que te conectan con la naturaleza. La laguna brinda un entorno sereno para desconectar.</p>
+        <span class="num" data-cms="detalle" data-cms-label="Texto">02 · Laguna</span>
+        <h3 data-cms="subtitulo" data-cms-label="Subtítulo">Un entorno sereno y natural</h3>
+        <p data-cms="texto" data-cms-label="Párrafo" data-cms-type="textarea">Vive rodeado de espacios exclusivos que te conectan con la naturaleza. La laguna brinda un entorno sereno para desconectar.</p>
       </div>
     </div>
     <div class="showcase-item reveal">
-      <div class="showcase-media"><img src="img/render-mirador.jpg" alt="Mirador con vistas al valle" /></div>
+      <div class="showcase-media"><img src="img/render-mirador.jpg" alt="Mirador con vistas al valle"  data-cms-img="imagen" data-cms-label="Imagen"/></div>
       <div class="showcase-text">
-        <span class="num">03 · Mirador</span>
-        <h3>Vistas impresionantes del valle</h3>
-        <p>El mirador ofrece panorámicas espectaculares de los paisajes circundantes — un lugar para contemplar el Valle de Yunguilla.</p>
+        <span class="num" data-cms="detalle" data-cms-label="Texto">03 · Mirador</span>
+        <h3 data-cms="subtitulo" data-cms-label="Subtítulo">Vistas impresionantes del valle</h3>
+        <p data-cms="texto" data-cms-label="Párrafo" data-cms-type="textarea">El mirador ofrece panorámicas espectaculares de los paisajes circundantes — un lugar para contemplar el Valle de Yunguilla.</p>
       </div>
     </div>
     <div class="showcase-item reveal">
-      <div class="showcase-media"><img src="img/render-senderos1.jpg" alt="Senderos para recorrer dentro del proyecto" /></div>
+      <div class="showcase-media"><img src="img/render-senderos1.jpg" alt="Senderos para recorrer dentro del proyecto"  data-cms-img="imagen" data-cms-label="Imagen"/></div>
       <div class="showcase-text">
-        <span class="num">04 · Senderos</span>
-        <h3>Extensos senderos naturales</h3>
-        <p>Rodeados de un entorno natural único, estos caminos invitan a la relajación, el ejercicio y la conexión con la naturaleza.</p>
+        <span class="num" data-cms="detalle" data-cms-label="Texto">04 · Senderos</span>
+        <h3 data-cms="subtitulo" data-cms-label="Subtítulo">Extensos senderos naturales</h3>
+        <p data-cms="texto" data-cms-label="Párrafo" data-cms-type="textarea">Rodeados de un entorno natural único, estos caminos invitan a la relajación, el ejercicio y la conexión con la naturaleza.</p>
       </div>
     </div>
   </div>
 </section>
 
 <!-- ============ UBICACIÓN ============ -->
-<section class="section section--alt" id="ubicacion">
+<section class="section section--alt" id="ubicacion" data-cms-group="Ubicación" data-cms-show="mostrar.ubicacion">
   <div class="container">
     <div class="section-head reveal">
-      <p class="kicker">Ubicación privilegiada</p>
-      <h2>En el corazón del Valle de Yunguilla</h2>
-      <p>A 800 metros del parque extremo, con vía principal de acceso y un elegante portón de ingreso al proyecto.</p>
+      <p class="kicker" data-cms="ubicacion.etiqueta" data-cms-label="Sobretítulo">Ubicación privilegiada</p>
+      <h2 data-cms="ubicacion.titulo" data-cms-label="Título">En el corazón del Valle de Yunguilla</h2>
+      <p data-cms="ubicacion.texto" data-cms-label="Párrafo" data-cms-type="textarea">A 800 metros del parque extremo, con vía principal de acceso y un elegante portón de ingreso al proyecto.</p>
     </div>
     <div class="location">
       <div class="location__maps reveal">
@@ -198,24 +198,24 @@
           <img src="img/aerial-valle3.jpg" alt="Vista panorámica del valle" />
         </div>
       </div>
-      <div class="poi-list reveal">
-        <div class="poi"><span class="poi__icon"><svg class="icon"><use href="#i-gate"></use></svg></span><div><strong>Portón de ingreso</strong><span>Acceso controlado y elegante al proyecto</span></div></div>
-        <div class="poi"><span class="poi__icon"><svg class="icon"><use href="#i-landmark"></use></svg></span><div><strong>Parque extremo</strong><span>A 800 m del ingreso</span></div></div>
-        <div class="poi"><span class="poi__icon"><svg class="icon"><use href="#i-road"></use></svg></span><div><strong>Vía principal</strong><span>Conexión directa al valle</span></div></div>
-        <div class="poi"><span class="poi__icon"><svg class="icon"><use href="#i-pin"></use></svg></span><div><strong>Centro de Yunguilla</strong><span>Ubicado cerca al centro</span></div></div>
-        <div class="poi"><span class="poi__icon"><svg class="icon"><use href="#i-water"></use></svg></span><div><strong>Valle de Yunguilla</strong><span>Clima cálido y paisajes privilegiados</span></div></div>
+      <div class="poi-list reveal" data-cms-list="ubicacion.lista-poi-list" data-cms-label="Puntos de interés cercanos" data-cms-noun="Punto">
+        <div class="poi"><span class="poi__icon"><svg class="icon"><use href="#i-gate" data-cms-icon="icono" data-cms-label="Ícono"></use></svg></span><div><strong data-cms="dato" data-cms-label="Dato destacado">Portón de ingreso</strong><span data-cms="detalle" data-cms-label="Texto">Acceso controlado y elegante al proyecto</span></div></div>
+        <div class="poi"><span class="poi__icon"><svg class="icon"><use href="#i-landmark" data-cms-icon="icono" data-cms-label="Ícono"></use></svg></span><div><strong data-cms="dato" data-cms-label="Dato destacado">Parque extremo</strong><span data-cms="detalle" data-cms-label="Texto">A 800 m del ingreso</span></div></div>
+        <div class="poi"><span class="poi__icon"><svg class="icon"><use href="#i-road" data-cms-icon="icono" data-cms-label="Ícono"></use></svg></span><div><strong data-cms="dato" data-cms-label="Dato destacado">Vía principal</strong><span data-cms="detalle" data-cms-label="Texto">Conexión directa al valle</span></div></div>
+        <div class="poi"><span class="poi__icon"><svg class="icon"><use href="#i-pin" data-cms-icon="icono" data-cms-label="Ícono"></use></svg></span><div><strong data-cms="dato" data-cms-label="Dato destacado">Centro de Yunguilla</strong><span data-cms="detalle" data-cms-label="Texto">Ubicado cerca al centro</span></div></div>
+        <div class="poi"><span class="poi__icon"><svg class="icon"><use href="#i-water" data-cms-icon="icono" data-cms-label="Ícono"></use></svg></span><div><strong data-cms="dato" data-cms-label="Dato destacado">Valle de Yunguilla</strong><span data-cms="detalle" data-cms-label="Texto">Clima cálido y paisajes privilegiados</span></div></div>
       </div>
     </div>
   </div>
 </section>
 
 <!-- ============ MAPA INTERACTIVO ============ -->
-<section class="section" id="mapa">
+<section class="section" id="mapa" data-cms-group="Mapa interactivo" data-cms-show="mostrar.mapa">
   <div class="container">
     <div class="section-head reveal">
-      <p class="kicker">Mapa interactivo</p>
-      <h2>Explora lote por lote</h2>
-      <p>Pasa el mouse sobre el mapa para ver el estado, área y precio de cada lote. Los disponibles muestran su información completa; los que ya no están disponibles se marcan en rojo.</p>
+      <p class="kicker" data-cms="mapa.etiqueta" data-cms-label="Sobretítulo">Mapa interactivo</p>
+      <h2 data-cms="mapa.titulo" data-cms-label="Título">Explora lote por lote</h2>
+      <p data-cms="mapa.texto" data-cms-label="Párrafo" data-cms-type="textarea">Pasa el mouse sobre el mapa para ver el estado, área y precio de cada lote. Los disponibles muestran su información completa; los que ya no están disponibles se marcan en rojo.</p>
     </div>
     <div class="interactive-map reveal" id="interactiveMap">
       <img src="img/mapa-lotes-hd.jpg" alt="Mapa detallado del proyecto Portón del Valle" />
@@ -223,33 +223,33 @@
       <div class="map-tooltip" id="mapTooltip"></div>
     </div>
     <div class="map-legend reveal">
-      <span><i class="dot-disponible"></i> Disponible</span>
-      <span><i class="dot-reservado"></i> Reservado</span>
-      <span><i class="dot-no_disponible"></i> No disponible</span>
+      <span><i class="dot-disponible"></i> <span data-cms="mapa.texto-2" data-cms-label="Texto 2">Disponible</span></span>
+      <span><i class="dot-reservado"></i> <span data-cms="mapa.texto-3" data-cms-label="Texto 3">Reservado</span></span>
+      <span><i class="dot-no_disponible"></i> <span data-cms="mapa.texto-4" data-cms-label="Texto 4">No disponible</span></span>
     </div>
-    <p class="map-hint">Mapa construido a partir del plano oficial del proyecto — pasa el cursor sobre cualquier lote.</p>
+    <p class="map-hint" data-cms="mapa.texto-5" data-cms-label="Párrafo 5" data-cms-type="textarea">Mapa construido a partir del plano oficial del proyecto — pasa el cursor sobre cualquier lote.</p>
   </div>
 </section>
 
 <!-- ============ LOTES DISPONIBLES ============ -->
-<section class="section section--alt" id="lotes">
+<section class="section section--alt" id="lotes" data-cms-group="Lotes" data-cms-show="mostrar.lotes">
   <div class="container">
     <div class="section-head reveal">
-      <p class="kicker">Lotes disponibles</p>
-      <h2>Encuentra tu lote ideal</h2>
-      <p>Lotes desde 2.500 m². 70% con entrega de escrituras al finalizar la ejecución de trabajos, opción a financiamiento con varias instituciones crediticias y descuento especial por pago en efectivo.</p>
+      <p class="kicker" data-cms="lotes.etiqueta" data-cms-label="Sobretítulo">Lotes disponibles</p>
+      <h2 data-cms="lotes.titulo" data-cms-label="Título">Encuentra tu lote ideal</h2>
+      <p data-cms="lotes.texto" data-cms-label="Párrafo" data-cms-type="textarea">Lotes desde 2.500 m². 70% con entrega de escrituras al finalizar la ejecución de trabajos, opción a financiamiento con varias instituciones crediticias y descuento especial por pago en efectivo.</p>
     </div>
 
-    <div class="lotes-perks reveal">
-      <div class="lotes-perk"><strong>70%</strong><span>Con entrega de escrituras al finalizar la ejecución de trabajos</span></div>
-      <div class="lotes-perk"><strong>Financiamiento</strong><span>Opción a financiamiento con varias instituciones crediticias</span></div>
-      <div class="lotes-perk"><strong>Descuento</strong><span>Descuento especial por pago en efectivo</span></div>
+    <div class="lotes-perks reveal" data-cms-list="lotes.lista-lotes-perks" data-cms-label="Ventajas de compra" data-cms-noun="Ventaja">
+      <div class="lotes-perk"><strong data-cms="dato" data-cms-label="Dato destacado">70%</strong><span data-cms="detalle" data-cms-label="Texto">Con entrega de escrituras al finalizar la ejecución de trabajos</span></div>
+      <div class="lotes-perk"><strong data-cms="dato" data-cms-label="Dato destacado">Financiamiento</strong><span data-cms="detalle" data-cms-label="Texto">Opción a financiamiento con varias instituciones crediticias</span></div>
+      <div class="lotes-perk"><strong data-cms="dato" data-cms-label="Dato destacado">Descuento</strong><span data-cms="detalle" data-cms-label="Texto">Descuento especial por pago en efectivo</span></div>
     </div>
 
     <div class="lotes-intro reveal">
       <p style="margin:0; color:var(--stone); font-size:0.9rem;" id="lotesCount">Cargando disponibilidad… Precios referenciales, sujetos a actualización.</p>
       <div class="lotes-search">
-        <input type="text" id="lotSearch" placeholder="Buscar lote (ej. A43)" />
+        <input type="text" id="lotSearch" placeholder="Buscar lote (ej. A43)"  data-cms-attr="placeholder:lotes.ejemplo" data-cms-label="Texto de ejemplo del campo"/>
       </div>
     </div>
 
@@ -262,70 +262,70 @@
         </tbody>
       </table>
     </div>
-    <p class="lotes-note">Áreas y valores referenciales del brochure oficial. Escríbenos por WhatsApp para conocer disponibilidad actualizada y forma de pago.</p>
+    <p class="lotes-note" data-cms="lotes.texto-2" data-cms-label="Párrafo 2" data-cms-type="textarea">Áreas y valores referenciales del brochure oficial. Escríbenos por WhatsApp para conocer disponibilidad actualizada y forma de pago.</p>
 
     <div class="lotes-map-cta reveal" data-ficha="img/mapa-lotes.jpg" data-title="Mapa detallado del proyecto Portón del Valle" style="margin-top:34px; display:flex; align-items:center; gap:24px; flex-wrap:wrap; background:var(--bg-2); border:1px solid var(--line); border-radius:var(--radius-lg); padding:28px 32px; cursor:pointer;">
-      <img src="img/mapa-lotes.jpg" alt="Mapa detallado del proyecto Portón del Valle" style="width:130px; height:90px; object-fit:cover; border-radius:6px; flex:none;" />
+      <img src="img/mapa-lotes.jpg" alt="Mapa detallado del proyecto Portón del Valle" style="width:130px; height:90px; object-fit:cover; border-radius:6px; flex:none;"  data-cms-img="lotes.imagen" data-cms-label="Imagen"/>
       <div style="flex:1; min-width:200px;">
-        <h4 style="margin:0 0 4px; color:var(--cream); font-family:var(--ff-display); font-style:italic; font-weight:500;">Mapa detallado del proyecto</h4>
-        <p style="margin:0; color:var(--stone); font-size:0.88rem;">Descarga la versión completa del plano con la laguna, el mirador y el portón de ingreso.</p>
+        <h4 style="margin:0 0 4px; color:var(--cream); font-family:var(--ff-display); font-style:italic; font-weight:500;" data-cms="lotes.subtitulo" data-cms-label="Subtítulo">Mapa detallado del proyecto</h4>
+        <p style="margin:0; color:var(--stone); font-size:0.88rem;" data-cms="lotes.texto-3" data-cms-label="Párrafo 3" data-cms-type="textarea">Descarga la versión completa del plano con la laguna, el mirador y el portón de ingreso.</p>
       </div>
-      <span class="btn btn--outline">Ver mapa completo</span>
+      <span class="btn btn--outline" data-cms="lotes.detalle" data-cms-label="Texto">Ver mapa completo</span>
     </div>
   </div>
 </section>
 
 <!-- ============ GALERÍA ============ -->
-<section class="section" id="galeria">
+<section class="section" id="galeria" data-cms-group="Galería" data-cms-show="mostrar.galeria">
   <div class="container">
     <div class="section-head reveal">
-      <p class="kicker">Galería</p>
-      <h2>Un vistazo a Portón del Valle</h2>
-      <p>Renders y fotografías del proyecto: portón de ingreso, laguna, mirador y senderos.</p>
+      <p class="kicker" data-cms="galeria.etiqueta" data-cms-label="Sobretítulo">Galería</p>
+      <h2 data-cms="galeria.titulo" data-cms-label="Título">Un vistazo a Portón del Valle</h2>
+      <p data-cms="galeria.texto" data-cms-label="Párrafo" data-cms-type="textarea">Renders y fotografías del proyecto: portón de ingreso, laguna, mirador y senderos.</p>
     </div>
   </div>
-  <div class="gallery-grid reveal">
-    <figure class="wide tall"><img src="img/render-porton1.jpg" data-full="img/render-porton1.jpg" data-lightbox alt="Render del portón de ingreso al proyecto" /></figure>
-    <figure><img src="img/render-laguna.jpg" data-full="img/render-laguna.jpg" data-lightbox alt="Render de la laguna, zona exclusiva del proyecto" /></figure>
-    <figure><img src="img/render-mirador.jpg" data-full="img/render-mirador.jpg" data-lightbox alt="Render del mirador con vistas al valle" /></figure>
-    <figure><img src="img/render-senderos1.jpg" data-full="img/render-senderos1.jpg" data-lightbox alt="Senderos para recorrer dentro del proyecto" /></figure>
-    <figure><img src="img/render-senderos2.jpg" data-full="img/render-senderos2.jpg" data-lightbox alt="Personas recorriendo los senderos del proyecto" /></figure>
-    <figure class="wide"><img src="img/render-porton2.jpg" data-full="img/render-porton2.jpg" data-lightbox alt="Render del portón de ingreso, vista de noche" /></figure>
-    <figure><img src="img/render-porton3.jpg" data-full="img/render-porton3.jpg" data-lightbox alt="Camino de ingreso al proyecto" /></figure>
-    <figure><img src="img/render-zona-exclusiva.jpg" data-full="img/render-zona-exclusiva.jpg" data-lightbox alt="Zona exclusiva con vista al valle" /></figure>
-    <figure><img src="img/aerial-valle1.jpg" data-full="img/aerial-valle1.jpg" data-lightbox alt="Vista aérea del Valle de Yunguilla" /></figure>
-    <figure class="tall"><img src="img/aerial-valle2.jpg" data-full="img/aerial-valle2.jpg" data-lightbox alt="Vista aérea del proyecto y sus alrededores" /></figure>
-    <figure><img src="img/aerial-valle3.jpg" data-full="img/aerial-valle3.jpg" data-lightbox alt="Vista panorámica del valle" /></figure>
-    <figure><img src="img/buho.jpg" data-full="img/buho.jpg" data-lightbox alt="Fauna del Valle de Yunguilla — vive la naturaleza" /></figure>
+  <div class="gallery-grid reveal" data-cms-list="galeria.lista-gallery-grid" data-cms-label="Fotos de la galería" data-cms-noun="Foto" data-cms-cls="wide:Doble ancho,tall:Doble alto,arch:Forma de arco">
+    <figure class="wide tall"><img src="img/render-porton1.jpg" data-full="img/render-porton1.jpg" data-lightbox alt="Render del portón de ingreso al proyecto"  data-cms-img="imagen" data-cms-label="Imagen"/></figure>
+    <figure><img src="img/render-laguna.jpg" data-full="img/render-laguna.jpg" data-lightbox alt="Render de la laguna, zona exclusiva del proyecto"  data-cms-img="imagen" data-cms-label="Imagen"/></figure>
+    <figure><img src="img/render-mirador.jpg" data-full="img/render-mirador.jpg" data-lightbox alt="Render del mirador con vistas al valle"  data-cms-img="imagen" data-cms-label="Imagen"/></figure>
+    <figure><img src="img/render-senderos1.jpg" data-full="img/render-senderos1.jpg" data-lightbox alt="Senderos para recorrer dentro del proyecto"  data-cms-img="imagen" data-cms-label="Imagen"/></figure>
+    <figure><img src="img/render-senderos2.jpg" data-full="img/render-senderos2.jpg" data-lightbox alt="Personas recorriendo los senderos del proyecto"  data-cms-img="imagen" data-cms-label="Imagen"/></figure>
+    <figure class="wide"><img src="img/render-porton2.jpg" data-full="img/render-porton2.jpg" data-lightbox alt="Render del portón de ingreso, vista de noche"  data-cms-img="imagen" data-cms-label="Imagen"/></figure>
+    <figure><img src="img/render-porton3.jpg" data-full="img/render-porton3.jpg" data-lightbox alt="Camino de ingreso al proyecto"  data-cms-img="imagen" data-cms-label="Imagen"/></figure>
+    <figure><img src="img/render-zona-exclusiva.jpg" data-full="img/render-zona-exclusiva.jpg" data-lightbox alt="Zona exclusiva con vista al valle"  data-cms-img="imagen" data-cms-label="Imagen"/></figure>
+    <figure><img src="img/aerial-valle1.jpg" data-full="img/aerial-valle1.jpg" data-lightbox alt="Vista aérea del Valle de Yunguilla"  data-cms-img="imagen" data-cms-label="Imagen"/></figure>
+    <figure class="tall"><img src="img/aerial-valle2.jpg" data-full="img/aerial-valle2.jpg" data-lightbox alt="Vista aérea del proyecto y sus alrededores"  data-cms-img="imagen" data-cms-label="Imagen"/></figure>
+    <figure><img src="img/aerial-valle3.jpg" data-full="img/aerial-valle3.jpg" data-lightbox alt="Vista panorámica del valle"  data-cms-img="imagen" data-cms-label="Imagen"/></figure>
+    <figure><img src="img/buho.jpg" data-full="img/buho.jpg" data-lightbox alt="Fauna del Valle de Yunguilla — vive la naturaleza"  data-cms-img="imagen" data-cms-label="Imagen"/></figure>
   </div>
 </section>
 
 <!-- ============ CONTACTO ============ -->
-<section class="section contact" id="contacto">
+<section class="section contact" id="contacto" data-cms-group="Contacto" data-cms-show="mostrar.contacto">
   <div class="container">
     <div class="contact-grid">
       <div class="contact-info reveal">
-        <p class="kicker">Contacto</p>
-        <h2 class="section-head" style="margin-bottom:0;">Agenda tu visita a Portón del Valle</h2>
-        <p style="margin-top:22px; color:var(--cream-dim);">Cuéntanos qué lote te interesa y te contactamos con toda la información: disponibilidad, mapa del proyecto y formas de pago.</p>
+        <p class="kicker" data-cms="contacto.etiqueta" data-cms-label="Sobretítulo">Contacto</p>
+        <h2 class="section-head" style="margin-bottom:0;" data-cms="contacto.titulo" data-cms-label="Título">Agenda tu visita a Portón del Valle</h2>
+        <p style="margin-top:22px; color:var(--cream-dim);" data-cms="contacto.texto" data-cms-label="Párrafo" data-cms-type="textarea">Cuéntanos qué lote te interesa y te contactamos con toda la información: disponibilidad, mapa del proyecto y formas de pago.</p>
 
         <div class="contact-details">
-          <div class="item"><span class="ic"><svg class="icon"><use href="#i-phone"></use></svg></span><div><strong>Teléfono / WhatsApp</strong><a href="https://wa.me/593939087030?text=Hola%2C%20quiero%20m%C3%A1s%20informaci%C3%B3n%20del%20proyecto%20PORT%C3%93N%20DEL%20VALLE." target="_blank" rel="noopener">093 908 7030</a></div></div>
-          <div class="item"><span class="ic"><svg class="icon"><use href="#i-instagram"></use></svg></span><div><strong>Instagram</strong><a href="https://instagram.com/portondelvalleecuador" target="_blank" rel="noopener">@portondelvalleecuador</a></div></div>
-          <div class="item"><span class="ic"><svg class="icon"><use href="#i-pin"></use></svg></span><div><strong>Ubicación</strong><span>Valle de Yunguilla, Cuenca, Ecuador</span></div></div>
+          <div class="item"><span class="ic"><svg class="icon"><use href="#i-phone"></use></svg></span><div><strong data-cms="contacto.dato" data-cms-label="Dato destacado">Teléfono / WhatsApp</strong><a href="https://wa.me/593939087030?text=Hola%2C%20quiero%20m%C3%A1s%20informaci%C3%B3n%20del%20proyecto%20PORT%C3%93N%20DEL%20VALLE." target="_blank" rel="noopener" data-cms="contacto.enlace" data-cms-label="Enlace" data-cms-wa>093 908 7030</a></div></div>
+          <div class="item"><span class="ic"><svg class="icon"><use href="#i-instagram"></use></svg></span><div><strong data-cms="contacto.dato-2" data-cms-label="Dato destacado 2">Instagram</strong><a href="https://instagram.com/portondelvalleecuador" target="_blank" rel="noopener" data-cms="contacto.enlace-2" data-cms-label="Enlace 2" data-cms-href="contacto.enlace-url">@portondelvalleecuador</a></div></div>
+          <div class="item"><span class="ic"><svg class="icon"><use href="#i-pin"></use></svg></span><div><strong data-cms="contacto.dato-3" data-cms-label="Dato destacado 3">Ubicación</strong><span data-cms="contacto.detalle" data-cms-label="Texto">Valle de Yunguilla, Cuenca, Ecuador</span></div></div>
         </div>
       </div>
 
       <form class="contact-form reveal" id="contactForm">
-        <h3>Solicita información</h3>
-        <p>Completa el formulario y te escribimos por WhatsApp al instante.</p>
+        <h3 data-cms="contacto.subtitulo" data-cms-label="Subtítulo">Solicita información</h3>
+        <p data-cms="contacto.texto-2" data-cms-label="Párrafo 2" data-cms-type="textarea">Completa el formulario y te escribimos por WhatsApp al instante.</p>
         <div class="form-row">
-          <div class="field"><label for="name">Nombre completo *</label><input type="text" id="name" name="name" placeholder="Tu nombre" required /></div>
-          <div class="field"><label for="phone">Teléfono *</label><input type="tel" id="phone" name="phone" placeholder="09XXXXXXXX" required /></div>
+          <div class="field"><label for="name" data-cms="contacto.campo" data-cms-label="Etiqueta del campo">Nombre completo *</label><input type="text" id="name" name="name" placeholder="Tu nombre" required  data-cms-attr="placeholder:contacto.ejemplo" data-cms-label="Texto de ejemplo del campo"/></div>
+          <div class="field"><label for="phone" data-cms="contacto.campo-2" data-cms-label="Etiqueta del campo 2">Teléfono *</label><input type="tel" id="phone" name="phone" placeholder="09XXXXXXXX" required  data-cms-attr="placeholder:contacto.ejemplo-2" data-cms-label="Texto de ejemplo del campo"/></div>
         </div>
-        <div class="field"><label for="email">Correo electrónico</label><input type="email" id="email" name="email" placeholder="tucorreo@email.com" /></div>
+        <div class="field"><label for="email" data-cms="contacto.campo-3" data-cms-label="Etiqueta del campo 3">Correo electrónico</label><input type="email" id="email" name="email" placeholder="tucorreo@email.com"  data-cms-attr="placeholder:contacto.ejemplo-3" data-cms-label="Texto de ejemplo del campo"/></div>
         <div class="field">
-          <label for="lote">Lote de interés</label>
+          <label for="lote" data-cms="contacto.campo-4" data-cms-label="Etiqueta del campo 4">Lote de interés</label>
           <select id="lote" name="lote">
             <option value="">Selecciona una opción</option>
             <option value="Lote desde 2.500 m²">Lote desde 2.500 m²</option>
@@ -334,30 +334,30 @@
             <option value="Aún no lo sé">Aún no lo sé</option>
           </select>
         </div>
-        <div class="field"><label for="message">Mensaje</label><textarea id="message" name="message" placeholder="Cuéntanos qué te gustaría saber..."></textarea></div>
-        <button type="submit" class="btn btn--primary btn--block">Enviar por WhatsApp</button>
+        <div class="field"><label for="message" data-cms="contacto.campo-5" data-cms-label="Etiqueta del campo 5">Mensaje</label><textarea id="message" name="message" placeholder="Cuéntanos qué te gustaría saber..." data-cms-attr="placeholder:contacto.ejemplo-4" data-cms-label="Texto de ejemplo del campo"></textarea></div>
+        <button type="submit" class="btn btn--primary btn--block" data-cms="contacto.boton" data-cms-label="Botón">Enviar por WhatsApp</button>
         <p class="form-status" id="formStatus"></p>
-        <p class="form-note">Al enviar aceptas ser contactado por nuestro equipo comercial.</p>
+        <p class="form-note" data-cms="contacto.texto-3" data-cms-label="Párrafo 3" data-cms-type="textarea">Al enviar aceptas ser contactado por nuestro equipo comercial.</p>
       </form>
     </div>
   </div>
 </section>
 
 <!-- ============ FOOTER ============ -->
-<footer class="footer">
+<footer class="footer" data-cms-group="Pie de página">
   <div class="container">
     <div class="footer__brand">
-      <img src="img/logo-porton-white.png" alt="Portón del Valle" style="height:40px;" />
-      <img class="footer__forxa" src="img/logo-forxa-black.jpg" alt="FORXA Inmobiliaria" style="height:32px; border-radius:4px;" />
-      <img class="footer__adrian" src="img/logo-vivecuenca-black.jpg" alt="Vive en Cuenca Inmobiliaria" style="height:32px; border-radius:4px;" />
-      <span>© 2026 Portón del Valle — Fideicomiso administrado por ENLACE Negocios Fiduciarios.</span>
+      <img src="img/logo-porton-white.png" alt="Portón del Valle" style="height:40px;"  data-cms-img="footer.imagen" data-cms-label="Logotipo"/>
+      <img class="footer__forxa" src="img/logo-forxa-black.jpg" alt="FORXA Inmobiliaria" style="height:32px; border-radius:4px;"  data-cms-img="footer.imagen-2" data-cms-label="Logotipo 2"/>
+      <img class="footer__adrian" src="img/logo-vivecuenca-black.jpg" alt="Vive en Cuenca Inmobiliaria" style="height:32px; border-radius:4px;"  data-cms-img="footer.imagen-3" data-cms-label="Logotipo 3"/>
+      <span data-cms="footer.detalle" data-cms-label="Texto" data-cms-type="textarea">© 2026 Portón del Valle — Fideicomiso administrado por ENLACE Negocios Fiduciarios.</span>
     </div>
-    <span>Valle de Yunguilla, Cuenca, Ecuador</span>
+    <span data-cms="footer.detalle-2" data-cms-label="Texto 2">Valle de Yunguilla, Cuenca, Ecuador</span>
   </div>
 </footer>
 
 <!-- WhatsApp floating button -->
-<a href="https://wa.me/593939087030?text=Hola%2C%20quiero%20m%C3%A1s%20informaci%C3%B3n%20del%20proyecto%20PORT%C3%93N%20DEL%20VALLE." class="whatsapp-float" target="_blank" rel="noopener" aria-label="Escríbenos por WhatsApp">
+<a href="https://wa.me/593939087030?text=Hola%2C%20quiero%20m%C3%A1s%20informaci%C3%B3n%20del%20proyecto%20PORT%C3%93N%20DEL%20VALLE." class="whatsapp-float" target="_blank" rel="noopener" aria-label="Escríbenos por WhatsApp" data-cms-wa>
   <svg class="icon"><use href="#i-whatsapp"></use></svg>
 </a>
 
@@ -374,6 +374,7 @@
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
 <script src="/js/forxa-config.js"></script>
+<script src="/js/cms.js"></script>
 <script src="js/script.js"></script>
 </body>
 </html>
