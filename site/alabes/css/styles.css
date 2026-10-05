@@ -38,12 +38,17 @@
   --line-on-dark: rgba(250, 248, 240, 0.16);
   --line-on-dark-strong: rgba(250, 248, 240, 0.3);
 
-  --status-ok-bg: rgba(31, 122, 76, 0.12);
-  --status-ok-text: #1f7a4c;
-  --status-sold-bg: rgba(165, 70, 43, 0.12);
-  --status-sold-text: #a5462b;
-  --status-reserved-bg: rgba(184, 134, 11, 0.14);
-  --status-reserved-text: #9a6c0d;
+  /* Estados: disponible = verde, vendido = rojo, reservado = naranja */
+  --status-ok-bg: rgba(21, 128, 61, 0.12);
+  --status-ok-text: #146c34;
+  --status-sold-bg: rgba(220, 38, 38, 0.10);
+  --status-sold-text: #b91c1c;
+  --status-reserved-bg: rgba(234, 88, 12, 0.12);
+  --status-reserved-text: #c2410c;
+  /* Sobre fotos oscuras (tarjetas de locales) */
+  --status-ok-on-dark: #86efac;
+  --status-sold-on-dark: #fca5a5;
+  --status-reserved-on-dark: #fdba74;
 
   --shadow: 0 24px 55px -22px rgba(32, 43, 22, 0.28);
   --shadow-sm: 0 12px 26px -16px rgba(32, 43, 22, 0.22);
@@ -366,18 +371,30 @@ ul { margin: 0; padding: 0; list-style: none; }
 .unit-card .area small { display: block; font-weight: 400; font-size: 0.68rem; color: var(--ink-soft); text-transform: none; }
 
 .status {
-  display: inline-block;
-  font-size: 0.68rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 0.72rem;
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
-  padding: 5px 12px;
+  letter-spacing: 0.06em;
+  padding: 6px 13px 6px 11px;
   border-radius: 999px;
   margin-top: 8px;
+  line-height: 1;
 }
+.status::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: currentColor; flex: none; }
 .status--disponible { background: var(--status-ok-bg); color: var(--status-ok-text); }
 .status--vendido { background: var(--status-sold-bg); color: var(--status-sold-text); }
 .status--reservado { background: var(--status-reserved-bg); color: var(--status-reserved-text); }
+.status--disponible::before { animation: statusPulse 2.2s ease-in-out infinite; }
+@keyframes statusPulse { 0%, 100% { opacity: 1; } 50% { opacity: .35; } }
+
+/* Sobre la foto oscura de los locales */
+.local-card .status { background: rgba(14, 18, 9, 0.62); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); border: 1px solid rgba(250, 248, 240, 0.14); }
+.local-card .status--disponible { color: var(--status-ok-on-dark); }
+.local-card .status--vendido { color: var(--status-sold-on-dark); }
+.local-card .status--reservado { color: var(--status-reserved-on-dark); }
 
 .unit-card__specs { display: flex; flex-wrap: wrap; gap: 8px 14px; margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--line); }
 .unit-card__specs li { display: flex; align-items: center; gap: 7px; font-size: 0.82rem; color: var(--ink-soft); }
@@ -600,4 +617,92 @@ ul { margin: 0; padding: 0; list-style: none; }
   .gallery-grid .wide { grid-column: span 2; }
   .contact-form { padding: 26px; }
   .brand img { height: 30px; }
+}
+
+/* ==========================================================================
+   IDENTIDAD ÁLABES — "arquitectura urbana": líneas rectas, esquinas firmes,
+   rejilla de planos y un verde oliva sobrio. Geométrico, no decorativo.
+   ========================================================================== */
+:root { --radius: 6px; --radius-lg: 10px; --rule: 3px; }
+
+h1, h2, h3, h4 { letter-spacing: -0.015em; }
+
+/* Sobretítulo como etiqueta de plano: cuadrado + línea */
+.eyebrow { display: inline-flex; align-items: center; gap: 12px; letter-spacing: 0.18em; }
+.eyebrow::before { content: ""; width: 9px; height: 9px; background: var(--accent); flex: none; }
+.hero .eyebrow::before, .contact-info .eyebrow::before { background: var(--accent-bright); }
+
+/* Título de sección con regla corta de acento */
+.section-head h2::after { content: ""; display: block; width: 56px; height: var(--rule); background: var(--accent); margin: 18px auto 0; }
+.section--alt .section-head h2::after { background: var(--olive-500); }
+
+/* Botones rectangulares con esquina suave */
+.btn { border-radius: var(--radius); letter-spacing: 0.01em; }
+.btn--sm { border-radius: 5px; }
+
+/* Hero: rejilla de plano arquitectónico sobre la foto */
+.hero__bg::after {
+  content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none;
+  background-image:
+    linear-gradient(to right, rgba(250,248,240,0.07) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(250,248,240,0.07) 1px, transparent 1px);
+  background-size: 96px 96px;
+  mask-image: linear-gradient(to bottom, #000 0%, transparent 70%);
+  -webkit-mask-image: linear-gradient(to bottom, #000 0%, transparent 70%);
+}
+.hero__title { font-weight: 700; letter-spacing: -0.03em; }
+.hero__tagline { border-left: var(--rule) solid var(--accent-bright); padding-left: 16px; }
+.hero__stats { gap: 0; border-top: 0; padding-top: 0; }
+.hero__stats > * { padding: 22px 40px 0 0; margin-right: 40px; border-top: 1px solid var(--line-on-dark-strong); border-right: 1px solid var(--line-on-dark); }
+.hero__stats > *:last-child { border-right: 0; margin-right: 0; }
+.hero__stats strong { font-weight: 700; }
+
+/* Insignias del proyecto: cifra grande, filo verde a la izquierda */
+.badge { border-radius: var(--radius); border-left: var(--rule) solid var(--accent); background: var(--bg-2); }
+.badge strong { font-size: 1.75rem; font-weight: 700; letter-spacing: -0.02em; }
+.about__media { border-radius: var(--radius-lg); }
+.about__media::after { content: ""; position: absolute; left: 0; bottom: 0; width: 38%; height: 8px; background: var(--accent); }
+
+/* Puntos de interés: ícono cuadrado */
+.poi { border-radius: var(--radius); border-left: var(--rule) solid var(--accent); }
+.poi__icon { border-radius: 8px; }
+
+/* Amenidades: tarjeta técnica con filo superior */
+.amenity-card { border-radius: var(--radius-lg); border-top: var(--rule) solid var(--accent); background: var(--bg-3); }
+.amenity-card:hover { background: var(--bg-2); }
+.amenity-card__icon { border-radius: 10px; }
+
+/* Pestañas: control segmentado recto */
+.tabs { gap: 0; width: max-content; max-width: 100%; margin-left: auto; margin-right: auto; border: 1.5px solid var(--line-strong); border-radius: var(--radius); overflow: hidden; background: var(--bg-1); }
+.tab-btn { border: 0; border-radius: 0; padding: 14px 28px; background: transparent; }
+.tab-btn + .tab-btn { border-left: 1px solid var(--line); }
+.tab-btn.is-active, .tab-btn:hover { background: var(--accent); color: var(--cream); }
+
+/* Tarjetas de unidad: ficha limpia con acento al hover */
+.unit-card { border-radius: var(--radius-lg); border-bottom: var(--rule) solid transparent; }
+.unit-card:hover { border-bottom-color: var(--accent); }
+.unit-card__top { align-items: center; }
+.unit-card .area { font-size: 1.15rem; letter-spacing: -0.01em; }
+.unit-card__zoom { border-radius: 8px; }
+
+/* Locales: placa oscura con filo verde claro */
+.local-card { border-radius: var(--radius-lg); border-top: var(--rule) solid var(--accent-bright); }
+.plan-card { border-radius: var(--radius-lg); }
+.gallery-grid figure { border-radius: var(--radius); }
+
+/* Formulario */
+.contact-form { border-radius: var(--radius-lg); border-top: var(--rule) solid var(--accent); }
+.field input, .field select, .field textarea { border-radius: 6px; }
+.field input:focus, .field select:focus, .field textarea:focus { box-shadow: 0 0 0 4px rgba(70,89,44,0.14); }
+
+/* Accesibilidad: foco visible y movimiento reducido */
+.btn:focus-visible, .tab-btn:focus-visible, .nav a:focus-visible { outline: 2px solid var(--accent-bright); outline-offset: 3px; }
+@media (max-width: 760px) {
+  .hero__stats > * { padding: 16px 24px 0 0; margin-right: 24px; }
+  .tabs { width: 100%; }
+  .tab-btn { flex: 1; padding: 13px 12px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; }
+  .reveal { opacity: 1 !important; transform: none !important; }
 }
