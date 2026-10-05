@@ -210,7 +210,7 @@ ul { margin: 0; padding: 0; list-style: none; }
 @keyframes pulseDot { 0%,100% { opacity: 1; transform: scale(1); } 50% { opacity: .4; transform: scale(.8); } }
 
 .hero__title { font-size: clamp(2.6rem, 6.2vw, 5rem); color: var(--cream-00); margin: 0 0 18px; line-height: 1.02; }
-.hero__title .line { display: block; overflow: hidden; }
+.hero__title .line { display: block; overflow: hidden; line-height: 1.14; padding-bottom: 0.08em; margin-bottom: -0.08em; } /* aire para las colas (q, g, y) que el overflow recortaba */
 .hero__title .line > span { display: block; transform: translateY(110%); animation: lineUp 1.1s var(--ease) forwards; }
 .hero__title .line:nth-child(1) > span { animation-delay: .35s; }
 .hero__title .line:nth-child(2) > span { animation-delay: .47s; }
