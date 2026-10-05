@@ -40,10 +40,11 @@
   --glass-line: rgba(247, 242, 234, 0.18);
   --glass-line-2: rgba(247, 242, 234, 0.3);
 
-  /* Estados — todos dentro de la gama cálida */
-  --ok-bg: rgba(138, 110, 88, 0.14);     --ok-tx: #705644;
-  --res-bg: rgba(176, 142, 99, 0.2);     --res-tx: #8a6535;
-  --sold-bg: rgba(58, 44, 35, 0.12);     --sold-tx: #3a2c23;
+  /* Estados — disponible verde, reservado naranja, vendido rojo (únicos colores fuera de la gama cálida) */
+  --ok-bg: rgba(21, 128, 61, 0.12);      --ok-tx: #146c34;
+  --res-bg: rgba(234, 88, 12, 0.12);     --res-tx: #c2410c;
+  --sold-bg: rgba(220, 38, 38, 0.10);    --sold-tx: #b91c1c;
+  --ok-on-dark: #86efac;  --res-on-dark: #fdba74;  --sold-on-dark: #fca5a5;
 
   /* Cristal */
   --glass-dark: rgba(28, 21, 17, 0.55);
@@ -337,10 +338,12 @@ ul { margin: 0; padding: 0; list-style: none; }
 .unit-card .area { font-family: var(--ff-head); font-weight: 600; color: var(--choc-80); font-size: 1.08rem; white-space: nowrap; text-align: right; }
 .unit-card .area small { display: block; font-weight: 400; font-family: var(--ff-body); font-size: 0.66rem; color: var(--ink-3); text-transform: uppercase; letter-spacing: 0.06em; }
 
-.status { display: inline-block; font-size: 0.66rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; padding: 5px 13px; border-radius: 999px; }
+.status { display: inline-flex; align-items: center; gap: 7px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.09em; padding: 6px 14px 6px 12px; border-radius: 999px; line-height: 1; }
+.status::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: currentColor; flex: none; }
 .status--disponible { background: var(--ok-bg); color: var(--ok-tx); }
 .status--reservado { background: var(--res-bg); color: var(--res-tx); }
 .status--vendido { background: var(--sold-bg); color: var(--sold-tx); }
+.status--disponible::before { animation: pulseDot 2s infinite; }
 
 .unit-card__specs { display: flex; flex-wrap: wrap; gap: 8px 16px; margin-top: 15px; padding-top: 15px; border-top: 1px solid var(--line); }
 .unit-card__specs li { display: flex; align-items: center; gap: 7px; font-size: 0.81rem; color: var(--ink-2); }
@@ -357,7 +360,10 @@ ul { margin: 0; padding: 0; list-style: none; }
 .local-card__body { position: relative; z-index: 1; padding: 20px; background: linear-gradient(to top, rgba(20,14,10,0.94), transparent); }
 .local-card h4 { color: var(--cream-00); margin-bottom: 4px; font-size: 1rem; }
 .local-card .area { color: var(--on-dark-2); font-family: var(--ff-head); font-weight: 600; display: block; margin-bottom: 10px; }
-.local-card .status--disponible { background: rgba(253,251,248,0.16); color: var(--cream-00); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); }
+.local-card .status { background: rgba(20,14,10,0.6); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border: 1px solid var(--glass-line); }
+.local-card .status--disponible { color: var(--ok-on-dark); }
+.local-card .status--reservado { color: var(--res-on-dark); }
+.local-card .status--vendido { color: var(--sold-on-dark); }
 
 /* ---------- Plantas ---------- */
 .plans-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
@@ -521,3 +527,54 @@ ul { margin: 0; padding: 0; list-style: none; }
   .hero__title .line > span { transform: none !important; }
   .marquee__track { animation: none; }
 }
+
+/* ==========================================================================
+   IDENTIDAD ARCUS — "el arco": cabeceras en arco, cristal cálido y serif
+   itálica. Suave, hospitalario, de hotel boutique.
+   ========================================================================== */
+
+/* Cursiva elegante en los títulos de sección */
+.section-head h2 em, .head-split h2 em { font-style: italic; font-weight: 500; color: var(--cafe-70); }
+.section--cafe .section-head h2 em, .section--choc .section-head h2 em { color: var(--cream-20); }
+
+/* Motivo de arco sobre cada título centrado */
+.section-head::before {
+  content: ""; display: block; width: 34px; height: 20px; margin: 0 auto 22px;
+  border: 1.5px solid var(--cafe-60); border-bottom: 0; border-radius: 34px 34px 0 0;
+}
+.section--cafe .section-head::before, .section--choc .section-head::before { border-color: var(--cream-20); }
+
+/* Tarjetas de unidad: foto con cabecera en arco */
+.unit-card { border-radius: var(--r-lg); padding: 10px; background: var(--cream-00); }
+.unit-card__img { border-radius: 130px 130px 14px 14px / 80px 80px 14px 14px; aspect-ratio: 16/11; }
+.unit-card__body { padding: 20px 14px 14px; }
+.unit-card__specs { border-top-style: dashed; }
+.unit-card__zoom { top: 14px; right: 50%; margin-right: -18px; }
+
+/* Planos: misma cabecera en arco */
+.plan-card { padding: 10px; }
+.plan-card__img { border-radius: 14px 14px 10px 10px; }
+.plan-card__label { padding: 16px 12px 8px; }
+
+/* Pestañas de cristal */
+.tabs { background: rgba(216,204,189,0.5); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border: 1px solid var(--line); }
+.tab-btn.is-active { background: var(--choc-80); }
+
+/* Sobretítulo con arco en lugar de línea */
+.eyebrow::before { height: 9px; width: 16px; background: none; border: 1.5px solid currentColor; border-bottom: 0; border-radius: 16px 16px 0 0; }
+
+/* Amenidades: cristal con brillo superior */
+.amenity-card { position: relative; overflow: hidden; }
+.amenity-card::before { content: ""; position: absolute; inset: 0 0 auto 0; height: 1px; background: linear-gradient(90deg, transparent, rgba(253,251,248,0.55), transparent); }
+
+/* Insignias */
+.badge { border-radius: var(--r-lg); background: linear-gradient(160deg, var(--cream-00), var(--cream-10)); }
+.badge strong { font-style: italic; font-weight: 500; }
+.hero__stats strong { font-style: italic; font-weight: 500; }
+
+/* Locales: estado legible sobre el cristal oscuro */
+.local-card { border-radius: var(--r-lg); }
+.local-card .status { align-self: flex-start; }
+
+/* Foco visible */
+.tab-btn:focus-visible, .unit-card:focus-visible { outline: 2px solid var(--cafe-60); outline-offset: 3px; }
