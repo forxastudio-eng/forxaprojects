@@ -10,6 +10,7 @@ Supabase para todo:
 | `/admin/` | Panel de administración | Editor, administrador, marketing |
 | `/cotizador/` | Cotizador interno y su historial | Todo el equipo (historial: no asesores) |
 | `/marketing/` | Dashboard ejecutivo de marketing | Editor, administrador, marketing |
+| `/crm/` | CRM comercial con asistente de IA (se instala en el celular) | Todo el equipo (cada rol ve lo suyo) |
 
 ```
 forxa-plataforma/
@@ -17,8 +18,9 @@ forxa-plataforma/
 │   ├── index.html         landing principal
 │   ├── js/forxa-config.js ← URL y anon key de Supabase (un solo lugar)
 │   ├── css/  assets/      marca FORXA compartida
-│   ├── alabes/ arcus/ porton/ cotizador/ marketing/ admin/
-├── supabase/              SQL en orden 01 → 07 (no se publica)
+│   ├── alabes/ arcus/ porton/ cotizador/ marketing/ admin/ crm/
+├── supabase/              SQL en orden 01 → 11 (no se publica)
+│   └── functions/crm-ia/  asistente de IA del CRM (Edge Function)
 ├── scripts/               migración y cuentas (se ejecutan en tu PC)
 ├── redirecciones-sitios-viejos/
 └── netlify.toml
@@ -191,6 +193,66 @@ Revisa que `scripts/.env` **no** aparezca en GitHub.
 Sigue `redirecciones-sitios-viejos/LEEME.md` para que los sitios viejos
 redirijan a las direcciones nuevas. Déjalos redirigiendo unos meses, luego
 archiva esos repos y pausa (no borres) los Supabase viejos.
+
+---
+
+## CRM comercial con IA (`/crm/`)
+
+Un CRM propio sobre la misma cuenta, los mismos roles y la misma base de datos. Se instala en el
+celular como una app (PWA): en Android, menú del navegador → **Instalar app**; en iPhone, Safari →
+**Compartir → Agregar a pantalla de inicio**. En escritorio funciona igual, con menú lateral.
+
+**Qué hace**
+- **Captura automática de leads:** los formularios de las 4 landings guardan al cliente en el CRM
+  (además de abrir WhatsApp, como siempre). Si la misma persona vuelve a escribir, no se duplica: se
+  agrega a su historial. Un cliente que ya tiene asesor sigue con ese asesor.
+- **Hoy:** leads sin asignar, tareas pendientes/vencidas y leads sin movimiento.
+- **Embudo:** Nuevo → Contactado → Cita → Proforma → Reserva → Vendido / Perdido (con motivo).
+- **Ficha del cliente:** llamar, WhatsApp y correo en un toque; notas, tareas con fecha e historial.
+- **Asistente de IA (Claude):**
+  - *Analizar con IA:* resumen del lead, calificación (caliente/tibio/frío) y la siguiente acción.
+  - *Redactar mensaje:* borrador de WhatsApp o correo según el objetivo (primer contacto, seguimiento, cita, proforma…). El asesor lo revisa y lo envía.
+  - *Dictar o escribir una nota → «Ordenar con IA»:* la limpia, propone las tareas y, si corresponde, el cambio de etapa. **No guarda nada hasta que la persona confirma.**
+  - *Pestaña Asistente:* preguntas sobre el embudo («¿a quién llamo hoy?»), solo con los leads que esa persona puede ver.
+- **Métricas:** leads, ventas, conversión, embudo, fuentes y asesores (7, 30 o 90 días).
+- **Tiempo real:** un lead nuevo aparece solo en la app de quien está conectado.
+
+**Quién puede qué** (lo hace cumplir la base de datos, igual que el resto de la plataforma)
+
+| | Editor | Administrador | Marketing | Asesor |
+|---|:-:|:-:|:-:|:-:|
+| Ver leads | todos | todos | todos (solo lectura) | los suyos + los sin asignar |
+| Crear y editar leads | ✓ | ✓ | – | los suyos |
+| Asignar / reasignar | ✓ | ✓ | – | solo «tomar» uno sin dueño |
+| Eliminar | ✓ | – | – | – |
+| Usar la IA | ✓ | ✓ | solo preguntas del Asistente | ✓ |
+
+### Puesta en marcha del CRM (una sola vez)
+
+1. **Base de datos:** en el SQL Editor ejecuta `supabase/11_crm.sql` (seguro de repetir; no toca nada existente).
+2. **IA:** necesitas una API key de Anthropic (console.anthropic.com → API keys). Con la CLI de Supabase:
+   ```bash
+   supabase secrets set ANTHROPIC_API_KEY=sk-ant-... --project-ref nvbqfckuqpdjterypszb
+   supabase functions deploy crm-ia --project-ref nvbqfckuqpdjterypszb
+   ```
+   Opcionales: `CRM_IA_MODEL` (por defecto `claude-opus-5-5`; para gastar menos puedes usar `claude-sonnet-5-5`),
+   `CRM_IA_LIMITE_HORA` (consultas a la IA por persona y hora, por defecto 40) y
+   `CRM_ALLOWED_ORIGIN` (ej. `https://forxainmobiliaria.com`).
+   Sin la clave, el CRM funciona completo; solo los botones de IA avisan que aún no está configurada.
+3. **Publicar:** `git push` y Netlify publica `/crm/` solo.
+4. **Probar:** envía el formulario de una landing con tu teléfono y mira que el lead aparezca en el CRM.
+5. **Privacidad (LOPDP):** ahora los formularios guardan datos personales y la IA procesa texto de los
+   leads en los servidores de Anthropic. Pídele a tu asesor legal que revise `/privacidad/` (Panel → Textos
+   legales) para que lo mencione, junto con el plazo de conservación de los leads.
+
+### Límites actuales (siguientes pasos posibles)
+- **Notificaciones push** al celular aún no existen: la app avisa en pantalla mientras está abierta.
+  Se pueden agregar con Web Push (requiere una clave VAPID y otra Edge Function).
+- **WhatsApp** se maneja con botón: la IA redacta, el asesor envía desde su WhatsApp y el CRM registra el
+  envío. Leer y responder mensajes dentro del CRM requiere la API de WhatsApp Business (con costo).
+- **Cotizador:** la proforma se liga a mano (campo «N.º de proforma» en *Datos del lead*). Ligarla
+  automáticamente y mover la etapa a «Reserva» al reservar una unidad es la siguiente integración.
+- **Dashboard de marketing:** sigue siendo manual; las métricas del CRM pueden alimentarlo después.
 
 ---
 

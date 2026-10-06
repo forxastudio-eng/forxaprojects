@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>CRM · FORXA Inmobiliaria</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#1D62DB">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="FORXA CRM">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<link rel="manifest" href="/crm/manifest.webmanifest">
+<link rel="icon" type="image/png" href="/assets/brand/favicon-32.png">
+<link rel="apple-touch-icon" href="/crm/icons/apple-touch-icon.png">
+<link rel="stylesheet" href="/css/forxa-tokens.css">
+<link rel="stylesheet" href="/crm/crm.css">
+</head>
+<body>
+
+<!-- ============ Cargando ============ -->
+<div class="boot" id="boot" aria-live="polite">
+  <img src="/assets/brand/forxa-mark-white.png" alt="" width="500" height="773">
+  <span>Cargando CRM…</span>
+</div>
+
+<!-- ============ Acceso ============ -->
+<main class="auth" id="auth" hidden>
+  <form class="auth-card" id="login-form" novalidate>
+    <img class="auth-logo" src="/assets/brand/forxa-logo-horizontal.png" alt="FORXA Inmobiliaria" width="601" height="200">
+    <h1>CRM comercial</h1>
+    <p class="muted">Ingresa con tu correo de FORXA. Es la misma cuenta del panel y del cotizador.</p>
+    <div class="notice notice-error" id="login-error" role="alert" hidden></div>
+    <div class="notice" id="login-info" role="status" hidden></div>
+    <label class="fld"><span>Correo</span>
+      <input type="email" id="login-email" autocomplete="username" inputmode="email" required></label>
+    <label class="fld"><span>Contraseña</span>
+      <input type="password" id="login-password" autocomplete="current-password" required></label>
+    <button class="btn btn-primary btn-block" type="submit" id="login-btn">Entrar</button>
+    <button class="link-btn" type="button" id="forgot-btn">Olvidé mi contraseña</button>
+  </form>
+</main>
+
+<!-- ============ Aplicación ============ -->
+<div class="app" id="app" hidden>
+  <header class="top">
+    <a class="brand" href="/crm/" aria-label="FORXA CRM">
+      <img src="/assets/brand/forxa-mark-white.png" alt="" width="500" height="773">
+      <span><strong>FORXA</strong> CRM</span>
+    </a>
+    <h1 class="top-title" id="top-title">Hoy</h1>
+    <div class="top-actions">
+      <button class="icon-btn" id="btn-refresh" aria-label="Actualizar" title="Actualizar"></button>
+      <button class="icon-btn" id="btn-menu" aria-label="Cuenta" title="Cuenta"></button>
+    </div>
+  </header>
+
+  <div class="offline" id="offline" hidden>Sin conexión. Los cambios no se guardarán hasta que vuelvas a conectarte.</div>
+
+  <main class="view" id="view" tabindex="-1"></main>
+
+  <nav class="tabbar" id="tabbar" aria-label="Secciones"></nav>
+  <button class="fab" id="fab" aria-label="Nuevo lead" hidden></button>
+</div>
+
+<!-- Detalle de un lead (hoja a pantalla completa en celular, panel lateral en escritorio) -->
+<div class="sheet" id="sheet" hidden role="dialog" aria-modal="true" aria-label="Detalle del lead">
+  <div class="sheet-backdrop" data-action="cerrar-hoja"></div>
+  <div class="sheet-panel" id="sheet-panel"></div>
+</div>
+
+<!-- Diálogos (nuevo lead, mensaje con IA, cuenta…) -->
+<div class="modal" id="modal" hidden role="dialog" aria-modal="true">
+  <div class="modal-backdrop" data-action="cerrar-modal"></div>
+  <div class="modal-card" id="modal-card"></div>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+<script src="/js/forxa-config.js"></script>
+<script src="/crm/js/crm.js"></script>
+</body>
+</html>

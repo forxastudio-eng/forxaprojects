@@ -79,6 +79,7 @@
     projects.forEach(function (p) {
       var o = document.createElement("option");
       o.value = p.name; o.textContent = p.name;
+      o.dataset.slug = (window.FORXA_CRM && FORXA_CRM.slug(p.url)) || "";
       sel.appendChild(o);
     });
   }
@@ -111,12 +112,16 @@
   document.getElementById("contact-form").addEventListener("submit", function (e) {
     e.preventDefault();
     var nombre = document.getElementById("c-nombre").value.trim();
+    var telefono = document.getElementById("c-telefono").value.trim();
     var proyecto = document.getElementById("c-proyecto").value;
+    var opt = document.getElementById("c-proyecto").selectedOptions[0];
     var mensaje = document.getElementById("c-mensaje").value.trim();
     var err = document.getElementById("c-error");
     if (!nombre) { err.textContent = "Escribe tu nombre para continuar."; document.getElementById("c-nombre").focus(); return; }
+    if (telefono.replace(/\D/g, "").length < 9) { err.textContent = "Escribe tu teléfono o WhatsApp para que te contactemos."; document.getElementById("c-telefono").focus(); return; }
     err.textContent = "";
-    var text = "Hola FORXA, soy " + nombre + "." +
+    if (window.FORXA_CRM) FORXA_CRM.enviar({ nombre: nombre, telefono: telefono, proyecto: (opt && opt.dataset.slug) || "", interes: proyecto, mensaje: mensaje, origen: "home" });
+    var text = "Hola FORXA, soy " + nombre + "." + (telefono ? " Mi teléfono: " + telefono + "." : "") +
       (proyecto ? " Me interesa " + proyecto + "." : "") +
       (mensaje ? " " + mensaje : "");
     window.open("https://wa.me/" + ((window.CMS && CMS.whatsapp()) || WA) + "?text=" + encodeURIComponent(text), "_blank", "noopener");

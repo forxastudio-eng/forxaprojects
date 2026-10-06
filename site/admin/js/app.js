@@ -27,6 +27,9 @@
       { r: "inventario/cot_unidades", t: "Unidades del cotizador", i: "grid" },
       { r: "inventario/cot_extra", t: "Parqueos, bodegas y lotes", i: "grid" }
     ] },
+    { g: "CRM", items: [
+      { href: "/crm/", t: "Abrir CRM", i: "users" }
+    ] },
     { g: "Cotizador", items: [
       { href: "/cotizador/", t: "Abrir cotizador", i: "calc" },
       { href: "/cotizador/historial.html", t: "Historial y dashboard", i: "chart", perm: "historial" },
@@ -60,7 +63,7 @@
   function buildNav() {
     $("side-nav").innerHTML = NAV.map(function (grp) {
       var items = grp.items.filter(function (it) {
-        if (FX.state.soloCuenta) return it.r === "cuenta" || it.href === "/cotizador/";
+        if (FX.state.soloCuenta) return it.r === "cuenta" || it.href === "/cotizador/" || it.href === "/crm/";
         return !it.perm || FX.can(it.perm);
       });
       if (!items.length) return "";

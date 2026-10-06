@@ -71,6 +71,10 @@
           <input id="c-nombre" name="nombre" autocomplete="name" required>
         </div>
         <div class="field">
+          <label for="c-telefono" data-cms="contacto.campo-4" data-cms-label="Etiqueta del campo 4">Teléfono / WhatsApp</label>
+          <input id="c-telefono" name="telefono" type="tel" inputmode="tel" autocomplete="tel" placeholder="09XXXXXXXX" required>
+        </div>
+        <div class="field field-wide">
           <label for="c-proyecto" data-cms="contacto.campo-2" data-cms-label="Etiqueta del campo 2">Proyecto de interés</label>
           <select id="c-proyecto" name="proyecto">
             <option value="">Todavía no lo sé</option>
@@ -104,6 +108,7 @@
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
 <script src="/js/forxa-config.js"></script>
+<script src="/js/crm-lead.js"></script>
 <script src="/js/cms.js"></script>
 <script src="/js/home.js"></script>
 <script src="/js/consent.js" defer></script>

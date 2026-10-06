@@ -431,6 +431,8 @@ document.addEventListener("DOMContentLoaded", function () {
         return;
       }
 
+      if (window.FORXA_CRM) FORXA_CRM.enviar({ nombre: name, telefono: phone, correo: email, proyecto: "porton", interes: lote, mensaje: message });
+
       var text = "Hola, soy " + name + ". Me interesa el proyecto Portón del Valle";
       if (lote) text += " (interés: " + lote + ")";
       text += ". Teléfono: " + phone;

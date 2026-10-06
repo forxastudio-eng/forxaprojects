@@ -26,6 +26,22 @@
   [headers.values]
     X-Robots-Tag = "noindex, nofollow"
 
+[[headers]]
+  for = "/crm/*"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"
+
+# El service worker nunca debe quedar en caché (si no, las actualizaciones no llegan)
+[[headers]]
+  for = "/crm/sw.js"
+  [headers.values]
+    Cache-Control = "no-cache"
+    Service-Worker-Allowed = "/crm/"
+[[headers]]
+  for = "/crm/manifest.webmanifest"
+  [headers.values]
+    Content-Type = "application/manifest+json"
+
 # La configuración cambia al actualizar claves: que no quede en caché vieja
 [[headers]]
   for = "/js/forxa-config.js"

@@ -315,6 +315,8 @@ document.addEventListener("DOMContentLoaded", function () {
         return;
       }
 
+      if (window.FORXA_CRM) FORXA_CRM.enviar({ nombre: name, telefono: phone, correo: email, proyecto: "alabes", interes: unit, mensaje: message });
+
       var text = "Hola, soy " + name + ". Me interesa el proyecto Álabes";
       if (unit) text += " (interés: " + unit + ")";
       text += ". Teléfono: " + phone;
