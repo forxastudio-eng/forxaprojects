@@ -30,6 +30,7 @@ const ESTADO_LABEL = {
 async function signedMediaUrl(path, expiresInSeconds = 3600) {
   if (!path) return null;
   if (/^https?:\/\//.test(path)) return path; // ya es una URL absoluta (externa)
+  if (path.startsWith('/')) return path;      // archivo publicado con el sitio (site/…)
   const { data, error } = await supabaseClient
     .storage
     .from('cotizador-media')
