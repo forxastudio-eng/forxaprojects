@@ -7,7 +7,7 @@ window.VIEWS = (function () {
      Inventarios: una sola vista genérica configurada por proyecto.
      Para sumar un proyecto nuevo al panel basta con agregar una entrada.
      ================================================================= */
-  var KIND = { suite: "Suite / Depto", loft: "Loft", local: "Local comercial", isla: "Isla comercial" };
+  var KIND = { suite: "Suite / Depto", loft: "Loft", departamento: "Departamento", local: "Local comercial", isla: "Isla comercial" };
   function unitFields(kinds) {
     return [
       { k: "code", t: "Código", req: true, newOnly: true, hint: "Ej. A0, B12, LOFT-101. No se puede cambiar después." },
@@ -45,7 +45,7 @@ window.VIEWS = (function () {
     arcus: {
       label: "Arcus Suites & Lofts", table: "arcus_units", key: "code", col: "status",
       estados: ["disponible", "reservado", "vendido"], base: "/arcus/", prefix: "arcus/", site: "/arcus/",
-      editable: true, thumb: "thumb", cols: unitCols, fields: unitFields(["suite", "loft", "local", "isla"]), sort: byOrderThenCode("code")
+      editable: true, thumb: "thumb", cols: unitCols, fields: unitFields(["suite", "loft", "departamento", "local", "isla"]), sort: byOrderThenCode("code")
     },
     porton: {
       label: "Portón del Valle", table: "lots", key: "code", col: "status",

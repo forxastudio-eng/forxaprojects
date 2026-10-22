@@ -9,6 +9,7 @@
 --   Álabes : LOCAL01 → L01
 --   Arcus  : SUITE-102 → 102 · LOFT-101 → 101 · LOCAL-1 → 001 · ISLA-1 → I1
 --   Portón : A64 → A-64 (el cotizador a veces lleva guion)
+--   Variantes con parqueadero del cotizador (303-P1, 303-P2) siguen a su unidad.
 -- Estados: vendido → vendida; el resto se llama igual.
 -- Es seguro volver a ejecutarlo.
 -- ============================================================================
@@ -50,7 +51,10 @@ begin
        and (codigo = new.code or codigo = regexp_replace(new.code, '^([A-Za-z]+)(\d+)$', '\1-\2'));
   else
     update public.cotizador_unidades set estado = v_estado
-     where proyecto_id = v_proyecto and codigo = public.codigo_cotizador(v_proyecto, new.code);
+     where proyecto_id = v_proyecto
+       and (codigo = public.codigo_cotizador(v_proyecto, new.code)
+            -- variantes de la misma unidad con parqueadero (ej. 303-P1, 303-P2)
+            or codigo ~ ('^' || public.codigo_cotizador(v_proyecto, new.code) || '-P\d+$'));
   end if;
   return new;
 end;
