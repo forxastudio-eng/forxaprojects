@@ -40,7 +40,7 @@ document.addEventListener("DOMContentLoaded", function () {
     var thumb = esc(u.thumb || FALLBACK_PHOTO);
     var ficha = esc(u.ficha || u.thumb || FALLBACK_PHOTO);
     return (
-      '<article class="unit-card" data-ficha="' + ficha + '" data-title="' + esc(u.title) + ' · ' + esc(areaVal) + '">' +
+      '<article class="unit-card" data-ficha="' + ficha + '" data-title="' + esc(u.title) + ' · ' + esc(areaVal) + ' · ' + statusLabelFor(u.status) + '">' +
         '<div class="unit-card__img">' +
           '<img src="' + thumb + '" loading="lazy" alt="' + esc(u.title) + '" />' +
           '<span class="unit-card__zoom"><svg class="icon"><use href="#i-expand"></use></svg></span>' +
@@ -68,7 +68,7 @@ document.addEventListener("DOMContentLoaded", function () {
     var thumb = esc(u.thumb || FALLBACK_PHOTO);
     var ficha = esc(u.ficha || u.thumb || FALLBACK_PHOTO);
     return (
-      '<article class="local-card" data-ficha="' + ficha + '" data-title="' + esc(u.title) + ' · ' + esc(areaVal) + '">' +
+      '<article class="local-card" data-ficha="' + ficha + '" data-title="' + esc(u.title) + ' · ' + esc(areaVal) + ' · ' + statusLabelFor(u.status) + '">' +
         '<img src="' + thumb + '" loading="lazy" alt="' + esc(u.title) + '" />' +
         '<div class="local-card__body">' +
           '<h4>' + esc(u.title) + '</h4>' +
