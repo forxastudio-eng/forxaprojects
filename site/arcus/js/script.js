@@ -88,17 +88,21 @@ document.addEventListener("DOMContentLoaded", function () {
         var rows = res.data || [];
         var suites = rows.filter(function (u) { return u.kind === "suite"; });
         var lofts = rows.filter(function (u) { return u.kind === "loft"; });
+        var deptos = rows.filter(function (u) { return u.kind === "departamento"; });
         var comerciales = rows.filter(function (u) { return u.kind === "local" || u.kind === "isla"; });
 
         var gs = document.getElementById("grid-suites");
         if (gs) gs.innerHTML = suites.map(unitCardHTML).join("");
         var gl = document.getElementById("grid-lofts");
         if (gl) gl.innerHTML = lofts.map(unitCardHTML).join("");
+        var gd = document.getElementById("grid-deptos");
+        if (gd) gd.innerHTML = deptos.map(unitCardHTML).join("");
         var lc = document.getElementById("localesGrid");
         if (lc) lc.innerHTML = comerciales.map(localCardHTML).join("");
 
         var cs = document.getElementById("countSuites"); if (cs) cs.textContent = suites.length;
         var cl = document.getElementById("countLofts"); if (cl) cl.textContent = lofts.length;
+        var cd = document.getElementById("countDeptos"); if (cd) cd.textContent = deptos.length;
         var cc = document.getElementById("countLocales"); if (cc) cc.textContent = comerciales.length;
       })
       .catch(function (err) { console.error("No se pudieron cargar las unidades:", err); });

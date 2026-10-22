@@ -516,7 +516,7 @@ ul { margin: 0; padding: 0; list-style: none; }
   .scroll-cue { display: none; }
   .whatsapp-float { left: 16px; bottom: 16px; width: 52px; height: 52px; font-size: 1.45rem; }
   .tabs { width: 100%; }
-  .tab-btn { flex: 1; padding: 12px 14px; }
+  .tab-btn { flex: 1 1 auto; padding: 12px 8px; font-size: 0.8rem; white-space: nowrap; }
 }
 
 /* ---------- Accesibilidad: movimiento reducido ---------- */
