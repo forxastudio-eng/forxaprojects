@@ -7,7 +7,7 @@
 --
 -- Códigos que difieren entre ambos sistemas:
 --   Álabes : LOCAL01 → L01
---   Arcus  : SUITE-102 → 102 · LOFT-101 → 101 · LOCAL-1 → 001 · ISLA-1 → I1
+--   Arcus  : SUITE-102 → 102 · LOFT-101 → 101 · DEPTO-603 → 603 · LOCAL-1 → 001 · ISLA-1 → I1
 --   Portón : A64 → A-64 (el cotizador a veces lleva guion)
 --   Variantes con parqueadero del cotizador (303-P1, 303-P2) siguen a su unidad.
 -- Estados: vendido → vendida; el resto se llama igual.
@@ -19,7 +19,7 @@ returns text language sql immutable as $$
   select case p_proyecto
     when 'alabes' then case when p_code ~ '^LOCAL\d+$' then 'L' || substring(p_code from 6) else p_code end
     when 'arcus' then case
-      when p_code ~ '^(SUITE|LOFT)-\d+$' then substring(p_code from '\d+$')
+      when p_code ~ '^(SUITE|LOFT|DEPTO)-\d+$' then substring(p_code from '\d+$')
       when p_code ~ '^LOCAL-\d+$' then lpad(substring(p_code from '\d+$'), 3, '0')
       when p_code ~ '^ISLA-\d+$' then 'I' || substring(p_code from '\d+$')
       else p_code end
