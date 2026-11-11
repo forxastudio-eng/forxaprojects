@@ -687,6 +687,7 @@ window.VIEWS = (function () {
     { n: "Cotizador extra", t: "cotizador_inventario_extra", d: "Parqueos, bodegas y lotes" },
     { n: "Asesores", t: "cotizador_asesores", d: "Directorio de asesores" },
     { n: "Historial proformas", t: "cotizador_historial", d: "Todas las proformas generadas", perm: "historial", order: "created_at" },
+    { n: "Leads", t: "leads", d: "Contactos de los formularios de la web", perm: "leads", order: "created_at" },
     { n: "Actividad", t: "actividad", d: "Registro de cambios del panel", order: "created_at" },
     { n: "Usuarios y roles", t: "user_roles", d: "Correos y roles del equipo", perm: "usuarios" }
   ];
@@ -719,6 +720,72 @@ window.VIEWS = (function () {
       FX.exportXlsx(sheets, "forxa-plataforma-" + hoy + ".xlsx");
       b.disabled = false;
     };
+  }
+
+
+  /* ================================================================ Leads */
+  var LEAD_ESTADOS = { nuevo: "Nuevo", contactado: "Contactado", visita: "Visita agendada", cerrado: "Cerrado", descartado: "Descartado" };
+  var LEAD_PROY = { home: "Landing principal", alabes: "Álabes", arcus: "Arcus", porton: "Portón del Valle" };
+  async function leads(el) {
+    el.innerHTML = '<section class="panel">' +
+      '<div class="toolbar">' +
+        '<label class="search">' + icon("search") + '<input class="input" type="search" placeholder="Buscar nombre, teléfono o correo…" aria-label="Buscar" id="l-q"></label>' +
+        '<select class="input" id="l-proy" style="width:auto" aria-label="Proyecto"><option value="">Todos los proyectos</option>' +
+          Object.keys(LEAD_PROY).map(function (k) { return '<option value="' + k + '">' + esc(LEAD_PROY[k]) + "</option>"; }).join("") + "</select>" +
+        '<select class="input" id="l-est" style="width:auto" aria-label="Estado"><option value="">Todos los estados</option>' +
+          Object.keys(LEAD_ESTADOS).map(function (k) { return '<option value="' + k + '">' + esc(LEAD_ESTADOS[k]) + "</option>"; }).join("") + "</select>" +
+        '<span class="spacer"></span>' +
+        '<button class="btn btn-ghost btn-sm" id="l-xlsx">' + icon("download") + "Excel</button>" +
+      "</div>" +
+      '<p class="muted" id="l-resumen" style="margin:4px 0 12px"></p>' +
+      '<div class="table-wrap"><table class="data"><thead><tr><th>Fecha</th><th>Cliente</th><th>Proyecto</th><th>Pedido</th><th>Estado</th><th>Nota interna</th></tr></thead>' +
+      '<tbody id="l-body" aria-busy="true"><tr><td class="empty" colspan="6">Cargando…</td></tr></tbody></table></div></section>';
+    var body = el.querySelector("#l-body"), rows = [];
+    try { rows = await FX.fetchAll("leads", { order: "created_at", asc: false }); }
+    catch (err) { body.innerHTML = '<tr><td class="empty" colspan="6">' + esc(FX.errMsg(err)) + "</td></tr>"; return; }
+    body.removeAttribute("aria-busy");
+
+    function filtrados() {
+      var q = el.querySelector("#l-q").value.trim().toLowerCase(), pr = el.querySelector("#l-proy").value, es = el.querySelector("#l-est").value;
+      return rows.filter(function (r) {
+        return (!pr || r.proyecto === pr) && (!es || r.estado === es) &&
+          (!q || [r.nombre, r.telefono, r.email].join(" ").toLowerCase().indexOf(q) !== -1);
+      });
+    }
+    function pintar() {
+      var list = filtrados();
+      var nuevos = rows.filter(function (r) { return r.estado === "nuevo"; }).length;
+      el.querySelector("#l-resumen").textContent = list.length + " de " + rows.length + " leads · " + nuevos + " sin contactar";
+      body.innerHTML = list.length ? list.map(function (r) {
+        var tel = String(r.telefono || "").replace(/\D/g, "").replace(/^0/, "593");
+        var pedido = (r.tipo === "visita" ? "<strong>Visita " + esc(r.fecha_visita ? FX.fecha(r.fecha_visita + "T12:00:00") : "") + "</strong><br>" : "") +
+          esc(r.interes || "") + (r.mensaje ? '<br><span class="muted">' + esc(r.mensaje) + "</span>" : "");
+        return "<tr data-id=\"" + esc(r.id) + "\"><td>" + esc(FX.fecha(r.created_at, true)) + "</td>" +
+          "<td><strong>" + esc(r.nombre) + '</strong><br><a href="https://wa.me/' + esc(tel) + '" target="_blank" rel="noopener">' + esc(r.telefono) + "</a>" +
+            (r.email ? '<br><a href="mailto:' + esc(r.email) + '">' + esc(r.email) + "</a>" : "") + "</td>" +
+          "<td>" + esc(LEAD_PROY[r.proyecto] || r.proyecto) + "</td><td>" + pedido + "</td>" +
+          '<td><select class="input l-estado" aria-label="Estado del lead de ' + esc(r.nombre) + '">' +
+            Object.keys(LEAD_ESTADOS).map(function (k) { return '<option value="' + k + '"' + (r.estado === k ? " selected" : "") + ">" + esc(LEAD_ESTADOS[k]) + "</option>"; }).join("") + "</select></td>" +
+          '<td><input class="input l-nota" value="' + esc(r.nota || "") + '" placeholder="Ej. llamar el lunes" aria-label="Nota interna"></td></tr>';
+      }).join("") : '<tr><td class="empty" colspan="6">' + (rows.length ? "Ningún lead coincide con el filtro." : "Todavía no llegan leads desde los formularios.") + "</td></tr>";
+    }
+    async function guardar(tr, campo, valor) {
+      var r = rows.filter(function (x) { return x.id === tr.dataset.id; })[0]; if (!r) return;
+      var upd = {}; upd[campo] = valor;
+      var res = await sb.from("leads").update(upd).eq("id", r.id);
+      if (res.error) { FX.toast(FX.errMsg(res.error), true); return; }
+      r[campo] = valor; FX.toast("Lead actualizado");
+    }
+    el.addEventListener("change", function (e) {
+      var tr = e.target.closest("tr[data-id]"); if (!tr) return;
+      if (e.target.classList.contains("l-estado")) guardar(tr, "estado", e.target.value);
+      else if (e.target.classList.contains("l-nota")) guardar(tr, "nota", e.target.value.trim() || null);
+    });
+    ["#l-q", "#l-proy", "#l-est"].forEach(function (id) { el.querySelector(id).addEventListener("input", pintar); });
+    el.querySelector("#l-xlsx").onclick = function () {
+      FX.exportXlsx([{ name: "Leads", rows: filtrados() }], "forxa-leads-" + new Date().toISOString().slice(0, 10) + ".xlsx");
+    };
+    pintar();
   }
 
   /* ============================================================= Actividad */
@@ -754,6 +821,6 @@ window.VIEWS = (function () {
 
   return {
     INV: INV, escritorio: escritorio, inventario: inventario, portafolio: portafolio, slider: slider,
-    usuarios: usuarios, exportar: exportar, actividad: actividad, cuenta: cuenta
+    usuarios: usuarios, exportar: exportar, actividad: actividad, cuenta: cuenta, leads: leads
   };
 })();

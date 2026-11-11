@@ -15,7 +15,8 @@ window.FX = (function () {
     estado:    ["editor", "administrador"],
     historial: ["editor", "administrador", "marketing"],
     marketing: ["editor", "marketing"],
-    usuarios:  ["editor"]
+    usuarios:  ["editor"],
+    leads:     ["editor", "administrador", "marketing"]
   };
   function can(p) { return !!state.rol && (PERMISOS[p] || []).indexOf(state.rol) !== -1; }
 
@@ -34,6 +35,7 @@ window.FX = (function () {
 
   /* ------------------------------------------------------------ íconos */
   var P = {
+    inbox: '<path d="M3 13h5l2 3h4l2-3h5"/><path d="M5 5h14l2 8v6H3v-6z"/>',
     home: '<path d="M3 11.5 12 4l9 7.5"/><path d="M5 10v10h14V10"/><path d="M10 20v-6h4v6"/>',
     globe: '<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/>',
     image: '<rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="2"/><path d="m21 16-5-5-9 9"/>',
