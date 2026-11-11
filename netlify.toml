@@ -11,6 +11,12 @@
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "strict-origin-when-cross-origin"
     X-Frame-Options = "SAMEORIGIN"
+    Strict-Transport-Security = "max-age=31536000"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+    # CSP en modo ESTRICTO (probada sin violaciones en las 13 páginas el 11/11/2026).
+    # Scripts y conexiones solo a dominios conocidos: es lo que frena un robo de datos por XSS.
+    # Imágenes y video aceptan cualquier https porque el panel permite pegar URLs externas.
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline' cloud.umami.is cdn.jsdelivr.net cdnjs.cloudflare.com challenges.cloudflare.com; style-src 'self' 'unsafe-inline' fonts.googleapis.com cdnjs.cloudflare.com; font-src 'self' fonts.gstatic.com data:; img-src 'self' data: blob: https:; media-src 'self' blob: https:; connect-src 'self' https://cloud.umami.is https://api-gateway.umami.dev https://*.supabase.co wss://*.supabase.co; frame-src 'self' https://wa.me https://challenges.cloudflare.com; frame-ancestors 'self'; base-uri 'self'; form-action 'self' https://wa.me"
 
 # Zonas internas: fuera de los buscadores
 [[headers]]
@@ -25,6 +31,17 @@
   for = "/marketing/*"
   [headers.values]
     X-Robots-Tag = "noindex, nofollow"
+
+# Solo imágenes y assets se cachean 7 días. JS/CSS NO: no llevan hash y, si se cachearan,
+# el HTML nuevo se mezclaría con scripts viejos (Netlify los revalida con ETag, es barato).
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=604800, stale-while-revalidate=86400"
+[[headers]]
+  for = "/*/img/*"
+  [headers.values]
+    Cache-Control = "public, max-age=604800, stale-while-revalidate=86400"
 
 # La configuración cambia al actualizar claves: que no quede en caché vieja
 [[headers]]

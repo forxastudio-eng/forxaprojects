@@ -159,6 +159,7 @@ async function cargarHistorial() {
       ${puedeBorrar ? '<th class="col-check"><input type="checkbox" id="sel-todas" aria-label="Seleccionar todas"></th>' : ''}
       <th>Cliente</th><th>Proyecto</th><th>Unidad(es)</th><th>N.º proforma</th><th>Fecha</th>
       <th>Asesor</th><th>Precio final</th><th>Abono</th><th>Financiado</th><th>Cuota/mes</th>
+      <th><span class="sr-only">Duplicar</span></th>
       ${puedeBorrar ? '<th class="col-accion"><span class="sr-only">Eliminar</span></th>' : ''}
     </tr></thead><tbody>${filas.map(f => filaHTML(f, puedeBorrar)).join('')}</tbody></table>`;
     if (puedeBorrar) wireBorrado(list);
@@ -224,11 +225,6 @@ async function borrarProformas(ids) {
   await cargarHistorial();
 }
 
-// Evita que un nombre con "<" o comillas rompa la tabla.
-function escHTML(v) {
-  return String(v == null ? '' : v).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
-}
-
 function filaHTML(f, puedeBorrar) {
   const fecha = f.created_at ? new Date(f.created_at).toLocaleDateString('es-EC', { day: '2-digit', month: '2-digit', year: 'numeric' }) : '—';
   const unidades = Array.isArray(f.unidades) ? f.unidades.map(u => u.nombre || u.codigo).join(', ') : '';
@@ -244,6 +240,7 @@ function filaHTML(f, puedeBorrar) {
     <td>${fmtMoney(f.abono_total)}</td>
     <td>${fmtMoney(f.monto_financiado)}</td>
     <td>${f.cuota_mensual ? fmtMoney(f.cuota_mensual) : '—'}</td>
+    <td><a class="btn btn-ghost btn-sm" href="cotizador.html?proyecto=${encodeURIComponent(f.proyecto_id)}&amp;duplicar=${encodeURIComponent(f.id)}" aria-label="Duplicar ${escHTML(f.numero_proforma)}">Duplicar</a></td>
     ${puedeBorrar ? `<td class="col-accion"><button type="button" class="btn-borrar" data-borrar="${escHTML(f.id)}" title="Eliminar proforma" aria-label="Eliminar ${escHTML(f.numero_proforma)}"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3"/></svg></button></td>` : ''}
   </tr>`;
 }

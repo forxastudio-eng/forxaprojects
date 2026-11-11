@@ -71,7 +71,7 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-img { max-width: 100%; display: block; }
+img { max-width: 100%; height: auto; display: block; }
 
 .icon { width: 1em; height: 1em; display: inline-block; vertical-align: -0.14em; flex: none; }
 
@@ -706,3 +706,21 @@ h1, h2, h3, h4 { letter-spacing: -0.015em; }
   *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; }
   .reveal { opacity: 1 !important; transform: none !important; }
 }
+
+/* Foco visible en campos (WCAG 2.4.7): sustituye al outline:none de :focus */
+.field input:focus-visible, .field select:focus-visible, .field textarea:focus-visible { outline: 2px solid var(--accent-bright); outline-offset: 2px; }
+
+/* Móvil: cifras en cuadrícula 2×2 sin bordes descuadrados, y un solo CTA de WhatsApp (queda el flotante) */
+@media (max-width: 700px) {
+  .hero__stats { display: grid; grid-template-columns: 1fr 1fr; gap: 0; }
+  .hero__stats > * { margin-right: 0; padding: 16px 12px 16px 0; border-right: 0; }
+  .hero__cta .btn--whatsapp, .hero__cta .btn--primary[href*="wa.me"] { display: none; }
+}
+
+/* "Quedan N" en pestañas y locales (js/quedan.js) */
+.quedan{display:inline-block;margin-left:8px;padding:2px 8px;border-radius:999px;font-size:.72em;font-weight:600;letter-spacing:.02em;background:var(--status-ok-bg, rgba(21,128,61,.12));color:var(--status-ok-text, #146c34);vertical-align:middle}
+.quedan.is-low{background:var(--status-reserved-bg, rgba(234,88,12,.12));color:var(--status-reserved-text, #c2410c)}
+.quedan-row{margin:0 0 14px}
+.quedan-row .quedan{margin-left:0;font-size:.85rem}
+.tab-btn.is-active .quedan{background:rgba(255,255,255,.92)}
+@media (max-width: 600px){.tab-btn .quedan:not(.is-low){display:none}.tab-btn .quedan{margin-left:4px}}

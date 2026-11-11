@@ -1,0 +1,6 @@
+User-agent: *
+Disallow: /admin/
+Disallow: /cotizador/
+Disallow: /marketing/
+
+Sitemap: https://forxainmobiliaria.com/sitemap.xml

@@ -104,6 +104,7 @@ document.addEventListener("DOMContentLoaded", function () {
         var cl = document.getElementById("countLofts"); if (cl) cl.textContent = lofts.length;
         var cd = document.getElementById("countDeptos"); if (cd) cd.textContent = deptos.length;
         var cc = document.getElementById("countLocales"); if (cc) cc.textContent = comerciales.length;
+        if (window.FORXA_QUEDAN) FORXA_QUEDAN();
       })
       .catch(function (err) { console.error("No se pudieron cargar las unidades:", err); });
   }
@@ -328,6 +329,9 @@ document.addEventListener("DOMContentLoaded", function () {
       text += ". Teléfono: " + phone;
       if (email) text += ". Correo: " + email;
       if (message) text += ". Mensaje: " + message;
+      var visit = (form.querySelector("#visit") || {}).value || "";
+      if (visit) text += ". Me gustaría visitar el proyecto el " + visit.split("-").reverse().join("/");
+      if (window.FORXA_LEAD) FORXA_LEAD.send(form, { proyecto: "arcus", nombre: name, telefono: phone, email: email, interes: unit, mensaje: message, fecha_visita: visit });
 
       openWhatsApp("https://wa.me/" + ((window.CMS && CMS.whatsapp()) || WHATSAPP_NUMBER) + "?text=" + encodeURIComponent(text));
       formStatus.textContent = "¡Listo! Te llevamos a WhatsApp para enviar tu consulta.";

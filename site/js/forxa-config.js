@@ -13,5 +13,7 @@ window.FORXA_CONFIG = {
   SUPABASE_URL: SUPABASE_URL,
   SUPABASE_ANON_KEY: SUPABASE_ANON_KEY,
   WHATSAPP: "593939087030",
-  LOGIN_URL: "/admin/"
+  LOGIN_URL: "/admin/",
+  // Cloudflare Turnstile (anti-spam de formularios). Pública por diseño; la secreta vive en Supabase.
+  TURNSTILE_SITE_KEY: "0x4AAAAAAF9N35f0Tvgwk5FV"
 };

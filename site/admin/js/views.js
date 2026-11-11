@@ -552,9 +552,16 @@ window.VIEWS = (function () {
   // Contraseña legible (sin 0/O ni 1/l), 12 caracteres.
   function generarClave() {
     var abc = "ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnpqrstuvwxyz23456789";
-    var r = new Uint8Array(12); crypto.getRandomValues(r);
-    return Array.prototype.map.call(r, function (x) { return abc[x % abc.length]; }).join("");
+    var c;
+    do { // Supabase exige mayúscula, minúscula y número
+      var r = new Uint8Array(12); crypto.getRandomValues(r);
+      c = Array.prototype.map.call(r, function (x) { return abc[x % abc.length]; }).join("");
+    } while (!claveValida(c));
+    return c;
   }
+  // Misma regla que Authentication → Email en Supabase: 10+ caracteres con mayúscula, minúscula y número.
+  function claveValida(c) { return c.length >= 10 && /[a-z]/.test(c) && /[A-Z]/.test(c) && /\d/.test(c); }
+  var REGLA_CLAVE = "Mínimo 10 caracteres, con mayúsculas, minúsculas y números.";
   async function llamarAdminUsuarios(body) {
     var res = await sb.functions.invoke("admin-usuarios", { body: body });
     if (res.error) {
@@ -616,14 +623,14 @@ window.VIEWS = (function () {
             ? "Se crea la cuenta con esta contraseña. Entrégala por un canal privado y pide que la cambie en Mi cuenta."
             : "La contraseña anterior deja de funcionar de inmediato. Entrégala por un canal privado y pide que la cambie en Mi cuenta.") + "</p>" +
           '<label class="fld"><span>Contraseña</span>' +
-          '<div style="display:flex;gap:8px"><input class="input" id="np" minlength="8" autocomplete="off" spellcheck="false" style="font-family:ui-monospace,Menlo,monospace;letter-spacing:.04em" value="' + generarClave() + '">' +
+          '<div style="display:flex;gap:8px"><input class="input" id="np" minlength="10" autocomplete="off" spellcheck="false" style="font-family:ui-monospace,Menlo,monospace;letter-spacing:.04em" value="' + generarClave() + '">' +
           '<button type="button" class="btn btn-ghost btn-sm" id="np-gen">Generar otra</button></div>' +
-          "<small>Mínimo 8 caracteres. Puedes escribir una propia.</small></label>",
+          "<small>" + REGLA_CLAVE + " Puedes escribir una propia.</small></label>",
         actions: [{ label: "Cancelar", value: "cancel" }, { label: nueva ? "Crear cuenta" : "Asignar contraseña", value: "ok", cls: "btn-primary" }],
         onOpen: function (f) { f.querySelector("#np-gen").onclick = function () { f.querySelector("#np").value = generarClave(); }; },
         onSubmit: async function (f) {
           var pass = f.querySelector("#np").value.trim();
-          if (pass.length < 8) { FX.toast("La contraseña debe tener al menos 8 caracteres.", true); return false; }
+          if (!claveValida(pass)) { FX.toast(REGLA_CLAVE, true); return false; }
           try {
             await llamarAdminUsuarios({ accion: "asignar_password", email: u.email, password: pass });
           } catch (e) { FX.toast(e.message, true); return false; }
@@ -687,6 +694,7 @@ window.VIEWS = (function () {
     { n: "Cotizador extra", t: "cotizador_inventario_extra", d: "Parqueos, bodegas y lotes" },
     { n: "Asesores", t: "cotizador_asesores", d: "Directorio de asesores" },
     { n: "Historial proformas", t: "cotizador_historial", d: "Todas las proformas generadas", perm: "historial", order: "created_at" },
+    { n: "Leads", t: "leads", d: "Contactos de los formularios de la web", perm: "leads", order: "created_at" },
     { n: "Actividad", t: "actividad", d: "Registro de cambios del panel", order: "created_at" },
     { n: "Usuarios y roles", t: "user_roles", d: "Correos y roles del equipo", perm: "usuarios" }
   ];
@@ -721,6 +729,72 @@ window.VIEWS = (function () {
     };
   }
 
+
+  /* ================================================================ Leads */
+  var LEAD_ESTADOS = { nuevo: "Nuevo", contactado: "Contactado", visita: "Visita agendada", cerrado: "Cerrado", descartado: "Descartado" };
+  var LEAD_PROY = { home: "Landing principal", alabes: "Álabes", arcus: "Arcus", porton: "Portón del Valle" };
+  async function leads(el) {
+    el.innerHTML = '<section class="panel">' +
+      '<div class="toolbar">' +
+        '<label class="search">' + icon("search") + '<input class="input" type="search" placeholder="Buscar nombre, teléfono o correo…" aria-label="Buscar" id="l-q"></label>' +
+        '<select class="input" id="l-proy" style="width:auto" aria-label="Proyecto"><option value="">Todos los proyectos</option>' +
+          Object.keys(LEAD_PROY).map(function (k) { return '<option value="' + k + '">' + esc(LEAD_PROY[k]) + "</option>"; }).join("") + "</select>" +
+        '<select class="input" id="l-est" style="width:auto" aria-label="Estado"><option value="">Todos los estados</option>' +
+          Object.keys(LEAD_ESTADOS).map(function (k) { return '<option value="' + k + '">' + esc(LEAD_ESTADOS[k]) + "</option>"; }).join("") + "</select>" +
+        '<span class="spacer"></span>' +
+        '<button class="btn btn-ghost btn-sm" id="l-xlsx">' + icon("download") + "Excel</button>" +
+      "</div>" +
+      '<p class="muted" id="l-resumen" style="margin:4px 0 12px"></p>' +
+      '<div class="table-wrap"><table class="data"><thead><tr><th>Fecha</th><th>Cliente</th><th>Proyecto</th><th>Pedido</th><th>Estado</th><th>Nota interna</th></tr></thead>' +
+      '<tbody id="l-body" aria-busy="true"><tr><td class="empty" colspan="6">Cargando…</td></tr></tbody></table></div></section>';
+    var body = el.querySelector("#l-body"), rows = [];
+    try { rows = await FX.fetchAll("leads", { order: "created_at", asc: false }); }
+    catch (err) { body.innerHTML = '<tr><td class="empty" colspan="6">' + esc(FX.errMsg(err)) + "</td></tr>"; return; }
+    body.removeAttribute("aria-busy");
+
+    function filtrados() {
+      var q = el.querySelector("#l-q").value.trim().toLowerCase(), pr = el.querySelector("#l-proy").value, es = el.querySelector("#l-est").value;
+      return rows.filter(function (r) {
+        return (!pr || r.proyecto === pr) && (!es || r.estado === es) &&
+          (!q || [r.nombre, r.telefono, r.email].join(" ").toLowerCase().indexOf(q) !== -1);
+      });
+    }
+    function pintar() {
+      var list = filtrados();
+      var nuevos = rows.filter(function (r) { return r.estado === "nuevo"; }).length;
+      el.querySelector("#l-resumen").textContent = list.length + " de " + rows.length + " leads · " + nuevos + " sin contactar";
+      body.innerHTML = list.length ? list.map(function (r) {
+        var tel = String(r.telefono || "").replace(/\D/g, "").replace(/^0/, "593");
+        var pedido = (r.tipo === "visita" ? "<strong>Visita " + esc(r.fecha_visita ? FX.fecha(r.fecha_visita + "T12:00:00") : "") + "</strong><br>" : "") +
+          esc(r.interes || "") + (r.mensaje ? '<br><span class="muted">' + esc(r.mensaje) + "</span>" : "");
+        return "<tr data-id=\"" + esc(r.id) + "\"><td>" + esc(FX.fecha(r.created_at, true)) + "</td>" +
+          "<td><strong>" + esc(r.nombre) + '</strong><br><a href="https://wa.me/' + esc(tel) + '" target="_blank" rel="noopener">' + esc(r.telefono) + "</a>" +
+            (r.email ? '<br><a href="mailto:' + esc(r.email) + '">' + esc(r.email) + "</a>" : "") + "</td>" +
+          "<td>" + esc(LEAD_PROY[r.proyecto] || r.proyecto) + "</td><td>" + pedido + "</td>" +
+          '<td><select class="input l-estado" aria-label="Estado del lead de ' + esc(r.nombre) + '">' +
+            Object.keys(LEAD_ESTADOS).map(function (k) { return '<option value="' + k + '"' + (r.estado === k ? " selected" : "") + ">" + esc(LEAD_ESTADOS[k]) + "</option>"; }).join("") + "</select></td>" +
+          '<td><input class="input l-nota" value="' + esc(r.nota || "") + '" placeholder="Ej. llamar el lunes" aria-label="Nota interna"></td></tr>';
+      }).join("") : '<tr><td class="empty" colspan="6">' + (rows.length ? "Ningún lead coincide con el filtro." : "Todavía no llegan leads desde los formularios.") + "</td></tr>";
+    }
+    async function guardar(tr, campo, valor) {
+      var r = rows.filter(function (x) { return x.id === tr.dataset.id; })[0]; if (!r) return;
+      var upd = {}; upd[campo] = valor;
+      var res = await sb.from("leads").update(upd).eq("id", r.id);
+      if (res.error) { FX.toast(FX.errMsg(res.error), true); return; }
+      r[campo] = valor; FX.toast("Lead actualizado");
+    }
+    el.addEventListener("change", function (e) {
+      var tr = e.target.closest("tr[data-id]"); if (!tr) return;
+      if (e.target.classList.contains("l-estado")) guardar(tr, "estado", e.target.value);
+      else if (e.target.classList.contains("l-nota")) guardar(tr, "nota", e.target.value.trim() || null);
+    });
+    ["#l-q", "#l-proy", "#l-est"].forEach(function (id) { el.querySelector(id).addEventListener("input", pintar); });
+    el.querySelector("#l-xlsx").onclick = function () {
+      FX.exportXlsx([{ name: "Leads", rows: filtrados() }], "forxa-leads-" + new Date().toISOString().slice(0, 10) + ".xlsx");
+    };
+    pintar();
+  }
+
   /* ============================================================= Actividad */
   async function actividad(el) {
     el.innerHTML = '<section class="panel"><div class="panel-head"><div><h2>Actividad</h2><p>Últimos 300 cambios: estados de unidades, ediciones y roles.</p></div></div><div class="table-wrap"><table class="data"><thead><tr><th>Fecha</th><th>Persona</th><th>Acción</th><th>Detalle</th></tr></thead><tbody id="a-body"><tr><td class="empty" colspan="4">Cargando…</td></tr></tbody></table></div></section>';
@@ -738,14 +812,17 @@ window.VIEWS = (function () {
     var r = FX.ROLES[FX.state.rol] || {};
     el.innerHTML = '<div class="grid-2"><section class="panel"><div class="panel-head"><h2>Mi cuenta</h2></div><dl class="kv"><dt>Correo</dt><dd>' + esc(FX.state.user.email) + "</dd><dt>Rol</dt><dd>" + esc(r.label) + '</dd></dl><p class="muted" style="margin-top:12px">' + esc(r.desc) + "</p></section>" +
       '<section class="panel"><div class="panel-head"><h2>Cambiar contraseña</h2></div><form id="pw-form" style="display:flex;flex-direction:column;gap:12px">' +
-      '<label class="fld"><span>Nueva contraseña</span><input type="password" id="pw1" minlength="8" autocomplete="new-password" required><small>Mínimo 8 caracteres.</small></label>' +
-      '<label class="fld"><span>Repite la contraseña</span><input type="password" id="pw2" minlength="8" autocomplete="new-password" required></label>' +
+      '<label class="fld"><span>Nueva contraseña</span><input type="password" id="pw1" minlength="10" autocomplete="new-password" required><small>' + esc(REGLA_CLAVE) + '</small></label>' +
+      '<label class="fld"><span>Repite la contraseña</span><input type="password" id="pw2" minlength="10" autocomplete="new-password" required></label>' +
       '<button class="btn btn-primary" type="submit" style="align-self:flex-start">Guardar contraseña</button></form>' +
-      '<p class="muted" style="margin-top:14px;font-size:14px">Si olvidas tu contraseña, pide al editor que te asigne una nueva.</p></section></div>';
+      '<p class="muted" style="margin-top:14px;font-size:14px">Si olvidas tu contraseña, pide al editor que te asigne una nueva.</p></section>' +
+      '<section class="panel"><div class="panel-head"><h2>Verificación en dos pasos</h2></div><div id="mfa-box"></div></section></div>';
+    if (window.FORXA_MFA) FORXA_MFA.cuenta(el.querySelector("#mfa-box"), sb);
     el.querySelector("#pw-form").addEventListener("submit", async function (e) {
       e.preventDefault();
       var a = el.querySelector("#pw1").value, b = el.querySelector("#pw2").value;
       if (a !== b) { FX.toast("Las contraseñas no coinciden.", true); return; }
+      if (!claveValida(a)) { FX.toast(REGLA_CLAVE, true); return; }
       var res = await sb.auth.updateUser({ password: a });
       if (res.error) { FX.toast(FX.errMsg(res.error), true); return; }
       e.target.reset(); FX.toast("Contraseña actualizada");
@@ -754,6 +831,6 @@ window.VIEWS = (function () {
 
   return {
     INV: INV, escritorio: escritorio, inventario: inventario, portafolio: portafolio, slider: slider,
-    usuarios: usuarios, exportar: exportar, actividad: actividad, cuenta: cuenta
+    usuarios: usuarios, exportar: exportar, actividad: actividad, cuenta: cuenta, leads: leads
   };
 })();

@@ -6,6 +6,7 @@
 
   var NAV = [
     { items: [{ r: "escritorio", t: "Escritorio", i: "home" }] },
+    { g: "Ventas", items: [{ r: "leads", t: "Leads de la web", i: "inbox", perm: "leads" }] },
     { g: "Landings", items: [
       { r: "sitio/home", t: "Landing principal", i: "layout" },
       { r: "sitio/alabes", t: "Álabes", i: "layout" },
@@ -50,6 +51,7 @@
     escritorio: { t: "Escritorio", fn: VIEWS.escritorio },
     portafolio: { t: "Portafolio de proyectos", g: "Sitio web", fn: VIEWS.portafolio },
     slider: { t: "Slider de Portón del Valle", g: "Sitio web", fn: VIEWS.slider },
+    leads: { t: "Leads de la web", g: "Ventas", fn: VIEWS.leads, perm: "leads" },
     exportar: { t: "Descargar tablas", g: "Datos", fn: VIEWS.exportar },
     actividad: { t: "Actividad", g: "Datos", fn: VIEWS.actividad },
     usuarios: { t: "Usuarios y roles", g: "Cuenta", fn: VIEWS.usuarios, perm: "usuarios" },
@@ -138,6 +140,7 @@
   }
 
   async function entrar(user) {
+    if (window.FORXA_MFA && !(await FORXA_MFA.asegurar(sb))) { show("auth"); loginMsg("Necesitas el código de verificación para entrar.", true); return; }
     FX.state.user = user;
     var r = await sb.rpc("mi_rol");
     FX.state.rol = r.error ? null : r.data;

@@ -1,8 +1,8 @@
 /* FORXA · Consentimiento de cookies (banner + preferencias).
    - Muestra el aviso la primera vez (y cada 12 meses o si cambia la versión).
    - Categorías: necesarias (siempre activas), analítica y marketing.
-     Hoy el sitio NO usa analítica ni marketing; las categorías existen para
-     que, si se activan después, solo se carguen con permiso de la persona.
+     Analítica: Umami (sin cookies), solo con permiso. Marketing: hoy no se usa;
+     la categoría existe para cargar scripts solo con permiso de la persona.
    - Cualquier script de terceros debe declararse así y NO se ejecuta hasta
      que se acepte su categoría:
          <script type="text/plain" data-consent="analytics" src="…"></script>
@@ -124,7 +124,7 @@
       '<button type="button" class="cc-x" data-a="close" aria-label="Cerrar">' + CLOSE + '</button></div>' +
       '<div class="cc-dialog__body">' +
         cat("necessary", "Necesarias", "Guardan tu elección sobre cookies y la última versión del contenido para que el sitio cargue rápido. No se pueden desactivar.", true, true) +
-        cat("analytics", "Analítica", "Nos ayudarían a entender cómo se usa el sitio para mejorarlo. <strong>Hoy no usamos ninguna.</strong>", cur.analytics, false) +
+        cat("analytics", "Analítica", "Medición anónima de visitas con Umami, sin cookies ni datos personales, para mejorar el sitio. <strong>Solo se carga si la aceptas.</strong>", cur.analytics, false) +
         cat("marketing", "Marketing", "Permitirían medir y mostrar publicidad de nuestros proyectos. <strong>Hoy no usamos ninguna.</strong>", cur.marketing, false) +
       '</div>' +
       '<p class="cc-dialog__links">Detalles en la <a href="/cookies/">Política de cookies</a> y la <a href="/privacidad/">Política de privacidad</a>.</p>' +

@@ -164,54 +164,55 @@ Modo *impeccable*: las landings y la home son **Persuade** (el visitante decide 
 Cada fase va en **su propio PR**, se revisa en el *deploy preview* de Netlify y se puede revertir con un clic (revertir el PR). No se cambian URLs ni el esquema de datos, salvo agregar.
 
 ### Fase 0 · Hoy, sin código (30 minutos)
-- [ ] Hacer merge del PR #8 (15 Patios) y probar una proforma de 15 Patios.
+- [x] Hacer merge del PR #8 (15 Patios) y probar una proforma de 15 Patios.
 - [ ] Confirmar las contraseñas cambiadas y ejecutar `drop table migracion.credenciales_iniciales;` (S1).
 - [ ] Activar *Leaked password protection* (S2) y confirmar *Allow new users to sign up* = OFF (S3).
 - [ ] Ejecutar `supabase/15_15patios_contado_simulacion.sql` (15 Patios es de contado) y confirmar el estado de la Vivienda 3.
 
 ### Fase 1 · Ganancias rápidas de bajo riesgo (1–2 días)
 **Seguridad**
-- [ ] `netlify.toml`:
+- [x] `netlify.toml`:
   - HSTS y `Permissions-Policy: camera=(), microphone=(), geolocation=()`.
   - **CSP en modo `Report-Only`** (S4).
   - `Cache-Control` para assets (R4).
-- [ ] Fijar `supabase-js` a una versión exacta con SRI en las 5 páginas (S5).
+- [x] Fijar `supabase-js` a una versión exacta con SRI en las 5 páginas (S5).
 - [ ] `supabase/16_endurecimiento.sql`:
   - `revoke execute` a `anon` (S6) y `revoke all` de tablas internas a `anon` (S7).
   - `search_path` (S8) y límites de buckets (S9).
   - Índices FK y `(select auth.uid())` en las 3 políticas (R9).
   - Fusionar las políticas duplicadas.
-- [ ] Volver a correr los asesores de Supabase y dejar seguridad en 0 WARN.
+- [x] Volver a correr los asesores de Supabase: quedan solo los WARN esperados (4 funciones SECURITY DEFINER que el equipo usa con sesión) y *Leaked password protection*, que se activa a mano.
 
 **Rendimiento**
-- [ ] `loading="lazy" decoding="async"` y `width`/`height` en todas las imágenes bajo la primera pantalla de Álabes, Portón y Arcus (R2), y `fetchpriority="high"` en el hero.
-- [ ] Quitar el `<source>` roto de Arcus (R7).
-- [ ] Pasar las fuentes de `@import` a `<link>` con `preconnect` y quitar las familias que no se usan del cotizador (R5).
-- [ ] Firmar las URLs en lote en el cotizador (R8).
+- [x] `loading="lazy" decoding="async"` y `width`/`height` en todas las imágenes bajo la primera pantalla de Álabes, Portón y Arcus (R2), y `fetchpriority="high"` en el hero.
+- [x] Quitar el `<source>` roto de Arcus (R7).
+- [x] Pasar las fuentes de `@import` a `<link>` con `preconnect` y quitar las familias que no se usan del cotizador (R5).
+- [x] Firmar las URLs en lote en el cotizador (R8).
 
 **Verificación:** las mismas mediciones de la sección 3 antes y después; login con cada rol; generar y borrar una proforma; cambiar un estado desde el panel y comprobar que se refleja en la landing y en el cotizador.
 
 ### Fase 2 · Imágenes, video, SEO y accesibilidad (≈ 1 semana)
 - [ ] `scripts/optimizar-imagenes.mjs` (`sharp`): genera `.avif` y `.webp` en 640, 1280 y 1920 junto al original, **sin renombrar ni borrar nada**. Con el script se actualizan las páginas a `<picture>` con `srcset`/`sizes` (R1).
-- [ ] Mismo tratamiento para las imágenes que sube el editor:
+- [x] Mismo tratamiento para las imágenes que sube el editor:
   - Al subir desde el panel, el navegador redimensiona a un máximo de 2000 px y convierte a WebP antes de enviar (canvas, sin servidor).
   - Las imágenes ya subidas en Storage se pueden pedir redimensionadas con las *Image Transformations* de Supabase si el plan lo incluye. Si no, se reprocesan una vez con el script.
-- [ ] Video de Portón:
+- [x] Video de Portón:
   - Recomprimir a 720p y unos 1,5 MB.
   - En móvil y con `Save-Data`, solo el póster.
   - Pausar fuera de pantalla con `IntersectionObserver` y añadir un botón de pausa (R3).
-- [ ] SEO y compartir:
+- [x] SEO y compartir:
   - `og:*` y `twitter:*` con foto en cada landing y en la home.
   - JSON-LD (`RealEstateAgent` en la home y `Residence`/`Offer` por proyecto).
   - `robots.txt` (que excluya `/admin/`, `/cotizador/` y `/marketing/`) y `sitemap.xml`.
-- [ ] Accesibilidad:
+- [x] Accesibilidad:
   - `:focus-visible` con anillo de 2 px en todos los inputs.
   - Revisar el contraste de los textos sobre fotos (scrim mínimo).
   - Objetivos táctiles de 44 px en móvil.
-- [ ] Arreglos de diseño responsive: grilla de cifras de Álabes, un solo CTA de WhatsApp en el hero móvil y la navegación de Arcus agrupada.
-- [ ] Un `esc()` compartido para todo texto de la base, y *allowlist* en el CMS (S10).
+- [~] Arreglos de diseño responsive: grilla de cifras de Álabes, un solo CTA de WhatsApp en el hero móvil y la navegación de Arcus agrupada.
+- [x] Un `esc()` compartido para todo texto de la base, y *allowlist* en el CMS (S10).
 
 ### Fase 3 · Nueva funcionalidad sobre la base existente (2–3 semanas)
+> **Estado (11/11/2026, rama `claude/lucid-curie-kfbacv`):** hecho → home con fotos y disponibilidad en vivo, tabla `leads` + Edge Function `lead` con Turnstile, formularios que guardan y luego abren WhatsApp, "agendar visita", bandeja de leads en `/admin/#/leads`, "Quedan N" en la home, PDF directo y filtros de unidades en el cotizador, leads en el dashboard de marketing. Hecho después: duplicar proforma desde el historial, "Quedan N" en Álabes y Arcus, width/height en imágenes. Pendiente → enlace público de la proforma con token y la analítica sin cookies con Umami (conectada tras el consentimiento).
 1. **Home que vende.**
    - Primera pantalla con los proyectos reales: foto, "desde $", unidades disponibles calculadas en vivo y filtro por tipo y ubicación.
    - 15 Patios agregado a la tabla `projects`, que es contenido y no código.
@@ -262,3 +263,13 @@ Cada fase va en **su propio PR**, se revisa en el *deploy preview* de Netlify y 
 | Asesores de seguridad de Supabase | 4 WARN | 0 WARN |
 | Lighthouse móvil (rendimiento / accesibilidad) | sin medir en producción | ≥ 85 / ≥ 95 |
 | Leads registrados | 0 (todo se va a WhatsApp) | 100 % de los formularios |
+
+---
+
+## 8. Notas de la revisión final (11/11/2026)
+- **CSP:** activada en modo estricto el 11/11/2026 tras simularla sin violaciones en las 13 páginas. Si tras publicar algo deja de cargar, mira la consola del navegador ("Content Security Policy") y agrega ese dominio en `netlify.toml`.
+- **Caché:** JS/CSS no se cachean (se revalidan con ETag) porque no llevan hash; imágenes y assets, 7 días. Si algún día los archivos llevan hash en el nombre, se puede volver a cachear todo.
+- **Imágenes:** `sizes="100vw"` en todas (seguro, nunca elige una versión menor que el ancho real). Se puede afinar por imagen más adelante.
+- **Leads:** la función `lead` falla cerrada sin `TURNSTILE_SECRET`. El navegador espera hasta 30 s el token de Turnstile en segundo plano y avisa en consola si el servidor rechaza.
+- **Buckets:** permiten HEIC/HEIF (fotos de iPhone). SVG no, a propósito.
+- **Pendiente:** la portada de Arcus (Storage, ~800 KB) no tiene versión ligera; subir una de ≤200 KB desde el panel mejora el LCP de la home.

@@ -8,6 +8,9 @@
 <meta name="theme-color" content="#0E1624">
 <link rel="icon" type="image/png" sizes="32x32" href="/assets/brand/favicon-32.png">
 <link rel="apple-touch-icon" href="/assets/brand/favicon-180.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&family=Hanken+Grotesk:wght@400;500;600;700&display=swap">
 <link rel="stylesheet" href="/css/forxa-tokens.css">
 <link rel="stylesheet" href="/css/home.css">
 <link rel="stylesheet" href="/css/legal.css">
@@ -68,7 +71,7 @@
 
       <section class="lg-sec" id="formularios" data-cms-group="Cómo funcionan los formularios de contacto" data-cms-show="mostrar.formularios">
         <h2 data-cms="formularios.titulo" data-cms-label="Título">Cómo funcionan los formularios de contacto</h2>
-        <p data-cms-html="formularios.texto" data-cms-label="Párrafo" data-cms-type="textarea">Los formularios de este sitio <strong>no guardan lo que escribes en nuestras bases de datos</strong>. Al enviarlos, se abre WhatsApp con un mensaje ya redactado con tus datos; el envío lo haces tú, desde tu propia cuenta de WhatsApp. Si cierras la ventana sin enviarlo, no recibimos nada.</p>
+        <p data-cms-html="formularios.texto" data-cms-label="Párrafo" data-cms-type="textarea">Al enviar un formulario de este sitio <strong>guardamos tus datos de contacto</strong> (nombre, teléfono, correo si lo escribes, proyecto de interés, mensaje y, si la pides, la fecha de visita) en nuestra base de datos, para poder responderte y darte seguimiento. Además, se abre WhatsApp con un mensaje ya redactado; ese envío lo haces tú, desde tu propia cuenta de WhatsApp. Para evitar el spam usamos Cloudflare Turnstile, que verifica que quien envía es una persona.</p>
         <p data-cms="formularios.texto-2" data-cms-label="Párrafo 2" data-cms-type="textarea">Una vez que nos escribes, recibimos el mensaje en nuestro WhatsApp y lo usamos para responderte, según se explica en esta política.</p>
       </section>
 
@@ -87,7 +90,7 @@
         <h2 data-cms="destinatarios.titulo" data-cms-label="Título">Con quién compartimos tus datos</h2>
         <p data-cms="destinatarios.texto" data-cms-label="Párrafo" data-cms-type="textarea">No vendemos tus datos. Los compartimos únicamente cuando es necesario para prestarte el servicio, con:</p>
         <ul>
-          <li data-cms-html="destinatarios.punto" data-cms-label="Punto de la lista" data-cms-type="textarea"><strong>Proveedores tecnológicos</strong> que actúan por nuestra cuenta: Netlify (alojamiento del sitio), Supabase (base de datos y almacenamiento de contenido) y Google Fonts (tipografías).</li>
+          <li data-cms-html="destinatarios.punto" data-cms-label="Punto de la lista" data-cms-type="textarea"><strong>Proveedores tecnológicos</strong> que actúan por nuestra cuenta: Netlify (alojamiento del sitio), Supabase (base de datos, almacenamiento de contenido y de los formularios), Cloudflare (verificación anti-spam Turnstile), Umami (medición anónima de visitas, solo si aceptas la analítica) y Google Fonts (tipografías).</li>
           <li data-cms-html="destinatarios.punto-2" data-cms-label="Punto de la lista 2" data-cms-type="textarea"><strong>WhatsApp (Meta),</strong> cuando decides escribirnos por ese canal; su tratamiento se rige por sus propias políticas.</li>
           <li data-cms-html="destinatarios.punto-3" data-cms-label="Punto de la lista 3" data-cms-type="textarea"><strong>Aliados comerciales del proyecto</strong> (por ejemplo, inmobiliarias o fiduciarias que participan en su comercialización), solo con la información necesaria para atender tu solicitud.</li>
           <li data-cms-html="destinatarios.punto-4" data-cms-label="Punto de la lista 4" data-cms-type="textarea"><strong>Autoridades competentes,</strong> cuando una ley o una orden válida nos lo exija.</li>
@@ -159,10 +162,11 @@
   </div>
 </footer>
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.119.0/dist/umd/supabase.js" integrity="sha384-uteMfOloLDGt042uDz+xHGF3ym63/WQ6rFq7murQRG8Ih7QrXGEGNtWd8688sb4O" crossorigin="anonymous"></script>
 <script src="/js/forxa-config.js"></script>
 <script src="/js/cms.js"></script>
 <script src="/js/legal.js"></script>
 <script src="/js/consent.js" defer></script>
+<script type="text/plain" data-consent="analytics" src="https://cloud.umami.is/script.js" data-website-id="998907a3-0d93-4c47-8a49-053845c00aae" data-do-not-track="true" data-domains="forxainmobiliaria.com"></script>
 </body>
 </html>

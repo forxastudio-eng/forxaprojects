@@ -6,6 +6,9 @@
 <title id="page-title">Cotizador — FORXA</title>
 <meta name="robots" content="noindex, nofollow">
 <link rel="icon" type="image/png" href="/assets/brand/favicon-32.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&family=Hanken+Grotesk:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap">
 <link rel="stylesheet" href="css/styles.css">
 <link rel="stylesheet" href="css/forxa-theme.css">
 </head>
@@ -93,6 +96,12 @@
     <div class="card">
       <h3 id="unit-section-title">Seleccionar unidad(es)</h3>
       <p class="hint" id="unit-section-hint" style="margin-bottom:12px;"></p>
+      <div class="unit-filters" style="display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:12px;">
+        <input type="search" id="uf-q" placeholder="Buscar código, nombre o tipo" aria-label="Buscar unidad" style="flex:1 1 180px;min-height:40px;">
+        <input type="number" id="uf-max" placeholder="Precio máximo" aria-label="Precio máximo" min="0" step="1000" style="width:150px;min-height:40px;">
+        <label style="display:flex;gap:6px;align-items:center;font-size:13.5px;"><input type="checkbox" id="uf-disp"> Solo disponibles</label>
+        <span class="hint" id="uf-count" aria-live="polite"></span>
+      </div>
       <div id="unit-grid" class="unit-grid"><div class="empty-state">Cargando unidades…</div></div>
     </div>
 
@@ -121,7 +130,9 @@
   <div id="proforma-view" hidden>
     <div class="no-print" style="display:flex;gap:12px;margin-bottom:20px;flex-wrap:wrap;">
       <button class="btn btn-ghost" id="back-btn">&larr; Editar datos</button>
-      <button class="btn btn-primary" id="print-btn">Imprimir / Guardar PDF</button>
+      <button class="btn btn-primary" id="pdf-btn">Descargar PDF</button>
+      <button class="btn btn-primary" id="share-btn">Compartir enlace del PDF</button>
+      <button class="btn btn-ghost" id="print-btn">Imprimir</button>
       <button class="btn btn-primary" id="whatsapp-btn" style="background:#25d366;" hidden>Enviar por WhatsApp</button>
     </div>
     <div id="proforma-doc"></div>
@@ -129,8 +140,9 @@
 
 </main>
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.119.0/dist/umd/supabase.js" integrity="sha384-uteMfOloLDGt042uDz+xHGF3ym63/WQ6rFq7murQRG8Ih7QrXGEGNtWd8688sb4O" crossorigin="anonymous"></script>
 <script src="/js/forxa-config.js"></script>
+<script src="/js/mfa.js"></script>
 <script src="js/supabase-client.js"></script>
 <script src="js/auth.js"></script>
 <script src="js/utils.js"></script>

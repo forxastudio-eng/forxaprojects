@@ -48,6 +48,7 @@ async function boot() {
     qs('forma-pago-hint').hidden = true;
     document.querySelector('#financing-card h3').textContent = 'Plan de pago · contado';
   }
+  if (params.get('duplicar')) await prellenarDesdeHistorial(params.get('duplicar'));
   wireEvents();
   await loadAsesores();
   loadAsesorGuardado();
@@ -206,10 +207,10 @@ function renderUnitGrid() {
   grid.innerHTML = UNIDADES.map(u => {
     const disabled = u.estado !== 'disponible';
     return `
-    <div class="unit-card ${disabled ? '' : ''}" data-id="${u.id}" style="${disabled ? 'opacity:.55;cursor:not-allowed;' : ''}">
-      <span class="badge badge-${u.estado}">${ESTADO_LABEL[u.estado] || u.estado}</span>
-      <div class="name" style="margin-top:8px;">${u.nombre}</div>
-      <div class="specs">${u.specsText}</div>
+    <div class="unit-card" data-id="${escHTML(u.id)}" ${disabled || !u.precio ? 'aria-disabled="true"' : 'role="button" tabindex="0" aria-pressed="false"'} style="${disabled ? 'opacity:.55;cursor:not-allowed;' : ''}">
+      <span class="badge badge-${escHTML(u.estado)}">${escHTML(ESTADO_LABEL[u.estado] || u.estado)}</span>
+      <div class="name" style="margin-top:8px;">${escHTML(u.nombre)}</div>
+      <div class="specs">${escHTML(u.specsText)}</div>
       <div class="price">${u.precio ? fmtMoney(u.precio) : 'Consultar precio'}</div>
     </div>`;
   }).join('');
@@ -218,7 +219,24 @@ function renderUnitGrid() {
     const u = UNIDADES.find(x => x.id === card.dataset.id);
     if (u.estado !== 'disponible' || !u.precio) return;
     card.addEventListener('click', () => toggleUnit(u, card));
+    card.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleUnit(u, card); } });
   });
+  filtrarUnidades();
+}
+
+// Filtros: solo ocultan tarjetas (no se re-renderiza), así no se pierde la selección.
+function filtrarUnidades() {
+  const q = (qs('uf-q')?.value || '').trim().toLowerCase();
+  const max = parseFloat(qs('uf-max')?.value) || 0;
+  const disp = !!qs('uf-disp')?.checked;
+  let n = 0;
+  qs('unit-grid').querySelectorAll('.unit-card').forEach(card => {
+    const u = UNIDADES.find(x => x.id === card.dataset.id);
+    const ok = u && (!q || [u.codigo, u.nombre, u.tipo, u.specsText].join(' ').toLowerCase().includes(q)) &&
+      (!max || (u.precio && u.precio <= max)) && (!disp || u.estado === 'disponible');
+    card.hidden = !ok; if (ok) n++;
+  });
+  if (qs('uf-count')) qs('uf-count').textContent = `${n} de ${UNIDADES.length}`;
 }
 
 function toggleUnit(u, card) {
@@ -226,13 +244,13 @@ function toggleUnit(u, card) {
   if (idx === -1) {
     if (!PROYECTO.permite_multi_seleccion) {
       seleccionadas = [];
-      qs('unit-grid').querySelectorAll('.unit-card.selected').forEach(c => c.classList.remove('selected'));
+      qs('unit-grid').querySelectorAll('.unit-card.selected').forEach(c => { c.classList.remove('selected'); c.setAttribute('aria-pressed', 'false'); });
     }
     seleccionadas.push(u);
-    card.classList.add('selected');
+    card.classList.add('selected'); card.setAttribute('aria-pressed', 'true');
   } else {
     seleccionadas.splice(idx, 1);
-    card.classList.remove('selected');
+    card.classList.remove('selected'); card.setAttribute('aria-pressed', 'false');
   }
   renderFinancingSummary();
 }
@@ -245,6 +263,115 @@ function wireEvents() {
   qs('generate-btn').onclick = generarProforma;
   qs('back-btn').onclick = () => { qs('proforma-view').hidden = true; qs('form-view').hidden = false; window.scrollTo(0, 0); };
   qs('print-btn').onclick = () => window.print();
+  qs('pdf-btn').onclick = descargarPDF;
+  qs('share-btn').onclick = compartirEnlace;
+  ['uf-q', 'uf-max', 'uf-disp'].forEach(id => qs(id)?.addEventListener('input', filtrarUnidades));
+}
+
+// "Duplicar" desde el historial: carga cliente, condiciones y unidades de una
+// proforma anterior. Al generar sale una proforma NUEVA (número nuevo); la original no se toca.
+async function prellenarDesdeHistorial(id) {
+  const { data: h, error } = await supabaseClient.from('cotizador_historial').select('*').eq('id', id).maybeSingle();
+  if (error || !h || h.proyecto_id !== PROYECTO.id) { showToast('No se pudo cargar la proforma a duplicar.'); return; }
+  qs('cli-nombre').value = h.cliente_nombre || '';
+  qs('cli-email').value = h.cliente_correo || '';
+  const m = String(h.cliente_telefono || '').match(/^\+(\d+)\s+(\d+)$/);
+  if (m && [...qs('cli-tel-code').options].some(o => o.value === m[1])) { qs('cli-tel-code').value = m[1]; qs('cli-tel').value = m[2]; }
+  else qs('cli-tel').value = h.cliente_telefono || '';
+  if (h.motivo_compra) qs('motivo-compra').value = h.motivo_compra;
+  if (h.forma_pago && !qs('forma-pago').closest('.field').hidden) { qs('forma-pago').value = h.forma_pago; aplicarFormaPago(); }
+  if (h.descuento && !qs('discount-card').hidden) qs('desc-monto').value = h.descuento;
+  qs('notas').value = h.notas || '';
+  const codigos = (h.unidades || []).map(u => String(u.codigo));
+  const faltan = [];
+  codigos.forEach(c => {
+    const u = UNIDADES.find(x => String(x.codigo) === c);
+    const card = u && qs('unit-grid').querySelector(`.unit-card[data-id="${CSS.escape(String(u.id))}"]`);
+    if (u && card && u.estado === 'disponible' && u.precio) { if (!seleccionadas.some(x => x.id === u.id)) toggleUnit(u, card); }
+    else faltan.push(c);
+  });
+  renderFinancingSummary();
+  showToast(faltan.length
+    ? `Datos copiados de ${h.numero_proforma}. Ya no están disponibles: ${faltan.join(', ')}.`
+    : `Datos copiados de ${h.numero_proforma}. Revisa y genera la nueva proforma.`, faltan.length ? 'error' : 'ok');
+}
+
+// PDF directo (sobre todo para asesores en el celular, donde "Imprimir" es incómodo).
+// La librería (~900 KB) se carga solo al pulsar el botón.
+let html2pdfCarga = null;
+function cargarHtml2pdf() {
+  if (window.html2pdf) return Promise.resolve();
+  html2pdfCarga = html2pdfCarga || new Promise((ok, mal) => {
+    const s = document.createElement('script');
+    s.src = 'js/vendor/html2pdf-0.10.2.bundle.min.js';
+    s.onload = ok; s.onerror = () => { html2pdfCarga = null; mal(new Error('No se pudo cargar el generador de PDF')); };
+    document.head.appendChild(s);
+  });
+  return html2pdfCarga;
+}
+// Genera el PDF desde una copia del documento a ancho A4 fijo: así el PDF sale igual
+// de ordenado desde un celular (donde el documento en pantalla es angosto).
+async function generarPDF(modo) {
+  await cargarHtml2pdf();
+  const doc = qs('proforma-doc');
+  const titulo = (doc.querySelector('.doc-title')?.textContent || 'Proforma FORXA').trim();
+  const nombre = titulo.replace(/[^\w\s.-]+/g, '').replace(/\s+/g, '-');
+  const host = document.createElement('div');
+  host.style.cssText = 'position:fixed;left:-10000px;top:0;width:794px;background:#fff;';
+  host.appendChild(doc.cloneNode(true));
+  document.body.appendChild(host);
+  try {
+    const w = window.html2pdf().set({
+      margin: 0, filename: nombre + '.pdf',
+      image: { type: 'jpeg', quality: 0.92 },
+      html2canvas: { scale: 2, useCORS: true, backgroundColor: '#ffffff', windowWidth: 794 },
+      jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
+      pagebreak: { mode: ['css', 'legacy'], before: '.pf-page + .pf-page' },
+    }).from(host.firstChild);
+    if (modo === 'blob') return { blob: await w.outputPdf('blob'), nombre, titulo };
+    await w.save();
+    return { nombre, titulo };
+  } finally { host.remove(); }
+}
+
+async function descargarPDF() {
+  const btn = qs('pdf-btn');
+  btn.disabled = true; btn.setAttribute('aria-busy', 'true'); btn.textContent = 'Generando PDF…';
+  try { await generarPDF('save'); }
+  catch (e) {
+    console.error(e);
+    showToast('No se pudo generar el PDF. Usa "Imprimir" y elige "Guardar como PDF".');
+  } finally {
+    btn.disabled = false; btn.removeAttribute('aria-busy'); btn.textContent = 'Descargar PDF';
+  }
+}
+
+// Enlace para el cliente: sube el PDF a un bucket PRIVADO y crea una URL firmada de 7 días
+// (cualquiera con el enlace lo ve hasta que caduca; no expone el historial ni otras proformas).
+async function compartirEnlace() {
+  const btn = qs('share-btn');
+  btn.disabled = true; btn.setAttribute('aria-busy', 'true'); btn.textContent = 'Creando enlace…';
+  try {
+    const { blob, nombre, titulo } = await generarPDF('blob');
+    const rand = crypto.getRandomValues(new Uint32Array(2)).join('');
+    const path = `${CotizadorAuth.getUser().id}/${nombre}-${rand}.pdf`;
+    const up = await supabaseClient.storage.from('proformas-compartidas').upload(path, blob, { contentType: 'application/pdf' });
+    if (up.error) throw up.error;
+    const sg = await supabaseClient.storage.from('proformas-compartidas').createSignedUrl(path, 7 * 24 * 3600);
+    if (sg.error) throw sg.error;
+    const url = sg.data.signedUrl;
+    if (navigator.share) {
+      try { await navigator.share({ title: titulo, text: `${titulo} (enlace válido por 7 días)`, url }); return; }
+      catch (e) { if (e.name === 'AbortError') return; }
+    }
+    await navigator.clipboard.writeText(url);
+    showToast('Enlace copiado. Es válido por 7 días.', 'ok');
+  } catch (e) {
+    console.error(e);
+    showToast('No se pudo crear el enlace. Usa "Descargar PDF" y compártelo desde tu teléfono.');
+  } finally {
+    btn.disabled = false; btn.removeAttribute('aria-busy'); btn.textContent = 'Compartir enlace del PDF';
+  }
 }
 
 // El descuento ahora es un monto libre que escribe el asesor (antes era por
@@ -610,20 +737,21 @@ async function generarProforma() {
   const fotos = []; // { caption, url } — van todas juntas en la página 2
   let plan0 = null;
   const unidadesTexto = seleccionadas.map(u => u.nombre).join(', ');
-  for (const u of seleccionadas) {
+  const fotoUrls = await signedMediaUrls(seleccionadas.map(u => u.raw?.foto_url));
+  for (const [i, u] of seleccionadas.entries()) {
     const plan = calcularPlan(u);
     plan.precioLista = u.precio;
     if (!plan0) plan0 = plan;
-    const fotoUrl = await signedMediaUrl(u.raw?.foto_url);
-    if (fotoUrl) fotos.push({ caption: `${u.nombre}${u.specsText ? ' · ' + u.specsText : ''}`, url: fotoUrl });
+    const fotoUrl = fotoUrls[i];
+    if (fotoUrl) fotos.push({ caption: `${escHTML(u.nombre)}${u.specsText ? ' · ' + escHTML(u.specsText) : ''}`, url: fotoUrl });
 
     unitSections += `
       <div class="pf-unit">
         <div class="pf-unit-head">
           <div>
             <div class="tag">Propiedad cotizada${plan.formaPago === 'contado' ? ' · Pago de contado' : ''}</div>
-            <h2>${u.nombre}</h2>
-            <div class="specs">${u.specsText}</div>
+            <h2>${escHTML(u.nombre)}</h2>
+            <div class="specs">${escHTML(u.specsText)}</div>
           </div>
           <div class="price-box">
             ${plan.desc > 0 ? `<div class="price-old">${fmtMoney(u.precio)}</div>` : ''}
@@ -641,10 +769,10 @@ async function generarProforma() {
         <div class="logos">
           <img src="assets/logo.png" alt="FORXA Inmobiliaria" onerror="this.style.display='none'">
           <div class="div"></div>
-          <img src="${logoProyecto}" alt="${PROYECTO.nombre}" onerror="this.style.display='none'">
+          <img src="${logoProyecto}" alt="${escHTML(PROYECTO.nombre)}" onerror="this.style.display='none'">
         </div>
         <div class="doc-meta">
-          <div class="doc-title">Proforma${numeroProforma ? ' ' + numeroProforma : ''}</div>
+          <div class="doc-title">Proforma${numeroProforma ? ' ' + escHTML(numeroProforma) : ''}</div>
           <div class="doc-date">${fmtDate(hoy)}</div>
         </div>
       </div>
@@ -652,13 +780,13 @@ async function generarProforma() {
       <div class="pf-parties">
         <div>
           <div class="pf-party-label">Asesor</div>
-          <div class="pf-party-name">${asesorNombre}</div>
-          <div class="pf-party-meta">${asesorTel}${asesorEmail ? ' · ' + asesorEmail : ''}</div>
+          <div class="pf-party-name">${escHTML(asesorNombre)}</div>
+          <div class="pf-party-meta">${escHTML(asesorTel)}${asesorEmail ? ' · ' + escHTML(asesorEmail) : ''}</div>
         </div>
         <div>
           <div class="pf-party-label">Cotización preparada para</div>
-          <div class="pf-party-name">${nombre}</div>
-          <div class="pf-party-meta">${[tel, email].filter(Boolean).join(' · ') || '&mdash;'}</div>
+          <div class="pf-party-name">${escHTML(nombre)}</div>
+          <div class="pf-party-meta">${escHTML([tel, email].filter(Boolean).join(' · ')) || '&mdash;'}</div>
         </div>
       </div>
 
@@ -667,12 +795,12 @@ async function generarProforma() {
       ${notas ? `
       <div class="pf-notes">
         <div class="pf-party-label">Notas adicionales</div>
-        <p>${notas.replace(/\n/g, '<br>')}</p>
+        <p>${escHTML(notas).replace(/\n/g, '<br>')}</p>
       </div>` : ''}
 
       <div class="pf-footer">
-        <div class="col"><strong>${asesorNombre}</strong><br>Asesor FORXA<br>${asesorTel}${asesorEmail ? '<br>' + asesorEmail : ''}</div>
-        <div class="col"><strong>FORXA Inmobiliaria</strong><br>${PROYECTO.nombre}${PROYECTO.ubicacion ? '<br>' + PROYECTO.ubicacion : ''}</div>
+        <div class="col"><strong>${escHTML(asesorNombre)}</strong><br>Asesor FORXA<br>${escHTML(asesorTel)}${asesorEmail ? '<br>' + escHTML(asesorEmail) : ''}</div>
+        <div class="col"><strong>FORXA Inmobiliaria</strong><br>${escHTML(PROYECTO.nombre)}${PROYECTO.ubicacion ? '<br>' + escHTML(PROYECTO.ubicacion) : ''}</div>
         <div class="col"><strong>Vigencia</strong><br>Esta proforma es referencial y válida por 8 días desde su emisión. Precios y disponibilidad sujetos a confirmación al momento de la reserva.</div>
       </div>
     </div>`;
@@ -680,11 +808,11 @@ async function generarProforma() {
   const page2 = fotos.length ? `
     <div class="pf-page pf-photos">
       <div class="pf-photos-title">Fichas de la propiedad</div>
-      <div class="pf-photos-sub">${PROYECTO.nombre} · ${fotos.length > 1 ? fotos.length + ' unidades cotizadas' : '1 unidad cotizada'}</div>
+      <div class="pf-photos-sub">${escHTML(PROYECTO.nombre)} · ${fotos.length > 1 ? fotos.length + ' unidades cotizadas' : '1 unidad cotizada'}</div>
       ${fotos.map(f => `
         <div class="pf-photo-item">
           <div class="cap">${f.caption}</div>
-          <img src="${f.url}">
+          <img src="${escHTML(f.url)}">
         </div>`).join('')}
     </div>` : '';
 

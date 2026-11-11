@@ -6,6 +6,17 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title data-cms="seo.titulo" data-cms-label="Título de la página (pestaña y Google)">Portón del Valle | Proyecto de lotización en Yunguilla, Cuenca</title>
 <meta name="description" content="Portón del Valle: 79 lotes desde 2.500 m² en el Valle de Yunguilla, Cuenca. Laguna, mirador, senderos, agua potable con planta propia y portón de ingreso. Fideicomiso administrado por ENLACE Negocios Fiduciarios."  data-cms-attr="content:seo.descripcion" data-cms-label="Descripción para Google" data-cms-type="textarea"/>
+<link rel="canonical" href="https://forxainmobiliaria.com/porton/">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_EC">
+<meta property="og:site_name" content="FORXA Inmobiliaria">
+<meta property="og:title" content="Portón del Valle | Proyecto de lotización en Yunguilla, Cuenca">
+<meta property="og:description" content="Portón del Valle: 79 lotes desde 2.500 m² en el Valle de Yunguilla, Cuenca. Laguna, mirador, senderos, agua potable con planta propia y portón de ingreso. Fideicomiso administrado por ENLACE Negocios Fiduciarios.">
+<meta property="og:url" content="https://forxainmobiliaria.com/porton/">
+<meta property="og:image" content="https://forxainmobiliaria.com/assets/covers/porton-del-valle.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://forxainmobiliaria.com/assets/covers/porton-del-valle.jpg">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Residence", "name": "Portón del Valle", "url": "https://forxainmobiliaria.com/porton/", "description": "Portón del Valle: 79 lotes desde 2.500 m² en el Valle de Yunguilla, Cuenca. Laguna, mirador, senderos, agua potable con planta propia y portón de ingreso. Fideicomiso administrado por ENLACE Negocios Fiduciarios.", "image": "https://forxainmobiliaria.com/assets/covers/porton-del-valle.jpg", "address": {"@type": "PostalAddress", "addressLocality": "Cuenca", "addressCountry": "EC"}, "seller": {"@type": "RealEstateAgent", "name": "FORXA Inmobiliaria", "url": "https://forxainmobiliaria.com/"}}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -36,7 +47,7 @@
 <!-- ============ HEADER ============ -->
 <header class="header" id="header" data-cms-group="Menú superior">
   <div class="container header__inner">
-    <a href="#inicio" class="brand"><img src="img/logo-porton-white.png" alt="Portón del Valle"  data-cms-img="header.imagen" data-cms-label="Logotipo"/></a>
+    <a href="#inicio" class="brand"><img width="890" height="873" src="img/logo-porton-white.png" alt="Portón del Valle"  data-cms-img="header.imagen" data-cms-label="Logotipo"/></a>
     <nav class="nav" id="nav">
       <a href="#proyecto" data-cms="header.enlace" data-cms-label="Enlace">Proyecto</a>
       <a href="#exclusivo" data-cms="header.enlace-2" data-cms-label="Enlace 2">Zonas exclusivas</a>
@@ -55,10 +66,10 @@
 <!-- ============ HERO (VIDEO) ============ -->
 <section class="hero" id="inicio" data-cms-group="Portada">
   <div class="hero__bg">
-    <video autoplay muted loop playsinline poster="img/hero-poster.jpg" data-cms-attr="poster:inicio.video-portada" data-cms-label="Imagen de carga del video" data-cms-type="image">
-      <source src="img/hero-video.webm" type="video/webm"  data-cms-attr="src:inicio.video-webm" data-cms-label="Video de fondo (WEBM)" data-cms-type="video"/>
+    <video muted loop playsinline preload="none" id="heroVideo" poster="img/hero-poster.jpg" data-cms-attr="poster:inicio.video-portada" data-cms-label="Imagen de carga del video" data-cms-type="image">
       <source src="img/hero-video.mp4" type="video/mp4"  data-cms-attr="src:inicio.video-mp4" data-cms-label="Video de fondo (MP4)" data-cms-type="video"/>
     </video>
+    <button type="button" id="heroPause" aria-label="Pausar video de fondo" hidden style="position:absolute;right:16px;bottom:16px;z-index:3;min-width:44px;min-height:44px;border-radius:50%;border:1px solid rgba(255,255,255,.6);background:rgba(0,0,0,.45);color:#fff;font-size:16px;cursor:pointer">&#10074;&#10074;</button>
   </div>
   <div class="hero__overlay"></div>
   <div class="container hero__content">
@@ -95,7 +106,7 @@
   <div class="container">
     <div class="about">
       <div class="about__media reveal">
-        <img src="img/aerial-hillside.jpg" alt="Vista aérea de las vías y lotes de Portón del Valle"  data-cms-img="proyecto.imagen" data-cms-label="Imagen"/>
+        <img width="1600" height="900" srcset="img/aerial-hillside-640.webp 640w, img/aerial-hillside-1280.webp 1280w, img/aerial-hillside-1600.webp 1600w" sizes="100vw" loading="lazy" decoding="async" src="img/aerial-hillside.jpg" alt="Vista aérea de las vías y lotes de Portón del Valle"  data-cms-img="proyecto.imagen" data-cms-label="Imagen"/>
       </div>
       <div class="about__text reveal">
         <p class="kicker" data-cms="proyecto.etiqueta" data-cms-label="Sobretítulo">Sobre Portón del Valle</p>
@@ -146,7 +157,7 @@
   </div>
   <div class="showcase" data-cms-list="exclusivo.lista-showcase" data-cms-label="Zonas exclusivas" data-cms-noun="Zona">
     <div class="showcase-item reveal">
-      <div class="showcase-media"><img src="img/render-porton1.jpg" alt="Portón de ingreso al proyecto"  data-cms-img="imagen" data-cms-label="Imagen"/></div>
+      <div class="showcase-media"><img width="1400" height="787" srcset="img/render-porton1-640.webp 640w, img/render-porton1-1280.webp 1280w, img/render-porton1-1400.webp 1400w" sizes="100vw" loading="lazy" decoding="async" src="img/render-porton1.jpg" alt="Portón de ingreso al proyecto"  data-cms-img="imagen" data-cms-label="Imagen"/></div>
       <div class="showcase-text">
         <span class="num" data-cms="detalle" data-cms-label="Texto">01 · Portón de ingreso</span>
         <h3 data-cms="subtitulo" data-cms-label="Subtítulo">La seguridad es nuestra prioridad</h3>
@@ -154,7 +165,7 @@
       </div>
     </div>
     <div class="showcase-item reveal">
-      <div class="showcase-media"><img src="img/render-laguna.jpg" alt="Laguna, zona exclusiva del proyecto"  data-cms-img="imagen" data-cms-label="Imagen"/></div>
+      <div class="showcase-media"><img width="1400" height="787" srcset="img/render-laguna-640.webp 640w, img/render-laguna-1280.webp 1280w, img/render-laguna-1400.webp 1400w" sizes="100vw" loading="lazy" decoding="async" src="img/render-laguna.jpg" alt="Laguna, zona exclusiva del proyecto"  data-cms-img="imagen" data-cms-label="Imagen"/></div>
       <div class="showcase-text">
         <span class="num" data-cms="detalle" data-cms-label="Texto">02 · Laguna</span>
         <h3 data-cms="subtitulo" data-cms-label="Subtítulo">Un entorno sereno y natural</h3>
@@ -162,7 +173,7 @@
       </div>
     </div>
     <div class="showcase-item reveal">
-      <div class="showcase-media"><img src="img/render-mirador.jpg" alt="Mirador con vistas al valle"  data-cms-img="imagen" data-cms-label="Imagen"/></div>
+      <div class="showcase-media"><img width="1400" height="896" srcset="img/render-mirador-640.webp 640w, img/render-mirador-1280.webp 1280w, img/render-mirador-1400.webp 1400w" sizes="100vw" loading="lazy" decoding="async" src="img/render-mirador.jpg" alt="Mirador con vistas al valle"  data-cms-img="imagen" data-cms-label="Imagen"/></div>
       <div class="showcase-text">
         <span class="num" data-cms="detalle" data-cms-label="Texto">03 · Mirador</span>
         <h3 data-cms="subtitulo" data-cms-label="Subtítulo">Vistas impresionantes del valle</h3>
@@ -170,7 +181,7 @@
       </div>
     </div>
     <div class="showcase-item reveal">
-      <div class="showcase-media"><img src="img/render-senderos1.jpg" alt="Senderos para recorrer dentro del proyecto"  data-cms-img="imagen" data-cms-label="Imagen"/></div>
+      <div class="showcase-media"><img width="1400" height="787" srcset="img/render-senderos1-640.webp 640w, img/render-senderos1-1280.webp 1280w, img/render-senderos1-1400.webp 1400w" sizes="100vw" loading="lazy" decoding="async" src="img/render-senderos1.jpg" alt="Senderos para recorrer dentro del proyecto"  data-cms-img="imagen" data-cms-label="Imagen"/></div>
       <div class="showcase-text">
         <span class="num" data-cms="detalle" data-cms-label="Texto">04 · Senderos</span>
         <h3 data-cms="subtitulo" data-cms-label="Subtítulo">Extensos senderos naturales</h3>
@@ -191,12 +202,12 @@
     <div class="location">
       <div class="location__maps reveal">
         <div class="location-slider" id="locationSlider">
-          <img src="img/mapa-ubicacion.jpg" alt="Mapa satelital: Portón del Valle ubicado a 800m del parque extremo" class="is-active" />
-          <img src="img/aerial-lotes.jpg" alt="Vista aérea de los lotes y vías internas del proyecto" />
-          <img src="img/aerial-hillside.jpg" alt="Vista aérea de las vías y lotes de Portón del Valle" />
-          <img src="img/aerial-valle1.jpg" alt="Vista aérea del Valle de Yunguilla" />
-          <img src="img/aerial-valle2.jpg" alt="Vista aérea del proyecto y sus alrededores" />
-          <img src="img/aerial-valle3.jpg" alt="Vista panorámica del valle" />
+          <img width="1400" height="1985" srcset="img/mapa-ubicacion-640.webp 640w, img/mapa-ubicacion-1280.webp 1280w, img/mapa-ubicacion-1400.webp 1400w" sizes="100vw" loading="lazy" decoding="async" src="img/mapa-ubicacion.jpg" alt="Mapa satelital: Portón del Valle ubicado a 800m del parque extremo" class="is-active" />
+          <img width="1600" height="900" srcset="img/aerial-lotes-640.webp 640w, img/aerial-lotes-1280.webp 1280w, img/aerial-lotes-1600.webp 1600w" sizes="100vw" loading="lazy" decoding="async" src="img/aerial-lotes.jpg" alt="Vista aérea de los lotes y vías internas del proyecto" />
+          <img width="1600" height="900" srcset="img/aerial-hillside-640.webp 640w, img/aerial-hillside-1280.webp 1280w, img/aerial-hillside-1600.webp 1600w" sizes="100vw" loading="lazy" decoding="async" src="img/aerial-hillside.jpg" alt="Vista aérea de las vías y lotes de Portón del Valle" />
+          <img width="1600" height="1066" srcset="img/aerial-valle1-640.webp 640w, img/aerial-valle1-1280.webp 1280w, img/aerial-valle1-1600.webp 1600w" sizes="100vw" loading="lazy" decoding="async" src="img/aerial-valle1.jpg" alt="Vista aérea del Valle de Yunguilla" />
+          <img width="1600" height="1066" srcset="img/aerial-valle2-640.webp 640w, img/aerial-valle2-1280.webp 1280w, img/aerial-valle2-1600.webp 1600w" sizes="100vw" loading="lazy" decoding="async" src="img/aerial-valle2.jpg" alt="Vista aérea del proyecto y sus alrededores" />
+          <img width="1600" height="1066" srcset="img/aerial-valle3-640.webp 640w, img/aerial-valle3-1280.webp 1280w, img/aerial-valle3-1600.webp 1600w" sizes="100vw" loading="lazy" decoding="async" src="img/aerial-valle3.jpg" alt="Vista panorámica del valle" />
         </div>
       </div>
       <div class="poi-list reveal" data-cms-list="ubicacion.lista-poi-list" data-cms-label="Puntos de interés cercanos" data-cms-noun="Punto">
@@ -219,7 +230,7 @@
       <p data-cms="mapa.texto" data-cms-label="Párrafo" data-cms-type="textarea">Pasa el mouse sobre el mapa para ver el estado, área y precio de cada lote. Los disponibles muestran su información completa; los que ya no están disponibles se marcan en rojo.</p>
     </div>
     <div class="interactive-map reveal" id="interactiveMap">
-      <img src="img/mapa-lotes-hd.jpg" alt="Mapa detallado del proyecto Portón del Valle" />
+      <img width="1800" height="2554" srcset="img/mapa-lotes-hd-640.webp 640w, img/mapa-lotes-hd-1280.webp 1280w, img/mapa-lotes-hd-1800.webp 1800w" sizes="100vw" loading="lazy" decoding="async" src="img/mapa-lotes-hd.jpg" alt="Mapa detallado del proyecto Portón del Valle" />
       <svg id="lotsSvg" viewBox="0 0 100 100" preserveAspectRatio="none"></svg>
       <div class="map-tooltip" id="mapTooltip"></div>
     </div>
@@ -266,7 +277,7 @@
     <p class="lotes-note" data-cms="lotes.texto-2" data-cms-label="Párrafo 2" data-cms-type="textarea">Áreas y valores referenciales del brochure oficial. Escríbenos por WhatsApp para conocer disponibilidad actualizada y forma de pago.</p>
 
     <div class="lotes-map-cta reveal" data-ficha="img/mapa-lotes.jpg" data-title="Mapa detallado del proyecto Portón del Valle" style="margin-top:34px; display:flex; align-items:center; gap:24px; flex-wrap:wrap; background:var(--bg-2); border:1px solid var(--line); border-radius:var(--radius-lg); padding:28px 32px; cursor:pointer;">
-      <img src="img/mapa-lotes.jpg" alt="Mapa detallado del proyecto Portón del Valle" style="width:130px; height:90px; object-fit:cover; border-radius:6px; flex:none;"  data-cms-img="lotes.imagen" data-cms-label="Imagen"/>
+      <img width="1096" height="1555" srcset="img/mapa-lotes-640.webp 640w, img/mapa-lotes-1096.webp 1096w" sizes="100vw" loading="lazy" decoding="async" src="img/mapa-lotes.jpg" alt="Mapa detallado del proyecto Portón del Valle" style="width:130px; height:90px; object-fit:cover; border-radius:6px; flex:none;"  data-cms-img="lotes.imagen" data-cms-label="Imagen"/>
       <div style="flex:1; min-width:200px;">
         <h4 style="margin:0 0 4px; color:var(--cream); font-family:var(--ff-display); font-style:italic; font-weight:500;" data-cms="lotes.subtitulo" data-cms-label="Subtítulo">Mapa detallado del proyecto</h4>
         <p style="margin:0; color:var(--stone); font-size:0.88rem;" data-cms="lotes.texto-3" data-cms-label="Párrafo 3" data-cms-type="textarea">Descarga la versión completa del plano con la laguna, el mirador y el portón de ingreso.</p>
@@ -286,18 +297,18 @@
     </div>
   </div>
   <div class="gallery-grid reveal" data-cms-list="galeria.lista-gallery-grid" data-cms-label="Fotos de la galería" data-cms-noun="Foto" data-cms-cls="wide:Doble ancho,tall:Doble alto,arch:Forma de arco">
-    <figure class="wide tall"><img src="img/render-porton1.jpg" data-full="img/render-porton1.jpg" data-lightbox alt="Render del portón de ingreso al proyecto"  data-cms-img="imagen" data-cms-label="Imagen"/></figure>
-    <figure><img src="img/render-laguna.jpg" data-full="img/render-laguna.jpg" data-lightbox alt="Render de la laguna, zona exclusiva del proyecto"  data-cms-img="imagen" data-cms-label="Imagen"/></figure>
-    <figure><img src="img/render-mirador.jpg" data-full="img/render-mirador.jpg" data-lightbox alt="Render del mirador con vistas al valle"  data-cms-img="imagen" data-cms-label="Imagen"/></figure>
-    <figure><img src="img/render-senderos1.jpg" data-full="img/render-senderos1.jpg" data-lightbox alt="Senderos para recorrer dentro del proyecto"  data-cms-img="imagen" data-cms-label="Imagen"/></figure>
-    <figure><img src="img/render-senderos2.jpg" data-full="img/render-senderos2.jpg" data-lightbox alt="Personas recorriendo los senderos del proyecto"  data-cms-img="imagen" data-cms-label="Imagen"/></figure>
-    <figure class="wide"><img src="img/render-porton2.jpg" data-full="img/render-porton2.jpg" data-lightbox alt="Render del portón de ingreso, vista de noche"  data-cms-img="imagen" data-cms-label="Imagen"/></figure>
-    <figure><img src="img/render-porton3.jpg" data-full="img/render-porton3.jpg" data-lightbox alt="Camino de ingreso al proyecto"  data-cms-img="imagen" data-cms-label="Imagen"/></figure>
-    <figure><img src="img/render-zona-exclusiva.jpg" data-full="img/render-zona-exclusiva.jpg" data-lightbox alt="Zona exclusiva con vista al valle"  data-cms-img="imagen" data-cms-label="Imagen"/></figure>
-    <figure><img src="img/aerial-valle1.jpg" data-full="img/aerial-valle1.jpg" data-lightbox alt="Vista aérea del Valle de Yunguilla"  data-cms-img="imagen" data-cms-label="Imagen"/></figure>
-    <figure class="tall"><img src="img/aerial-valle2.jpg" data-full="img/aerial-valle2.jpg" data-lightbox alt="Vista aérea del proyecto y sus alrededores"  data-cms-img="imagen" data-cms-label="Imagen"/></figure>
-    <figure><img src="img/aerial-valle3.jpg" data-full="img/aerial-valle3.jpg" data-lightbox alt="Vista panorámica del valle"  data-cms-img="imagen" data-cms-label="Imagen"/></figure>
-    <figure><img src="img/buho.jpg" data-full="img/buho.jpg" data-lightbox alt="Fauna del Valle de Yunguilla — vive la naturaleza"  data-cms-img="imagen" data-cms-label="Imagen"/></figure>
+    <figure class="wide tall"><img width="1400" height="787" srcset="img/render-porton1-640.webp 640w, img/render-porton1-1280.webp 1280w, img/render-porton1-1400.webp 1400w" sizes="100vw" loading="lazy" decoding="async" src="img/render-porton1.jpg" data-full="img/render-porton1.jpg" data-lightbox alt="Render del portón de ingreso al proyecto"  data-cms-img="imagen" data-cms-label="Imagen"/></figure>
+    <figure><img width="1400" height="787" srcset="img/render-laguna-640.webp 640w, img/render-laguna-1280.webp 1280w, img/render-laguna-1400.webp 1400w" sizes="100vw" loading="lazy" decoding="async" src="img/render-laguna.jpg" data-full="img/render-laguna.jpg" data-lightbox alt="Render de la laguna, zona exclusiva del proyecto"  data-cms-img="imagen" data-cms-label="Imagen"/></figure>
+    <figure><img width="1400" height="896" srcset="img/render-mirador-640.webp 640w, img/render-mirador-1280.webp 1280w, img/render-mirador-1400.webp 1400w" sizes="100vw" loading="lazy" decoding="async" src="img/render-mirador.jpg" data-full="img/render-mirador.jpg" data-lightbox alt="Render del mirador con vistas al valle"  data-cms-img="imagen" data-cms-label="Imagen"/></figure>
+    <figure><img width="1400" height="787" srcset="img/render-senderos1-640.webp 640w, img/render-senderos1-1280.webp 1280w, img/render-senderos1-1400.webp 1400w" sizes="100vw" loading="lazy" decoding="async" src="img/render-senderos1.jpg" data-full="img/render-senderos1.jpg" data-lightbox alt="Senderos para recorrer dentro del proyecto"  data-cms-img="imagen" data-cms-label="Imagen"/></figure>
+    <figure><img width="1400" height="787" srcset="img/render-senderos2-640.webp 640w, img/render-senderos2-1280.webp 1280w, img/render-senderos2-1400.webp 1400w" sizes="100vw" loading="lazy" decoding="async" src="img/render-senderos2.jpg" data-full="img/render-senderos2.jpg" data-lightbox alt="Personas recorriendo los senderos del proyecto"  data-cms-img="imagen" data-cms-label="Imagen"/></figure>
+    <figure class="wide"><img width="1400" height="787" srcset="img/render-porton2-640.webp 640w, img/render-porton2-1280.webp 1280w, img/render-porton2-1400.webp 1400w" sizes="100vw" loading="lazy" decoding="async" src="img/render-porton2.jpg" data-full="img/render-porton2.jpg" data-lightbox alt="Render del portón de ingreso, vista de noche"  data-cms-img="imagen" data-cms-label="Imagen"/></figure>
+    <figure><img width="1400" height="787" srcset="img/render-porton3-640.webp 640w, img/render-porton3-1280.webp 1280w, img/render-porton3-1400.webp 1400w" sizes="100vw" loading="lazy" decoding="async" src="img/render-porton3.jpg" data-full="img/render-porton3.jpg" data-lightbox alt="Camino de ingreso al proyecto"  data-cms-img="imagen" data-cms-label="Imagen"/></figure>
+    <figure><img width="1400" height="787" srcset="img/render-zona-exclusiva-640.webp 640w, img/render-zona-exclusiva-1280.webp 1280w, img/render-zona-exclusiva-1400.webp 1400w" sizes="100vw" loading="lazy" decoding="async" src="img/render-zona-exclusiva.jpg" data-full="img/render-zona-exclusiva.jpg" data-lightbox alt="Zona exclusiva con vista al valle"  data-cms-img="imagen" data-cms-label="Imagen"/></figure>
+    <figure><img width="1600" height="1066" srcset="img/aerial-valle1-640.webp 640w, img/aerial-valle1-1280.webp 1280w, img/aerial-valle1-1600.webp 1600w" sizes="100vw" loading="lazy" decoding="async" src="img/aerial-valle1.jpg" data-full="img/aerial-valle1.jpg" data-lightbox alt="Vista aérea del Valle de Yunguilla"  data-cms-img="imagen" data-cms-label="Imagen"/></figure>
+    <figure class="tall"><img width="1600" height="1066" srcset="img/aerial-valle2-640.webp 640w, img/aerial-valle2-1280.webp 1280w, img/aerial-valle2-1600.webp 1600w" sizes="100vw" loading="lazy" decoding="async" src="img/aerial-valle2.jpg" data-full="img/aerial-valle2.jpg" data-lightbox alt="Vista aérea del proyecto y sus alrededores"  data-cms-img="imagen" data-cms-label="Imagen"/></figure>
+    <figure><img width="1600" height="1066" srcset="img/aerial-valle3-640.webp 640w, img/aerial-valle3-1280.webp 1280w, img/aerial-valle3-1600.webp 1600w" sizes="100vw" loading="lazy" decoding="async" src="img/aerial-valle3.jpg" data-full="img/aerial-valle3.jpg" data-lightbox alt="Vista panorámica del valle"  data-cms-img="imagen" data-cms-label="Imagen"/></figure>
+    <figure><img width="1081" height="1321" srcset="img/buho-640.webp 640w, img/buho-1081.webp 1081w" sizes="100vw" loading="lazy" decoding="async" src="img/buho.jpg" data-full="img/buho.jpg" data-lightbox alt="Fauna del Valle de Yunguilla — vive la naturaleza"  data-cms-img="imagen" data-cms-label="Imagen"/></figure>
   </div>
 </section>
 
@@ -317,7 +328,7 @@
         </div>
       </div>
 
-      <form class="contact-form reveal" id="contactForm">
+      <form class="contact-form reveal" id="contactForm" data-lead="porton">
         <h3 data-cms="contacto.subtitulo" data-cms-label="Subtítulo">Solicita información</h3>
         <p data-cms="contacto.texto-2" data-cms-label="Párrafo 2" data-cms-type="textarea">Completa el formulario y te escribimos por WhatsApp al instante.</p>
         <div class="form-row">
@@ -335,6 +346,7 @@
             <option value="Aún no lo sé">Aún no lo sé</option>
           </select>
         </div>
+        <div class="field"><label for="visit">¿Quieres agendar una visita? Fecha preferida (opcional)</label><input type="date" id="visit" name="visit"></div>
         <div class="field"><label for="message" data-cms="contacto.campo-5" data-cms-label="Etiqueta del campo 5">Mensaje</label><textarea id="message" name="message" placeholder="Cuéntanos qué te gustaría saber..." data-cms-attr="placeholder:contacto.ejemplo-4" data-cms-label="Texto de ejemplo del campo"></textarea></div>
         <button type="submit" class="btn btn--primary btn--block" data-cms="contacto.boton" data-cms-label="Botón">Enviar por WhatsApp</button>
         <p class="form-status" id="formStatus"></p>
@@ -348,9 +360,9 @@
 <footer class="footer" data-cms-group="Pie de página">
   <div class="container">
     <div class="footer__brand">
-      <img src="img/logo-porton-white.png" alt="Portón del Valle" style="height:40px;"  data-cms-img="footer.imagen" data-cms-label="Logotipo"/>
-      <img class="footer__forxa" src="img/logo-forxa-black.jpg" alt="FORXA Inmobiliaria" style="height:32px; border-radius:4px;"  data-cms-img="footer.imagen-2" data-cms-label="Logotipo 2"/>
-      <img class="footer__adrian" src="img/logo-vivecuenca-black.jpg" alt="Vive en Cuenca Inmobiliaria" style="height:32px; border-radius:4px;"  data-cms-img="footer.imagen-3" data-cms-label="Logotipo 3"/>
+      <img width="890" height="873" loading="lazy" decoding="async" src="img/logo-porton-white.png" alt="Portón del Valle" style="height:40px;"  data-cms-img="footer.imagen" data-cms-label="Logotipo"/>
+      <img width="800" height="972" loading="lazy" decoding="async" class="footer__forxa" src="img/logo-forxa-black.jpg" alt="FORXA Inmobiliaria" style="height:32px; border-radius:4px;"  data-cms-img="footer.imagen-2" data-cms-label="Logotipo 2"/>
+      <img width="800" height="832" loading="lazy" decoding="async" class="footer__adrian" src="img/logo-vivecuenca-black.jpg" alt="Vive en Cuenca Inmobiliaria" style="height:32px; border-radius:4px;"  data-cms-img="footer.imagen-3" data-cms-label="Logotipo 3"/>
       <span data-cms="footer.detalle" data-cms-label="Texto" data-cms-type="textarea">© 2026 Portón del Valle — Fideicomiso administrado por ENLACE Negocios Fiduciarios.</span>
     </div>
     <span data-cms="footer.detalle-2" data-cms-label="Texto 2">Valle de Yunguilla, Cuenca, Ecuador</span>
@@ -378,10 +390,23 @@
   <div class="lightbox__caption" id="lightboxCaption"></div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.119.0/dist/umd/supabase.js" integrity="sha384-uteMfOloLDGt042uDz+xHGF3ym63/WQ6rFq7murQRG8Ih7QrXGEGNtWd8688sb4O" crossorigin="anonymous"></script>
 <script src="/js/forxa-config.js"></script>
 <script src="/js/cms.js"></script>
+<script src="/js/leads.js"></script>
 <script src="js/script.js"></script>
 <script src="/js/consent.js" defer></script>
+<script type="text/plain" data-consent="analytics" src="https://cloud.umami.is/script.js" data-website-id="998907a3-0d93-4c47-8a49-053845c00aae" data-do-not-track="true" data-domains="forxainmobiliaria.com"></script>
+<script>
+// Video del hero: en todas las pantallas, salvo con ahorro de datos o "reducir movimiento";
+// se pausa fuera de pantalla y tiene botón de pausa (WCAG 2.2.2). Si no, queda el póster.
+(function(){var v=document.getElementById('heroVideo'),b=document.getElementById('heroPause');if(!v)return;
+var c=navigator.connection||{},ok=!c.saveData&&!matchMedia('(prefers-reduced-motion: reduce)').matches;
+if(!ok){v.removeAttribute('autoplay');return;}
+var manual=false;b.hidden=false;
+function play(){if(!manual)v.play().catch(function(){});}
+new IntersectionObserver(function(e){e[0].isIntersecting?play():v.pause();}).observe(v);
+b.onclick=function(){if(v.paused){manual=false;v.play();b.innerHTML='&#10074;&#10074;';b.setAttribute('aria-label','Pausar video de fondo');}else{manual=true;v.pause();b.innerHTML='&#9654;';b.setAttribute('aria-label','Reproducir video de fondo');}};})();
+</script>
 </body>
 </html>

@@ -105,6 +105,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       var localesContainer = document.getElementById("localesGrid");
       if (localesContainer) localesContainer.innerHTML = locales.map(localCardHTML).join("");
+      if (window.FORXA_QUEDAN) FORXA_QUEDAN();
 
       /* Vuelve a correr el observer de "reveal" ahora que las tarjetas ya
          existen (los clics de la ficha ya funcionan solos: el listener de
@@ -320,6 +321,9 @@ document.addEventListener("DOMContentLoaded", function () {
       text += ". Teléfono: " + phone;
       if (email) text += ". Correo: " + email;
       if (message) text += ". Mensaje: " + message;
+      var visit = (form.querySelector("#visit") || {}).value || "";
+      if (visit) text += ". Me gustaría visitar el proyecto el " + visit.split("-").reverse().join("/");
+      if (window.FORXA_LEAD) FORXA_LEAD.send(form, { proyecto: "alabes", nombre: name, telefono: phone, email: email, interes: unit, mensaje: message, fecha_visita: visit });
 
       var url = "https://wa.me/" + ((window.CMS && CMS.whatsapp()) || WHATSAPP_NUMBER) + "?text=" + encodeURIComponent(text);
       openWhatsApp(url);

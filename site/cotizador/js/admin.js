@@ -53,15 +53,15 @@ async function loadAsesoresAdmin() {
   list.innerHTML = `<table class="admin-table"><thead><tr>
     <th>Nombre</th><th>Correo</th><th>Cód. país</th><th>Teléfono</th><th>Activo</th><th></th>
   </tr></thead><tbody>${data.map(a => `
-    <tr data-id="${a.id}">
-      <td><input class="a-nombre" value="${a.nombre || ''}" style="width:150px;"></td>
-      <td><input class="a-correo" type="email" value="${a.correo || ''}" style="width:200px;"></td>
-      <td><input class="a-codigo" value="${a.telefono_codigo || '593'}" style="width:64px;"></td>
-      <td><input class="a-numero" value="${a.telefono_numero || ''}" style="width:120px;"></td>
+    <tr data-id="${escHTML(a.id)}">
+      <td><input class="a-nombre" value="${escHTML(a.nombre || '')}" style="width:150px;"></td>
+      <td><input class="a-correo" type="email" value="${escHTML(a.correo || '')}" style="width:200px;"></td>
+      <td><input class="a-codigo" value="${escHTML(a.telefono_codigo || '593')}" style="width:64px;"></td>
+      <td><input class="a-numero" value="${escHTML(a.telefono_numero || '')}" style="width:120px;"></td>
       <td style="text-align:center;"><input type="checkbox" class="a-activo" ${a.activo ? 'checked' : ''} style="width:auto;min-height:auto;"></td>
       <td style="white-space:nowrap;">
-        <button class="icon-btn" title="Guardar" aria-label="Guardar asesor ${a.nombre || ''}" data-save>&#10003;</button>
-        <button class="icon-btn danger" title="Eliminar" aria-label="Eliminar asesor ${a.nombre || ''}" data-del>&times;</button>
+        <button class="icon-btn" title="Guardar" aria-label="Guardar asesor ${escHTML(a.nombre || '')}" data-save>&#10003;</button>
+        <button class="icon-btn danger" title="Eliminar" aria-label="Eliminar asesor ${escHTML(a.nombre || '')}" data-del>&times;</button>
       </td>
     </tr>`).join('')}</tbody></table>`;
 
@@ -122,34 +122,35 @@ async function loadProjects() {
   if (error) { list.innerHTML = `Error: ${error.message}`; return; }
   PROYECTOS = data;
 
+  const covers = await signedMediaUrls(data.map(p => p.cover_url));
   list.innerHTML = `<table class="admin-table"><thead><tr>
     <th>Portada</th><th>Proyecto</th><th>Color</th><th>Tipo financiamiento</th><th>Activo</th><th></th>
-  </tr></thead><tbody>${await Promise.all(data.map(async p => {
-    const cover = await signedMediaUrl(p.cover_url);
+  </tr></thead><tbody>${data.map((p, i) => {
+    const cover = covers[i];
     return `<tr>
-      <td>${cover ? `<img class="thumb" src="${cover}">` : `<div class="thumb" style="background:linear-gradient(150deg, ${p.color_primario}, ${p.color_acento});"></div>`}</td>
-      <td><strong>${p.nombre}</strong><br><span class="hint">${p.id}${p.prefijo_proforma ? ' · proforma ' + p.prefijo_proforma + '-####' : ''}</span></td>
-      <td><span style="display:inline-block;width:16px;height:16px;border-radius:5px;background:${p.color_primario};border:1px solid var(--border);vertical-align:middle;" title="${p.color_primario}"></span></td>
-      <td>${p.tipo_financiamiento}</td>
+      <td>${cover ? `<img class="thumb" src="${cover}">` : `<div class="thumb" style="background:linear-gradient(150deg, ${escHTML(p.color_primario)}, ${escHTML(p.color_acento)});"></div>`}</td>
+      <td><strong>${escHTML(p.nombre)}</strong><br><span class="hint">${escHTML(p.id)}${p.prefijo_proforma ? ' · proforma ' + escHTML(p.prefijo_proforma) + '-####' : ''}</span></td>
+      <td><span style="display:inline-block;width:16px;height:16px;border-radius:5px;background:${escHTML(p.color_primario)};border:1px solid var(--border);vertical-align:middle;" title="${escHTML(p.color_primario)}"></span></td>
+      <td>${escHTML(p.tipo_financiamiento)}</td>
       <td>${p.activo ? 'Sí' : 'No'}</td>
       <td style="white-space:nowrap;">
-        <button class="icon-btn" title="Editar" aria-label="Editar ${p.nombre}" data-edit="${p.id}">✎</button>
-        <button class="icon-btn" title="${p.activo ? 'Desactivar' : 'Activar'}" aria-label="${p.activo ? 'Desactivar' : 'Activar'} ${p.nombre}" data-toggle="${p.id}">${p.activo ? '⏻' : '▶'}</button>
+        <button class="icon-btn" title="Editar" aria-label="Editar ${escHTML(p.nombre)}" data-edit="${escHTML(p.id)}">✎</button>
+        <button class="icon-btn" title="${p.activo ? 'Desactivar' : 'Activar'}" aria-label="${p.activo ? 'Desactivar' : 'Activar'} ${escHTML(p.nombre)}" data-toggle="${escHTML(p.id)}">${p.activo ? '⏻' : '▶'}</button>
       </td>
     </tr>`;
-  })).then(rows => rows.join(''))}</tbody></table>`;
+  }).join('')}</tbody></table>`;
 
   list.querySelectorAll('[data-edit]').forEach(b => b.onclick = () => editProject(b.dataset.edit));
   list.querySelectorAll('[data-toggle]').forEach(b => b.onclick = () => toggleProject(b.dataset.toggle));
 
   const sel = document.getElementById('unit-project-select');
-  sel.innerHTML = data.map(p => `<option value="${p.id}">${p.nombre}</option>`).join('');
+  sel.innerHTML = data.map(p => `<option value="${escHTML(p.id)}">${escHTML(p.nombre)}</option>`).join('');
   if (data.length) loadUnits();
 }
 
 function editProject(id) {
   const p = PROYECTOS.find(x => x.id === id);
-  document.getElementById('project-form-title').textContent = `Editando: ${p.nombre}`;
+  document.getElementById('project-form-title').textContent = `Editando: ${escHTML(p.nombre)}`;
   document.getElementById('p-id').value = p.id;
   document.getElementById('p-id').disabled = true;
   document.getElementById('p-nombre').value = p.nombre;
@@ -221,24 +222,25 @@ async function loadUnits() {
   const { data, error } = table === 'cotizador_inventario_extra' ? await query.eq('tipo', 'lote') : await query;
   if (error) { list.innerHTML = `Error: ${error.message}`; return; }
 
-  const rows = await Promise.all(data.map(async u => {
-    const thumb = table === 'cotizador_unidades' ? await signedMediaUrl(u.foto_url) : null;
-    return `<tr data-id="${u.id}" data-table="${table}">
+  const thumbs = await signedMediaUrls(data.map(u => (table === 'cotizador_unidades' ? u.foto_url : null)));
+  const rows = data.map((u, i) => {
+    const thumb = thumbs[i];
+    return `<tr data-id="${escHTML(u.id)}" data-table="${table}">
       <td>${thumb ? `<img class="thumb" src="${thumb}">` : '<div class="thumb"></div>'}</td>
-      <td><input class="f-codigo" value="${u.codigo}" style="width:90px;"></td>
-      <td><input class="f-nombre" value="${u.nombre || ''}" style="width:140px;"></td>
+      <td><input class="f-codigo" value="${escHTML(u.codigo)}" style="width:90px;"></td>
+      <td><input class="f-nombre" value="${escHTML(u.nombre || '')}" style="width:140px;"></td>
       <td><input class="f-precio" type="number" step="0.01" value="${u.precio ?? ''}" style="width:110px;"></td>
       <td><select class="f-estado">
         ${['disponible','reservado','vendida','no_disponible'].map(s => `<option value="${s}" ${u.estado===s?'selected':''}>${ESTADO_LABEL[s]}</option>`).join('')}
       </select></td>
-      <td><input class="f-nota" value="${u.nota || ''}" placeholder="Nota interna (no se imprime)" style="width:170px;"></td>
+      <td><input class="f-nota" value="${escHTML(u.nota || '')}" placeholder="Nota interna (no se imprime)" style="width:170px;"></td>
       <td><input type="file" class="f-foto" accept="image/*" style="width:130px;"></td>
       <td style="white-space:nowrap;">
-        <button class="icon-btn" title="Guardar" aria-label="Guardar unidad ${u.codigo || ''}" data-save>&#10003;</button>
-        <button class="icon-btn danger" title="Eliminar" aria-label="Eliminar unidad ${u.codigo || ''}" data-del>&times;</button>
+        <button class="icon-btn" title="Guardar" aria-label="Guardar unidad ${escHTML(u.codigo || '')}" data-save>&#10003;</button>
+        <button class="icon-btn danger" title="Eliminar" aria-label="Eliminar unidad ${escHTML(u.codigo || '')}" data-del>&times;</button>
       </td>
     </tr>`;
-  }));
+  });
 
   list.innerHTML = `<table class="admin-table"><thead><tr>
     <th>Foto</th><th>Código</th><th>Nombre</th><th>Precio</th><th>Estado</th><th>Nota</th><th>Subir foto</th><th></th>
