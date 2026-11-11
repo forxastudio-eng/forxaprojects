@@ -589,3 +589,10 @@ ul { margin: 0; padding: 0; list-style: none; }
 .tab-btn.is-active .quedan{background:rgba(255,255,255,.92)}
 /* móvil: las 3 pestañas ya llenan el ancho; el estado se ve en cada tarjeta */
 @media (max-width: 600px){.tab-btn .quedan{display:none}}
+
+/* Menú de escritorio más corto: "Locales" y "Plantas" siguen a "Suites & Lofts" en la página;
+   en el menú móvil se mantienen todos los enlaces */
+@media (min-width: 681px) { .nav a[href="#locales"], .nav a[href="#planos"] { display: none; } }
+@media (min-width: 681px) { .nav a { white-space: nowrap; } }
+@media (min-width: 681px) and (max-width: 1100px) { .nav { gap: 20px; } }
+@media (min-width: 681px) and (max-width: 900px) { .nav { gap: 14px; } .nav a { font-size: 0.85rem; } .nav a[href="#amenidades"] { display: none; } }
