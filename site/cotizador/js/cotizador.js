@@ -264,6 +264,7 @@ function wireEvents() {
   qs('back-btn').onclick = () => { qs('proforma-view').hidden = true; qs('form-view').hidden = false; window.scrollTo(0, 0); };
   qs('print-btn').onclick = () => window.print();
   qs('pdf-btn').onclick = descargarPDF;
+  qs('share-btn').onclick = compartirEnlace;
   ['uf-q', 'uf-max', 'uf-disp'].forEach(id => qs(id)?.addEventListener('input', filtrarUnidades));
 }
 
@@ -308,26 +309,68 @@ function cargarHtml2pdf() {
   });
   return html2pdfCarga;
 }
-async function descargarPDF() {
-  const btn = qs('pdf-btn');
+// Genera el PDF desde una copia del documento a ancho A4 fijo: así el PDF sale igual
+// de ordenado desde un celular (donde el documento en pantalla es angosto).
+async function generarPDF(modo) {
+  await cargarHtml2pdf();
   const doc = qs('proforma-doc');
-  btn.disabled = true; btn.setAttribute('aria-busy', 'true'); btn.textContent = 'Generando PDF…';
+  const titulo = (doc.querySelector('.doc-title')?.textContent || 'Proforma FORXA').trim();
+  const nombre = titulo.replace(/[^\w\s.-]+/g, '').replace(/\s+/g, '-');
+  const host = document.createElement('div');
+  host.style.cssText = 'position:fixed;left:-10000px;top:0;width:794px;background:#fff;';
+  host.appendChild(doc.cloneNode(true));
+  document.body.appendChild(host);
   try {
-    await cargarHtml2pdf();
-    const titulo = (doc.querySelector('.doc-title')?.textContent || 'Proforma FORXA').trim();
-    await window.html2pdf().set({
-      margin: 0,
-      filename: titulo.replace(/[^\w\s.-]+/g, '').replace(/\s+/g, '-') + '.pdf',
+    const w = window.html2pdf().set({
+      margin: 0, filename: nombre + '.pdf',
       image: { type: 'jpeg', quality: 0.92 },
-      html2canvas: { scale: 2, useCORS: true, backgroundColor: '#ffffff' },
+      html2canvas: { scale: 2, useCORS: true, backgroundColor: '#ffffff', windowWidth: 794 },
       jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
       pagebreak: { mode: ['css', 'legacy'], before: '.pf-page + .pf-page' },
-    }).from(doc).save();
-  } catch (e) {
+    }).from(host.firstChild);
+    if (modo === 'blob') return { blob: await w.outputPdf('blob'), nombre, titulo };
+    await w.save();
+    return { nombre, titulo };
+  } finally { host.remove(); }
+}
+
+async function descargarPDF() {
+  const btn = qs('pdf-btn');
+  btn.disabled = true; btn.setAttribute('aria-busy', 'true'); btn.textContent = 'Generando PDF…';
+  try { await generarPDF('save'); }
+  catch (e) {
     console.error(e);
     showToast('No se pudo generar el PDF. Usa "Imprimir" y elige "Guardar como PDF".');
   } finally {
     btn.disabled = false; btn.removeAttribute('aria-busy'); btn.textContent = 'Descargar PDF';
+  }
+}
+
+// Enlace para el cliente: sube el PDF a un bucket PRIVADO y crea una URL firmada de 7 días
+// (cualquiera con el enlace lo ve hasta que caduca; no expone el historial ni otras proformas).
+async function compartirEnlace() {
+  const btn = qs('share-btn');
+  btn.disabled = true; btn.setAttribute('aria-busy', 'true'); btn.textContent = 'Creando enlace…';
+  try {
+    const { blob, nombre, titulo } = await generarPDF('blob');
+    const rand = crypto.getRandomValues(new Uint32Array(2)).join('');
+    const path = `${CotizadorAuth.getUser().id}/${nombre}-${rand}.pdf`;
+    const up = await supabaseClient.storage.from('proformas-compartidas').upload(path, blob, { contentType: 'application/pdf' });
+    if (up.error) throw up.error;
+    const sg = await supabaseClient.storage.from('proformas-compartidas').createSignedUrl(path, 7 * 24 * 3600);
+    if (sg.error) throw sg.error;
+    const url = sg.data.signedUrl;
+    if (navigator.share) {
+      try { await navigator.share({ title: titulo, text: `${titulo} (enlace válido por 7 días)`, url }); return; }
+      catch (e) { if (e.name === 'AbortError') return; }
+    }
+    await navigator.clipboard.writeText(url);
+    showToast('Enlace copiado. Es válido por 7 días.', 'ok');
+  } catch (e) {
+    console.error(e);
+    showToast('No se pudo crear el enlace. Usa "Descargar PDF" y compártelo desde tu teléfono.');
+  } finally {
+    btn.disabled = false; btn.removeAttribute('aria-busy'); btn.textContent = 'Compartir enlace del PDF';
   }
 }
 
