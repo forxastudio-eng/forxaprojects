@@ -501,18 +501,6 @@ function buildWhatsAppMessage({ numeroProforma, asesorNombre, asesorEmpresa, cli
     `Saludos cordiales.`;
 }
 
-// Material de marca de los proyectos con identidad propia: su proforma lleva
-// el render, los logos y la paleta (estilos en styles.css, #proforma-doc[data-marca]).
-// Los demás proyectos siguen con la proforma FORXA estándar.
-const MARCA_PROYECTO = {
-  '15patios': {
-    render: 'assets/15patios/render-fachada.jpg',
-    logoCrema: 'assets/15patios/logo-horizontal-crema.png',
-    slogan: 'Vivir sin prisas',
-    lugar: 'Misicata · Cuenca · Ecuador',
-  },
-};
-
 async function generarProforma() {
   if (!seleccionadas.length) { showToast('Selecciona al menos una unidad.'); return; }
   const asesorNombre = qs('asesor-nombre').value.trim();
@@ -536,7 +524,6 @@ async function generarProforma() {
   const hoy = new Date();
   const asesorEmail = CotizadorAuth.getUser().email;
   const logoProyecto = `assets/logos/${PROYECTO.id}.png`;
-  const marca = MARCA_PROYECTO[PROYECTO.id];
 
   // Número de proforma: lo genera la base de datos de forma atómica (nunca
   // se repite aunque dos asesores generen al mismo tiempo). Si por algún
@@ -594,10 +581,6 @@ async function generarProforma() {
           <div class="doc-date">${fmtDate(hoy)}</div>
         </div>
       </div>
-      ${marca ? `
-      <div class="pf-hero" style="background-image:url('${marca.render}')">
-        <div class="cap"><div class="slogan">${marca.slogan}</div><div class="lugar">${marca.lugar}</div></div>
-      </div>` : ''}
 
       <div class="pf-parties">
         <div>
@@ -627,28 +610,17 @@ async function generarProforma() {
       </div>
     </div>`;
 
-  const cierreMarca = marca ? `
-      <div class="pf-cierre">
-        <div class="lugar">${marca.lugar}</div>
-        <img class="logo-proyecto" src="${marca.logoCrema}" alt="${PROYECTO.nombre}">
-        <div class="texto">Comercializa y acompaña FORXA Inmobiliaria</div>
-        <img class="logo-forxa" src="assets/logo-white.png" alt="FORXA Inmobiliaria">
-      </div>` : '';
-
-  const page2 = (fotos.length || marca) ? `
+  const page2 = fotos.length ? `
     <div class="pf-page pf-photos">
       <div class="pf-photos-title">Fichas de la propiedad</div>
-      <div class="pf-photos-sub">${PROYECTO.nombre} · ${seleccionadas.length > 1 ? seleccionadas.length + ' unidades cotizadas' : '1 unidad cotizada'}</div>
+      <div class="pf-photos-sub">${PROYECTO.nombre} · ${fotos.length > 1 ? fotos.length + ' unidades cotizadas' : '1 unidad cotizada'}</div>
       ${fotos.map(f => `
         <div class="pf-photo-item">
           <div class="cap">${f.caption}</div>
           <img src="${f.url}">
         </div>`).join('')}
-      ${cierreMarca}
     </div>` : '';
 
-  // sin marca el atributo no debe existir (los selectores [data-marca] también casan con vacío)
-  if (marca) qs('proforma-doc').dataset.marca = PROYECTO.id; else delete qs('proforma-doc').dataset.marca;
   qs('proforma-doc').innerHTML = page1 + page2;
   qs('form-view').hidden = true;
   qs('proforma-view').hidden = false;
