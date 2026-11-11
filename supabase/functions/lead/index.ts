@@ -35,7 +35,8 @@ Deno.serve(async (req) => {
 
   const proyecto = txt(b.proyecto, 30);
   const nombre = txt(b.nombre, 120);
-  const telefono = txt(b.telefono, 30)?.replace(/[^\d+ ()-]/g, "") || null;
+  // Solo dígitos (y + inicial): así "099 123 4567", "0991234567" y "+593991234567" cuentan igual.
+  const telefono = txt(b.telefono, 30)?.replace(/(?!^\+)[^\d]/g, "") || null;
   if (!proyecto || !/^[a-z0-9-]{2,30}$/.test(proyecto)) return out(400, { error: "Proyecto inválido" });
   if (!nombre || !telefono || telefono.replace(/\D/g, "").length < 7) return out(400, { error: "Nombre y teléfono son obligatorios" });
   const email = txt(b.email, 160);
@@ -59,10 +60,13 @@ Deno.serve(async (req) => {
   }
 
   const db = createClient(Deno.env.get("SUPABASE_URL")!, Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!);
-  // Evita duplicados por doble clic: mismo teléfono y proyecto en los últimos 2 minutos.
-  const desde = new Date(Date.now() - 120_000).toISOString();
-  const dup = await db.from("leads").select("id").eq("telefono", telefono).eq("proyecto", proyecto).gte("created_at", desde).limit(1);
-  if (dup.data?.length) return out(200, { ok: true, duplicado: true });
+  // Límite anti-abuso: máx. 3 leads por teléfono en 24 h (y nada de doble clic en 2 min).
+  // Se responde "ok" igual para no darle pistas a quien insiste.
+  const dia = new Date(Date.now() - 864e5).toISOString();
+  const prev = await db.from("leads").select("proyecto, created_at").like("telefono", "%" + telefono.replace(/\D/g, "").slice(-9)).gte("created_at", dia);
+  const recientes = prev.data || [];
+  const dobleClic = recientes.some((r) => r.proyecto === proyecto && Date.parse(r.created_at) > Date.now() - 120_000);
+  if (dobleClic || recientes.length >= 3) return out(200, { ok: true });
 
   const { error } = await db.from("leads").insert({
     tipo: fecha_visita ? "visita" : "informacion",
