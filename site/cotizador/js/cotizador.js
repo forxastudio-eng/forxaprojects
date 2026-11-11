@@ -743,15 +743,15 @@ async function generarProforma() {
     plan.precioLista = u.precio;
     if (!plan0) plan0 = plan;
     const fotoUrl = fotoUrls[i];
-    if (fotoUrl) fotos.push({ caption: `${u.nombre}${u.specsText ? ' · ' + u.specsText : ''}`, url: fotoUrl });
+    if (fotoUrl) fotos.push({ caption: `${escHTML(u.nombre)}${u.specsText ? ' · ' + escHTML(u.specsText) : ''}`, url: fotoUrl });
 
     unitSections += `
       <div class="pf-unit">
         <div class="pf-unit-head">
           <div>
             <div class="tag">Propiedad cotizada${plan.formaPago === 'contado' ? ' · Pago de contado' : ''}</div>
-            <h2>${u.nombre}</h2>
-            <div class="specs">${u.specsText}</div>
+            <h2>${escHTML(u.nombre)}</h2>
+            <div class="specs">${escHTML(u.specsText)}</div>
           </div>
           <div class="price-box">
             ${plan.desc > 0 ? `<div class="price-old">${fmtMoney(u.precio)}</div>` : ''}
@@ -769,10 +769,10 @@ async function generarProforma() {
         <div class="logos">
           <img src="assets/logo.png" alt="FORXA Inmobiliaria" onerror="this.style.display='none'">
           <div class="div"></div>
-          <img src="${logoProyecto}" alt="${PROYECTO.nombre}" onerror="this.style.display='none'">
+          <img src="${logoProyecto}" alt="${escHTML(PROYECTO.nombre)}" onerror="this.style.display='none'">
         </div>
         <div class="doc-meta">
-          <div class="doc-title">Proforma${numeroProforma ? ' ' + numeroProforma : ''}</div>
+          <div class="doc-title">Proforma${numeroProforma ? ' ' + escHTML(numeroProforma) : ''}</div>
           <div class="doc-date">${fmtDate(hoy)}</div>
         </div>
       </div>
@@ -780,13 +780,13 @@ async function generarProforma() {
       <div class="pf-parties">
         <div>
           <div class="pf-party-label">Asesor</div>
-          <div class="pf-party-name">${asesorNombre}</div>
-          <div class="pf-party-meta">${asesorTel}${asesorEmail ? ' · ' + asesorEmail : ''}</div>
+          <div class="pf-party-name">${escHTML(asesorNombre)}</div>
+          <div class="pf-party-meta">${escHTML(asesorTel)}${asesorEmail ? ' · ' + escHTML(asesorEmail) : ''}</div>
         </div>
         <div>
           <div class="pf-party-label">Cotización preparada para</div>
-          <div class="pf-party-name">${nombre}</div>
-          <div class="pf-party-meta">${[tel, email].filter(Boolean).join(' · ') || '&mdash;'}</div>
+          <div class="pf-party-name">${escHTML(nombre)}</div>
+          <div class="pf-party-meta">${escHTML([tel, email].filter(Boolean).join(' · ')) || '&mdash;'}</div>
         </div>
       </div>
 
@@ -795,12 +795,12 @@ async function generarProforma() {
       ${notas ? `
       <div class="pf-notes">
         <div class="pf-party-label">Notas adicionales</div>
-        <p>${notas.replace(/\n/g, '<br>')}</p>
+        <p>${escHTML(notas).replace(/\n/g, '<br>')}</p>
       </div>` : ''}
 
       <div class="pf-footer">
-        <div class="col"><strong>${asesorNombre}</strong><br>Asesor FORXA<br>${asesorTel}${asesorEmail ? '<br>' + asesorEmail : ''}</div>
-        <div class="col"><strong>FORXA Inmobiliaria</strong><br>${PROYECTO.nombre}${PROYECTO.ubicacion ? '<br>' + PROYECTO.ubicacion : ''}</div>
+        <div class="col"><strong>${escHTML(asesorNombre)}</strong><br>Asesor FORXA<br>${escHTML(asesorTel)}${asesorEmail ? '<br>' + escHTML(asesorEmail) : ''}</div>
+        <div class="col"><strong>FORXA Inmobiliaria</strong><br>${escHTML(PROYECTO.nombre)}${PROYECTO.ubicacion ? '<br>' + escHTML(PROYECTO.ubicacion) : ''}</div>
         <div class="col"><strong>Vigencia</strong><br>Esta proforma es referencial y válida por 8 días desde su emisión. Precios y disponibilidad sujetos a confirmación al momento de la reserva.</div>
       </div>
     </div>`;
@@ -808,11 +808,11 @@ async function generarProforma() {
   const page2 = fotos.length ? `
     <div class="pf-page pf-photos">
       <div class="pf-photos-title">Fichas de la propiedad</div>
-      <div class="pf-photos-sub">${PROYECTO.nombre} · ${fotos.length > 1 ? fotos.length + ' unidades cotizadas' : '1 unidad cotizada'}</div>
+      <div class="pf-photos-sub">${escHTML(PROYECTO.nombre)} · ${fotos.length > 1 ? fotos.length + ' unidades cotizadas' : '1 unidad cotizada'}</div>
       ${fotos.map(f => `
         <div class="pf-photo-item">
           <div class="cap">${f.caption}</div>
-          <img src="${f.url}">
+          <img src="${escHTML(f.url)}">
         </div>`).join('')}
     </div>` : '';
 
