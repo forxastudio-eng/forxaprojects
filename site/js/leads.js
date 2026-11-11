@@ -49,6 +49,7 @@
         body: JSON.stringify(data)
       }).catch(function () {});
     } catch (e) { /* sin red: WhatsApp sigue funcionando */ }
+    if (window.umami && window.umami.track) { try { window.umami.track("lead", { proyecto: data.proyecto, visita: !!data.fecha_visita }); } catch (e) {} }
     // El token de Turnstile sirve una sola vez: se pide otro para un segundo envío.
     if (window.turnstile) { try { window.turnstile.reset(form.querySelector(".cf-turnstile")); } catch (e) {} }
   }

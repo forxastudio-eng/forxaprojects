@@ -212,7 +212,7 @@ Cada fase va en **su propio PR**, se revisa en el *deploy preview* de Netlify y 
 - [x] Un `esc()` compartido para todo texto de la base, y *allowlist* en el CMS (S10).
 
 ### Fase 3 · Nueva funcionalidad sobre la base existente (2–3 semanas)
-> **Estado (11/11/2026, rama `claude/lucid-curie-kfbacv`):** hecho → home con fotos y disponibilidad en vivo, tabla `leads` + Edge Function `lead` con Turnstile, formularios que guardan y luego abren WhatsApp, "agendar visita", bandeja de leads en `/admin/#/leads`, "Quedan N" en la home, PDF directo y filtros de unidades en el cotizador, leads en el dashboard de marketing. Hecho después: duplicar proforma desde el historial, "Quedan N" en Álabes y Arcus, width/height en imágenes. Pendiente → enlace público de la proforma con token y analítica sin cookies (falta elegir Plausible o Umami y crear la cuenta).
+> **Estado (11/11/2026, rama `claude/lucid-curie-kfbacv`):** hecho → home con fotos y disponibilidad en vivo, tabla `leads` + Edge Function `lead` con Turnstile, formularios que guardan y luego abren WhatsApp, "agendar visita", bandeja de leads en `/admin/#/leads`, "Quedan N" en la home, PDF directo y filtros de unidades en el cotizador, leads en el dashboard de marketing. Hecho después: duplicar proforma desde el historial, "Quedan N" en Álabes y Arcus, width/height en imágenes. Pendiente → enlace público de la proforma con token y la analítica sin cookies con Umami (conectada tras el consentimiento).
 1. **Home que vende.**
    - Primera pantalla con los proyectos reales: foto, "desde $", unidades disponibles calculadas en vivo y filtro por tipo y ubicación.
    - 15 Patios agregado a la tabla `projects`, que es contenido y no código.

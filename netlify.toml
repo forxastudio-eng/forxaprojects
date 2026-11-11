@@ -14,7 +14,7 @@
     Strict-Transport-Security = "max-age=31536000"
     Permissions-Policy = "camera=(), microphone=(), geolocation=()"
     # CSP en modo solo-reporte durante ~1 semana; luego pasar a Content-Security-Policy.
-    Content-Security-Policy-Report-Only = "default-src 'self'; script-src 'self' 'unsafe-inline' cdn.jsdelivr.net cdnjs.cloudflare.com challenges.cloudflare.com; style-src 'self' 'unsafe-inline' fonts.googleapis.com cdnjs.cloudflare.com; font-src 'self' fonts.gstatic.com data:; img-src 'self' data: blob: https://*.supabase.co; media-src 'self' blob: https://*.supabase.co; connect-src 'self' https://*.supabase.co wss://*.supabase.co; frame-src 'self' https://wa.me https://challenges.cloudflare.com; frame-ancestors 'self'; base-uri 'self'; form-action 'self' https://wa.me"
+    Content-Security-Policy-Report-Only = "default-src 'self'; script-src 'self' 'unsafe-inline' cloud.umami.is cdn.jsdelivr.net cdnjs.cloudflare.com challenges.cloudflare.com; style-src 'self' 'unsafe-inline' fonts.googleapis.com cdnjs.cloudflare.com; font-src 'self' fonts.gstatic.com data:; img-src 'self' data: blob: https://*.supabase.co; media-src 'self' blob: https://*.supabase.co; connect-src 'self' https://cloud.umami.is https://api-gateway.umami.dev https://*.supabase.co wss://*.supabase.co; frame-src 'self' https://wa.me https://challenges.cloudflare.com; frame-ancestors 'self'; base-uri 'self'; form-action 'self' https://wa.me"
 
 # Zonas internas: fuera de los buscadores
 [[headers]]
