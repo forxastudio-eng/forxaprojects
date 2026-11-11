@@ -206,10 +206,10 @@ function renderUnitGrid() {
   grid.innerHTML = UNIDADES.map(u => {
     const disabled = u.estado !== 'disponible';
     return `
-    <div class="unit-card ${disabled ? '' : ''}" data-id="${u.id}" style="${disabled ? 'opacity:.55;cursor:not-allowed;' : ''}">
-      <span class="badge badge-${u.estado}">${ESTADO_LABEL[u.estado] || u.estado}</span>
-      <div class="name" style="margin-top:8px;">${u.nombre}</div>
-      <div class="specs">${u.specsText}</div>
+    <div class="unit-card" data-id="${escHTML(u.id)}" ${disabled || !u.precio ? 'aria-disabled="true"' : 'role="button" tabindex="0" aria-pressed="false"'} style="${disabled ? 'opacity:.55;cursor:not-allowed;' : ''}">
+      <span class="badge badge-${escHTML(u.estado)}">${escHTML(ESTADO_LABEL[u.estado] || u.estado)}</span>
+      <div class="name" style="margin-top:8px;">${escHTML(u.nombre)}</div>
+      <div class="specs">${escHTML(u.specsText)}</div>
       <div class="price">${u.precio ? fmtMoney(u.precio) : 'Consultar precio'}</div>
     </div>`;
   }).join('');
@@ -218,7 +218,24 @@ function renderUnitGrid() {
     const u = UNIDADES.find(x => x.id === card.dataset.id);
     if (u.estado !== 'disponible' || !u.precio) return;
     card.addEventListener('click', () => toggleUnit(u, card));
+    card.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleUnit(u, card); } });
   });
+  filtrarUnidades();
+}
+
+// Filtros: solo ocultan tarjetas (no se re-renderiza), así no se pierde la selección.
+function filtrarUnidades() {
+  const q = (qs('uf-q')?.value || '').trim().toLowerCase();
+  const max = parseFloat(qs('uf-max')?.value) || 0;
+  const disp = !!qs('uf-disp')?.checked;
+  let n = 0;
+  qs('unit-grid').querySelectorAll('.unit-card').forEach(card => {
+    const u = UNIDADES.find(x => x.id === card.dataset.id);
+    const ok = u && (!q || [u.codigo, u.nombre, u.tipo, u.specsText].join(' ').toLowerCase().includes(q)) &&
+      (!max || (u.precio && u.precio <= max)) && (!disp || u.estado === 'disponible');
+    card.hidden = !ok; if (ok) n++;
+  });
+  if (qs('uf-count')) qs('uf-count').textContent = `${n} de ${UNIDADES.length}`;
 }
 
 function toggleUnit(u, card) {
@@ -226,13 +243,13 @@ function toggleUnit(u, card) {
   if (idx === -1) {
     if (!PROYECTO.permite_multi_seleccion) {
       seleccionadas = [];
-      qs('unit-grid').querySelectorAll('.unit-card.selected').forEach(c => c.classList.remove('selected'));
+      qs('unit-grid').querySelectorAll('.unit-card.selected').forEach(c => { c.classList.remove('selected'); c.setAttribute('aria-pressed', 'false'); });
     }
     seleccionadas.push(u);
-    card.classList.add('selected');
+    card.classList.add('selected'); card.setAttribute('aria-pressed', 'true');
   } else {
     seleccionadas.splice(idx, 1);
-    card.classList.remove('selected');
+    card.classList.remove('selected'); card.setAttribute('aria-pressed', 'false');
   }
   renderFinancingSummary();
 }
@@ -246,6 +263,7 @@ function wireEvents() {
   qs('back-btn').onclick = () => { qs('proforma-view').hidden = true; qs('form-view').hidden = false; window.scrollTo(0, 0); };
   qs('print-btn').onclick = () => window.print();
   qs('pdf-btn').onclick = descargarPDF;
+  ['uf-q', 'uf-max', 'uf-disp'].forEach(id => qs(id)?.addEventListener('input', filtrarUnidades));
 }
 
 // PDF directo (sobre todo para asesores en el celular, donde "Imprimir" es incómodo).

@@ -164,14 +164,14 @@ Modo *impeccable*: las landings y la home son **Persuade** (el visitante decide 
 Cada fase va en **su propio PR**, se revisa en el *deploy preview* de Netlify y se puede revertir con un clic (revertir el PR). No se cambian URLs ni el esquema de datos, salvo agregar.
 
 ### Fase 0 · Hoy, sin código (30 minutos)
-- [ ] Hacer merge del PR #8 (15 Patios) y probar una proforma de 15 Patios.
+- [x] Hacer merge del PR #8 (15 Patios) y probar una proforma de 15 Patios.
 - [ ] Confirmar las contraseñas cambiadas y ejecutar `drop table migracion.credenciales_iniciales;` (S1).
 - [ ] Activar *Leaked password protection* (S2) y confirmar *Allow new users to sign up* = OFF (S3).
 - [ ] Ejecutar `supabase/15_15patios_contado_simulacion.sql` (15 Patios es de contado) y confirmar el estado de la Vivienda 3.
 
 ### Fase 1 · Ganancias rápidas de bajo riesgo (1–2 días)
 **Seguridad**
-- [ ] `netlify.toml`:
+- [x] `netlify.toml`:
   - HSTS y `Permissions-Policy: camera=(), microphone=(), geolocation=()`.
   - **CSP en modo `Report-Only`** (S4).
   - `Cache-Control` para assets (R4).
@@ -181,7 +181,7 @@ Cada fase va en **su propio PR**, se revisa en el *deploy preview* de Netlify y 
   - `search_path` (S8) y límites de buckets (S9).
   - Índices FK y `(select auth.uid())` en las 3 políticas (R9).
   - Fusionar las políticas duplicadas.
-- [ ] Volver a correr los asesores de Supabase y dejar seguridad en 0 WARN.
+- [x] Volver a correr los asesores de Supabase: quedan solo los WARN esperados (4 funciones SECURITY DEFINER que el equipo usa con sesión) y *Leaked password protection*, que se activa a mano.
 
 **Rendimiento**
 - [x] `loading="lazy" decoding="async"` y `width`/`height` en todas las imágenes bajo la primera pantalla de Álabes, Portón y Arcus (R2), y `fetchpriority="high"` en el hero.
@@ -212,6 +212,7 @@ Cada fase va en **su propio PR**, se revisa en el *deploy preview* de Netlify y 
 - [x] Un `esc()` compartido para todo texto de la base, y *allowlist* en el CMS (S10).
 
 ### Fase 3 · Nueva funcionalidad sobre la base existente (2–3 semanas)
+> **Estado (11/11/2026, rama `claude/lucid-curie-kfbacv`):** hecho → home con fotos y disponibilidad en vivo, tabla `leads` + Edge Function `lead` con Turnstile, formularios que guardan y luego abren WhatsApp, "agendar visita", bandeja de leads en `/admin/#/leads`, "Quedan N" en la home, PDF directo y filtros de unidades en el cotizador, leads en el dashboard de marketing. Pendiente → enlace público de la proforma con token, duplicar proforma, distintivo "Quedan N" dentro de cada landing y analítica sin cookies (falta elegir Plausible o Umami y crear la cuenta).
 1. **Home que vende.**
    - Primera pantalla con los proyectos reales: foto, "desde $", unidades disponibles calculadas en vivo y filtro por tipo y ubicación.
    - 15 Patios agregado a la tabla `projects`, que es contenido y no código.
