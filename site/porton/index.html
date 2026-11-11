@@ -55,10 +55,10 @@
 <!-- ============ HERO (VIDEO) ============ -->
 <section class="hero" id="inicio" data-cms-group="Portada">
   <div class="hero__bg">
-    <video autoplay muted loop playsinline poster="img/hero-poster.jpg" data-cms-attr="poster:inicio.video-portada" data-cms-label="Imagen de carga del video" data-cms-type="image">
-      <source src="img/hero-video.webm" type="video/webm"  data-cms-attr="src:inicio.video-webm" data-cms-label="Video de fondo (WEBM)" data-cms-type="video"/>
+    <video muted loop playsinline preload="none" id="heroVideo" poster="img/hero-poster.jpg" data-cms-attr="poster:inicio.video-portada" data-cms-label="Imagen de carga del video" data-cms-type="image">
       <source src="img/hero-video.mp4" type="video/mp4"  data-cms-attr="src:inicio.video-mp4" data-cms-label="Video de fondo (MP4)" data-cms-type="video"/>
     </video>
+    <button type="button" id="heroPause" aria-label="Pausar video de fondo" hidden style="position:absolute;right:16px;bottom:16px;z-index:3;min-width:44px;min-height:44px;border-radius:50%;border:1px solid rgba(255,255,255,.6);background:rgba(0,0,0,.45);color:#fff;font-size:16px;cursor:pointer">&#10074;&#10074;</button>
   </div>
   <div class="hero__overlay"></div>
   <div class="container hero__content">
@@ -383,5 +383,16 @@
 <script src="/js/cms.js"></script>
 <script src="js/script.js"></script>
 <script src="/js/consent.js" defer></script>
+<script>
+// Video del hero: solo en pantallas anchas, sin ahorro de datos ni "reducir movimiento";
+// se pausa fuera de pantalla y tiene botón de pausa (WCAG 2.2.2). Si no, queda el póster.
+(function(){var v=document.getElementById('heroVideo'),b=document.getElementById('heroPause');if(!v)return;
+var c=navigator.connection||{},ok=innerWidth>=800&&!c.saveData&&!matchMedia('(prefers-reduced-motion: reduce)').matches;
+if(!ok){v.removeAttribute('autoplay');return;}
+var manual=false;b.hidden=false;
+function play(){if(!manual)v.play().catch(function(){});}
+new IntersectionObserver(function(e){e[0].isIntersecting?play():v.pause();}).observe(v);
+b.onclick=function(){if(v.paused){manual=false;v.play();b.innerHTML='&#10074;&#10074;';b.setAttribute('aria-label','Pausar video de fondo');}else{manual=true;v.pause();b.innerHTML='&#9654;';b.setAttribute('aria-label','Reproducir video de fondo');}};})();
+</script>
 </body>
 </html>

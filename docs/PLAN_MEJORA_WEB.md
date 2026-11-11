@@ -193,10 +193,10 @@ Cada fase va en **su propio PR**, se revisa en el *deploy preview* de Netlify y 
 
 ### Fase 2 · Imágenes, video, SEO y accesibilidad (≈ 1 semana)
 - [ ] `scripts/optimizar-imagenes.mjs` (`sharp`): genera `.avif` y `.webp` en 640, 1280 y 1920 junto al original, **sin renombrar ni borrar nada**. Con el script se actualizan las páginas a `<picture>` con `srcset`/`sizes` (R1).
-- [ ] Mismo tratamiento para las imágenes que sube el editor:
+- [x] Mismo tratamiento para las imágenes que sube el editor:
   - Al subir desde el panel, el navegador redimensiona a un máximo de 2000 px y convierte a WebP antes de enviar (canvas, sin servidor).
   - Las imágenes ya subidas en Storage se pueden pedir redimensionadas con las *Image Transformations* de Supabase si el plan lo incluye. Si no, se reprocesan una vez con el script.
-- [ ] Video de Portón:
+- [x] Video de Portón:
   - Recomprimir a 720p y unos 1,5 MB.
   - En móvil y con `Save-Data`, solo el póster.
   - Pausar fuera de pantalla con `IntersectionObserver` y añadir un botón de pausa (R3).
