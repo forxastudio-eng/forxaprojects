@@ -287,7 +287,7 @@
 
       </div>
 
-      <form class="contact-form reveal" id="contactForm">
+      <form class="contact-form reveal" id="contactForm" data-lead="alabes">
         <h3 data-cms="contacto.subtitulo" data-cms-label="Subtítulo">Solicita información</h3>
         <p data-cms="contacto.texto-2" data-cms-label="Párrafo 2" data-cms-type="textarea">Completa el formulario y te escribimos por WhatsApp al instante.</p>
         <div class="form-row">
@@ -306,6 +306,7 @@
             <option value="Aún no lo sé">Aún no lo sé</option>
           </select>
         </div>
+        <div class="field"><label for="visit">¿Quieres agendar una visita? Fecha preferida (opcional)</label><input type="date" id="visit" name="visit"></div>
         <div class="field"><label for="message" data-cms="contacto.campo-5" data-cms-label="Etiqueta del campo 5">Mensaje</label><textarea id="message" name="message" placeholder="Cuéntanos qué te gustaría saber..." data-cms-attr="placeholder:contacto.ejemplo-4" data-cms-label="Texto de ejemplo del campo"></textarea></div>
         <button type="submit" class="btn btn--primary btn--block" data-cms="contacto.boton" data-cms-label="Botón">Enviar por WhatsApp</button>
         <p class="form-status" id="formStatus"></p>
@@ -347,6 +348,7 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.119.0/dist/umd/supabase.js" integrity="sha384-uteMfOloLDGt042uDz+xHGF3ym63/WQ6rFq7murQRG8Ih7QrXGEGNtWd8688sb4O" crossorigin="anonymous"></script>
 <script src="/js/forxa-config.js"></script>
 <script src="/js/cms.js"></script>
+<script src="/js/leads.js"></script>
 <script src="js/script.js"></script>
 <script src="/js/consent.js" defer></script>
 </body>

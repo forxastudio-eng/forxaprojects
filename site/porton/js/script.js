@@ -436,6 +436,9 @@ document.addEventListener("DOMContentLoaded", function () {
       text += ". Teléfono: " + phone;
       if (email) text += ". Correo: " + email;
       if (message) text += ". Mensaje: " + message;
+      var visit = (form.querySelector("#visit") || {}).value || "";
+      if (visit) text += ". Me gustaría visitar el proyecto el " + visit.split("-").reverse().join("/");
+      if (window.FORXA_LEAD) FORXA_LEAD.send(form, { proyecto: "porton", nombre: name, telefono: phone, email: email, interes: lote, mensaje: message, fecha_visita: visit });
 
       var url = "https://wa.me/" + ((window.CMS && CMS.whatsapp()) || WHATSAPP_NUMBER) + "?text=" + encodeURIComponent(text);
       openWhatsApp(url);

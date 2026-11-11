@@ -129,3 +129,6 @@ button,input,select,textarea{font:inherit;color:inherit}
 
 /* Foco visible en campos (WCAG 2.4.7): sustituye al outline:none de :focus */
 .field input:focus-visible, .field select:focus-visible, .field textarea:focus-visible { outline: 2px solid var(--fx-blue-400); outline-offset: 2px; }
+
+/* Widget anti-spam de Turnstile a todo el ancho del formulario */
+.contact-form .cf-turnstile{grid-column:1/-1}

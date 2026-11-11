@@ -114,9 +114,12 @@
     var proyecto = document.getElementById("c-proyecto").value;
     var mensaje = document.getElementById("c-mensaje").value.trim();
     var err = document.getElementById("c-error");
+    var telefono = document.getElementById("c-telefono").value.trim();
     if (!nombre) { err.textContent = "Escribe tu nombre para continuar."; document.getElementById("c-nombre").focus(); return; }
+    if (telefono.replace(/\D/g, "").length < 7) { err.textContent = "Escribe tu teléfono para que podamos responderte."; document.getElementById("c-telefono").focus(); return; }
     err.textContent = "";
-    var text = "Hola FORXA, soy " + nombre + "." +
+    if (window.FORXA_LEAD) FORXA_LEAD.send(e.target, { proyecto: "home", nombre: nombre, telefono: telefono, interes: proyecto, mensaje: mensaje });
+    var text = "Hola FORXA, soy " + nombre + ". Mi teléfono: " + telefono + "." +
       (proyecto ? " Me interesa " + proyecto + "." : "") +
       (mensaje ? " " + mensaje : "");
     window.open("https://wa.me/" + ((window.CMS && CMS.whatsapp()) || WA) + "?text=" + encodeURIComponent(text), "_blank", "noopener");
