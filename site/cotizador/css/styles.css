@@ -7,6 +7,8 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Work+Sans:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
 
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Poppins:wght@400;500;600&display=swap');
+
 :root {
   --carbon: #26251f;
   --carbon-soft: #3a392f;
@@ -354,6 +356,43 @@ img { max-width: 100%; display: block; }
 .pf-photo-item:last-child { margin-bottom: 0; }
 .pf-photo-item .cap { font-family: var(--font-display); font-size: 15px; font-weight: 700; color: var(--carbon); margin-bottom: 8px; }
 .pf-photo-item img { width: 100%; border-radius: var(--radius); display: block; }
+
+/* -- proformas con marca propia (ver MARCA_PROYECTO en cotizador.js) --
+   15 Patios: café / terracota / crema, titulares en condensada (Bebas Neue) y
+   texto en Poppins, como el brochure. Solo cambia la paleta y suma el render
+   y el cierre de marca; el contenido y el cálculo son los mismos. */
+#proforma-doc[data-marca="15patios"] {
+  --pf-blue: #bd603f; --pf-blue-light: #d38b6e;
+  --pf-gradient: linear-gradient(135deg, #352b23 0%, #bd603f 100%);
+  --pf-font: 'Poppins', 'Plus Jakarta Sans', sans-serif;
+  --pf-display: 'Bebas Neue', 'Oswald', Impact, sans-serif;
+  --carbon: #352b23; --text: #352b23; --muted: #7a6a5d; --border: #e1d4c4; --crema: #f0e6da;
+  -webkit-print-color-adjust: exact; print-color-adjust: exact;
+}
+#proforma-doc[data-marca] .pf-letterhead .doc-title,
+#proforma-doc[data-marca] .pf-unit-head h2,
+#proforma-doc[data-marca] .price-final,
+#proforma-doc[data-marca] .pf-cuota .amount,
+#proforma-doc[data-marca] .pf-photos-title,
+#proforma-doc[data-marca] .pf-hero .slogan { font-family: var(--pf-display); font-weight: 400; letter-spacing: .02em; }
+#proforma-doc[data-marca] .pf-letterhead .doc-title { font-size: 38px; }
+#proforma-doc[data-marca] .pf-letterhead .logos img { height: 56px; max-height: 56px; max-width: 170px; }
+#proforma-doc[data-marca] .pf-unit-head h2 { font-size: 36px; }
+#proforma-doc[data-marca] .price-final { font-size: 42px; }
+#proforma-doc[data-marca] .pf-cuota .amount { font-size: 44px; }
+#proforma-doc[data-marca] .pf-photos-title { font-size: 30px; color: var(--carbon); }
+
+.pf-hero { position: relative; height: 210px; margin-top: 22px; border-radius: var(--radius); background-size: cover; background-position: center 42%; overflow: hidden; }
+.pf-hero::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(53,43,35,0) 35%, rgba(53,43,35,.82) 100%); }
+.pf-hero .cap { position: absolute; z-index: 1; left: 24px; right: 24px; bottom: 16px; color: #f0e6da; display: flex; justify-content: space-between; align-items: flex-end; gap: 16px; }
+.pf-hero .slogan { font-size: 34px; line-height: 1; }
+.pf-hero .lugar { font-size: 10.5px; letter-spacing: .22em; text-transform: uppercase; opacity: .9; }
+
+.pf-cierre { margin-top: 28px; border-radius: var(--radius); background: #352b23; color: #f0e6da; text-align: center; padding: 34px 24px 28px; }
+.pf-cierre .lugar { font-size: 10.5px; letter-spacing: .22em; text-transform: uppercase; opacity: .85; }
+.pf-cierre .logo-proyecto { display: block; width: 300px; max-width: 70%; margin: 22px auto 24px; }
+.pf-cierre .texto { font-size: 12.5px; opacity: .85; }
+.pf-cierre .logo-forxa { display: block; height: 34px; margin: 22px auto 0; opacity: .95; }
 
 /* ---------- historial: pestañas Tabla / Dashboard ---------- */
 .tab-btn.active { background: var(--olive); color: #fff; border-color: var(--olive); }
