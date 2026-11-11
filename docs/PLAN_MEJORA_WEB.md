@@ -267,7 +267,7 @@ Cada fase va en **su propio PR**, se revisa en el *deploy preview* de Netlify y 
 ---
 
 ## 8. Notas de la revisión final (11/11/2026)
-- **CSP:** sigue en `Report-Only` y no tiene endpoint de reportes. Antes de pasarla a modo estricto, abre cada página en el deploy preview con la consola del navegador abierta y revisa los avisos de "Content Security Policy"; permite solo lo legítimo. Si aparece un iframe (mapas, YouTube) añade su host a `frame-src`.
+- **CSP:** activada en modo estricto el 11/11/2026 tras simularla sin violaciones en las 13 páginas. Si tras publicar algo deja de cargar, mira la consola del navegador ("Content Security Policy") y agrega ese dominio en `netlify.toml`.
 - **Caché:** JS/CSS no se cachean (se revalidan con ETag) porque no llevan hash; imágenes y assets, 7 días. Si algún día los archivos llevan hash en el nombre, se puede volver a cachear todo.
 - **Imágenes:** `sizes="100vw"` en todas (seguro, nunca elige una versión menor que el ancho real). Se puede afinar por imagen más adelante.
 - **Leads:** la función `lead` falla cerrada sin `TURNSTILE_SECRET`. El navegador espera hasta 30 s el token de Turnstile en segundo plano y avisa en consola si el servidor rechaza.
