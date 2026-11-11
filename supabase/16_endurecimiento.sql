@@ -70,9 +70,10 @@ create policy "contador: editor elimina" on public.cotizador_contador_proforma f
   using (tiene_rol(variadic array['editor']));
 
 -- S9 · Buckets con límite de tamaño y tipo (solo afecta subidas nuevas).
-update storage.buckets set file_size_limit = 8388608,
-  allowed_mime_types = array['image/jpeg','image/png','image/webp','image/avif','video/mp4','video/webm']
+-- Límites holgados a propósito: el panel acepta fotos de celular y videos de portada.
+update storage.buckets set file_size_limit = 52428800,
+  allowed_mime_types = array['image/jpeg','image/png','image/webp','image/avif','image/gif','video/mp4','video/webm']
   where id = 'site-images';
-update storage.buckets set file_size_limit = 8388608,
-  allowed_mime_types = array['image/jpeg','image/png','image/webp','image/avif']
+update storage.buckets set file_size_limit = 20971520,
+  allowed_mime_types = array['image/jpeg','image/png','image/webp','image/avif','image/gif']
   where id = 'cotizador-media';
