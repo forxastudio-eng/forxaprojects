@@ -100,6 +100,8 @@
       v = get(k);
       var alt = get(k + "@alt");
       if (has(v) && safeUrl(v)) {
+        // si el panel cambió la foto, el srcset del original ya no aplica y taparía el nuevo src
+        if (el.hasAttribute("srcset") && el.getAttribute("src") !== safeUrl(v)) { el.removeAttribute("srcset"); el.removeAttribute("sizes"); }
         setAttr(el, "src", safeUrl(v));
         if (el.hasAttribute("data-full")) setAttr(el, "data-full", safeUrl(v));
         var holder = el.closest("[data-ficha]");

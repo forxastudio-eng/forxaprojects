@@ -12,10 +12,12 @@
     "usuarios:crear": "node crear_usuarios.mjs --ejecutar",
     "imagenes:simular": "node migrar_datos.mjs --solo-imagenes",
     "imagenes": "node migrar_datos.mjs --ejecutar --solo-imagenes",
-    "etiquetar": "node etiquetar-landing.mjs"
+    "etiquetar": "node etiquetar-landing.mjs",
+    "optimizar": "node optimizar-imagenes.mjs"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.45.0",
-    "parse5": "^7.1.2"
+    "parse5": "^7.1.2",
+    "sharp": "^0.35.0"
   }
 }
