@@ -245,6 +245,43 @@ function wireEvents() {
   qs('generate-btn').onclick = generarProforma;
   qs('back-btn').onclick = () => { qs('proforma-view').hidden = true; qs('form-view').hidden = false; window.scrollTo(0, 0); };
   qs('print-btn').onclick = () => window.print();
+  qs('pdf-btn').onclick = descargarPDF;
+}
+
+// PDF directo (sobre todo para asesores en el celular, donde "Imprimir" es incómodo).
+// La librería (~900 KB) se carga solo al pulsar el botón.
+let html2pdfCarga = null;
+function cargarHtml2pdf() {
+  if (window.html2pdf) return Promise.resolve();
+  html2pdfCarga = html2pdfCarga || new Promise((ok, mal) => {
+    const s = document.createElement('script');
+    s.src = 'js/vendor/html2pdf-0.10.2.bundle.min.js';
+    s.onload = ok; s.onerror = () => { html2pdfCarga = null; mal(new Error('No se pudo cargar el generador de PDF')); };
+    document.head.appendChild(s);
+  });
+  return html2pdfCarga;
+}
+async function descargarPDF() {
+  const btn = qs('pdf-btn');
+  const doc = qs('proforma-doc');
+  btn.disabled = true; btn.setAttribute('aria-busy', 'true'); btn.textContent = 'Generando PDF…';
+  try {
+    await cargarHtml2pdf();
+    const titulo = (doc.querySelector('.doc-title')?.textContent || 'Proforma FORXA').trim();
+    await window.html2pdf().set({
+      margin: 0,
+      filename: titulo.replace(/[^\w\s.-]+/g, '').replace(/\s+/g, '-') + '.pdf',
+      image: { type: 'jpeg', quality: 0.92 },
+      html2canvas: { scale: 2, useCORS: true, backgroundColor: '#ffffff' },
+      jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' },
+      pagebreak: { mode: ['css', 'legacy'], before: '.pf-page + .pf-page' },
+    }).from(doc).save();
+  } catch (e) {
+    console.error(e);
+    showToast('No se pudo generar el PDF. Usa "Imprimir" y elige "Guardar como PDF".');
+  } finally {
+    btn.disabled = false; btn.removeAttribute('aria-busy'); btn.textContent = 'Descargar PDF';
+  }
 }
 
 // El descuento ahora es un monto libre que escribe el asesor (antes era por
