@@ -552,9 +552,16 @@ window.VIEWS = (function () {
   // Contraseña legible (sin 0/O ni 1/l), 12 caracteres.
   function generarClave() {
     var abc = "ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnpqrstuvwxyz23456789";
-    var r = new Uint8Array(12); crypto.getRandomValues(r);
-    return Array.prototype.map.call(r, function (x) { return abc[x % abc.length]; }).join("");
+    var c;
+    do { // Supabase exige mayúscula, minúscula y número
+      var r = new Uint8Array(12); crypto.getRandomValues(r);
+      c = Array.prototype.map.call(r, function (x) { return abc[x % abc.length]; }).join("");
+    } while (!claveValida(c));
+    return c;
   }
+  // Misma regla que Authentication → Email en Supabase: 10+ caracteres con mayúscula, minúscula y número.
+  function claveValida(c) { return c.length >= 10 && /[a-z]/.test(c) && /[A-Z]/.test(c) && /\d/.test(c); }
+  var REGLA_CLAVE = "Mínimo 10 caracteres, con mayúsculas, minúsculas y números.";
   async function llamarAdminUsuarios(body) {
     var res = await sb.functions.invoke("admin-usuarios", { body: body });
     if (res.error) {
@@ -616,14 +623,14 @@ window.VIEWS = (function () {
             ? "Se crea la cuenta con esta contraseña. Entrégala por un canal privado y pide que la cambie en Mi cuenta."
             : "La contraseña anterior deja de funcionar de inmediato. Entrégala por un canal privado y pide que la cambie en Mi cuenta.") + "</p>" +
           '<label class="fld"><span>Contraseña</span>' +
-          '<div style="display:flex;gap:8px"><input class="input" id="np" minlength="8" autocomplete="off" spellcheck="false" style="font-family:ui-monospace,Menlo,monospace;letter-spacing:.04em" value="' + generarClave() + '">' +
+          '<div style="display:flex;gap:8px"><input class="input" id="np" minlength="10" autocomplete="off" spellcheck="false" style="font-family:ui-monospace,Menlo,monospace;letter-spacing:.04em" value="' + generarClave() + '">' +
           '<button type="button" class="btn btn-ghost btn-sm" id="np-gen">Generar otra</button></div>' +
-          "<small>Mínimo 8 caracteres. Puedes escribir una propia.</small></label>",
+          "<small>" + REGLA_CLAVE + " Puedes escribir una propia.</small></label>",
         actions: [{ label: "Cancelar", value: "cancel" }, { label: nueva ? "Crear cuenta" : "Asignar contraseña", value: "ok", cls: "btn-primary" }],
         onOpen: function (f) { f.querySelector("#np-gen").onclick = function () { f.querySelector("#np").value = generarClave(); }; },
         onSubmit: async function (f) {
           var pass = f.querySelector("#np").value.trim();
-          if (pass.length < 8) { FX.toast("La contraseña debe tener al menos 8 caracteres.", true); return false; }
+          if (!claveValida(pass)) { FX.toast(REGLA_CLAVE, true); return false; }
           try {
             await llamarAdminUsuarios({ accion: "asignar_password", email: u.email, password: pass });
           } catch (e) { FX.toast(e.message, true); return false; }
@@ -805,14 +812,15 @@ window.VIEWS = (function () {
     var r = FX.ROLES[FX.state.rol] || {};
     el.innerHTML = '<div class="grid-2"><section class="panel"><div class="panel-head"><h2>Mi cuenta</h2></div><dl class="kv"><dt>Correo</dt><dd>' + esc(FX.state.user.email) + "</dd><dt>Rol</dt><dd>" + esc(r.label) + '</dd></dl><p class="muted" style="margin-top:12px">' + esc(r.desc) + "</p></section>" +
       '<section class="panel"><div class="panel-head"><h2>Cambiar contraseña</h2></div><form id="pw-form" style="display:flex;flex-direction:column;gap:12px">' +
-      '<label class="fld"><span>Nueva contraseña</span><input type="password" id="pw1" minlength="8" autocomplete="new-password" required><small>Mínimo 8 caracteres.</small></label>' +
-      '<label class="fld"><span>Repite la contraseña</span><input type="password" id="pw2" minlength="8" autocomplete="new-password" required></label>' +
+      '<label class="fld"><span>Nueva contraseña</span><input type="password" id="pw1" minlength="10" autocomplete="new-password" required><small>' + esc(REGLA_CLAVE) + '</small></label>' +
+      '<label class="fld"><span>Repite la contraseña</span><input type="password" id="pw2" minlength="10" autocomplete="new-password" required></label>' +
       '<button class="btn btn-primary" type="submit" style="align-self:flex-start">Guardar contraseña</button></form>' +
       '<p class="muted" style="margin-top:14px;font-size:14px">Si olvidas tu contraseña, pide al editor que te asigne una nueva.</p></section></div>';
     el.querySelector("#pw-form").addEventListener("submit", async function (e) {
       e.preventDefault();
       var a = el.querySelector("#pw1").value, b = el.querySelector("#pw2").value;
       if (a !== b) { FX.toast("Las contraseñas no coinciden.", true); return; }
+      if (!claveValida(a)) { FX.toast(REGLA_CLAVE, true); return; }
       var res = await sb.auth.updateUser({ password: a });
       if (res.error) { FX.toast(FX.errMsg(res.error), true); return; }
       e.target.reset(); FX.toast("Contraseña actualizada");
