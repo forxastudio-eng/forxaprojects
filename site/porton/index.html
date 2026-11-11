@@ -397,7 +397,7 @@
 <script src="js/script.js"></script>
 <script src="/js/consent.js" defer></script>
 <script>
-// Video del hero: en todas las pantallas salvo con ahorro de datos ni "reducir movimiento";
+// Video del hero: en todas las pantallas, salvo con ahorro de datos o "reducir movimiento";
 // se pausa fuera de pantalla y tiene botón de pausa (WCAG 2.2.2). Si no, queda el póster.
 (function(){var v=document.getElementById('heroVideo'),b=document.getElementById('heroPause');if(!v)return;
 var c=navigator.connection||{},ok=!c.saveData&&!matchMedia('(prefers-reduced-motion: reduce)').matches;
