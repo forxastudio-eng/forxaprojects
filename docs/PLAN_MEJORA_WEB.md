@@ -263,3 +263,13 @@ Cada fase va en **su propio PR**, se revisa en el *deploy preview* de Netlify y 
 | Asesores de seguridad de Supabase | 4 WARN | 0 WARN |
 | Lighthouse móvil (rendimiento / accesibilidad) | sin medir en producción | ≥ 85 / ≥ 95 |
 | Leads registrados | 0 (todo se va a WhatsApp) | 100 % de los formularios |
+
+---
+
+## 8. Notas de la revisión final (11/11/2026)
+- **CSP:** sigue en `Report-Only` y no tiene endpoint de reportes. Antes de pasarla a modo estricto, abre cada página en el deploy preview con la consola del navegador abierta y revisa los avisos de "Content Security Policy"; permite solo lo legítimo. Si aparece un iframe (mapas, YouTube) añade su host a `frame-src`.
+- **Caché:** JS/CSS no se cachean (se revalidan con ETag) porque no llevan hash; imágenes y assets, 7 días. Si algún día los archivos llevan hash en el nombre, se puede volver a cachear todo.
+- **Imágenes:** `sizes="100vw"` en todas (seguro, nunca elige una versión menor que el ancho real). Se puede afinar por imagen más adelante.
+- **Leads:** la función `lead` falla cerrada sin `TURNSTILE_SECRET`. El navegador espera hasta 30 s el token de Turnstile en segundo plano y avisa en consola si el servidor rechaza.
+- **Buckets:** permiten HEIC/HEIF (fotos de iPhone). SVG no, a propósito.
+- **Pendiente:** la portada de Arcus (Storage, ~800 KB) no tiene versión ligera; subir una de ≤200 KB desde el panel mejora el LCP de la home.

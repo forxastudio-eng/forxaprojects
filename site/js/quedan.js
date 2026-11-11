@@ -26,3 +26,5 @@ window.FORXA_QUEDAN = function () {
     loc.parentNode.insertBefore(row, loc);
   }
 };
+// El CMS reescribe el texto de los botones al aplicar contenido: se repone el distintivo.
+document.addEventListener("cms:applied", function () { if (window.FORXA_QUEDAN) window.FORXA_QUEDAN(); });

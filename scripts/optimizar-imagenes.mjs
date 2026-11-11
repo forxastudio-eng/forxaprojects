@@ -44,7 +44,7 @@ for (const page of all.filter(f => f.endsWith('.html'))) {
     const base = m[1].replace(/\.(jpe?g|png)$/i, '');
     const srcset = v.map(x => `${base}-${x.w}.webp ${x.w}w`).join(', ');
     patched++;
-    return tag.replace('<img', `<img srcset="${srcset}" sizes="(max-width: 800px) 100vw, 50vw"`);
+    return tag.replace('<img', `<img srcset="${srcset}" sizes="100vw"`);
   });
   if (out !== html) fs.writeFileSync(page, out);
 }

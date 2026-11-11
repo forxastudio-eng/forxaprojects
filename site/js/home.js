@@ -25,7 +25,9 @@
   function isExternal(url) { return /^https?:\/\//i.test(url || ""); }
   function coverSrc(u) {
     if (!u) return "";
-    return (isExternal(u) || u.charAt(0) === "/") ? u : "/" + u;
+    var abs = (isExternal(u) || u.charAt(0) === "/") ? u : "/" + u;
+    // portadas del repo: variante WebP de 640 px (existe junto a cada .jpg)
+    return /^\/assets\/covers\/[\w-]+\.jpg$/.test(abs) ? abs.replace(/\.jpg$/, "-640.webp") : abs;
   }
   function initials(name) {
     return String(name || "?").trim().split(/\s+/).slice(0, 2).map(function (p) { return p.charAt(0).toUpperCase(); }).join("");

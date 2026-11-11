@@ -30,21 +30,14 @@
   [headers.values]
     X-Robots-Tag = "noindex, nofollow"
 
-# Caché de 7 días (los nombres no llevan hash, por eso no "immutable")
+# Solo imágenes y assets se cachean 7 días. JS/CSS NO: no llevan hash y, si se cachearan,
+# el HTML nuevo se mezclaría con scripts viejos (Netlify los revalida con ETag, es barato).
 [[headers]]
   for = "/assets/*"
   [headers.values]
     Cache-Control = "public, max-age=604800, stale-while-revalidate=86400"
 [[headers]]
   for = "/*/img/*"
-  [headers.values]
-    Cache-Control = "public, max-age=604800, stale-while-revalidate=86400"
-[[headers]]
-  for = "/*.css"
-  [headers.values]
-    Cache-Control = "public, max-age=604800, stale-while-revalidate=86400"
-[[headers]]
-  for = "/*.js"
   [headers.values]
     Cache-Control = "public, max-age=604800, stale-while-revalidate=86400"
 

@@ -1,6 +1,7 @@
 // FORXA · Edge Function "lead": recibe los formularios de las landings, valida
-// Cloudflare Turnstile (si TURNSTILE_SECRET está configurado) y guarda en
-// public.leads con la service role. El navegador nunca escribe la tabla directo.
+// Cloudflare Turnstile y guarda en public.leads con la service role. El navegador
+// nunca escribe la tabla directo. Sin el secreto TURNSTILE_SECRET la función falla
+// cerrada (500): una función pública sin verificación se llenaría de spam.
 // Secretos (Supabase → Edge Functions → Secrets): TURNSTILE_SECRET.
 import { createClient } from "jsr:@supabase/supabase-js@2";
 
@@ -43,7 +44,8 @@ Deno.serve(async (req) => {
   const fecha_visita = fv && /^\d{4}-\d{2}-\d{2}$/.test(fv) ? fv : null;
 
   const secret = Deno.env.get("TURNSTILE_SECRET");
-  if (secret) {
+  if (!secret) { console.error("Falta el secreto TURNSTILE_SECRET"); return out(500, { error: "Servicio no configurado" }); }
+  {
     const token = txt(b.turnstile, 2048);
     if (!token) return out(400, { error: "Falta la verificación anti-spam" });
     const form = new FormData();

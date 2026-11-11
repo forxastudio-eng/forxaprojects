@@ -72,8 +72,9 @@ create policy "contador: editor elimina" on public.cotizador_contador_proforma f
 -- S9 · Buckets con límite de tamaño y tipo (solo afecta subidas nuevas).
 -- Límites holgados a propósito: el panel acepta fotos de celular y videos de portada.
 update storage.buckets set file_size_limit = 52428800,
-  allowed_mime_types = array['image/jpeg','image/png','image/webp','image/avif','image/gif','video/mp4','video/webm']
+  allowed_mime_types = array['image/jpeg','image/png','image/webp','image/avif','image/gif','image/heic','image/heif','video/mp4','video/webm']
   where id = 'site-images';
 update storage.buckets set file_size_limit = 20971520,
-  allowed_mime_types = array['image/jpeg','image/png','image/webp','image/avif','image/gif']
+  allowed_mime_types = array['image/jpeg','image/png','image/webp','image/avif','image/gif','image/heic','image/heif']
   where id = 'cotizador-media';
+-- (SVG no se permite a propósito: un SVG público puede ejecutar scripts al abrirse directo.)

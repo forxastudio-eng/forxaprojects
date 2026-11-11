@@ -12,10 +12,11 @@
     var hp = document.createElement("div");
     hp.setAttribute("aria-hidden", "true");
     hp.style.cssText = "position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden";
-    hp.innerHTML = '<label>No llenar<input type="text" name="website" tabindex="-1" autocomplete="off"></label>';
+    hp.className = "fx-hp";
+    hp.innerHTML = '<label>No llenar<input type="text" name="fx_ref_' + Math.random().toString(36).slice(2, 8) + '" tabindex="-1" autocomplete="off" data-lpignore="true" data-1p-ignore></label>';
     form.appendChild(hp);
     var visit = form.querySelector('input[type="date"][name="visit"]');
-    if (visit) visit.min = new Date().toISOString().slice(0, 10);
+    if (visit) { var d = new Date(); visit.min = d.getFullYear() + "-" + ("0" + (d.getMonth() + 1)).slice(-2) + "-" + ("0" + d.getDate()).slice(-2); }
     if (C.TURNSTILE_SITE_KEY) {
       var ts = document.createElement("div");
       ts.className = "cf-turnstile";
@@ -39,19 +40,27 @@
   // data: { proyecto, nombre, telefono, email?, interes?, mensaje?, fecha_visita? }
   function send(form, data) {
     if (!C.SUPABASE_URL || !data || !data.nombre || !data.telefono) return;
-    data.website = val(form, 'input[name="website"]');
-    data.turnstile = val(form, '[name="cf-turnstile-response"]');
+    data.website = val(form, ".fx-hp input");
     data.fuente = (location.pathname + location.search).slice(0, 500);
-    try {
+    // WhatsApp ya se abrió en otra pestaña: si el token de Turnstile aún no llegó, esperamos
+    // en segundo plano (hasta 30 s) y reintentamos una vez si el servidor lo rechaza.
+    var tries = 0;
+    (function enviar() {
+      var token = val(form, '[name="cf-turnstile-response"]');
+      if (!token && C.TURNSTILE_SITE_KEY && tries++ < 60) { setTimeout(enviar, 500); return; }
+      data.turnstile = token;
       fetch(C.SUPABASE_URL + "/functions/v1/lead", {
         method: "POST", keepalive: true,
         headers: { "Content-Type": "application/json", apikey: C.SUPABASE_ANON_KEY, Authorization: "Bearer " + C.SUPABASE_ANON_KEY },
         body: JSON.stringify(data)
-      }).catch(function () {});
-    } catch (e) { /* sin red: WhatsApp sigue funcionando */ }
+      }).then(function (r) { if (!r.ok) console.warn("No se pudo guardar el lead:", r.status); })
+        .catch(function () { /* sin red: WhatsApp sigue funcionando */ })
+        .then(function () {
+          // El token sirve una sola vez: se pide otro para un segundo envío.
+          if (window.turnstile) { try { window.turnstile.reset(form.querySelector(".cf-turnstile")); } catch (e) {} }
+        });
+    })();
     if (window.umami && window.umami.track) { try { window.umami.track("lead", { proyecto: data.proyecto, visita: !!data.fecha_visita }); } catch (e) {} }
-    // El token de Turnstile sirve una sola vez: se pide otro para un segundo envío.
-    if (window.turnstile) { try { window.turnstile.reset(form.querySelector(".cf-turnstile")); } catch (e) {} }
   }
 
   window.FORXA_LEAD = { send: send };
