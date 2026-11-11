@@ -815,7 +815,9 @@ window.VIEWS = (function () {
       '<label class="fld"><span>Nueva contraseña</span><input type="password" id="pw1" minlength="10" autocomplete="new-password" required><small>' + esc(REGLA_CLAVE) + '</small></label>' +
       '<label class="fld"><span>Repite la contraseña</span><input type="password" id="pw2" minlength="10" autocomplete="new-password" required></label>' +
       '<button class="btn btn-primary" type="submit" style="align-self:flex-start">Guardar contraseña</button></form>' +
-      '<p class="muted" style="margin-top:14px;font-size:14px">Si olvidas tu contraseña, pide al editor que te asigne una nueva.</p></section></div>';
+      '<p class="muted" style="margin-top:14px;font-size:14px">Si olvidas tu contraseña, pide al editor que te asigne una nueva.</p></section>' +
+      '<section class="panel"><div class="panel-head"><h2>Verificación en dos pasos</h2></div><div id="mfa-box"></div></section></div>';
+    if (window.FORXA_MFA) FORXA_MFA.cuenta(el.querySelector("#mfa-box"), sb);
     el.querySelector("#pw-form").addEventListener("submit", async function (e) {
       e.preventDefault();
       var a = el.querySelector("#pw1").value, b = el.querySelector("#pw2").value;

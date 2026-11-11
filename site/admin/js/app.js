@@ -140,6 +140,7 @@
   }
 
   async function entrar(user) {
+    if (window.FORXA_MFA && !(await FORXA_MFA.asegurar(sb))) { show("auth"); loginMsg("Necesitas el código de verificación para entrar.", true); return; }
     FX.state.user = user;
     var r = await sb.rpc("mi_rol");
     FX.state.rol = r.error ? null : r.data;

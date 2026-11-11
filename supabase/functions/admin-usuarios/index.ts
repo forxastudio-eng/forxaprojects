@@ -37,9 +37,13 @@ Deno.serve(async (req) => {
     if (errUser || !quien?.user?.email) return json({ error: "Sesión no válida. Vuelve a iniciar sesión." }, 401);
     const emailEditor = quien.user.email.toLowerCase();
 
-    // 2) Solo el rol editor puede usar esta función.
-    const { data: rol } = await admin.from("user_roles").select("role").eq("email", emailEditor).maybeSingle();
-    if (rol?.role !== "editor") return json({ error: "Solo el rol editor puede administrar contraseñas." }, 403);
+    // 2) Solo el rol editor. Se pregunta a mi_rol() CON la sesión de quien llama: así aplica
+    //    la misma regla que el resto de la plataforma (incluida la verificación en dos pasos).
+    const comoQuien = createClient(URL, Deno.env.get("SUPABASE_ANON_KEY")!, {
+      auth: { persistSession: false }, global: { headers: { Authorization: "Bearer " + token } },
+    });
+    const { data: rol } = await comoQuien.rpc("mi_rol");
+    if (rol !== "editor") return json({ error: "Solo el rol editor puede administrar contraseñas." }, 403);
 
     const body = await req.json();
 

@@ -20,6 +20,7 @@ const CotizadorAuth = (() => {
   async function init() {
     const { data: { session } } = await supabaseClient.auth.getSession();
     currentUser = session ? session.user : null;
+    if (currentUser && window.FORXA_MFA && !(await FORXA_MFA.asegurar(supabaseClient))) currentUser = null;
     if (currentUser) await cargarRol();
     return currentUser;
   }
@@ -28,6 +29,7 @@ const CotizadorAuth = (() => {
     const { data, error } = await supabaseClient.auth.signInWithPassword({ email, password });
     if (error) throw error;
     currentUser = data.user;
+    if (window.FORXA_MFA && !(await FORXA_MFA.asegurar(supabaseClient))) { currentUser = null; throw new Error('Falta el código de verificación.'); }
     await cargarRol();
     return currentUser;
   }
