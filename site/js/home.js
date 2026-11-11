@@ -45,7 +45,7 @@
         ? '<img src="' + esc(coverSrc(p.cover_url)) + '" alt="" loading="lazy" width="800" height="600">'
         : '<div class="ph">' + esc(initials(p.name)) + "</div>";
       var chips = [p.ubicacion ? '<span class="chip">' + esc(p.ubicacion) + "</span>" : "",
-                   p.tipo ? '<span class="chip chip-muted">' + esc(p.tipo) + "</span>" : ""].join("");
+                   p.tipo ? '<span class="chip chip-muted">' + esc(p.tipo) + "</span>" : "", stockChip(p)].join("");
       return '<a class="card" href="' + esc(p.url) + '"' + (ext ? ' target="_blank" rel="noopener"' : "") + ">" +
         '<div class="card-media">' + media + "</div>" +
         '<div class="card-body">' +
@@ -83,10 +83,48 @@
     });
   }
 
+  // Disponibilidad en vivo: mismas tablas (y estados) que ya sincronizan panel y cotizador.
+  var STOCK = { "/alabes/": "units", "/arcus/": "arcus_units", "/porton/": "lots" };
+  var stock = {};
+  function money(n) { return "$" + Math.round(n).toLocaleString("es-EC"); }
+  function stockChip(p) {
+    var st = stock[p.url]; if (!st) return "";
+    var label = st.disp === 0 ? "Agotado" : (st.disp <= 10 ? "Quedan " + st.disp : st.disp + " disponibles");
+    return '<span class="chip chip-stock' + (st.disp <= 10 ? " is-low" : "") + '">' + label + "</span>" +
+      (st.desde ? '<span class="chip chip-muted">Desde ' + money(st.desde) + "</span>" : "");
+  }
+  function loadStock(sb) {
+    return Promise.all(Object.keys(STOCK).map(function (url) {
+      var t = STOCK[url];
+      return sb.from(t).select(t === "lots" ? "status,price" : "status").then(function (r) {
+        if (r.error || !r.data) return;
+        var disp = r.data.filter(function (u) { return u.status === "disponible"; });
+        var precios = disp.map(function (u) { return +u.price; }).filter(function (n) { return n > 0; });
+        stock[url] = { disp: disp.length, desde: precios.length ? Math.min.apply(null, precios) : 0 };
+      });
+    })).catch(function () { /* sin cifras: las tarjetas se muestran igual */ });
+  }
+
+  // Primera pantalla: fotos reales de los proyectos en lugar del isotipo.
+  function renderHeroShots() {
+    var mark = document.querySelector(".hero-mark");
+    var con = projects.filter(function (p) { return p.cover_url; }).slice(0, 3);
+    if (!mark || con.length < 2) return;
+    mark.removeAttribute("aria-hidden");
+    mark.classList.add("hero-shots");
+    mark.innerHTML = con.map(function (p, i) {
+      var ext = isExternal(p.url);
+      return '<a class="shot shot-' + i + '" href="' + esc(p.url) + '"' + (ext ? ' target="_blank" rel="noopener"' : "") + ">" +
+        '<img src="' + esc(coverSrc(p.cover_url)) + '" alt="" width="800" height="600"' + (i ? ' loading="lazy"' : ' fetchpriority="high"') + ">" +
+        '<span class="shot-cap"><strong>' + esc(p.name) + "</strong>" + (p.ubicacion ? "<small>" + esc(p.ubicacion) + "</small>" : "") + stockChip(p) + "</span></a>";
+    }).join("");
+  }
+
   function done(list) {
     projects = list;
     renderFilters();
     render();
+    renderHeroShots();
     fillContactSelect();
   }
 
@@ -98,7 +136,8 @@
     sb.from("projects").select("*").eq("visible", true).order("sort_order", { ascending: true })
       .then(function (res) {
         if (res.error) throw res.error;
-        done(res.data && res.data.length ? res.data : FALLBACK);
+        var list = res.data && res.data.length ? res.data : FALLBACK;
+        return loadStock(sb).then(function () { done(list); });
       })
       .catch(function (err) {
         console.warn("No se pudieron cargar los proyectos; uso la lista base.", err);
