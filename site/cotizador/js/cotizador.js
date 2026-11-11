@@ -48,6 +48,7 @@ async function boot() {
     qs('forma-pago-hint').hidden = true;
     document.querySelector('#financing-card h3').textContent = 'Plan de pago · contado';
   }
+  if (params.get('duplicar')) await prellenarDesdeHistorial(params.get('duplicar'));
   wireEvents();
   await loadAsesores();
   loadAsesorGuardado();
@@ -264,6 +265,34 @@ function wireEvents() {
   qs('print-btn').onclick = () => window.print();
   qs('pdf-btn').onclick = descargarPDF;
   ['uf-q', 'uf-max', 'uf-disp'].forEach(id => qs(id)?.addEventListener('input', filtrarUnidades));
+}
+
+// "Duplicar" desde el historial: carga cliente, condiciones y unidades de una
+// proforma anterior. Al generar sale una proforma NUEVA (número nuevo); la original no se toca.
+async function prellenarDesdeHistorial(id) {
+  const { data: h, error } = await supabaseClient.from('cotizador_historial').select('*').eq('id', id).maybeSingle();
+  if (error || !h || h.proyecto_id !== PROYECTO.id) { showToast('No se pudo cargar la proforma a duplicar.'); return; }
+  qs('cli-nombre').value = h.cliente_nombre || '';
+  qs('cli-email').value = h.cliente_correo || '';
+  const m = String(h.cliente_telefono || '').match(/^\+(\d+)\s+(\d+)$/);
+  if (m && [...qs('cli-tel-code').options].some(o => o.value === m[1])) { qs('cli-tel-code').value = m[1]; qs('cli-tel').value = m[2]; }
+  else qs('cli-tel').value = h.cliente_telefono || '';
+  if (h.motivo_compra) qs('motivo-compra').value = h.motivo_compra;
+  if (h.forma_pago && !qs('forma-pago').closest('.field').hidden) { qs('forma-pago').value = h.forma_pago; aplicarFormaPago(); }
+  if (h.descuento && !qs('discount-card').hidden) qs('desc-monto').value = h.descuento;
+  qs('notas').value = h.notas || '';
+  const codigos = (h.unidades || []).map(u => String(u.codigo));
+  const faltan = [];
+  codigos.forEach(c => {
+    const u = UNIDADES.find(x => String(x.codigo) === c);
+    const card = u && qs('unit-grid').querySelector(`.unit-card[data-id="${CSS.escape(String(u.id))}"]`);
+    if (u && card && u.estado === 'disponible' && u.precio) { if (!seleccionadas.some(x => x.id === u.id)) toggleUnit(u, card); }
+    else faltan.push(c);
+  });
+  renderFinancingSummary();
+  showToast(faltan.length
+    ? `Datos copiados de ${h.numero_proforma}. Ya no están disponibles: ${faltan.join(', ')}.`
+    : `Datos copiados de ${h.numero_proforma}. Revisa y genera la nueva proforma.`, faltan.length ? 'error' : 'ok');
 }
 
 // PDF directo (sobre todo para asesores en el celular, donde "Imprimir" es incómodo).
