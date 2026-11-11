@@ -6,6 +6,9 @@
 <title>Cotizador — FORXA</title>
 <meta name="robots" content="noindex, nofollow">
 <link rel="icon" type="image/png" href="/assets/brand/favicon-32.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lexend:wght@300;400;500;600;700&family=Hanken+Grotesk:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap">
 <link rel="stylesheet" href="css/styles.css">
 <link rel="stylesheet" href="css/forxa-theme.css">
 </head>
@@ -54,7 +57,7 @@
   </section>
 </main>
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.119.0/dist/umd/supabase.js" integrity="sha384-uteMfOloLDGt042uDz+xHGF3ym63/WQ6rFq7murQRG8Ih7QrXGEGNtWd8688sb4O" crossorigin="anonymous"></script>
 <script src="/js/forxa-config.js"></script>
 <script src="js/supabase-client.js"></script>
 <script src="js/auth.js"></script>
@@ -104,8 +107,9 @@ async function loadProjects() {
   if (!data.length) { grid.innerHTML = `<div class="empty-state">Todavía no hay proyectos cargados.</div>`; return; }
 
   grid.innerHTML = '';
-  for (const p of data) {
-    const coverUrl = await signedMediaUrl(p.cover_url);
+  const coverUrls = await signedMediaUrls(data.map(p => p.cover_url));
+  for (const [i, p] of data.entries()) {
+    const coverUrl = coverUrls[i];
     const card = document.createElement('a');
     card.className = 'project-card';
     card.href = `cotizador.html?proyecto=${encodeURIComponent(p.id)}`;

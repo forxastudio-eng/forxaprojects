@@ -10,6 +10,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="icon" href="img/brand/arcus-mark-black.png" type="image/png" data-cms-attr="href:seo.icono" data-cms-label="Icono de la pestaña (favicon)" data-cms-type="image">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600;700&display=swap">
 <link rel="stylesheet" href="css/styles.css" />
 <link rel="stylesheet" href="/css/consent.css" />
 </head>
@@ -81,7 +82,6 @@
 <section class="hero" id="inicio" data-cms-group="Portada">
   <div class="hero__media">
     <video autoplay muted loop playsinline poster="img/hero-poster.jpg" data-cms-attr="poster:inicio.video-portada" data-cms-label="Imagen de carga del video" data-cms-type="image">
-      <source src="video/hero-arcus.mp4" type="video/mp4"  data-cms-attr="src:inicio.video-mp4" data-cms-label="Video de fondo (MP4)" data-cms-type="video"/>
       <img src="img/hero-poster.jpg" alt="Edificio Arcus al atardecer" />
     </video>
   </div>
@@ -172,11 +172,11 @@
     <div class="location">
       <div class="location__maps reveal" data-cms-list="ubicacion.lista-location-maps" data-cms-label="Mapas de ubicación" data-cms-noun="Mapa">
         <figure class="location__map" style="margin:0">
-          <img src="img/ubicacion/mapa-1.jpg" alt="Ubicación de Arcus respecto al Centro Histórico y la Universidad de Cuenca"  data-cms-img="imagen" data-cms-label="Imagen"/>
+          <img loading="lazy" decoding="async" src="img/ubicacion/mapa-1.jpg" alt="Ubicación de Arcus respecto al Centro Histórico y la Universidad de Cuenca"  data-cms-img="imagen" data-cms-label="Imagen"/>
           <figcaption data-cms="pie" data-cms-label="Pie de foto">Entorno inmediato</figcaption>
         </figure>
         <figure class="location__map" style="margin:0">
-          <img src="img/ubicacion/mapa-2.jpg" alt="Ubicación de Arcus respecto al Estadio Alejandro Serrano Aguilar"  data-cms-img="imagen" data-cms-label="Imagen"/>
+          <img loading="lazy" decoding="async" src="img/ubicacion/mapa-2.jpg" alt="Ubicación de Arcus respecto al Estadio Alejandro Serrano Aguilar"  data-cms-img="imagen" data-cms-label="Imagen"/>
           <figcaption data-cms="pie" data-cms-label="Pie de foto">Conectividad urbana</figcaption>
         </figure>
       </div>
@@ -222,7 +222,7 @@
         <a href="https://wa.me/593939087030?text=Hola%2C%20quiero%20m%C3%A1s%20informaci%C3%B3n%20del%20proyecto%20ARCUS." class="btn btn--cream" target="_blank" rel="noopener" data-cms-wa><span data-cms="terraza-areas-verdes.texto-2" data-cms-label="Texto del botón">Consultar disponibilidad</span> <svg class="icon"><use href="#i-arrow-right"></use></svg></a>
       </div>
       <div class="feature-band__media">
-        <img src="img/interior/sala.jpg" alt="Sala con vista, proyecto Arcus"  data-cms-img="terraza-areas-verdes.imagen" data-cms-label="Imagen"/>
+        <img loading="lazy" decoding="async" src="img/interior/sala.jpg" alt="Sala con vista, proyecto Arcus"  data-cms-img="terraza-areas-verdes.imagen" data-cms-label="Imagen"/>
       </div>
     </div>
   </div>
@@ -327,7 +327,7 @@
 
 <!-- ============ CONTACTO ============ -->
 <section class="section section--choc contact" id="contacto" data-cms-group="Contacto" data-cms-show="mostrar.contacto">
-  <div class="contact__bg"><img src="img/exterior/frontal.jpg" alt="" aria-hidden="true"  data-cms-img="contacto.imagen" data-cms-label="Imagen"/></div>
+  <div class="contact__bg"><img loading="lazy" decoding="async" src="img/exterior/frontal.jpg" alt="" aria-hidden="true"  data-cms-img="contacto.imagen" data-cms-label="Imagen"/></div>
   <div class="container">
     <div class="contact-grid">
       <div class="contact-info reveal">
@@ -373,7 +373,7 @@
 <footer class="footer" data-cms-group="Pie de página">
   <div class="container">
     <div class="footer__brand">
-      <img src="img/brand/arcus-mark-white.png" alt="Arcus"  data-cms-img="footer.imagen" data-cms-label="Logotipo"/>
+      <img loading="lazy" decoding="async" src="img/brand/arcus-mark-white.png" alt="Arcus"  data-cms-img="footer.imagen" data-cms-label="Logotipo"/>
       <span data-cms="footer.detalle" data-cms-label="Texto">© 2026 Arcus Suites &amp; Lofts. Todos los derechos reservados.</span>
     </div>
     <span data-cms="footer.detalle-2" data-cms-label="Texto 2">Calle Remigio Tamariz Crespo, Cuenca, Ecuador</span>
@@ -401,7 +401,7 @@
   <div class="lightbox__caption" id="lightboxCaption"></div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.119.0/dist/umd/supabase.js" integrity="sha384-uteMfOloLDGt042uDz+xHGF3ym63/WQ6rFq7murQRG8Ih7QrXGEGNtWd8688sb4O" crossorigin="anonymous"></script>
 <script src="/js/forxa-config.js"></script>
 <script src="/js/cms.js"></script>
 <script src="js/script.js"></script>

@@ -175,7 +175,7 @@ Cada fase va en **su propio PR**, se revisa en el *deploy preview* de Netlify y 
   - HSTS y `Permissions-Policy: camera=(), microphone=(), geolocation=()`.
   - **CSP en modo `Report-Only`** (S4).
   - `Cache-Control` para assets (R4).
-- [ ] Fijar `supabase-js` a una versión exacta con SRI en las 5 páginas (S5).
+- [x] Fijar `supabase-js` a una versión exacta con SRI en las 5 páginas (S5).
 - [ ] `supabase/16_endurecimiento.sql`:
   - `revoke execute` a `anon` (S6) y `revoke all` de tablas internas a `anon` (S7).
   - `search_path` (S8) y límites de buckets (S9).
@@ -184,10 +184,10 @@ Cada fase va en **su propio PR**, se revisa en el *deploy preview* de Netlify y 
 - [ ] Volver a correr los asesores de Supabase y dejar seguridad en 0 WARN.
 
 **Rendimiento**
-- [ ] `loading="lazy" decoding="async"` y `width`/`height` en todas las imágenes bajo la primera pantalla de Álabes, Portón y Arcus (R2), y `fetchpriority="high"` en el hero.
-- [ ] Quitar el `<source>` roto de Arcus (R7).
-- [ ] Pasar las fuentes de `@import` a `<link>` con `preconnect` y quitar las familias que no se usan del cotizador (R5).
-- [ ] Firmar las URLs en lote en el cotizador (R8).
+- [x] `loading="lazy" decoding="async"` y `width`/`height` en todas las imágenes bajo la primera pantalla de Álabes, Portón y Arcus (R2), y `fetchpriority="high"` en el hero.
+- [x] Quitar el `<source>` roto de Arcus (R7).
+- [x] Pasar las fuentes de `@import` a `<link>` con `preconnect` y quitar las familias que no se usan del cotizador (R5).
+- [x] Firmar las URLs en lote en el cotizador (R8).
 
 **Verificación:** las mismas mediciones de la sección 3 antes y después; login con cada rol; generar y borrar una proforma; cambiar un estado desde el panel y comprobar que se refleja en la landing y en el cotizador.
 

@@ -83,7 +83,7 @@
 
 <!-- ============ HERO ============ -->
 <section class="hero" id="inicio" data-cms-group="Portada">
-  <div class="hero__bg"><img src="img/vista-frontal.jpg" alt="Fachada frontal del proyecto Álabes"  data-cms-img="inicio.imagen" data-cms-label="Imagen"/></div>
+  <div class="hero__bg"><img fetchpriority="high" decoding="async" src="img/vista-frontal.jpg" alt="Fachada frontal del proyecto Álabes"  data-cms-img="inicio.imagen" data-cms-label="Imagen"/></div>
   <div class="hero__overlay"></div>
   <div class="container hero__content">
     <h1 class="hero__title" data-cms="inicio.titulo-principal" data-cms-label="Título principal">Álabes</h1>
@@ -109,7 +109,7 @@
   <div class="container">
     <div class="about">
       <div class="about__media reveal">
-        <img src="img/vista-lateral.jpg" alt="Vista lateral del edificio Álabes"  data-cms-img="proyecto.imagen" data-cms-label="Imagen"/>
+        <img loading="lazy" decoding="async" src="img/vista-lateral.jpg" alt="Vista lateral del edificio Álabes"  data-cms-img="proyecto.imagen" data-cms-label="Imagen"/>
       </div>
       <div class="about__text reveal">
         <p class="eyebrow" data-cms="proyecto.etiqueta" data-cms-label="Sobretítulo">Sobre Álabes</p>
@@ -138,8 +138,8 @@
     </div>
     <div class="location">
       <div class="location__maps reveal" data-cms-list="ubicacion.lista-location-maps" data-cms-label="Mapas de ubicación" data-cms-noun="Mapa">
-        <img src="img/map-close.jpg" alt="Ubicación exacta del proyecto Álabes en Calle del Batán"  data-cms-img="imagen" data-cms-label="Imagen"/>
-        <img src="img/map-wide.jpg" alt="Vista panorámica de Cuenca con la ubicación de Álabes"  data-cms-img="imagen" data-cms-label="Imagen"/>
+        <img loading="lazy" decoding="async" src="img/map-close.jpg" alt="Ubicación exacta del proyecto Álabes en Calle del Batán"  data-cms-img="imagen" data-cms-label="Imagen"/>
+        <img loading="lazy" decoding="async" src="img/map-wide.jpg" alt="Vista panorámica de Cuenca con la ubicación de Álabes"  data-cms-img="imagen" data-cms-label="Imagen"/>
       </div>
       <div class="poi-list reveal" data-cms-list="ubicacion.lista-poi-list" data-cms-label="Puntos de interés cercanos" data-cms-noun="Punto">
         <div class="poi"><span class="poi__icon"><svg class="icon"><use href="#i-water" data-cms-icon="icono" data-cms-label="Ícono"></use></svg></span><div><strong data-cms="dato" data-cms-label="Dato destacado">Río Tomebamba</strong><span data-cms="detalle" data-cms-label="Texto">A pasos del proyecto</span></div></div>
@@ -219,15 +219,15 @@
     </div>
     <div class="plans-grid" data-cms-list="planos.lista-plans-grid" data-cms-label="Planos / plantas" data-cms-noun="Plano">
       <div class="plan-card reveal" data-ficha="img/planta-baja.jpg" data-title="Planta Baja" data-cms-attr="data-title:titulo-ampliado">
-        <img src="img/planta-baja.jpg" alt="Planta baja: suites A, locales comerciales y sala comunal"  data-cms-img="imagen" data-cms-label="Imagen"/>
+        <img loading="lazy" decoding="async" src="img/planta-baja.jpg" alt="Planta baja: suites A, locales comerciales y sala comunal"  data-cms-img="imagen" data-cms-label="Imagen"/>
         <div class="plan-card__label" data-cms="texto" data-cms-label="Texto" data-cms-type="textarea">01 · Planta Baja — Suites A, locales comerciales y sala comunal</div>
       </div>
       <div class="plan-card reveal" data-ficha="img/primera-planta-alta.jpg" data-title="Primera Planta Alta" data-cms-attr="data-title:titulo-ampliado">
-        <img src="img/primera-planta-alta.jpg" alt="Primera planta alta: suites B"  data-cms-img="imagen" data-cms-label="Imagen"/>
+        <img loading="lazy" decoding="async" src="img/primera-planta-alta.jpg" alt="Primera planta alta: suites B"  data-cms-img="imagen" data-cms-label="Imagen"/>
         <div class="plan-card__label" data-cms="texto" data-cms-label="Texto" data-cms-type="textarea">02 · Primera Planta Alta — Suites B0 a B12</div>
       </div>
       <div class="plan-card reveal" data-ficha="img/segunda-planta-alta.jpg" data-title="Segunda Planta Alta" data-cms-attr="data-title:titulo-ampliado">
-        <img src="img/segunda-planta-alta.jpg" alt="Segunda planta alta: suites y departamentos C"  data-cms-img="imagen" data-cms-label="Imagen"/>
+        <img loading="lazy" decoding="async" src="img/segunda-planta-alta.jpg" alt="Segunda planta alta: suites y departamentos C"  data-cms-img="imagen" data-cms-label="Imagen"/>
         <div class="plan-card__label" data-cms="texto" data-cms-label="Texto" data-cms-type="textarea">03 · Segunda Planta Alta — Suites y departamentos C</div>
       </div>
     </div>
@@ -243,18 +243,18 @@
       <p data-cms="galeria.texto" data-cms-label="Párrafo" data-cms-type="textarea">Renders del proyecto: fachadas, áreas comunales e interiores.</p>
     </div>
     <div class="gallery-grid reveal" data-cms-list="galeria.lista-gallery-grid" data-cms-label="Fotos de la galería" data-cms-noun="Foto" data-cms-cls="wide:Doble ancho,tall:Doble alto,arch:Forma de arco">
-      <figure class="wide tall"><img src="img/vista-frontal.jpg" data-full="img/vista-frontal.jpg" data-lightbox alt="Vista frontal del edificio"  data-cms-img="imagen" data-cms-label="Imagen"/></figure>
-      <figure><img src="img/terraza.jpg" data-full="img/terraza.jpg" data-lightbox alt="Terraza Roof Top"  data-cms-img="imagen" data-cms-label="Imagen"/></figure>
-      <figure><img src="img/zona-comunal-bbq.jpg" data-full="img/zona-comunal-bbq.jpg" data-lightbox alt="Zona comunal con BBQ"  data-cms-img="imagen" data-cms-label="Imagen"/></figure>
-      <figure><img src="img/lobby.jpg" data-full="img/lobby.jpg" data-lightbox alt="Lobby de ingreso"  data-cms-img="imagen" data-cms-label="Imagen"/></figure>
-      <figure><img src="img/area-comunal-jardin.jpg" data-full="img/area-comunal-jardin.jpg" data-lightbox alt="Jardín interior"  data-cms-img="imagen" data-cms-label="Imagen"/></figure>
-      <figure class="wide"><img src="img/area-comunal-lounge.jpg" data-full="img/area-comunal-lounge.jpg" data-lightbox alt="Sala comunal lounge"  data-cms-img="imagen" data-cms-label="Imagen"/></figure>
-      <figure><img src="img/area-comunal-kitchen.jpg" data-full="img/area-comunal-kitchen.jpg" data-lightbox alt="Cocina comunal"  data-cms-img="imagen" data-cms-label="Imagen"/></figure>
-      <figure><img src="img/interior-01.jpg" data-full="img/interior-01.jpg" data-lightbox alt="Interior suite"  data-cms-img="imagen" data-cms-label="Imagen"/></figure>
-      <figure><img src="img/interior-02.jpg" data-full="img/interior-02.jpg" data-lightbox alt="Dormitorio"  data-cms-img="imagen" data-cms-label="Imagen"/></figure>
-      <figure class="tall"><img src="img/interior-04.jpg" data-full="img/interior-04.jpg" data-lightbox alt="Cocina departamento dúplex"  data-cms-img="imagen" data-cms-label="Imagen"/></figure>
-      <figure><img src="img/interior-06.jpg" data-full="img/interior-06.jpg" data-lightbox alt="Sala de estar"  data-cms-img="imagen" data-cms-label="Imagen"/></figure>
-      <figure><img src="img/interior-07.jpg" data-full="img/interior-07.jpg" data-lightbox alt="Sala moderna"  data-cms-img="imagen" data-cms-label="Imagen"/></figure>
+      <figure class="wide tall"><img loading="lazy" decoding="async" src="img/vista-frontal.jpg" data-full="img/vista-frontal.jpg" data-lightbox alt="Vista frontal del edificio"  data-cms-img="imagen" data-cms-label="Imagen"/></figure>
+      <figure><img loading="lazy" decoding="async" src="img/terraza.jpg" data-full="img/terraza.jpg" data-lightbox alt="Terraza Roof Top"  data-cms-img="imagen" data-cms-label="Imagen"/></figure>
+      <figure><img loading="lazy" decoding="async" src="img/zona-comunal-bbq.jpg" data-full="img/zona-comunal-bbq.jpg" data-lightbox alt="Zona comunal con BBQ"  data-cms-img="imagen" data-cms-label="Imagen"/></figure>
+      <figure><img loading="lazy" decoding="async" src="img/lobby.jpg" data-full="img/lobby.jpg" data-lightbox alt="Lobby de ingreso"  data-cms-img="imagen" data-cms-label="Imagen"/></figure>
+      <figure><img loading="lazy" decoding="async" src="img/area-comunal-jardin.jpg" data-full="img/area-comunal-jardin.jpg" data-lightbox alt="Jardín interior"  data-cms-img="imagen" data-cms-label="Imagen"/></figure>
+      <figure class="wide"><img loading="lazy" decoding="async" src="img/area-comunal-lounge.jpg" data-full="img/area-comunal-lounge.jpg" data-lightbox alt="Sala comunal lounge"  data-cms-img="imagen" data-cms-label="Imagen"/></figure>
+      <figure><img loading="lazy" decoding="async" src="img/area-comunal-kitchen.jpg" data-full="img/area-comunal-kitchen.jpg" data-lightbox alt="Cocina comunal"  data-cms-img="imagen" data-cms-label="Imagen"/></figure>
+      <figure><img loading="lazy" decoding="async" src="img/interior-01.jpg" data-full="img/interior-01.jpg" data-lightbox alt="Interior suite"  data-cms-img="imagen" data-cms-label="Imagen"/></figure>
+      <figure><img loading="lazy" decoding="async" src="img/interior-02.jpg" data-full="img/interior-02.jpg" data-lightbox alt="Dormitorio"  data-cms-img="imagen" data-cms-label="Imagen"/></figure>
+      <figure class="tall"><img loading="lazy" decoding="async" src="img/interior-04.jpg" data-full="img/interior-04.jpg" data-lightbox alt="Cocina departamento dúplex"  data-cms-img="imagen" data-cms-label="Imagen"/></figure>
+      <figure><img loading="lazy" decoding="async" src="img/interior-06.jpg" data-full="img/interior-06.jpg" data-lightbox alt="Sala de estar"  data-cms-img="imagen" data-cms-label="Imagen"/></figure>
+      <figure><img loading="lazy" decoding="async" src="img/interior-07.jpg" data-full="img/interior-07.jpg" data-lightbox alt="Sala moderna"  data-cms-img="imagen" data-cms-label="Imagen"/></figure>
     </div>
   </div>
 </section>
@@ -307,7 +307,7 @@
 <!-- ============ FOOTER ============ -->
 <footer class="footer" data-cms-group="Pie de página">
   <div class="container">
-    <div class="footer__brand"><img src="img/logo-mark.png" alt="Álabes"  data-cms-img="footer.imagen" data-cms-label="Logotipo"/><img class="footer__forxa" src="img/logo-forxa-white.png" alt="FORXA Inmobiliaria"  data-cms-img="footer.imagen-2" data-cms-label="Logotipo 2"/><img class="footer__adrian" src="img/logo-adrian-white.png" alt="Adrián Rodríguez Inmobiliario"  data-cms-img="footer.imagen-3" data-cms-label="Logotipo 3"/><span data-cms="footer.detalle" data-cms-label="Texto">© 2026 Álabes — FORXA Inmobiliaria. Todos los derechos reservados.</span></div>
+    <div class="footer__brand"><img loading="lazy" decoding="async" src="img/logo-mark.png" alt="Álabes"  data-cms-img="footer.imagen" data-cms-label="Logotipo"/><img loading="lazy" decoding="async" class="footer__forxa" src="img/logo-forxa-white.png" alt="FORXA Inmobiliaria"  data-cms-img="footer.imagen-2" data-cms-label="Logotipo 2"/><img loading="lazy" decoding="async" class="footer__adrian" src="img/logo-adrian-white.png" alt="Adrián Rodríguez Inmobiliario"  data-cms-img="footer.imagen-3" data-cms-label="Logotipo 3"/><span data-cms="footer.detalle" data-cms-label="Texto">© 2026 Álabes — FORXA Inmobiliaria. Todos los derechos reservados.</span></div>
     <span data-cms="footer.detalle-2" data-cms-label="Texto 2">Calle del Batán, Cuenca, Ecuador</span>
     <nav class="legal-links" aria-label="Información legal">
       <a href="/privacidad/">Política de privacidad</a>
@@ -333,7 +333,7 @@
   <div class="lightbox__caption" id="lightboxCaption"></div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.119.0/dist/umd/supabase.js" integrity="sha384-uteMfOloLDGt042uDz+xHGF3ym63/WQ6rFq7murQRG8Ih7QrXGEGNtWd8688sb4O" crossorigin="anonymous"></script>
 <script src="/js/forxa-config.js"></script>
 <script src="/js/cms.js"></script>
 <script src="js/script.js"></script>

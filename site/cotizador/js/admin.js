@@ -122,10 +122,11 @@ async function loadProjects() {
   if (error) { list.innerHTML = `Error: ${error.message}`; return; }
   PROYECTOS = data;
 
+  const covers = await signedMediaUrls(data.map(p => p.cover_url));
   list.innerHTML = `<table class="admin-table"><thead><tr>
     <th>Portada</th><th>Proyecto</th><th>Color</th><th>Tipo financiamiento</th><th>Activo</th><th></th>
-  </tr></thead><tbody>${await Promise.all(data.map(async p => {
-    const cover = await signedMediaUrl(p.cover_url);
+  </tr></thead><tbody>${data.map((p, i) => {
+    const cover = covers[i];
     return `<tr>
       <td>${cover ? `<img class="thumb" src="${cover}">` : `<div class="thumb" style="background:linear-gradient(150deg, ${p.color_primario}, ${p.color_acento});"></div>`}</td>
       <td><strong>${p.nombre}</strong><br><span class="hint">${p.id}${p.prefijo_proforma ? ' · proforma ' + p.prefijo_proforma + '-####' : ''}</span></td>
@@ -137,7 +138,7 @@ async function loadProjects() {
         <button class="icon-btn" title="${p.activo ? 'Desactivar' : 'Activar'}" aria-label="${p.activo ? 'Desactivar' : 'Activar'} ${p.nombre}" data-toggle="${p.id}">${p.activo ? '⏻' : '▶'}</button>
       </td>
     </tr>`;
-  })).then(rows => rows.join(''))}</tbody></table>`;
+  }).join('')}</tbody></table>`;
 
   list.querySelectorAll('[data-edit]').forEach(b => b.onclick = () => editProject(b.dataset.edit));
   list.querySelectorAll('[data-toggle]').forEach(b => b.onclick = () => toggleProject(b.dataset.toggle));
@@ -221,8 +222,9 @@ async function loadUnits() {
   const { data, error } = table === 'cotizador_inventario_extra' ? await query.eq('tipo', 'lote') : await query;
   if (error) { list.innerHTML = `Error: ${error.message}`; return; }
 
-  const rows = await Promise.all(data.map(async u => {
-    const thumb = table === 'cotizador_unidades' ? await signedMediaUrl(u.foto_url) : null;
+  const thumbs = await signedMediaUrls(data.map(u => (table === 'cotizador_unidades' ? u.foto_url : null)));
+  const rows = data.map((u, i) => {
+    const thumb = thumbs[i];
     return `<tr data-id="${u.id}" data-table="${table}">
       <td>${thumb ? `<img class="thumb" src="${thumb}">` : '<div class="thumb"></div>'}</td>
       <td><input class="f-codigo" value="${u.codigo}" style="width:90px;"></td>
@@ -238,7 +240,7 @@ async function loadUnits() {
         <button class="icon-btn danger" title="Eliminar" aria-label="Eliminar unidad ${u.codigo || ''}" data-del>&times;</button>
       </td>
     </tr>`;
-  }));
+  });
 
   list.innerHTML = `<table class="admin-table"><thead><tr>
     <th>Foto</th><th>Código</th><th>Nombre</th><th>Precio</th><th>Estado</th><th>Nota</th><th>Subir foto</th><th></th>

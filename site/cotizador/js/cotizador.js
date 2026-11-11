@@ -610,11 +610,12 @@ async function generarProforma() {
   const fotos = []; // { caption, url } — van todas juntas en la página 2
   let plan0 = null;
   const unidadesTexto = seleccionadas.map(u => u.nombre).join(', ');
-  for (const u of seleccionadas) {
+  const fotoUrls = await signedMediaUrls(seleccionadas.map(u => u.raw?.foto_url));
+  for (const [i, u] of seleccionadas.entries()) {
     const plan = calcularPlan(u);
     plan.precioLista = u.precio;
     if (!plan0) plan0 = plan;
-    const fotoUrl = await signedMediaUrl(u.raw?.foto_url);
+    const fotoUrl = fotoUrls[i];
     if (fotoUrl) fotos.push({ caption: `${u.nombre}${u.specsText ? ' · ' + u.specsText : ''}`, url: fotoUrl });
 
     unitSections += `

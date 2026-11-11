@@ -39,6 +39,20 @@ async function signedMediaUrl(path, expiresInSeconds = 3600) {
   return data.signedUrl;
 }
 
+// Igual que signedMediaUrl pero para varias rutas: UNA sola petición a Storage.
+// Devuelve un arreglo alineado con `paths` (null donde no hay URL).
+async function signedMediaUrls(paths, expiresInSeconds = 3600) {
+  const out = paths.map(p => (!p ? null : (/^https?:\/\//.test(p) || p.startsWith('/')) ? p : undefined));
+  const pend = [...new Set(paths.filter((p, i) => out[i] === undefined))];
+  if (pend.length) {
+    const { data, error } = await supabaseClient.storage.from('cotizador-media').createSignedUrls(pend, expiresInSeconds);
+    if (error) console.warn('No se pudieron firmar las imágenes', error);
+    const m = new Map((data || []).map(d => [d.path, d.signedUrl || null]));
+    paths.forEach((p, i) => { if (out[i] === undefined) out[i] = m.get(p) || null; });
+  }
+  return out;
+}
+
 // Aviso no bloqueante (reemplaza a alert(), que congela la página hasta que
 // alguien hace clic en "Aceptar" — mala práctica de UX para errores de forma).
 let toastTimer = null;

@@ -11,6 +11,10 @@
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "strict-origin-when-cross-origin"
     X-Frame-Options = "SAMEORIGIN"
+    Strict-Transport-Security = "max-age=31536000"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+    # CSP en modo solo-reporte durante ~1 semana; luego pasar a Content-Security-Policy.
+    Content-Security-Policy-Report-Only = "default-src 'self'; script-src 'self' 'unsafe-inline' cdn.jsdelivr.net cdnjs.cloudflare.com; style-src 'self' 'unsafe-inline' fonts.googleapis.com cdnjs.cloudflare.com; font-src 'self' fonts.gstatic.com data:; img-src 'self' data: blob: https://*.supabase.co; media-src 'self' blob: https://*.supabase.co; connect-src 'self' https://*.supabase.co wss://*.supabase.co; frame-src 'self' https://wa.me; frame-ancestors 'self'; base-uri 'self'; form-action 'self' https://wa.me"
 
 # Zonas internas: fuera de los buscadores
 [[headers]]
@@ -25,6 +29,24 @@
   for = "/marketing/*"
   [headers.values]
     X-Robots-Tag = "noindex, nofollow"
+
+# Caché de 7 días (los nombres no llevan hash, por eso no "immutable")
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=604800, stale-while-revalidate=86400"
+[[headers]]
+  for = "/*/img/*"
+  [headers.values]
+    Cache-Control = "public, max-age=604800, stale-while-revalidate=86400"
+[[headers]]
+  for = "/*.css"
+  [headers.values]
+    Cache-Control = "public, max-age=604800, stale-while-revalidate=86400"
+[[headers]]
+  for = "/*.js"
+  [headers.values]
+    Cache-Control = "public, max-age=604800, stale-while-revalidate=86400"
 
 # La configuración cambia al actualizar claves: que no quede en caché vieja
 [[headers]]
