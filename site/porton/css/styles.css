@@ -507,3 +507,6 @@ body::after {
   .reveal { opacity: 1 !important; transform: none !important; }
   body::after { display: none; }
 }
+
+/* Foco visible en campos (WCAG 2.4.7): sustituye al outline:none de :focus */
+.field input:focus-visible, .field select:focus-visible, .field textarea:focus-visible, .lotes-search input:focus-visible { outline: 2px solid var(--sage-300); outline-offset: 2px; }

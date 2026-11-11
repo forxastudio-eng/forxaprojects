@@ -39,6 +39,11 @@ async function signedMediaUrl(path, expiresInSeconds = 3600) {
   return data.signedUrl;
 }
 
+// Evita que un nombre con "<" o comillas rompa la tabla.
+function escHTML(v) {
+  return String(v == null ? '' : v).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+}
+
 // Igual que signedMediaUrl pero para varias rutas: UNA sola petición a Storage.
 // Devuelve un arreglo alineado con `paths` (null donde no hay URL).
 async function signedMediaUrls(paths, expiresInSeconds = 3600) {

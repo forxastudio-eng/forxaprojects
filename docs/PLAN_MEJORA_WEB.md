@@ -200,16 +200,16 @@ Cada fase va en **su propio PR**, se revisa en el *deploy preview* de Netlify y 
   - Recomprimir a 720p y unos 1,5 MB.
   - En móvil y con `Save-Data`, solo el póster.
   - Pausar fuera de pantalla con `IntersectionObserver` y añadir un botón de pausa (R3).
-- [ ] SEO y compartir:
+- [x] SEO y compartir:
   - `og:*` y `twitter:*` con foto en cada landing y en la home.
   - JSON-LD (`RealEstateAgent` en la home y `Residence`/`Offer` por proyecto).
   - `robots.txt` (que excluya `/admin/`, `/cotizador/` y `/marketing/`) y `sitemap.xml`.
-- [ ] Accesibilidad:
+- [x] Accesibilidad:
   - `:focus-visible` con anillo de 2 px en todos los inputs.
   - Revisar el contraste de los textos sobre fotos (scrim mínimo).
   - Objetivos táctiles de 44 px en móvil.
-- [ ] Arreglos de diseño responsive: grilla de cifras de Álabes, un solo CTA de WhatsApp en el hero móvil y la navegación de Arcus agrupada.
-- [ ] Un `esc()` compartido para todo texto de la base, y *allowlist* en el CMS (S10).
+- [~] Arreglos de diseño responsive: grilla de cifras de Álabes, un solo CTA de WhatsApp en el hero móvil y la navegación de Arcus agrupada.
+- [x] Un `esc()` compartido para todo texto de la base, y *allowlist* en el CMS (S10).
 
 ### Fase 3 · Nueva funcionalidad sobre la base existente (2–3 semanas)
 1. **Home que vende.**

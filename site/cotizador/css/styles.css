@@ -447,3 +447,6 @@ img { max-width: 100%; display: block; }
 
 .hint { color: var(--muted); font-size: 12.5px; }
 .empty-state { text-align: center; padding: 60px 20px; color: var(--muted); }
+
+/* Foco visible en campos (WCAG 2.4.7): sustituye al outline:none de :focus */
+.field input:focus-visible, .field select:focus-visible, .field textarea:focus-visible { outline: 2px solid var(--olive); outline-offset: 2px; }

@@ -224,11 +224,6 @@ async function borrarProformas(ids) {
   await cargarHistorial();
 }
 
-// Evita que un nombre con "<" o comillas rompa la tabla.
-function escHTML(v) {
-  return String(v == null ? '' : v).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
-}
-
 function filaHTML(f, puedeBorrar) {
   const fecha = f.created_at ? new Date(f.created_at).toLocaleDateString('es-EC', { day: '2-digit', month: '2-digit', year: 'numeric' }) : '—';
   const unidades = Array.isArray(f.unidades) ? f.unidades.map(u => u.nombre || u.codigo).join(', ') : '';

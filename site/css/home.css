@@ -126,3 +126,6 @@ button,input,select,textarea{font:inherit;color:inherit}
 .foot-nav{flex-wrap:wrap}
 .foot-nav button{background:none;border:0;padding:0;font:inherit;color:inherit;cursor:pointer}
 .foot-nav button:hover,.foot-nav a:hover{color:#fff}
+
+/* Foco visible en campos (WCAG 2.4.7): sustituye al outline:none de :focus */
+.field input:focus-visible, .field select:focus-visible, .field textarea:focus-visible { outline: 2px solid var(--fx-blue-400); outline-offset: 2px; }
