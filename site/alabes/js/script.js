@@ -105,6 +105,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       var localesContainer = document.getElementById("localesGrid");
       if (localesContainer) localesContainer.innerHTML = locales.map(localCardHTML).join("");
+      if (window.FORXA_QUEDAN) FORXA_QUEDAN();
 
       /* Vuelve a correr el observer de "reveal" ahora que las tarjetas ya
          existen (los clics de la ficha ya funcionan solos: el listener de

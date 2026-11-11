@@ -104,6 +104,7 @@ document.addEventListener("DOMContentLoaded", function () {
         var cl = document.getElementById("countLofts"); if (cl) cl.textContent = lofts.length;
         var cd = document.getElementById("countDeptos"); if (cd) cd.textContent = deptos.length;
         var cc = document.getElementById("countLocales"); if (cc) cc.textContent = comerciales.length;
+        if (window.FORXA_QUEDAN) FORXA_QUEDAN();
       })
       .catch(function (err) { console.error("No se pudieron cargar las unidades:", err); });
   }
