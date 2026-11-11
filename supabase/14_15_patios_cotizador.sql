@@ -2,9 +2,9 @@
 -- FORXA · 14 · Cotizador: proyecto 15 PATIOS (Misicata, Cuenca) — 5 viviendas
 -- Unidades en exclusividad del contratista, entrega enero de 2027.
 --
--- Supuestos que conviene confirmar (todo se cambia luego desde Administrar):
---  · Política de compra copiada de Arcus: reserva 2 % + promesa 8 % + cuotas
---    hasta la entrega, resto financiado a 10.5 % / 20 años, sin descuento manual.
+-- Supuestos (la política de pago se corrigió en el archivo 15: es de contado):
+--  · Política de pago: aquí se copió la de Arcus (cuotas hasta la entrega) por
+--    falta de datos; el archivo 15 la corrige a CONTADO + simulación de crédito.
 --  · Vivienda 3 queda "no_disponible" porque así figura en el brochure
 --    (la tabla de precios la lista como disponible y con exclusividad).
 --  · Total de la tabla de precios: dice $685.000 pero la suma de las cinco

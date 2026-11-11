@@ -54,7 +54,7 @@ Consultado directamente en Supabase:
 
 **Acción:** hacer merge de https://github.com/forxastudio-eng/forxaprojects/pull/8. Después, abrir el cotizador, elegir 15 Patios, generar una proforma de prueba y revisar que se vean la portada, el logo en el membrete y el plano en la página 2. Esa proforma de prueba se puede borrar desde Historial con el rol editor.
 
-**Pendientes de negocio** (ya están en la descripción del PR): financiamiento copiado de Arcus, estado de la Vivienda 3 y total de la tabla ($684.500 frente a $685.000).
+**Pendientes de negocio** (ya están en la descripción del PR): el estado de la Vivienda 3 (el financiamiento ya se corrigió: la compra es de contado con simulación de crédito) y total de la tabla ($684.500 frente a $685.000).
 
 ---
 
@@ -167,7 +167,7 @@ Cada fase va en **su propio PR**, se revisa en el *deploy preview* de Netlify y 
 - [ ] Hacer merge del PR #8 (15 Patios) y probar una proforma de 15 Patios.
 - [ ] Confirmar las contraseñas cambiadas y ejecutar `drop table migracion.credenciales_iniciales;` (S1).
 - [ ] Activar *Leaked password protection* (S2) y confirmar *Allow new users to sign up* = OFF (S3).
-- [ ] Confirmar con el equipo comercial el financiamiento de 15 Patios y el estado de la Vivienda 3.
+- [ ] Ejecutar `supabase/15_15patios_contado_simulacion.sql` (15 Patios es de contado) y confirmar el estado de la Vivienda 3.
 
 ### Fase 1 · Ganancias rápidas de bajo riesgo (1–2 días)
 **Seguridad**
@@ -176,7 +176,7 @@ Cada fase va en **su propio PR**, se revisa en el *deploy preview* de Netlify y 
   - **CSP en modo `Report-Only`** (S4).
   - `Cache-Control` para assets (R4).
 - [ ] Fijar `supabase-js` a una versión exacta con SRI en las 5 páginas (S5).
-- [ ] `supabase/15_endurecimiento.sql`:
+- [ ] `supabase/16_endurecimiento.sql`:
   - `revoke execute` a `anon` (S6) y `revoke all` de tablas internas a `anon` (S7).
   - `search_path` (S8) y límites de buckets (S9).
   - Índices FK y `(select auth.uid())` en las 3 políticas (R9).

@@ -41,6 +41,13 @@ async function boot() {
 
   await loadUnidades();
   renderFinancingFields();
+  if (proyecto.tipo_financiamiento === 'contado_simulacion') {
+    // Proyecto finalizado: la compra es siempre de contado (el crédito solo se simula)
+    qs('forma-pago').value = 'contado';
+    qs('forma-pago').closest('.field').hidden = true;
+    qs('forma-pago-hint').hidden = true;
+    document.querySelector('#financing-card h3').textContent = 'Plan de pago · contado';
+  }
   wireEvents();
   await loadAsesores();
   loadAsesorGuardado();
@@ -284,6 +291,23 @@ function renderFinancingFields() {
         <div class="field fp-only"><label>Interés anual del financiamiento (%)</label><input type="number" id="f-tasa" step="0.01" value="${PROYECTO.tasa_default}"></div>
         <div class="field fp-only"><label>Plazo (años)</label><input type="number" id="f-plazo" value="${PROYECTO.plazo_default_anios}"></div>
       </div>`;
+  } else if (tipo === 'contado_simulacion') {
+    // Compra de contado (proyecto finalizado): reserva y saldo a la escritura.
+    // El crédito hipotecario es solo una simulación para estimar la cuota
+    // mensual; no cambia lo que paga el cliente. 30 % de entrada simulada:
+    // shortcut: valor fijo por defecto (editable por el asesor en cada proforma).
+    el.innerHTML = `
+      <p class="hint" style="margin-bottom:14px;">
+        La compra es de <b>contado</b>. La reserva se descuenta del precio y el saldo se cancela al firmar la escritura.
+      </p>
+      <div class="field" style="max-width:260px;"><label>Reserva (%)</label><input type="number" id="f-reserva-pct" min="0" step="0.1" value="${(PROYECTO.reserva_pct * 100).toFixed(2).replace(/\.?0+$/, '')}"></div>
+      <h4 style="margin:18px 0 6px;font-size:14px;">Simulación de crédito hipotecario (solo referencial)</h4>
+      <p class="hint" style="margin-bottom:12px;">Sirve para que el cliente estime su cuota mensual si decide financiar con un banco. No es parte de la compra ni una oferta de crédito.</p>
+      <div class="row2">
+        <div class="field"><label>Entrada simulada (%)</label><input type="number" id="f-entrada-pct" min="0" max="100" step="1" value="30"></div>
+        <div class="field"><label>Interés anual simulado (%)</label><input type="number" id="f-tasa" step="0.01" value="${PROYECTO.tasa_default}"></div>
+      </div>
+      <div class="field" style="max-width:260px;"><label>Plazo (años)</label><input type="number" id="f-plazo" value="${PROYECTO.plazo_default_anios}"></div>`;
   } else if (tipo === 'pago_directo') {
     // Portón del Valle: ya está listo para entrega — un solo abono (sugerido
     // según reserva_pct) en vez del desglose por pasos, más el financiamiento.
@@ -364,6 +388,22 @@ function calcularPlan(unidad) {
     });
   }
 
+  if (tipo === 'contado_simulacion') {
+    const reserva = precioFinal * getReservaPct();
+    const entradaPct = Math.min(100, Math.max(0, parseFloat(qs('f-entrada-pct')?.value) || 0)) / 100;
+    const entrada = precioFinal * entradaPct;
+    const monto = Math.max(0, precioFinal - entrada);
+    const tasa = parseFloat(qs('f-tasa')?.value) || PROYECTO.tasa_default;
+    const plazo = parseFloat(qs('f-plazo')?.value) || PROYECTO.plazo_default_anios;
+    // plan.cuota/tasa/plazo quedan vacíos a propósito: la compra es de contado
+    // y el historial no debe contarla como financiada. La simulación va aparte.
+    return {
+      desc, precioFinal, reserva, promesa: 0, abonoTotal: reserva, saldo: Math.max(0, precioFinal - reserva),
+      cuota: 0, formaPago: 'contado',
+      simulacion: { entradaPct, entrada, monto, tasa, plazo, cuota: calcCuota(monto, tasa, plazo * 12) },
+    };
+  }
+
   if (tipo === 'pago_directo') {
     const abonoSugerido = precioFinal * PROYECTO.reserva_pct;
     const abonoInput = qs('f-abono');
@@ -421,6 +461,15 @@ function ajustarPorFormaPago(plan) {
   return plan;
 }
 
+const AVISO_SIMULACION = 'La compra es de contado. Esta simulación es solo referencial para estimar la cuota mensual de un crédito hipotecario; no es una oferta de financiamiento ni una aprobación bancaria. Tasa, plazo y condiciones dependen de la entidad financiera.';
+
+function filasSimulacion(sim) {
+  return `<div class="pf-line"><span>Entrada simulada (${(sim.entradaPct * 100).toFixed(0)} %)</span><b>${fmtMoney(sim.entrada)}</b></div>
+    <div class="pf-line"><span>Monto a financiar (simulado)</span><b>${fmtMoney(sim.monto)}</b></div>
+    <div class="pf-line"><span>Interés anual simulado</span><b>${sim.tasa}%</b></div>
+    <div class="pf-line"><span>Plazo</span><b>${sim.plazo} años</b></div>`;
+}
+
 function renderFinancingSummary() {
   const box = qs('financing-summary');
   if (!seleccionadas.length) { box.innerHTML = ''; return; }
@@ -447,6 +496,10 @@ function renderFinancingSummary() {
   if (plan.tasa !== undefined) rows += `<div class="pf-line"><span>Interés anual</span><b>${plan.tasa}%</b></div>`;
   if (plan.plazo !== undefined) rows += `<div class="pf-line"><span>Plazo</span><b>${plan.plazo} años</b></div>`;
   if (plan.cuota) rows += `<div class="pf-line"><span>Cuota mensual estimada</span><b>${fmtMoney(plan.cuota)}</b></div>`;
+  if (plan.simulacion) {
+    rows += `<div class="pf-line"><span><strong>Simulación de crédito hipotecario (referencial)</strong></span><b></b></div>${filasSimulacion(plan.simulacion)}
+      <div class="pf-line"><span>Cuota mensual simulada</span><b>${fmtMoney(plan.simulacion.cuota)}</b></div>`;
+  }
   box.innerHTML = `<div class="pf-breakdown">${rows}</div>`;
 }
 
@@ -483,6 +536,20 @@ function buildPagoBreakdown(plan) {
       ${plan.cuota20 ? `<div class="alt">20 años: <strong>${fmtMoney(plan.cuota20)}</strong><br>15 años: <strong>${fmtMoney(plan.cuota15)}</strong></div>` : ''}
     </div>` : '';
 
+  if (plan.simulacion) {
+    const sim = plan.simulacion;
+    return `<div class="pf-breakdown">${rows}</div>
+      <div class="pf-party-label" style="margin:22px 0 8px;">Simulación de crédito hipotecario · solo referencial</div>
+      <div class="pf-breakdown">${filasSimulacion(sim)}</div>
+      <div class="pf-cuota">
+        <div>
+          <div class="label">Cuota mensual simulada</div>
+          <div class="amount">${fmtMoney(sim.cuota)}<span> /mes</span></div>
+        </div>
+        <div class="alt">${sim.plazo} años · ${sim.tasa}% anual</div>
+      </div>
+      <p class="pf-party-meta" style="margin-top:10px;">${AVISO_SIMULACION}</p>`;
+  }
   return `<div class="pf-breakdown">${rows}</div>${cuotaBox}`;
 }
 

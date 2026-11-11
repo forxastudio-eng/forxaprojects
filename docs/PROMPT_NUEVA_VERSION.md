@@ -15,7 +15,7 @@ FASE A EJECUTAR: Fase 1   ← (cambia a Fase 2, 3 o 4 en cada sesión)
 - docs/PLAN_MEJORA_WEB.md   ← plan aprobado: hallazgos S1–S12, R1–R9 y las fases
 - README.md                 ← arquitectura, roles y puesta en marcha
 - netlify.toml, site/js/forxa-config.js, site/js/cms.js
-- supabase/01…15*.sql       ← esquema, RLS y funciones (en orden)
+- supabase/01…16*.sql       ← esquema, RLS y funciones (en orden)
 Resume en 10 líneas lo que entendiste y la lista exacta de cambios de la fase
 antes de empezar.
 
@@ -70,7 +70,7 @@ Fase 1 · Ganancias rápidas
   para /assets/*, /*/img/*, *.css y *.js.
 - supabase-js con versión exacta + integrity (SRI) + crossorigin en todas las
   páginas que lo cargan.
-- supabase/15_endurecimiento.sql:
+- supabase/16_endurecimiento.sql:
   - revoke execute from anon en mi_rol, tiene_rol, siguiente_numero_proforma
     y sincronizar_estado_cotizador; revoke from authenticated en
     sincronizar_estado_cotizador.
