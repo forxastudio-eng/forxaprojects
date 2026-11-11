@@ -48,4 +48,25 @@ for (const page of all.filter(f => f.endsWith('.html'))) {
   });
   if (out !== html) fs.writeFileSync(page, out);
 }
-console.log(`${variants.size} imágenes con variantes WebP; ${patched} <img> con srcset.`);
+// width/height reales en cada <img> local que no los tenga: el navegador reserva el
+// espacio antes de descargar (evita saltos, CLS). Requiere `img { height: auto }` en el CSS.
+let sized = 0;
+const dims = new Map();
+for (const page of ['alabes', 'arcus', 'porton'].map(d => path.join(SITE, d, 'index.html'))) {
+  const dir = path.dirname(page);
+  let html = fs.readFileSync(page, 'utf8');
+  const tags = html.match(/<img\b[^>]*>/g) || [];
+  for (const tag of tags) {
+    if (/\swidth=/.test(tag) || /\sheight=/.test(tag)) continue;
+    const m = tag.match(/\ssrc="([^"#?]+\.(?:jpe?g|png|webp))"/i);
+    if (!m || /^(https?:|data:)/.test(m[1])) continue;
+    const abs = m[1].startsWith('/') ? path.join(SITE, m[1]) : path.join(dir, m[1]);
+    if (!fs.existsSync(abs)) continue;
+    if (!dims.has(abs)) dims.set(abs, await sharp(abs).metadata());
+    const { width, height } = dims.get(abs);
+    html = html.replace(tag, tag.replace('<img', `<img width="${width}" height="${height}"`));
+    sized++;
+  }
+  fs.writeFileSync(page, html);
+}
+console.log(`${variants.size} imágenes con variantes WebP; ${patched} <img> con srcset; ${sized} con width/height.`);
