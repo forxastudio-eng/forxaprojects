@@ -321,6 +321,7 @@ ul { margin: 0; padding: 0; list-style: none; }
 .unit-card:hover { transform: translateY(-6px); box-shadow: var(--shadow); border-color: var(--cafe-40); }
 .unit-card__img { position: relative; aspect-ratio: 16/10; overflow: hidden; background: var(--cream-20); }
 .unit-card__img img { width: 100%; height: 100%; object-fit: cover; transition: transform 1s var(--ease); }
+.unit-card__img img.is-plan { object-fit: contain; padding: 14px 26px; box-sizing: border-box; background: #e3dcd2; }
 .unit-card:hover .unit-card__img img { transform: scale(1.07); }
 .unit-card__zoom {
   position: absolute; right: 12px; top: 12px; width: 36px; height: 36px; border-radius: 50%;

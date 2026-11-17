@@ -39,10 +39,13 @@ document.addEventListener("DOMContentLoaded", function () {
     var extra = u.extra ? '<li><svg class="icon"><use href="#i-tree"></use></svg> ' + esc(u.extra) + '</li>' : "";
     var thumb = esc(u.thumb || FALLBACK_PHOTO);
     var ficha = esc(u.ficha || u.thumb || FALLBACK_PHOTO);
+    // portada = solo el plano de la unidad (img/unidades/<CODIGO>.webp); si no existe, la portada genérica
+    var plan = /^img\/fichas\/(SUITE|LOFT)-/.test(u.ficha || "") ? esc(u.ficha.replace("fichas/", "unidades/").replace(/\.\w+$/, ".webp")) : "";
     return (
       '<article class="unit-card" data-ficha="' + ficha + '" data-title="' + esc(u.title) + ' · ' + esc(areaVal) + ' · ' + statusLabelFor(u.status) + '">' +
         '<div class="unit-card__img">' +
-          '<img src="' + thumb + '" loading="lazy" alt="' + esc(u.title) + '" />' +
+          (plan ? '<img class="is-plan" src="' + plan + '" loading="lazy" alt="Plano de ' + esc(u.title) + '" onerror="this.className=\'\';this.onerror=null;this.src=\'' + thumb + '\'" />'
+                : '<img src="' + thumb + '" loading="lazy" alt="' + esc(u.title) + '" />') +
           '<span class="unit-card__zoom"><svg class="icon"><use href="#i-expand"></use></svg></span>' +
         '</div>' +
         '<div class="unit-card__body">' +
